@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoBean" >
+    <id column="UID_TICKET" property="uidTicket" jdbcType="VARCHAR" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="PUNTOS" property="puntos" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="TIMESTAMP" />
+    <result column="VERSION" property="version" jdbcType="DECIMAL" />
+    <result column="PROCESADO" property="procesado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="CODALM" property="codAlm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_TICKET, CODCLI, PUNTOS, FECHA, VERSION, PROCESADO, CODALM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_TICKETS_PUNTOS_CONSUMO_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from D_TICKETS_PUNTOS_CONSUMO_TBL
+    where UID_TICKET = #{uidTicket,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSumByCodCliente" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select SUM(PUNTOS) AS PUNTOS
+    from D_TICKETS_PUNTOS_CONSUMO_TBL
+    where CODCLI = #{codCliente,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from D_TICKETS_PUNTOS_CONSUMO_TBL
+    where UID_TICKET = #{uidTicket,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoExample" >
+    delete from D_TICKETS_PUNTOS_CONSUMO_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoBean" >
+    insert into D_TICKETS_PUNTOS_CONSUMO_TBL (UID_TICKET, CODCLI, PUNTOS, 
+      FECHA, VERSION, PROCESADO, 
+      CODALM)
+    values (#{uidTicket,jdbcType=VARCHAR}, #{codCliente,jdbcType=VARCHAR}, #{puntos,jdbcType=DECIMAL}, 
+      #{fecha,jdbcType=TIMESTAMP}, #{version,jdbcType=DECIMAL}, #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{codAlm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoBean" >
+    insert into D_TICKETS_PUNTOS_CONSUMO_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidTicket != null" >
+        UID_TICKET,
+      </if>
+      <if test="codCliente != null" >
+        CODCLI,
+      </if>
+      <if test="puntos != null" >
+        PUNTOS,
+      </if>
+      <if test="fecha != null" >
+        FECHA,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="procesado != null" >
+        PROCESADO,
+      </if>
+      <if test="codAlm != null" >
+        CODALM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidTicket != null" >
+        #{uidTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="codCliente != null" >
+        #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="puntos != null" >
+        #{puntos,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        #{fecha,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="procesado != null" >
+        #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codAlm != null" >
+        #{codAlm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoExample" resultType="java.lang.Integer" >
+    select count(*) from D_TICKETS_PUNTOS_CONSUMO_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update D_TICKETS_PUNTOS_CONSUMO_TBL
+    <set >
+      <if test="record.uidTicket != null" >
+        UID_TICKET = #{record.uidTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCliente != null" >
+        CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puntos != null" >
+        PUNTOS = #{record.puntos,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fecha != null" >
+        FECHA = #{record.fecha,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=DECIMAL},
+      </if>
+      <if test="record.procesado != null" >
+        PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.codAlm != null" >
+        CODALM = #{record.codAlm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update D_TICKETS_PUNTOS_CONSUMO_TBL
+    set UID_TICKET = #{record.uidTicket,jdbcType=VARCHAR},
+      CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      PUNTOS = #{record.puntos,jdbcType=DECIMAL},
+      FECHA = #{record.fecha,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=DECIMAL},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODALM = #{record.codAlm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoBean" >
+    update D_TICKETS_PUNTOS_CONSUMO_TBL
+    <set >
+      <if test="codCliente != null" >
+        CODCLI = #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="puntos != null" >
+        PUNTOS = #{puntos,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        FECHA = #{fecha,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="procesado != null" >
+        PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codAlm != null" >
+        CODALM = #{codAlm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UID_TICKET = #{uidTicket,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoBean" >
+    update D_TICKETS_PUNTOS_CONSUMO_TBL
+    set CODCLI = #{codCliente,jdbcType=VARCHAR},
+      PUNTOS = #{puntos,jdbcType=DECIMAL},
+      FECHA = #{fecha,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=DECIMAL},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODALM = #{codAlm,jdbcType=VARCHAR}
+    where UID_TICKET = #{uidTicket,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.puntos.consumo.ConsumoExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_TICKETS_PUNTOS_CONSUMO_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

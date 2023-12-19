@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.print.documentos.DocumentosMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    <id column="UID_DOCUMENTO" property="uidDocumento" jdbcType="VARCHAR" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="CODCAJA_EMISION" property="codCajaEmision" jdbcType="VARCHAR" />
+    <result column="ID_DOCUMENTO" property="idDocumento" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="USUARIO" property="usuario" jdbcType="VARCHAR" />
+    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+    <result column="REFERENCIA" property="referencia" jdbcType="VARCHAR" />
+    <result column="NUM_TRANSACCION" property="numTransaccion" jdbcType="VARCHAR" />
+    <result column="FECHA_CADUCIDAD" property="fechaCaducidad" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+  </resultMap>
+  <resultMap id="BaseResultMapSaldo" type="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    <id column="UID_DOCUMENTO" property="uidDocumento" jdbcType="VARCHAR" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="CODCAJA_EMISION" property="codCajaEmision" jdbcType="VARCHAR" />
+    <result column="ID_DOCUMENTO" property="idDocumento" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="USUARIO" property="usuario" jdbcType="VARCHAR" />
+    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+    <result column="REFERENCIA" property="referencia" jdbcType="VARCHAR" />
+    <result column="NUM_TRANSACCION" property="numTransaccion" jdbcType="VARCHAR" />
+    <result column="FECHA_CADUCIDAD" property="fechaCaducidad" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />    
+    <result column="SALDO_USADO" property="saldoUsado" jdbcType="DECIMAL" /> 
+  </resultMap>
+  <resultMap id="BaseResultMapGiftCard" type="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    <id column="UID_DOCUMENTO" property="uidDocumento" jdbcType="VARCHAR" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="CODCAJA_EMISION" property="codCajaEmision" jdbcType="VARCHAR" />
+    <result column="ID_DOCUMENTO" property="idDocumento" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="USUARIO" property="usuario" jdbcType="VARCHAR" />
+    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+    <result column="REFERENCIA" property="referencia" jdbcType="VARCHAR" />
+    <result column="NUM_TRANSACCION" property="numTransaccion" jdbcType="VARCHAR" />
+    <result column="FECHA_CADUCIDAD" property="fechaCaducidad" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />    
+    <result column="SALDO" property="saldoGiftCard" jdbcType="DECIMAL" /> 
+  </resultMap> 
+  <resultMap id="BaseResultMapReserva" type="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    <id column="UID_DOCUMENTO" property="uidDocumento" jdbcType="VARCHAR" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="CODCAJA_EMISION" property="codCajaEmision" jdbcType="VARCHAR" />
+    <result column="ID_DOCUMENTO" property="idDocumento" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="USUARIO" property="usuario" jdbcType="VARCHAR" />
+    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+    <result column="REFERENCIA" property="referencia" jdbcType="VARCHAR" />
+    <result column="NUM_TRANSACCION" property="numTransaccion" jdbcType="VARCHAR" />
+    <result column="FECHA_CADUCIDAD" property="fechaCaducidad" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />    
+    <result column="BONO" property="bono" jdbcType="VARCHAR" />  
+  </resultMap>    
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DOCU.UID_DOCUMENTO AS UID_DOCUMENTO, DOCU.TIPO AS TIPO, DOCU.CODALM AS CODALM, DOCU.CODCAJA AS CODCAJA, DOCU.CODCAJA_EMISION AS CODCAJA_EMISION, DOCU.ID_DOCUMENTO AS ID_DOCUMENTO, 
+    DOCU.FECHA AS FECHA, DOCU.CODCLI AS CODCLI, DOCU.MONTO AS MONTO, DOCU.ESTADO AS ESTADO,DOCU.USUARIO AS USUARIO, 
+    DOCU.OBSERVACIONES AS OBSERVACIONES, DOCU.REFERENCIA AS REFERENCIA, DOCU.NUM_TRANSACCION AS NUM_TRANSACCION, DOCU.FECHA_CADUCIDAD AS FECHA_CADUCIDAD
+  </sql>
+  <sql id="Base_Column_List_With_Bono" >
+    DOCU.UID_DOCUMENTO AS UID_DOCUMENTO, DOCU.TIPO AS TIPO, DOCU.CODALM AS CODALM, DOCU.CODCAJA AS CODCAJA, DOCU.CODCAJA_EMISION AS CODCAJA_EMISION,DOCU.ID_DOCUMENTO AS ID_DOCUMENTO, 
+    DOCU.FECHA AS FECHA, DOCU.CODCLI AS CODCLI, DOCU.MONTO AS MONTO, DOCU.ESTADO AS ESTADO,DOCU.USUARIO AS USUARIO, 
+    DOCU.OBSERVACIONES AS OBSERVACIONES, DOCU.REFERENCIA AS REFERENCIA, DOCU.NUM_TRANSACCION AS NUM_TRANSACCION, DOCU.FECHA_CADUCIDAD AS FECHA_CADUCIDAD, 
+    BONO.SALDO_USADO AS SALDO_USADO
+  </sql>
+  <sql id="Base_Column_List_With_NotaCredito" >
+    DOCU.UID_DOCUMENTO AS UID_DOCUMENTO, DOCU.TIPO AS TIPO, DOCU.CODALM AS CODALM, DOCU.CODCAJA AS CODCAJA, DOCU.CODCAJA_EMISION AS CODCAJA_EMISION, DOCU.ID_DOCUMENTO AS ID_DOCUMENTO, 
+    DOCU.FECHA AS FECHA, DOCU.CODCLI AS CODCLI, DOCU.MONTO AS MONTO, DOCU.ESTADO AS ESTADO,DOCU.USUARIO AS USUARIO, 
+    DOCU.OBSERVACIONES AS OBSERVACIONES, DOCU.REFERENCIA AS REFERENCIA, DOCU.NUM_TRANSACCION AS NUM_TRANSACCION, DOCU.FECHA_CADUCIDAD AS FECHA_CADUCIDAD, 
+    NOTA.SALDO_USADO AS SALDO_USADO
+  </sql>  
+  <sql id="Base_Column_List_With_GiftCards" >
+    DOCU.UID_DOCUMENTO AS UID_DOCUMENTO, DOCU.TIPO AS TIPO, DOCU.CODALM AS CODALM, DOCU.CODCAJA AS CODCAJA, DOCU.CODCAJA_EMISION AS CODCAJA_EMISION, DOCU.ID_DOCUMENTO AS ID_DOCUMENTO, 
+    DOCU.FECHA AS FECHA, DOCU.CODCLI AS CODCLI, DOCU.MONTO AS MONTO, DOCU.ESTADO AS ESTADO,DOCU.USUARIO AS USUARIO, 
+    DOCU.OBSERVACIONES AS OBSERVACIONES, DOCU.REFERENCIA AS REFERENCIA, DOCU.NUM_TRANSACCION AS NUM_TRANSACCION, DOCU.FECHA_CADUCIDAD AS FECHA_CADUCIDAD, 
+    GIF.SALDO AS SALDO
+  </sql>  
+  <sql id="Base_Column_List_With_Reserva" >
+    DOCU.UID_DOCUMENTO AS UID_DOCUMENTO, DOCU.TIPO AS TIPO, DOCU.CODALM AS CODALM, DOCU.CODCAJA AS CODCAJA, DOCU.CODCAJA_EMISION AS CODCAJA_EMISION, DOCU.ID_DOCUMENTO AS ID_DOCUMENTO, 
+    DOCU.FECHA AS FECHA, DOCU.CODCLI AS CODCLI, DOCU.MONTO AS MONTO, DOCU.ESTADO AS ESTADO,DOCU.USUARIO AS USUARIO, 
+    DOCU.OBSERVACIONES AS OBSERVACIONES, DOCU.REFERENCIA AS REFERENCIA, DOCU.NUM_TRANSACCION AS NUM_TRANSACCION, DOCU.FECHA_CADUCIDAD AS FECHA_CADUCIDAD, 
+    RES.BONO AS BONO
+  </sql>  
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_DOCUMENTOS_TBL DOCU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_DOCUMENTOS_TBL DOCU
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from X_DOCUMENTOS_TBL DOCU
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" >
+    delete from X_DOCUMENTOS_TBL DOCU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    insert into X_DOCUMENTOS_TBL (UID_DOCUMENTO, TIPO, CODALM, 
+      CODCAJA, CODCAJA_EMISION, ID_DOCUMENTO, FECHA, 
+      CODCLI, MONTO, ESTADO, 
+      USUARIO, OBSERVACIONES,
+      REFERENCIA, NUM_TRANSACCION,
+      FECHA_CADUCIDAD)
+    values (#{uidDocumento,jdbcType=VARCHAR}, #{tipo,jdbcType=VARCHAR}, #{codAlmacen,jdbcType=VARCHAR}, 
+      #{codCaja,jdbcType=VARCHAR}, #{codCajaEmision,jdbcType=VARCHAR}, #{idDocumento,jdbcType=DECIMAL}, #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{codCliente,jdbcType=VARCHAR}, #{monto,jdbcType=DECIMAL}, #{estado,jdbcType=CHAR}, 
+      #{usuario,jdbcType=VARCHAR}, #{observaciones,jdbcType=VARCHAR},
+      #{referencia,jdbcType=VARCHAR}, #{numTransaccion,jdbcType=VARCHAR},
+      #{fechaCaducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    insert into X_DOCUMENTOS_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidDocumento != null" >
+        UID_DOCUMENTO,
+      </if>
+      <if test="tipo != null" >
+        TIPO,
+      </if>
+      <if test="codAlmacen != null" >
+        CODALM,
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA,
+      </if>
+      <if test="codCajaEmision != null" >
+        CODCAJA_EMISION,
+      </if>      
+      <if test="idDocumento != null" >
+        ID_DOCUMENTO,
+      </if>
+      <if test="fecha != null" >
+        FECHA,
+      </if>
+      <if test="codCliente != null" >
+        CODCLI,
+      </if>
+      <if test="monto != null" >
+        MONTO,
+      </if>
+      <if test="estado != null" >
+        ESTADO,
+      </if>
+      <if test="usuario != null" >
+        USUARIO,
+      </if>
+      <if test="observaciones != null" >
+        OBSERVACIONES,
+      </if>
+      <if test="referencia != null" >
+        REFERENCIA,
+      </if>
+      <if test="numTransaccion != null" >
+        NUM_TRANSACCION,
+      </if>
+      <if test="fechaCaducidad != null" >
+        FECHA_CADUCIDAD,
+      </if>                  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidDocumento != null" >
+        #{uidDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="tipo != null" >
+        #{tipo,jdbcType=VARCHAR},
+      </if>
+      <if test="codAlmacen != null" >
+        #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="codCajaEmision != null" >
+        #{codCajaEmision,jdbcType=VARCHAR},
+      </if>      
+      <if test="idDocumento != null" >
+        #{idDocumento,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="codCliente != null" >
+        #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="monto != null" >
+        #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="estado != null" >
+        #{estado,jdbcType=CHAR},
+      </if>
+      <if test="usuario != null" >
+        #{usuario,jdbcType=VARCHAR},
+      </if>
+      <if test="observaciones != null" >
+        #{observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="referencia != null" >
+        #{referencia,jdbcType=VARCHAR},
+      </if>
+      <if test="numTransaccion != null" >
+        #{numTransaccion,jdbcType=VARCHAR},
+      </if> 
+      <if test="fechaCaducidad != null" >
+        #{fechaCaducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>                 
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultType="java.lang.Integer" >
+    select count(*) from X_DOCUMENTOS_TBL DOCU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_DOCUMENTOS_TBL
+    <set >
+      <if test="record.uidDocumento != null" >
+        UID_DOCUMENTO = #{record.uidDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tipo != null" >
+        TIPO = #{record.tipo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codAlmacen != null" >
+        CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCaja != null" >
+        CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCajaEmision != null" >
+        CODCAJA_EMISION = #{record.codCajaEmision,jdbcType=VARCHAR},
+      </if>      
+      <if test="record.idDocumento != null" >
+        ID_DOCUMENTO = #{record.idDocumento,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fecha != null" >
+        FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.codCliente != null" >
+        CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monto != null" >
+        MONTO = #{record.monto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.estado != null" >
+        ESTADO = #{record.estado,jdbcType=CHAR},
+      </if>
+      <if test="record.usuario != null" >
+        USUARIO = #{record.usuario,jdbcType=VARCHAR},
+      </if>
+      <if test="record.observaciones != null" >
+        OBSERVACIONES = #{record.observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="record.observaciones != null" >
+        REFERENCIA = #{record.referencia,jdbcType=VARCHAR},
+      </if>
+      <if test="record.observaciones != null" >
+        NUM_TRANSACCION = #{record.numTransaccion,jdbcType=VARCHAR},
+      </if>            
+      <if test="record.fechaCaducidad != null" >
+        FECHA_CADUCIDAD = #{record.fechaCaducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>      
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_DOCUMENTOS_TBL
+    set UID_DOCUMENTO = #{record.uidDocumento,jdbcType=VARCHAR},
+      TIPO = #{record.tipo,jdbcType=VARCHAR},
+      CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      CODCAJA_EMISION = #{record.codCajaEmision,jdbcType=VARCHAR},
+      ID_DOCUMENTO = #{record.idDocumento,jdbcType=DECIMAL},
+      FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      MONTO = #{record.monto,jdbcType=DECIMAL},
+      ESTADO = #{record.estado,jdbcType=CHAR},
+      USUARIO = #{record.usuario,jdbcType=VARCHAR},
+      OBSERVACIONES = #{record.observaciones,jdbcType=VARCHAR},
+      REFERENCIA = #{record.referencia, jdbcType=VARCHAR},
+      NUM_TRANSACCION = #{record.numTransaccion, jdbcType=VARCHAR},
+      FECHA_CADUCIDAD = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    update X_DOCUMENTOS_TBL
+    <set >
+      <if test="tipo != null" >
+        TIPO = #{tipo,jdbcType=VARCHAR},
+      </if>
+      <if test="codAlmacen != null" >
+        CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA_EMISION = #{codCajaEmision,jdbcType=VARCHAR},
+      </if>      
+      <if test="idDocumento != null" >
+        ID_DOCUMENTO = #{idDocumento,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="codCliente != null" >
+        CODCLI = #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="monto != null" >
+        MONTO = #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="estado != null" >
+        ESTADO = #{estado,jdbcType=CHAR},
+      </if>
+      <if test="usuario != null" >
+        USUARIO = #{usuario,jdbcType=VARCHAR},
+      </if>
+      <if test="observaciones != null" >
+        OBSERVACIONES = #{observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="referencia != null" >
+        REFERENCIA = #{referencia,jdbcType=VARCHAR},
+      </if>
+      <if test="numTransaccion != null" >
+        NUM_TRANSACCION = #{numTransaccion,jdbcType=VARCHAR},
+      </if> 
+      <if test="fechaCaducidad != null" >
+        FECHA_CADUCIDAD = #{fechaCaducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>                 
+    </set>
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+    update X_DOCUMENTOS_TBL
+    set TIPO = #{tipo,jdbcType=VARCHAR},
+      CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      CODCAJA_EMISION = #{codCajaEmision,jdbcType=VARCHAR},
+      ID_DOCUMENTO = #{idDocumento,jdbcType=DECIMAL},
+      FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      CODCLI = #{codCliente,jdbcType=VARCHAR},
+      MONTO = #{monto,jdbcType=DECIMAL},
+      ESTADO = #{estado,jdbcType=CHAR},
+      USUARIO = #{usuario,jdbcType=VARCHAR},
+      OBSERVACIONES = #{observaciones,jdbcType=VARCHAR},
+      REFERENCIA = #{referencia,jdbcType=VARCHAR},
+      NUM_TRANSACCION = #{numTransaccion,jdbcType=VARCHAR},
+      FECHA_CADUCIDAD = #{fechaCaducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}          
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByEstado" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean" >
+      update X_DOCUMENTOS_TBL
+        set ESTADO = #{estado,jdbcType=CHAR}
+      where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_DOCUMENTOS_TBL DOCU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select> 
+  <select id="selectByExampleWithBono" resultMap="BaseResultMapSaldo" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_Bono" />
+    from X_DOCUMENTOS_TBL DOCU
+    join X_BONOS_TBL BONO
+    ON (DOCU.CODALM = BONO.CODALM AND DOCU.ID_DOCUMENTO = TO_CHAR(BONO.ID_BONO))    
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>  
+  <select id="selectByExampleWithGiftCard" resultMap="BaseResultMapGiftCard" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_GiftCards" />
+    from X_DOCUMENTOS_TBL DOCU
+    join X_LOG_GIFTCARD_TBL GIF
+    ON (DOCU.REFERENCIA = GIF.ID_GIFTCARD AND DOCU.CODALM = GIF.COD_ALM AND DOCU.CODCAJA = GIF.COD_CAJA AND DOCU.ID_DOCUMENTO = GIF.ID_CARGA_GIFTCARD)    
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithNotaCredito" resultMap="BaseResultMapSaldo" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_NotaCredito" />
+    from X_DOCUMENTOS_TBL DOCU
+    join X_NOTAS_CREDITO_TBL NOTA
+    ON (DOCU.CODALM = NOTA.CODALM AND DOCU.CODCAJA = NOTA.CODCAJA AND DOCU.ID_DOCUMENTO = TO_CHAR(NOTA.ID_NOTA_CREDITO))    
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>    
+  <select id="selectByExampleWithReserva" resultMap="BaseResultMapReserva" parameterType="com.comerzzia.jpos.persistencia.print.documentos.DocumentosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_Reserva" />
+    from X_DOCUMENTOS_TBL DOCU
+    join X_RESERVA_TBL RES
+    ON (DOCU.CODALM = RES.CODALM  AND DOCU.ID_DOCUMENTO = TO_CHAR(RES.COD_RESERVACION))    
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>       
+</mapper>

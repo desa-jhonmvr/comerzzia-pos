@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket modoImpresora="SLIP">
+		<line/><line/>
+		<line>
+			<text align="left">           ${printCheque.getNombreEmpresayValorCheque()}</text>
+		</line>	
+		<line/>
+		<line>
+			<text align="left">           ${printCheque.getValorChequeLetrasAsImpresion()}</text>
+		</line>	
+		<line/>	
+		<line>
+			<text align="left">${printCheque.getLugarYfecha()}</text>
+		</line>				
+    </ticket>
+</output>

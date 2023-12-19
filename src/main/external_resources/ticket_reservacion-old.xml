@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>
+		<line/>
+		<barcode type="CODE128" position="none">${codigoBarras.getCodigoBarras()}</barcode>	
+		<line/>
+		<line>
+			<text align="left" length="40" >${empresa.getNombreComercial()}</text>
+		</line>
+		<line>
+		<text align="left" length="40" >MATRIZ:${empresa.getDireccionForPrint(33)}</text>
+		</line>
+		<line>
+			<text align="left" length="40" >${region} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >SUCURSAL:${tiendaSRI.getDireccionForPrint(31)} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >${tiendaSRI.getPoblacionForPrint(40)} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >${tiendaSRI.getDesalmForPrint(36)} ${tiendaSRI.getCodalm()} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >RUC : ${empresa.getCif()}</text>
+		</line>
+
+		<line/>
+		<line>
+			<text align="left" length="35" bold="true">RECIBO DE RESERVACIÓN</text>
+		</line>
+		<line>
+			<text align="left" length="35">LOCAL: ${tienda}</text>
+		</line>
+		<line>
+			<text align="left" length="35">CLIENTE: ${facturacion.getTipoDocumento()}: ${facturacion.getDocumento()}</text>
+		</line>
+
+		<line>
+			<text align="left" length="35">  Nombre: ${facturacion.getNombreImpresion()} ${facturacion.getApellidosImpresion()}</text>
+		</line>
+		
+		#if (${facturacion.getTelefono()}&&${facturacion.getTelefono().length()}==9)
+		<line>
+			<text align="left" length="35">  Teléfono: ${facturacion.getTelefono()}</text>
+		</line>
+		#end
+		#if (${facturacion.getDireccion()})
+		<line>
+			<text align="left" length="35">  Dirección: ${facturacion.getDireccionImpresion()}</text>
+		</line>
+		#end
+        <line></line>
+		
+		<line>
+			<text align="center" length="40">Reservación Nº ${codReserva}</text>
+		</line>
+		<line>
+			<text align="center" length="40">El cliente ha realizado una reserva </text>
+		</line>
+		<line>
+			<text align="center" length="40">de los siguientes productos </text>
+		</line>
+		<line/>
+        
+		#foreach ($linea in $ticket.getLineas().getLineas())
+        <line>
+            <text align="center" length="3">${linea.getCantidad().toString()} </text>  
+            <text align="center" length="14">${linea.getCodigoBarras()} </text> 
+            <text align="left" length="14"> ${linea.getArticulo().getDescForPrint()}</text>
+			<text align="right" length="9"> ${linea.getImporteTotalPantalla().toString()}</text>				
+		</line>
+			#if (${linea.getImpresionLineaDescuento()})
+			<line>
+				<text align="left" length="31">    ${linea.getImpresionLineaDescuento().getDescripcion()}</text>
+				<text align="right" length="9"> ${linea.getImpresionLineaDescuento().getDescuentoString()}</text>
+			</line>
+			#end
+        #end
+		<line></line>
+        #if (!($ticket.getLineas().getDescuentos().isEmpty()))
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+			#foreach($descuento in $ticket.getLineas().getDescuentos())
+			<line>
+				<text align="left" length="31">    ${descuento.getDescripcion()}</text>
+				<text align="right" length="9"> ${descuento.getDescuentoString()}</text>
+			</line>
+			#end
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+		
+		#end
+		
+        #if (${ticket.isObservacionVacia()})
+            <line><text align="left" lenght="40">Observ : REVISADO </text> </line>
+        #else
+            <line><text align="left" lenght="40">Observ:</text></line>
+            #foreach ($lineaObservacion in $ticket.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+            #end
+        #end	
+		<line/>
+		
+		<line>
+			<text align="left" lenght="40">Los precios incluyen IVA</text>
+		</line>
+		<line>
+			<text align="left" length="40"> TIPO DE RESERVA: ${reserva.getReservaTipo().getDesTipo()}</text>			
+		</line>
+		<line>
+			<text align="left" length="40"> FIN DE VALIDEZ: ${reserva.getFechaCaducidadAsString()}</text>			
+		</line>
+        <line></line>
+		
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${cajero.getDesUsuario()} </text></line>
+		<line><text align="left">,gracias.</text></line>
+        <line><text align="center" length="35">${fecha}</text></line>   	
+		<line/>
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+    </ticket>
+</output>

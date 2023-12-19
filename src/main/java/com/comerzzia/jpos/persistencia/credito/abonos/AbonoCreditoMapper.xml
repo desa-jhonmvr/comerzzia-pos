@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    <id column="UID_CREDITO_PAGO" property="uidCreditoPago" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="IDENTIFICADOR" property="identificador" jdbcType="DECIMAL" />
+    <result column="NUM_CREDITO" property="numCredito" jdbcType="DECIMAL" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="COD_VENDEDOR" property="codVendedor" jdbcType="VARCHAR" />
+    <result column="TOTAL_SIN_DTO" property="totalSinDto" jdbcType="DECIMAL" />
+    <result column="TOTAL_CON_DTO" property="totalConDto" jdbcType="DECIMAL" />
+    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+    <result column="PROCESADO" property="procesado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="NUMERO_TARJETA" property="numeroTarjeta" jdbcType="VARCHAR" />
+    <result column="ANULADO" property="anulado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />    
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" extends="BaseResultMap" >
+    <result column="PAGOS" property="pagos" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_CREDITO_PAGO, CODALM, CODCAJA, IDENTIFICADOR, NUM_CREDITO, CODCLI, COD_VENDEDOR, 
+    TOTAL_SIN_DTO, TOTAL_CON_DTO, OBSERVACIONES, PROCESADO, FECHA, NUMERO_TARJETA, ANULADO
+  </sql>
+  <sql id="Blob_Column_List" >
+    PAGOS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_CREDITO_PAGOS_TBL
+    where UID_CREDITO_PAGO = #{uidCreditoPago,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from X_CREDITO_PAGOS_TBL
+    where UID_CREDITO_PAGO = #{uidCreditoPago,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" >
+    delete from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    insert into X_CREDITO_PAGOS_TBL (UID_CREDITO_PAGO, CODALM, CODCAJA, 
+      IDENTIFICADOR, NUM_CREDITO, CODCLI, 
+      COD_VENDEDOR, TOTAL_SIN_DTO, TOTAL_CON_DTO, 
+      OBSERVACIONES, PROCESADO, 
+      FECHA, 
+      NUMERO_TARJETA, PAGOS, ANULADO)
+    values (#{uidCreditoPago,jdbcType=VARCHAR}, #{codAlmacen,jdbcType=VARCHAR}, #{codCaja,jdbcType=VARCHAR}, 
+      #{identificador,jdbcType=DECIMAL}, #{numCredito,jdbcType=DECIMAL}, #{codCliente,jdbcType=VARCHAR}, 
+      #{codVendedor,jdbcType=VARCHAR}, #{totalSinDto,jdbcType=DECIMAL}, #{totalConDto,jdbcType=DECIMAL}, 
+      #{observaciones,jdbcType=VARCHAR}, #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{numeroTarjeta,jdbcType=VARCHAR}, #{pagos,jdbcType=BLOB}, #{anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    insert into X_CREDITO_PAGOS_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidCreditoPago != null" >
+        UID_CREDITO_PAGO,
+      </if>
+      <if test="codAlmacen != null" >
+        CODALM,
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA,
+      </if>
+      <if test="identificador != null" >
+        IDENTIFICADOR,
+      </if>
+      <if test="numCredito != null" >
+        NUM_CREDITO,
+      </if>
+      <if test="codCliente != null" >
+        CODCLI,
+      </if>
+      <if test="codVendedor != null" >
+        COD_VENDEDOR,
+      </if>
+      <if test="totalSinDto != null" >
+        TOTAL_SIN_DTO,
+      </if>
+      <if test="totalConDto != null" >
+        TOTAL_CON_DTO,
+      </if>
+      <if test="observaciones != null" >
+        OBSERVACIONES,
+      </if>
+      <if test="procesado != null" >
+        PROCESADO,
+      </if>
+      <if test="fecha != null" >
+        FECHA,
+      </if>
+      <if test="numeroTarjeta != null" >
+        NUMERO_TARJETA,
+      </if>
+      <if test="pagos != null" >
+        PAGOS,
+      </if>
+      <if test="anulado != null" >
+        ANULADO,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidCreditoPago != null" >
+        #{uidCreditoPago,jdbcType=VARCHAR},
+      </if>
+      <if test="codAlmacen != null" >
+        #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="identificador != null" >
+        #{identificador,jdbcType=DECIMAL},
+      </if>
+      <if test="numCredito != null" >
+        #{numCredito,jdbcType=DECIMAL},
+      </if>
+      <if test="codCliente != null" >
+        #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="codVendedor != null" >
+        #{codVendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSinDto != null" >
+        #{totalSinDto,jdbcType=DECIMAL},
+      </if>
+      <if test="totalConDto != null" >
+        #{totalConDto,jdbcType=DECIMAL},
+      </if>
+      <if test="observaciones != null" >
+        #{observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="procesado != null" >
+        #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="fecha != null" >
+        #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="numeroTarjeta != null" >
+        #{numeroTarjeta,jdbcType=VARCHAR},
+      </if>
+      <if test="pagos != null" >
+        #{pagos,jdbcType=BLOB},
+      </if>
+      <if test="anulado != null" >
+        #{anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" resultType="java.lang.Integer" >
+    select count(*) from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_CREDITO_PAGOS_TBL
+    <set >
+      <if test="record.uidCreditoPago != null" >
+        UID_CREDITO_PAGO = #{record.uidCreditoPago,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codAlmacen != null" >
+        CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCaja != null" >
+        CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identificador != null" >
+        IDENTIFICADOR = #{record.identificador,jdbcType=DECIMAL},
+      </if>
+      <if test="record.numCredito != null" >
+        NUM_CREDITO = #{record.numCredito,jdbcType=DECIMAL},
+      </if>
+      <if test="record.codCliente != null" >
+        CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codVendedor != null" >
+        COD_VENDEDOR = #{record.codVendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalSinDto != null" >
+        TOTAL_SIN_DTO = #{record.totalSinDto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalConDto != null" >
+        TOTAL_CON_DTO = #{record.totalConDto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.observaciones != null" >
+        OBSERVACIONES = #{record.observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procesado != null" >
+        PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.fecha != null" >
+        FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.numeroTarjeta != null" >
+        NUMERO_TARJETA = #{record.numeroTarjeta,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pagos != null" >
+        PAGOS = #{record.pagos,jdbcType=BLOB},
+      </if>
+      <if test="record.anulado != null" >
+        ANULADO = #{record.anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update X_CREDITO_PAGOS_TBL
+    set UID_CREDITO_PAGO = #{record.uidCreditoPago,jdbcType=VARCHAR},
+      CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      IDENTIFICADOR = #{record.identificador,jdbcType=DECIMAL},
+      NUM_CREDITO = #{record.numCredito,jdbcType=DECIMAL},
+      CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      COD_VENDEDOR = #{record.codVendedor,jdbcType=VARCHAR},
+      TOTAL_SIN_DTO = #{record.totalSinDto,jdbcType=DECIMAL},
+      TOTAL_CON_DTO = #{record.totalConDto,jdbcType=DECIMAL},
+      OBSERVACIONES = #{record.observaciones,jdbcType=VARCHAR},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      NUMERO_TARJETA = #{record.numeroTarjeta,jdbcType=VARCHAR},
+      PAGOS = #{record.pagos,jdbcType=BLOB},
+      ANULADO = #{record.anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}      
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_CREDITO_PAGOS_TBL
+    set UID_CREDITO_PAGO = #{record.uidCreditoPago,jdbcType=VARCHAR},
+      CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      IDENTIFICADOR = #{record.identificador,jdbcType=DECIMAL},
+      NUM_CREDITO = #{record.numCredito,jdbcType=DECIMAL},
+      CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      COD_VENDEDOR = #{record.codVendedor,jdbcType=VARCHAR},
+      TOTAL_SIN_DTO = #{record.totalSinDto,jdbcType=DECIMAL},
+      TOTAL_CON_DTO = #{record.totalConDto,jdbcType=DECIMAL},
+      OBSERVACIONES = #{record.observaciones,jdbcType=VARCHAR},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      NUMERO_TARJETA = #{record.numeroTarjeta,jdbcType=VARCHAR},
+      ANULADO = #{record.anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}     
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    update X_CREDITO_PAGOS_TBL
+    <set >
+      <if test="codAlmacen != null" >
+        CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="identificador != null" >
+        IDENTIFICADOR = #{identificador,jdbcType=DECIMAL},
+      </if>
+      <if test="numCredito != null" >
+        NUM_CREDITO = #{numCredito,jdbcType=DECIMAL},
+      </if>
+      <if test="codCliente != null" >
+        CODCLI = #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="codVendedor != null" >
+        COD_VENDEDOR = #{codVendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSinDto != null" >
+        TOTAL_SIN_DTO = #{totalSinDto,jdbcType=DECIMAL},
+      </if>
+      <if test="totalConDto != null" >
+        TOTAL_CON_DTO = #{totalConDto,jdbcType=DECIMAL},
+      </if>
+      <if test="observaciones != null" >
+        OBSERVACIONES = #{observaciones,jdbcType=VARCHAR},
+      </if>
+      <if test="procesado != null" >
+        PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="fecha != null" >
+        FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="numeroTarjeta != null" >
+        NUMERO_TARJETA = #{numeroTarjeta,jdbcType=VARCHAR},
+      </if>
+      <if test="pagos != null" >
+        PAGOS = #{pagos,jdbcType=BLOB},
+      </if>
+      <if test="anulado != null" >
+        ANULADO = #{anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </set>
+    where UID_CREDITO_PAGO = #{uidCreditoPago,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    update X_CREDITO_PAGOS_TBL
+    set CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      IDENTIFICADOR = #{identificador,jdbcType=DECIMAL},
+      NUM_CREDITO = #{numCredito,jdbcType=DECIMAL},
+      CODCLI = #{codCliente,jdbcType=VARCHAR},
+      COD_VENDEDOR = #{codVendedor,jdbcType=VARCHAR},
+      TOTAL_SIN_DTO = #{totalSinDto,jdbcType=DECIMAL},
+      TOTAL_CON_DTO = #{totalConDto,jdbcType=DECIMAL},
+      OBSERVACIONES = #{observaciones,jdbcType=VARCHAR},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      NUMERO_TARJETA = #{numeroTarjeta,jdbcType=VARCHAR},
+      PAGOS = #{pagos,jdbcType=BLOB},
+      ANULADO = #{anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+    where UID_CREDITO_PAGO = #{uidCreditoPago,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoBean" >
+    update X_CREDITO_PAGOS_TBL
+    set CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      IDENTIFICADOR = #{identificador,jdbcType=DECIMAL},
+      NUM_CREDITO = #{numCredito,jdbcType=DECIMAL},
+      CODCLI = #{codCliente,jdbcType=VARCHAR},
+      COD_VENDEDOR = #{codVendedor,jdbcType=VARCHAR},
+      TOTAL_SIN_DTO = #{totalSinDto,jdbcType=DECIMAL},
+      TOTAL_CON_DTO = #{totalConDto,jdbcType=DECIMAL},
+      OBSERVACIONES = #{observaciones,jdbcType=VARCHAR},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      NUMERO_TARJETA = #{numeroTarjeta,jdbcType=VARCHAR},
+      ANULADO = #{anulado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}     
+    where UID_CREDITO_PAGO = #{uidCreditoPago,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" id="selectByExampleWithBLOBsWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.credito.abonos.AbonoCreditoExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_CREDITO_PAGOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

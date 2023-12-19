@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><text align="left" length="40">Sr./Sra.</text></line>
+		#if (!${ticket.getCliente().isClienteGenerico()})
+			<line><text align="left" length="45" >${ticket.getFacturacion().getNombreImpresion()} ${ticket.getFacturacion().getApellidosImpresion()}</text> </line>
+		#end
+		<line><text align="left" length="40">Presente.-</text></line>
+		<line/>
+		<line><text align="left" length="40">Tenemos el agrado de cotizar la </text></line>
+		<line><text align="left" length="40">siguiente mercadería:</text></line>
+		<line></line>
+
+		
+        #foreach ($linea in $ticket.getLineas().getLineas())
+        <line>
+            <text align="center" length="3">${linea.getCantidad().toString()} </text>  
+            <text align="center" length="14">${linea.getCodigoBarras()} </text> 
+			<text align="left" length="14"> ${linea.getArticulo().getDescForPrint()}</text>
+			<text align="right" length="9"> ${linea.getImporteTotalPantalla().toString()}</text>				
+		</line>
+			#if (${linea.getImpresionLineaDescuento()})
+			<line>
+				<text align="left" length="31">    ${linea.getImpresionLineaDescuento().getDescripcion()}</text>
+				<text align="right" length="9"> ${linea.getImpresionLineaDescuento().getDescuentoString()}</text>
+			</line>
+			#end
+        #end
+		<line></line>
+        #if (!($ticket.getLineas().getDescuentos().isEmpty()))
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+			#foreach($descuento in $ticket.getLineas().getDescuentos())
+			<line>
+				<text align="left" length="31">    ${descuento.getDescripcion()}</text>
+				<text align="right" length="9"> ${descuento.getDescuentoString()}</text>
+			</line>
+			#end
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+		
+		#end
+		<line>
+            <text align="left" length="28">    TOTAL </text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${ticket.getTotales().getTotalAPagar().toString()}</text>
+        </line>
+		
+		<line></line>
+		#foreach($lineaMensaje in $mensaje.getLineas())
+			<line><text align="left" lenght="40">$lineaMensaje  </text></line>
+		#end
+		<line/>
+		
+        #if (!${ticket.isObservacionVacia()})
+            #foreach ($lineaObservacion in $ticket.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+            #end
+        #end	
+		<line></line>
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${ticket.getCajero().getDesUsuario()}, gracias.</text></line>
+        <line><text align="center" length="35">${ticket.getFecha().getStringHora()}</text></line> 
+		<line><text align="center" length="35"></text></line>  
+    </ticket>
+</output>

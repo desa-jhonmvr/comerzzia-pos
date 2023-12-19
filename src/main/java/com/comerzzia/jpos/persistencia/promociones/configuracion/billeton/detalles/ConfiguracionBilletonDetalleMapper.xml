@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean" >
+    <id column="ID_CONF_BILLETON_DET" property="idConfBilletonDet" jdbcType="DECIMAL" />
+    <result column="ID_CONF_BILLETON" property="idConfBilleton" jdbcType="DECIMAL" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="DESDE" property="desde" jdbcType="DECIMAL" />
+    <result column="HASTA" property="hasta" jdbcType="DECIMAL" />
+    <result column="VALOR" property="valor" jdbcType="DECIMAL" />
+    <result column="COD_FORMATO" property="codFormato" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap  id="BaseResultMapConDesFormato" type="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean">
+   	<id column="ID_CONF_BILLETON_DET" property="idConfBilletonDet" jdbcType="DECIMAL" />
+    <result column="ID_CONF_BILLETON" property="idConfBilleton" jdbcType="DECIMAL" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="DESDE" property="desde" jdbcType="DECIMAL" />
+    <result column="HASTA" property="hasta" jdbcType="DECIMAL" />
+    <result column="VALOR" property="valor" jdbcType="DECIMAL" />
+    <result column="COD_FORMATO" property="codFormato" jdbcType="DECIMAL" />
+   	<result column="DESFORMATO" property="desFormato" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.tipoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.tipoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_CONF_BILLETON_DET, ID_CONF_BILLETON, TIPO, DESDE, HASTA, VALOR, COD_FORMATO
+  </sql>
+  <sql id="Base_Column_List_Con_Des_Formato" >
+    <include refid="Base_Column_List" />, DESFORMATO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleConDesFormato" resultMap="BaseResultMapConDesFormato" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_Con_Des_Formato" />
+    from X_PROMO_CONFIG_SUKUPON_DET_TBL detalle left join X_FORMATOS_TBL formatos on (detalle.cod_formato = formatos.codformato)
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    where ID_CONF_BILLETON_DET = #{idConfBilletonDet,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    where ID_CONF_BILLETON_DET = #{idConfBilletonDet,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleExample" >
+    delete from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean" >
+    insert into X_PROMO_CONFIG_SUKUPON_DET_TBL (ID_CONF_BILLETON_DET, ID_CONF_BILLETON, 
+      TIPO, 
+      DESDE, HASTA, VALOR, 
+      COD_FORMATO)
+    values (#{idConfBilletonDet,jdbcType=DECIMAL}, #{idConfBilleton,jdbcType=DECIMAL}, 
+      #{tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{desde,jdbcType=DECIMAL}, #{hasta,jdbcType=DECIMAL}, #{valor,jdbcType=DECIMAL}, 
+      #{codFormato,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean" >
+    insert into X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idConfBilletonDet != null" >
+        ID_CONF_BILLETON_DET,
+      </if>
+      <if test="idConfBilleton != null" >
+        ID_CONF_BILLETON,
+      </if>
+      <if test="tipo != null" >
+        TIPO,
+      </if>
+      <if test="desde != null" >
+        DESDE,
+      </if>
+      <if test="hasta != null" >
+        HASTA,
+      </if>
+      <if test="valor != null" >
+        VALOR,
+      </if>
+      <if test="codFormato != null" >
+        COD_FORMATO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idConfBilletonDet != null" >
+        #{idConfBilletonDet,jdbcType=DECIMAL},
+      </if>
+      <if test="idConfBilleton != null" >
+        #{idConfBilleton,jdbcType=DECIMAL},
+      </if>
+      <if test="tipo != null" >
+        #{tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="desde != null" >
+        #{desde,jdbcType=DECIMAL},
+      </if>
+      <if test="hasta != null" >
+        #{hasta,jdbcType=DECIMAL},
+      </if>
+      <if test="valor != null" >
+        #{valor,jdbcType=DECIMAL},
+      </if>
+      <if test="codFormato != null" >
+        #{codFormato,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleExample" resultType="java.lang.Integer" >
+    select count(*) from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <set >
+      <if test="record.idConfBilletonDet != null" >
+        ID_CONF_BILLETON_DET = #{record.idConfBilletonDet,jdbcType=DECIMAL},
+      </if>
+      <if test="record.idConfBilleton != null" >
+        ID_CONF_BILLETON = #{record.idConfBilleton,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tipo != null" >
+        TIPO = #{record.tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.desde != null" >
+        DESDE = #{record.desde,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hasta != null" >
+        HASTA = #{record.hasta,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valor != null" >
+        VALOR = #{record.valor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.codFormato != null" >
+        COD_FORMATO = #{record.codFormato,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_PROMO_CONFIG_SUKUPON_DET_TBL
+    set ID_CONF_BILLETON_DET = #{record.idConfBilletonDet,jdbcType=DECIMAL},
+      ID_CONF_BILLETON = #{record.idConfBilleton,jdbcType=DECIMAL},
+      TIPO = #{record.tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      DESDE = #{record.desde,jdbcType=DECIMAL},
+      HASTA = #{record.hasta,jdbcType=DECIMAL},
+      VALOR = #{record.valor,jdbcType=DECIMAL},
+      COD_FORMATO = #{record.codFormato,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean" >
+    update X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <set >
+      <if test="idConfBilleton != null" >
+        ID_CONF_BILLETON = #{idConfBilleton,jdbcType=DECIMAL},
+      </if>
+      <if test="tipo != null" >
+        TIPO = #{tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="desde != null" >
+        DESDE = #{desde,jdbcType=DECIMAL},
+      </if>
+      <if test="hasta != null" >
+        HASTA = #{hasta,jdbcType=DECIMAL},
+      </if>
+      <if test="valor != null" >
+        VALOR = #{valor,jdbcType=DECIMAL},
+      </if>
+      <if test="codFormato != null" >
+        COD_FORMATO = #{codFormato,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID_CONF_BILLETON_DET = #{idConfBilletonDet,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleBean" >
+    update X_PROMO_CONFIG_SUKUPON_DET_TBL
+    set ID_CONF_BILLETON = #{idConfBilleton,jdbcType=DECIMAL},
+      TIPO = #{tipo,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      DESDE = #{desde,jdbcType=DECIMAL},
+      HASTA = #{hasta,jdbcType=DECIMAL},
+      VALOR = #{valor,jdbcType=DECIMAL},
+      COD_FORMATO = #{codFormato,jdbcType=DECIMAL}
+    where ID_CONF_BILLETON_DET = #{idConfBilletonDet,jdbcType=DECIMAL}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.promociones.configuracion.billeton.detalles.ConfiguracionBilletonDetalleExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_PROMO_CONFIG_SUKUPON_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

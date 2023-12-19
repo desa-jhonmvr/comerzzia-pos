@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+	    <line><cabecera align="center" length="40" bold="true"></cabecera></line>        
+		<line>
+        <text align="left" length="30" >${empresa.getNombreComercial()}</text><text align="right" length="10" > </text>
+		</line>
+		<line>
+		<text align="left" length="40" >MATRIZ:${empresa.getDireccionForPrint(33)}</text>
+		</line>
+		<line>
+		<text align="left" length="40" >SUCURSAL: ${tienda.getDireccionForPrint()}</text>
+		</line>
+		<line>
+		<text align="left" length="40" >RUC : ${empresa.getCif()}</text>
+		</line>
+		<line></line>
+		
+		<line>
+            <text align="center" length="40" >${letra.getCliente().getTipoIdentificacion()}: ${letra.getCliente().getIdentificacion()}</text>
+		</line>
+		<line>
+            <text align="center" length="40" >Nombre: ${letra.getCliente().getNombreImpresion()} ${letra.getCliente().getApellidoImpresion()}</text>
+		</line>
+		<line></line>
+		
+		<line>
+            <text align="center" length="40" bold="true">ABONO A LETRAS</text>
+		</line>
+		<line>
+            <text align="center" length="40" >LETRAS DE CAMBIO DEL TICKET No. ${letra.getIdFactura()}</text>
+		</line>
+		<line>
+            <text align="center" length="40" >LETRA No. ${letraCuota.getCuota().toString()} </text>
+		</line>
+		<line>
+            <text align="center" length="40" >CON FECHA DE VENCIMIENTO ${fechaVencimiento}</text>
+		</line>			
+		
+	
+		<line></line>
+		      
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		
+		<line></line>
+				
+		<line>
+            <text align="left" length="28">   Por un valor de: </text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${letraCuota.getValor().toString()}</text>
+        </line>	
+		<line>
+            <text align="left" length="28">   +(incremento por mora) </text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${letraCuota.getMora().toString()}</text>
+        </line>
+		<line>
+            <text align="left" length="28">   Total: </text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${letraCuota.getTotal().toString()}</text>
+        </line>			
+		<line></line>
+        <line>
+            <text align="left" length="35" bold="true">FORMA DE PAGO:</text>
+        </line>
+        
+        #foreach ($pago in $ticket.getPagos().getPagos())
+        <line>         
+			#if (!(${pago.isPagoTarjeta()}))
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()}</text>
+			#end
+			#if (${pago.isPagoTarjeta()})
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()} (${pago.getPlanSeleccionado().getNumCuotas()})</text>
+			#end
+			<text align="right" length="5">US$:</text>		
+            <text align="right" length="7"> ${pago.getUstedPaga().toString()}</text>
+        </line>
+			#if (!(${pago.getVuelta().isEmpty()}))
+			<line>
+				<text align="left" length="28"> Su cambio es de :</text>
+				<text align="right" length="5"> $:</text>		
+				<text align="right" length="7"> ${pago.getVuelta()}</text>
+			</line>
+			#end		
+        #end
+		<line></line>
+       
+		<line></line>
+		<line></line>
+		<line><text align="left" length="14">Elaborado por:</text><text align="left" length="26"> ${cajero}</text></line>
+		<line></line>
+		<line></line>
+		<line><text align="left" length="40">Firma del cliente: .....................</text></line>
+		<line></line>		
+		<line><text align="center" length="40">GRACIAS POR SU CANCELACIÓN</text></line>
+	    <line><pie align="center" length="40" bold="true"></pie></line>		 
+    </ticket>
+</output>

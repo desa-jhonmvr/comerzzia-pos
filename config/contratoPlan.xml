@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<output>
+    <ticket>
+        <line><cabecera align="center" length="40" bold="true"></cabecera></line>	
+        <line>
+        <text align="left" length="30" >${empresa.getNombreComercial()}</text><text align="right" length="10" > </text>
+		</line>
+		<line>
+		<text align="left" length="40" >MATRIZ:${empresa.getDireccionForPrint(33)}</text>
+		</line>
+		<line>
+		<text align="left" length="40" >${empresa.getPoblacionForPrint(40)} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >SUCURSAL:${tienda.getDireccionForPrint(31)} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >${tienda.getPoblacionForPrint(40)} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >${tienda.getDesalmForPrint(36)} ${tienda.getCodalm()} </text>
+		</line>
+		<line></line>
+		<line>
+		<text align="left" length="40" >RUC : ${empresa.getCif()}</text>
+		</line>
+		<line></line>
+		<line>
+		<text align="left" length="40" >SOLICITUD DE INSCRIPCIÓN </text>
+		</line>
+		<line></line>
+		<line><text align="left" length="12">RESERVACION </text><text align="left" length="28" >${plan.getPlanNovioPK().getCodalm()} ${plan.getPlanNovioPK().getIdPlan()}	</text></line>
+		<line></line>		
+		<line>
+		<text align="left" length="40" >DATOS DE LA NOVIA</text>		
+		</line>
+		<line>
+		<text align="left" length="40" >NOMBRES: ${plan.getNovia().getNombre()} </text>
+		</line>		
+		<line>
+		<text align="left" length="40" >APELLIDOS: ${plan.getNovia().getApellido()} </text>
+		</line>		
+		<line>
+		<text align="left" length="20" >CEDULA: ${plan.getNovia().getCodcli()} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >TELÉFONO: ${plan.getTelefono()} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >EMAIL: ${plan.getEmail()} </text>
+		</line>	
+		<line></line>
+		<line>
+		<text align="left" length="40" >DATOS DEL NOVIO</text>		
+		</line>
+		<line>
+		<text align="left" length="40" >NOMBRES: ${plan.getNovio().getNombre()} </text>
+		</line>		
+		<line>
+		<text align="left" length="40" >APELLIDOS: ${plan.getNovio().getApellido()} </text>
+		</line>		
+		<line>
+		<text align="left" length="20" >CEDULA: ${plan.getNovio().getCodcli()} </text>
+		</line>
+		<line></line>
+		<line>
+		<text align="left" length="40" >DATOS DE LA BODA </text>
+		</line>
+		<line>
+		<text align="left" length="40" >LUGAR: ${plan.getLugar()} </text>
+		</line>
+		<line>
+		<text align="left" length="40" >FECHA Y HORA: ${fechaBoda}</text>
+		</line>	
+		<line></line>
+		
+		<line><text align="left" length="40" >CONDICIONES DEL CONTRATO: Consumo mínimo</text></line>
+		<line><text align="left" length="4" >de $</text><text align="left" length="4" >${consumoMinimo}</text><text align="left" length="32" >, la apertura tendrá vigencia de</text></line>
+		<line><text align="left" length="40" >2 meses __________________________________ </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+			
+		<line></line>
+		
+		<line><text align="left" length="40" >NUMERO DE INVITADOS:  </text></line>
+		
+		<line><text align="left" length="40" >FECHA DE LIQUIDACION DE LA BODA:__________ </text></line>
+		<line><text align="left" length="42" >VALOR CORRESPONDIENTE AL % DE LO RECAUDADO </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+		<line><text align="left" length="42" >VALOR CORRESPONDIENTE AL % DE LO RECAUDADO </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+		<line><text align="left" length="40" >CONDICIONES: _____________________________ </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+		<line><text align="left" length="40" >__________________________________________ </text></line>
+		<line><text align="left" length="40" >ESTANDO DE ACUERDO LOS NOVIOS DENTRO DE LOS</text></line>
+		<line><text align="left" length="40" >TERMINOS SUKASA SUSCRIBIMOS </text></line>
+		<line><text align="left" length="40" >EL PRESENTE CONTRATO </text></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line><text align="left" length="40" > ____________________________ </text></line>
+		<line><text align="left" length="40" >SUKASA: </text></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line><text align="left" length="40" >_____________________________ </text></line>
+		<line><text align="left" length="40" >RECIBI CONFORME</text></line>
+		<line></line>
+		<line></line>
+		<line><text align="left" length="40" >IMPRESO POR ${cajero} </text></line>
+		<line><text align="left" length="40" >FECHA Y HORA: ${fecha} - ${hora}  </text></line>
+		<line><text align="left" length="40" >MATRIMONIO: ${plan.getMatrimonio()} </text></line>
+		<line/>
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		 
+    </ticket>
+</output>

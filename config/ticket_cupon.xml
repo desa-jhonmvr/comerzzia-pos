@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+	#if (! ${cupon.getPromocion().getTipoPromocion().isPromocionTipoCuponRegaloProveedorExterno()})
+		<barcode type="CODE128" position="none">${cupon.getCodBarras()}</barcode>	
+		<line/>		
+	
+		#if ( ${printSK} && ! ${cupon.getPromocion().getTipoPromocion().isPromocionTipoCuponRegaloProveedorExterno()})
+			#foreach ($linea in $printSK.getNombreEmpresaLocalAsLineas().getLineas())
+				<line><text align="left" length="40" >${linea}</text> </line>
+			#end
+			
+			#foreach ($linea in $printSK.getDireccionLocalAsLineas().getLineas())
+				<line><text align="left" length="40" >${linea}</text> </line>
+			#end
+				<line>
+					<text align="left" length="11">    R.U.C: </text>
+					<text align="left" length="29">${printSK.getRuc()}</text>
+				</line>
+				<line/>
+				
+			#foreach ($lineaF in $printSK.getLugarYfechaAsLineas().getLineas())
+				<line><text align="left" length="40" >${lineaF}</text> </line>
+			#end
+				<line/>	
+		#end
+	
+	#else
+		
+		<line>
+            <text align="center" length="40">${printSK.getNombreEmpresa()}</text>
+		</line>
+		<line>
+			<text align="center" length="40">${printSK.getNombreTienda()}</text>
+		</line>
+		
+		#foreach ($linea in $printSK.getDireccionEmpresaAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		
+		#foreach ($lineaDL in $printSK.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaDL}</text> </line>
+		#end
+		
+		<line>
+			<text align="left" length="7">R.U.C: </text>
+			<text align="left" length="33">${printSK.getRuc()}</text>
+		</line>
+	
+	
+	#end
+	
+	#if (${esSukupon})
+	
+			#foreach ($linea in $cupon.getLineasTextoPromocion())
+				<line><text align="center" length="40" >${linea}</text> </line>
+			#end
+			<line> <text align="center" length="40"> No: ${printSK.getCodigoCupon()} </text> </line>
+			<line/>	
+			<line> <text align="left" length="40"> FACTURA : ${printSK.getReferencia()} </text> </line>
+			<line> <text align="left" length="40"> CLIENTE : ${printSK.getCliente()} </text> </line>
+			<line/>
+			<line> <text align="left" length="40"> Ced./RUC: ${printSK.getCedRuc()} </text> </line>
+			<line> <text align="left" length="40"> Telefono: ${printSK.getTelefono()} </text> </line>
+			<line/>
+			<line>
+				   <text align="left" length="12"> Valor   :$ </text>
+				   <text align="right" length="28"> ${printSK.getValor()} US DOLARES   </text> 
+			</line>
+			<line/>
+			<line/>
+			#foreach ($linea in $cupon.getLineasAvisoLegal())
+				<line><text align="left" length="40" >${linea}</text> </line>
+			#end
+			<line><text align="left" length="40" >VENCE: ${printSK.getVence()}</text> </line>
+			<line/>
+			<line/>
+			<line/>
+			<line/>	
+			<line/>
+			<line/>	
+			<line/>
+			<line/>	
+			<line/>
+			<line/>				
+	#else
+				#if (${cupon.getLogo()})  
+						<image>${cupon.getLogo()}</image>
+				#end
+				<line/>
+				
+				  #foreach ($lineatp in $cupon.getLineasTextoPromocion())	
+					<line>					  
+					   <text align="center" length="40" bold="true" >${lineatp}</text>
+					</line>
+				  #end
+				
+				<line>
+					<text align="center" length="40" bold="true">${cupon.getTextoCuponForPrint()}</text>
+				</line>	
+				#foreach ($lineaadicional in $cupon.getTextoAdicionalForPrint())	
+				<line>
+					<text align="center" length="40" bold="true">${lineaadicional}</text>
+				</line>		
+				#end
+
+        <line></line>		
+		<line/>
+		#if (!${cupon.getPromocion().getTipoPromocion().isPromocionTipoCuponRegaloProveedorExterno()})	
+		<line>
+			<text align="center" length="40" bold="true">Cupón : ${cupon.getCodBarras()}</text>
+		</line>
+		#else
+		<line>
+			<text align="center" length="40" bold="true">${cupon.getCodBarras()}</text>
+		</line>	
+		<line/>		
+		#end
+		
+		#if (!${cupon.getPromocion().getTipoPromocion().isPromocionTipoCuponRegaloProveedorExterno()})		
+			<line>
+				<text align="center" length="40" bold="true">Factura : ${cupon.getIdFactura()}</text>
+			</line>
+			<line>
+				<text align="center" length="40" bold="true">Fecha de la factura: ${cupon.getFechaForPrint()}</text>
+			</line>
+			<line/>
+			#if (!${cupon.getCliente().isClienteGenerico()}) 
+				#if (${cupon.getCliente().isSocio()})
+					<line>
+						<text align="left" length="40">  SOCIA: ${cupon.getCliente().getTipoIdentificacion()}: ${cupon.getCliente().getIdentificacion()}</text>
+					</line>
+				#end
+				#if (!${ticket.isClienteSocio()} )
+					<line>
+						<text align="left" length="40">  CLIENTE: ${cupon.getCliente().getTipoIdentificacion()}: ${cupon.getCliente().getIdentificacion()}</text>
+					</line>
+				#end
+				<line>
+					<text align="left" length="40">  Nombre: ${cupon.getCliente().getNombreImpresion()} ${cupon.getCliente().getApellidoImpresion()}</text>
+				</line>
+			#end
+			#if (${ticket.getCliente().isClienteGenerico()})
+				<line>
+					<text align="left" length="40">  CLIENTE: ${cupon.getCliente().getNombre()} ${cupon.getCliente().getApellido()}</text>
+				</line>
+			#end
+			#if (${ticket.getFacturacion().getTelefono()}&&${ticket.getFacturacion().getTelefono().length()}==9)
+			<line>
+				<text align="left" length="40">  Teléfono: ${ticket.getFacturacion().getTelefono()}</text>
+			</line>
+			#end
+			#if (${ticket.getFacturacion().getDireccion()})
+			<line>
+				<text align="left" length="40">  Dirección: ${ticket.getFacturacion().getDireccionImpresion()}</text>
+			</line>
+			#end
+		
+		#end
+		<line>
+			<text align="left" length="40">  Fecha de expedición: ${cupon.getFechaForPrint()}</text>
+		</line>
+		<line>
+			<text align="left" length="40">  Fecha de caducidad: ${cupon.getFechaImpresionForPrint()}</text>
+		</line>
+		<line/>
+		
+		#foreach ($linea in $cupon.getLineasAvisoLegal())
+		<line><text align="center" length="40" >${linea}</text> </line>
+		#end
+		<line></line>        
+		
+        <line></line>		
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+	#end	
+    </ticket>
+</output>

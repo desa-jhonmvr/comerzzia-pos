@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line>
+            <text align="center" length="20" bold="true">NÚMERO FACTURA : </text>
+			<text length="20">${ticket.getIdFactura()}</text>
+		</line>
+		#if (!${ticket.getCliente().isClienteGenerico()}) 
+			#if (${ticket.isClienteSocio()})
+				<line>
+					<text align="left" length="35">SOCIA: ${ticket.getFacturacion().getTipoIdent()}: ${ticket.getFacturacion().getIdent()}</text>
+				</line>
+			#end
+			#if (!${ticket.isClienteSocio()})
+				<line>
+					<text align="left" length="35">CLIENTE: ${ticket.getFacturacion().getTipoIdent()}: ${ticket.getFacturacion().getIdent()}</text>
+				</line>
+			#end
+			<line>
+				<text align="left" length="35">  Nombre: ${ticket.getFacturacion().getNombreImpresion()} ${ticket.getFacturacion().getApellidosImpresion()}</text>
+			</line>
+		#end
+		#if (${ticket.getCliente().isClienteGenerico()})
+			#if (${ticket.getFacturacion().getIdent()})
+			<line>
+				<text align="left" length="35">CLIENTE: ${ticket.getFacturacion().getTipoIdent()}: ${ticket.getFacturacion().getIdent()}</text>
+			</line>
+			<line>
+				<text align="left" length="35">  Nombre: ${ticket.getFacturacion().getNombreImpresion()} ${ticket.getFacturacion().getApellidosImpresion()}</text>
+			</line>			
+			#end
+			#if (!${ticket.getFacturacion().getIdent()})
+			<line>
+				<text align="left" length="35">CLIENTE: ${ticket.getFacturacion().getNombre()} ${ticket.getFacturacion().getApellidos()}</text>
+			</line>
+			#end
+			
+		#end
+		#if (${ticket.getFacturacion().getTelefono()}&&${ticket.getFacturacion().getTelefono().length()}==9)
+		<line>
+			<text align="left" length="35">  Teléfono: ${ticket.getFacturacion().getTelefono()}</text>
+		</line>
+                #else
+			#if (${ticket.getCliente().getTelefonoMovil()})
+			<line>
+			<text align="left" length="35">  Teléfono: ${ticket.getCliente().getTelefonoMovil()}</text>
+			</line>
+			#end		
+		#end
+		#if (${ticket.getFacturacion().getDireccion()})
+		<line>
+			<text align="left" length="35">  Dirección: ${ticket.getFacturacion().getDireccionImpresion()}</text>
+		</line>
+		#end
+        <line></line>
+
+		#if (${ticket.tieneKitAsociado()})
+			<line>
+				<text align="left" length="35">FACTURA DE VENTA DE KIT DE INSTALACIÓN</text>
+			</line>
+			<line>
+				<text align="left" length="35">  Factura asociada: ${ticket.getReferenciaKit().getTicketOrigen().getIdFactura()}</text>
+			</line>
+			<line>
+				<text align="left" length="35">  Artículo asociado: </text>
+			</line>
+			<line>
+				<text align="center" length="15"> ${ticket.getReferenciaKit().getArticulo().getCodart()} </text> 
+				<text align="left" length="15"> ${ticket.getReferenciaKit().getArticulo().getDescForPrint()}</text>
+			</line>
+		#end
+
+		#if (${ticket.tieneGarantiaAsociada()})
+			<line>
+				<text align="left" length="35">FACTURA DE VENTA DE GARANTÍA EXTENDIDA</text>
+			</line>
+			<line>
+				<text align="left" length="35">  Factura asociada: ${ticket.getReferenciaGarantia().getTicketOrigen().getIdFactura()}</text>
+			</line>
+			<line>
+				<text align="left" length="35">  Artículo asociado: </text>
+			</line>
+			<line>
+				<text align="center" length="15"> ${ticket.getReferenciaGarantia().getArticulo().getCodart()} </text> 
+				<text align="left" length="15"> ${ticket.getReferenciaGarantia().getArticulo().getDescForPrint()}</text>
+			</line>
+		#end
+
+		
+        #foreach ($linea in $ticket.getLineas().getLineas())
+        <line>
+            <text align="center" length="3">${linea.getCantidad().toString()} </text>  
+            <text align="center" length="14">${linea.getCodigoBarras()} </text> 
+			#if (${linea.isPendienteEntrega()})
+			#if (${linea.isEnvioDomicilio()})
+			<text align="left" length="4">P/E.</text>
+			#end
+			#if (${linea.isRecogidaPosterior()})
+			<text align="left" length="4">R  .</text>
+			#end
+			<text align="left" length="10"> ${linea.getArticulo().getDescForPrint()}</text>
+			#else
+			<text align="left" length="14"> ${linea.getArticulo().getDescForPrint()}</text>
+			#end            
+			<text align="right" length="9"> ${linea.getImportePantalla().toString()}</text>				
+		</line>
+			#if (${linea.getImpresionLineaDescuento()})
+			<line>
+				<text align="left" length="31">    ${linea.getImpresionLineaDescuento().getDescripcion()}</text>
+				<text align="right" length="9"> ${linea.getImpresionLineaDescuento().getDescuentoString()}</text>
+			</line>
+			#end
+        #end
+		<line></line>
+        #if (!($ticket.getLineas().getDescuentos().isEmpty()))
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+			#foreach($descuento in $ticket.getLineas().getDescuentos())
+			<line>
+				<text align="left" length="31">    ${descuento.getDescripcion()}</text>
+				<text align="right" length="9"> ${descuento.getDescuentoString()}</text>
+			</line>
+			#end
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		<line></line>
+		
+		#end
+		<line>
+			<text align="left" length="28">    DTO. FORMAS DE PAGOS:</text>
+			<text align="right" length="5">US$:</text>
+			<text align="right" length="7">-${ticket.getTotales().getAhorroPagosString()}</text>
+		</line>
+		#foreach ($subtotal in $ticket.getTotales().getSubtotalesImpuestos().values())
+			#if (${subtotal.getTotal()}>0)
+			<line>
+				<text align="left" length="28">    SUBTOTAL IVA ${subtotal.getPorcentajeImpresion()}% </text>
+				<text align="right" length="5">US$:</text>
+				<text align="right" length="7"> ${subtotal.getTotalString()}</text>
+			</line>
+			#end
+		#end
+		<line>
+            <text align="left" length="28">    IVA 12%</text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${ticket.getTotales().getImpuestosString()}</text>
+        </line>
+		<line>
+            <text align="left" length="28">    TOTAL </text>
+			<text align="right" length="5">US$:</text>
+            <text align="right" length="7"> ${ticket.getTotales().getTotalPagado().toString()}</text>
+        </line>
+        <line>
+            <text align="left" length="35" bold="true">FORMA DE PAGO:</text>
+        </line>
+         
+        #foreach ($pago in $ticket.getPagos().getPagos())
+        <line>         
+			#if (!(${pago.isPagoTarjeta()}))
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()}</text>
+			#end
+			#if (${pago.isPagoTarjeta()})
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()} (${pago.getPlanSeleccionado().getNumCuotas()})</text>
+			#end
+			<text align="right" length="5">US$:</text>		
+            <text align="right" length="7"> ${pago.getUstedPagaPrint().toString()}</text>
+        </line>
+			#if (!(${pago.getVuelta().isEmpty()}))
+			<line>
+				<text align="left" length="28">       Cambio:</text>
+				<text align="right" length="5">US$:</text>		
+				<text align="right" length="7"> ${pago.getVuelta()}</text>
+			</line>
+			#end
+		
+        #end
+        <line></line>
+		<line>
+			<text align="left" length="28">    TOTAL AHORRO</text>
+			<text align="right" length="5">US$:</text>
+			<text align="right" length="7">${ticket.getTotales().getTotalAhorroPrintBM().toString()}</text>
+		</line>
+        <line></line>
+        #if (${ticket.getTotales().isTotalDeducible()})
+                <line>
+			<text align="left" length="28">TOTAL DEDUCIBLE</text>
+			<text align="right" length="5">US$:</text>
+			<text align="right" length="7">${ticket.getTotales().getTotalDeducibleString()}</text>
+		</line>
+        #end
+        #foreach ($pago in $ticket.getPagos().getPagos())
+        	#if (${pago.getMedioPagoActivo().isCreditoDirecto()} && ${pago.isCuotasGeneradas()})
+				<line></line>
+				<line><text align="left" length="30">Relación de cuotas de Letra: </text></line>
+				#foreach ($cuotaLetra in $pago.getLetra().getCuotas())
+					<line><text align="left" length="35">   Cuota: ${cuotaLetra.getCuota()} - ${cuotaLetra.getValor()} - ${cuotaLetra.getFechaVencimiento().getString()}</text></line>
+				#end
+			#end
+        #end
+		<line></line>
+
+		#if (${ticket.getPuntosTicket().isPromocionActiva()})
+			#if (${ticket.getPuntosTicket().isClienteAcumulaPuntos()})
+				<line>
+					<text align="left" length="19" >Puntos acumulados: </text>
+					<text align="right" length="4" >${ticket.getPuntosTicket().getPuntosAcumulados()}</text>
+					<text align="left" length="13" >Nuevo saldo: </text>
+					<text align="right" length="5" > ${ticket.getPuntosTicket().getNuevoSaldoPuntos()}</text>
+				</line>
+			#end
+		#end
+	
+		<line></line>
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${ticket.getCajero().getDesUsuario()}, gracias.</text></line>
+        <line><text align="center" length="35">${ticket.getFecha().getStringHora()}</text></line> 
+		<line><text align="center" length="35"></text></line>  
+		<line><text align="left" length="54">Se aceptan cambios y devoluciones antes de</text></line>
+		<line><text align="left" length="54">los 30 dias a partir de la fecha de compra</text></line>		
+    </ticket>
+</output>

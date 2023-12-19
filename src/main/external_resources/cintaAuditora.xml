@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<output>
+    <ticket>
+        <line>
+            <text align="center" length="40" bold="true">${cintaAuditora.getTitulo()}</text>			
+        </line>        
+        <line></line>        
+        <line>
+            <text align="left" length="7" bold="true">FECHA:</text>
+            <text align="left" length="19">${cintaAuditora.getFecha()}</text>			
+        </line>                
+        <line>
+            <text align="center" length="40" bold="true">PERIODO</text>			
+        </line>
+        <line>
+            <text align="left" length="11" bold="true">F. INICIO:</text>
+            <text align="left" length="19">${cintaAuditora.getFechaInicio()}</text>
+        </line>
+        <line>
+            <text align="left" length="11" bold="true">F. FIN:</text>
+            <text align="left" length="19">${cintaAuditora.getFechaFin()}</text>
+        </line>        
+        <line></line>        
+        <line>
+            <text align="left" length="9" bold="true">ALMACEN:</text>
+            <text align="left" length="31">${cintaAuditora.getAlmacen()}</text>		
+        </line>        
+        <line>
+            <text align="left" length="9" bold="true">CAJA:</text>
+            <text align="left" length="31">${cintaAuditora.getCaja()}</text>		
+        </line>        
+        <line>
+            <text align="left" length="8" bold="true">CAJERO:</text>
+            <text align="left" length="32">${cintaAuditora.getUsuario()}</text>		
+        </line>        
+        <line>
+            <text align="left" length="13" bold="true">AUTORIZADOR:</text>
+            <text align="left" length="27">${cintaAuditora.getAutorizador()}</text>			
+        </line>        	
+        <line></line>        
+        <line>
+            <text align="center" length="40" bold="true">ACUMULADOS POR FORMA DE PAGO</text>
+        </line> 
+        <line></line>		
+        <line>
+            <text align="left" length="30" bold="true">F. PAGO</text>
+            <text align="left" length="10" bold="true">VALOR</text>
+        </line> 		
+        #foreach ($formaPago in $cintaAuditora.getItemsCintaAuditora())			
+            <line>
+                <text align="left" length="30">${formaPago.getNombre()}</text>
+                <text align="left" length="10">${formaPago.getValor()}</text>	
+            </line> 			
+        #end
+        <line><text align="center" length="40" >________________________________</text></line>
+	 <line>
+            <text align="left" length="30" bold="true">TOTAL :</text>
+            <text align="left" length="10" bold="true">${cintaAuditora.getTotales()}</text>
+        </line> 		
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+    </ticket>	
+</output>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaBean" >
+    <id column="UID_SESION_PDA" property="uidSesionPda" jdbcType="VARCHAR" />
+    <id column="ID_LINEA" property="idLinea" jdbcType="DECIMAL" />
+    <result column="CODART" property="codart" jdbcType="VARCHAR" />
+    <result column="CODIGO_BARRAS" property="codigoBarras" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_SESION_PDA, ID_LINEA, CODART, CODIGO_BARRAS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_SESION_PDA_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_SESION_PDA_DET_TBL
+    where UID_SESION_PDA = #{uidSesionPda,jdbcType=VARCHAR}
+      and ID_LINEA = #{idLinea,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaKey" >
+    delete from X_SESION_PDA_DET_TBL
+    where UID_SESION_PDA = #{uidSesionPda,jdbcType=VARCHAR}
+      and ID_LINEA = #{idLinea,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaExample" >
+    delete from X_SESION_PDA_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaBean" >
+    insert into X_SESION_PDA_DET_TBL (UID_SESION_PDA, ID_LINEA, CODART, 
+      CODIGO_BARRAS)
+    values (#{uidSesionPda,jdbcType=VARCHAR}, #{idLinea,jdbcType=DECIMAL}, #{codart,jdbcType=VARCHAR}, 
+      #{codigoBarras,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaBean" >
+    insert into X_SESION_PDA_DET_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidSesionPda != null" >
+        UID_SESION_PDA,
+      </if>
+      <if test="idLinea != null" >
+        ID_LINEA,
+      </if>
+      <if test="codart != null" >
+        CODART,
+      </if>
+      <if test="codigoBarras != null" >
+        CODIGO_BARRAS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidSesionPda != null" >
+        #{uidSesionPda,jdbcType=VARCHAR},
+      </if>
+      <if test="idLinea != null" >
+        #{idLinea,jdbcType=DECIMAL},
+      </if>
+      <if test="codart != null" >
+        #{codart,jdbcType=VARCHAR},
+      </if>
+      <if test="codigoBarras != null" >
+        #{codigoBarras,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaExample" resultType="java.lang.Integer" >
+    select count(*) from X_SESION_PDA_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_SESION_PDA_DET_TBL
+    <set >
+      <if test="record.uidSesionPda != null" >
+        UID_SESION_PDA = #{record.uidSesionPda,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idLinea != null" >
+        ID_LINEA = #{record.idLinea,jdbcType=DECIMAL},
+      </if>
+      <if test="record.codart != null" >
+        CODART = #{record.codart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codigoBarras != null" >
+        CODIGO_BARRAS = #{record.codigoBarras,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_SESION_PDA_DET_TBL
+    set UID_SESION_PDA = #{record.uidSesionPda,jdbcType=VARCHAR},
+      ID_LINEA = #{record.idLinea,jdbcType=DECIMAL},
+      CODART = #{record.codart,jdbcType=VARCHAR},
+      CODIGO_BARRAS = #{record.codigoBarras,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaBean" >
+    update X_SESION_PDA_DET_TBL
+    <set >
+      <if test="codart != null" >
+        CODART = #{codart,jdbcType=VARCHAR},
+      </if>
+      <if test="codigoBarras != null" >
+        CODIGO_BARRAS = #{codigoBarras,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UID_SESION_PDA = #{uidSesionPda,jdbcType=VARCHAR}
+      and ID_LINEA = #{idLinea,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaBean" >
+    update X_SESION_PDA_DET_TBL
+    set CODART = #{codart,jdbcType=VARCHAR},
+      CODIGO_BARRAS = #{codigoBarras,jdbcType=VARCHAR}
+    where UID_SESION_PDA = #{uidSesionPda,jdbcType=VARCHAR}
+      and ID_LINEA = #{idLinea,jdbcType=DECIMAL}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.listapda.detalle.DetalleSesionPdaExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_SESION_PDA_DET_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<output>
+    <ticket>
+            <line><cabecera align="center" length="40" bold="true"></cabecera></line>
+            <line>
+                <text align="center" length="40">${printVoucherAnu.getNombreEmpresa()}</text>
+            </line>
+            <line>
+                    <text align="center" length="40">${printVoucherAnu.getNombreTienda()}</text>
+            </line>
+            #foreach ($linea in $printVoucherAnu.getDireccionLocalAsLineas().getLineas())
+                    <line><text align="left" length="40" >${linea}</text> </line>
+            #end
+            #if (${printVoucherAnu.isTieneTelefonoTienda()} )
+                <line>
+                        <text align="left" length="10">Teléfono: </text>
+                        <text align="left" length="30">${printVoucherAnu.getTelefonoTienda()}</text>
+                </line>
+            #end
+            <line>
+                    <text align="left" length="11">    R.U.C: </text>
+                    <text align="left" length="29">${printVoucherAnu.getRuc()}</text>
+            </line>
+            <line/>
+
+            #foreach ($lineaF in $printVoucherAnu.getLugarYfechaAsLineas().getLineas())
+                    <line><text align="left" length="40" >${lineaF}</text> </line>
+            #end
+            <line/>
+            <line>
+                    <text align="center" length="40">${printVoucherAnu.getMidTidML()}</text>
+            </line>
+            <line>
+                    <text align="center" length="40">${printVoucherAnu.getNombreGrupoTarjeta()}</text>
+            </line>            
+            <line/>
+            <line>
+                    <text align="left" length="40">TARJETA : ${printVoucherAnu.getNumeroTarjeta()} </text>
+            </line>      
+            <line>
+                    <text align="left" length="6">LOTE: </text>
+                    <text align="left" length="6">${printVoucherAnu.getSecuencialPinpad()}</text>
+                    <text align="right" length="22">Ref: </text>
+                    <text align="left" legth="6">${printVoucherAnu.getSecuencialTransaccion()}</text>
+            </line>
+            <line>
+                    <text align="left" length="40">ADQUIRIENTE: ${printVoucherAnu.getNombreBancoAdquiriente()}</text>
+            </line>
+            <line/>
+            <line>
+                    <text align="center" length="40" bold="true">ANULACIÓN</text>
+            </line>  
+            <line>
+                    <text align="center" length="40">APROBACIÓN: ${printVoucherAnu.getNumeroAutorizacion()}</text>
+            </line> 
+            <line/>
+            <line>
+                    <text align="left" length="13">Total:$ </text>
+                    <text align="right" length="27">${printVoucherAnu.getTotal()} US DOLARES   </text>
+            </line>
+            <line/>
+            <line>
+                <text align="left" length="20">${printVoucherAnu.getAidemv()}</text>
+            </line>
+            <line>
+                <text align="left" length="16">${printVoucherAnu.getArqc()}</text>
+            </line>                                                       
+    </ticket>
+</output>

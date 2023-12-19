@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>	
+		<line/>
+		<barcode type="CODE128" position="none">${codigoBarras.getCodigoBarras()}</barcode>
+        <line>
+            <text align="center" length="35" bold="true">${codigoBarras.getCodigoBarras()}</text>
+		</line>
+		<line/>
+		<line/>
+		#if (!${hayUidNotaCredito})
+		<line>
+			<text align="center" length="40" bold="true">RESERVACIÓN Nº ${reservacion.getCodReservacion()}</text>
+		</line>		
+		#end		
+		<line>
+			<text align="left" length="45" bold="true">BONO POR ${tipoBono}</text>
+		</line>
+		<line>
+			<text align="left" length="45" bold="true">Identificador: ${identificador}</text>
+		</line>
+		#if (${hayUidNotaCredito})
+			<line><text align="left" length="40" >Origen Nota Crédito: ${notaCredito.getIdNotaCreditoCompleto()} </text></line>
+			<line><text align="left" length="40" >Valor Nota Crédito: $${notaCredito.getTotal()}</text></line>
+			<line><text align="left" length="40" >Saldo Restante: $${total}</text></line>
+			#if(${consumos.size()}>0)
+				<line><text align="left" length="40" >Consumos: </text></line>
+				#foreach ($consumo in $consumos)
+					<line><text align="center" length="40" >${consumo} </text></line>
+				#end
+			#end
+		#else
+			#if (${referenciaOrigen} && ${referenciaOrigen.length()}>7)
+			<line>
+				<text align="left" length="40" >Referencia Origen: ${referenciaOrigen}</text>
+			</line>
+			#else
+			<line>
+				<text align="left" length="40" >Referencia Origen: ${printBono.getCodalm()}-${referenciaOrigen}</text>
+			</line>
+			
+			#end
+		#end
+
+        <line></line>
+		
+		#if (${hayUidNotaCredito})
+			<line>
+				<text align="center" length="40" bold="true">Bono Válido por: $${total}</text>
+			</line>					
+		#else
+			<line>
+				<text align="center" length="40" bold="true">Valor Original: $${valorOriginal}</text>
+			</line>	
+			<line>
+				<text align="center" length="40" bold="true">Valor Debitado: $${valorDebitado}</text>
+			</line>	
+			<line>
+				<text align="center" length="40" bold="true">Saldo: $${total}</text>
+			</line>		
+		#end
+		<line></line>
+		<line><text align="center" length="45" >El bono puede ser usado en sus compras en</text> </line>
+		<line><text align="center" length="45" >bebemundo por el valor del importe indicado.</text> </line>
+		<line></line>
+		<line>
+			<text align="center" length="40"> Fecha de expedición: ${fechaInicio}</text>
+		</line>
+		<line>
+			<text align="center" length="40"> Fecha de caducidad: ${fechaCaducidad}</text>
+		</line>
+		<line/>
+        
+		
+        <line></line>				
+		<line><text align="left" length="28">   FIRMA CLIENTE</text></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line><text align="left" length="28">   FIRMA ADMINISTRADOR</text></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		<line></line>
+		#foreach ($linea in $avisoLegal.getLineas())
+		<line><text align="left" length="45" >${linea}</text> </line>
+		#end
+		<line>
+			<text align="left" length="35">LOCAL: ${tienda}</text>
+	    </line>
+		<line></line>
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${cajero.getDesUsuario()}, gracias.</text></line>
+        <line><text align="center" length="35">${fechaActual}</text></line>   	
+		<line/>	
+		#foreach ($linea in $avisoLegal.getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		<line/>	
+		<line/>
+        #if (${bonoObserva.isObservacionLlena()})
+            <line><text align="left" lenght="40">Observ:</text></line>
+            #foreach ($lineaObservacion in $bonoObserva.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+            #end
+        #end	
+		<line/>			
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>		
+    </ticket>
+</output>

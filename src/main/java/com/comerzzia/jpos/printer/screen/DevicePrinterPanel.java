@@ -1,0 +1,169 @@
+
+
+package com.comerzzia.jpos.printer.screen;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import com.comerzzia.jpos.printer.*;
+import com.comerzzia.jpos.printer.ticket.BasicTicket;
+import com.comerzzia.jpos.printer.ticket.BasicTicketForScreen;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+public class DevicePrinterPanel extends javax.swing.JPanel implements DevicePrinter {
+    
+    private String m_sName;
+   
+    private JTicketContainer m_jTicketContainer;    
+    private BasicTicket m_ticketcurrent;
+    private JDialog jDialogParent;
+    private boolean ventanaAceptada;
+    
+    /** Creates new form JPrinterScreen2 */
+    public DevicePrinterPanel() {
+        initComponents();
+        m_sName = "Impresora en Pantalla";
+        m_ticketcurrent = null;
+        m_jTicketContainer = new JTicketContainer();
+        m_jScrollView.setViewportView(m_jTicketContainer);
+
+
+        Action listeneresc = new AbstractAction() {
+            public void actionPerformed(ActionEvent ae) {
+                ventanaAceptada = false;
+                jDialogParent.setVisible(false);
+            }
+        };
+
+        Action listenerF9 = new AbstractAction() {
+            public void actionPerformed(ActionEvent ae) {
+                ventanaAceptada = true;
+                jDialogParent.setVisible(false);
+            }
+        };
+
+        Action listenerUp = new AbstractAction() {
+            public void actionPerformed(ActionEvent ae) {
+                BoundedRangeModel model = m_jScrollView.getVerticalScrollBar().getModel();
+                model.setValue(model.getValue()-3);
+            }
+        };
+
+        Action listenerDown = new AbstractAction() {
+            public void actionPerformed(ActionEvent ae) {
+                BoundedRangeModel model = m_jScrollView.getVerticalScrollBar().getModel();
+                model.setValue(model.getValue()+3);
+            }
+        };
+        
+        ActionMap actionMap = this.getActionMap();
+        InputMap inputMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
+        KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        KeyStroke f9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        KeyStroke up = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
+        KeyStroke down = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
+        
+        inputMap.put(esc, "PanelPrintScreenEsc");
+        inputMap.put(up, "PanelPrintScreenUp");
+        inputMap.put(down, "PanelPrintScreenDown");
+        inputMap.put(f9, "PanelPrintScreenF9");
+        
+        actionMap.put("PanelPrintScreenEsc", listeneresc);
+        actionMap.put("PanelPrintScreenUp", listenerUp);
+        actionMap.put("PanelPrintScreenDown", listenerDown);
+        actionMap.put("PanelPrintScreenF9", listenerF9);
+
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+        setCursor(blankCursor);
+        
+    }
+    
+    public String getPrinterName() {
+        return m_sName;
+    }
+    public String getPrinterDescription() {
+        return null;
+    }       
+    public JComponent getPrinterComponent() {
+        return this;
+    }
+    public void reset() {
+        m_ticketcurrent = null;
+        m_jTicketContainer.removeAllTickets();
+        m_jTicketContainer.repaint();
+    }
+    
+    // INTERFAZ PRINTER 2
+    public void beginReceipt() {
+        m_ticketcurrent = new BasicTicketForScreen();
+    }
+    public void printImage(BufferedImage image) {
+        m_ticketcurrent.printImage(image);
+    }
+    public void printBarCode(String type, String position, String code) {
+        m_ticketcurrent.printBarCode(type, position, code);
+    }
+    public void beginLine(int iTextSize) {
+        m_ticketcurrent.beginLine(iTextSize);
+    }
+    public void printText(int iStyle, String sText) {
+        m_ticketcurrent.printText(iStyle, sText);
+    }
+    public void endLine() {
+        m_ticketcurrent.endLine();
+    } 
+    public void endReceipt(int impresora) {
+        m_jTicketContainer.addTicket(new JTicket(m_ticketcurrent));
+        m_jTicketContainer.scrollRectToVisible(new Rectangle(0,0));
+        m_ticketcurrent = null;
+    }
+    
+    public void openDrawer() {
+        // Una simulacion
+        Toolkit.getDefaultToolkit().beep();
+    }
+
+    public JDialog getjDialogParent() {
+        return jDialogParent;
+    }
+
+    public void setjDialogParent(JDialog jDialogParent) {
+        this.jDialogParent = jDialogParent;
+    }
+
+    public boolean isVentanaAceptada() {
+        return ventanaAceptada;
+    }
+
+       
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        m_jScrollView = new javax.swing.JScrollPane();
+
+        setLayout(new java.awt.BorderLayout());
+
+        m_jScrollView.setAutoscrolls(true);
+        add(m_jScrollView, java.awt.BorderLayout.CENTER);
+    }// </editor-fold>//GEN-END:initComponents
+    
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane m_jScrollView;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void seleccionarImpresora(String tipo) {
+       
+    }
+    
+}
+

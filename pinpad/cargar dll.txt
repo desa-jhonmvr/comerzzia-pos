@@ -1,0 +1,3 @@
+En NetBeans, botón derecho sobre el proyecto principal, ir a la opción Run e incluir en VM Options:
+
+-Djava.library.path=(Ruta absoluta donde esta la dll, p.e.C:\Users\SMLM\Desktop\PinPadSukasa)

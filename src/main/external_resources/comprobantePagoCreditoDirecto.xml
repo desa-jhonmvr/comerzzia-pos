@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line/>
+	    <line><cabecera align="center" length="40" bold="true"></cabecera></line>      
+		<line>
+            <text align="center" length="40">${printPC.getNombreEmpresa()}</text>
+		</line>
+		<line>
+			<text align="center" length="40">${printPC.getNombreTienda()}</text>
+		</line>
+		
+		#foreach ($linea in $printPC.getDireccionEmpresaAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		
+		#foreach ($lineaDL in $printPC.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaDL}</text> </line>
+		#end
+		
+		<line>
+			<text align="left" length="7">R.U.C: </text>
+			<text align="left" length="33">${printPC.getRuc()}</text>
+		</line>
+		
+		<line/>
+
+		<line>
+            <text align="center" length="40" >RECIBO DE PAGO</text>
+		</line>
+		<line>
+            <text align="center" length="40" >${printPC.getIdentificador()}</text>
+		</line>
+		
+	
+		<line></line>
+		#foreach ($lineaF in $printPC.getLugarYfechaAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaF}</text> </line>
+		#end
+		<line>
+		<text align="left" length="40" >HORA : ${printPC.getHora()} </text>
+		</line>
+                <line>
+		<text align="left" length="40" >CED : ${printPC.getNumeroDocumento()} </text>
+		</line>  
+        	<line>
+		<text align="left" length="40" >NOMBRE : ${printPC.getNombreCliente()} </text>
+		</line>  
+		<line>
+			<text align="left" length="40">-------------------------------------------</text>
+		</line>
+		<line>
+			<text align="left" length="40">ABONO A CUENTA</text>
+		</line>
+		<line>
+            <text align="left" length="35" bold="true">US DOLARES</text>
+        </line>
+		<line/><line/>
+		
+		
+		<line>
+			<text align="left" length="17">    Subtotal :   </text>
+			<text align="right" length="12"> ${ticket.getTotales().getBasePantalla()}</text>
+		</line>			
+		<line/>
+        #foreach ($pago in $ticket.getPagos().getPagos())
+			#foreach ($lineaP in $pago.getDesMedioPagoAsLineas().getLineas())
+				<line><text align="left" length="40" >${lineaP}</text> </line>
+			#end
+			<line>
+				<text align="left" length = "16">Valor        : $</text>
+				<text align="right" length = "24">${pago.getUstedPagaPrint().toString()} US DOLARES</text>
+			</line>	
+			<line/>
+			#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()} || ${pago.getMedioPagoActivo().isEfectivo()})          
+				#if (${pago.getVueltaAsBD()}>0)
+					<line>
+						<text align="left" length = "16">-Recibido    : $</text>
+						<text align="right" length = "24">${pago.getEntregado().toString()} US DOLARES</text>
+					</line>				
+					#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()})
+						<line>
+							<text align="left" lenght="40">Su cambio en Bono Efectivo : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>
+					#else
+						<line>
+							<text align="left" lenght="40">Su cambio en ${pago.toString()} : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>                                
+					#end
+					<line/>
+				#end
+			#end			
+		#end
+		<line/>
+		<line></line>
+        <line/>
+        #if (${ticket.isObservacionVacia()})
+           <line><text align="left" lenght="40">Observ : REVISADO </text> </line>
+        #else
+           <line><text align="left" lenght="40">Observ:</text></line>
+           #foreach ($lineaObservacion in $ticket.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+          #end
+        #end
+        <line/>		
+		<line></line>
+		<line><text align="left" length="14">Elaborado por:</text><text align="left" length="26"> ${printPC.getCajero()}</text></line>
+		<line></line>
+        <line><text align="left" length="35">${printPC.getFecha()}</text></line>  
+		<line/>
+		<line/>
+	    <line><pie align="center" length="40" bold="true"></pie></line>	
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>		
+    </ticket>
+</output>

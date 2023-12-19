@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line><cabecera align="center" length="40" bold="true"></cabecera></line>
+        <line>
+            <text align="center" length="40">${printTicket.getNombreEmpresa()}</text>
+		</line>
+		<line>
+			<text align="center" length="40">${printTicket.getNombreTienda()}</text>
+		</line>
+		
+		#foreach ($linea in $printTicket.getDireccionEmpresaAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		
+		#foreach ($lineaDL in $printTicket.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaDL}</text> </line>
+		#end
+		
+		<line>
+			<text align="left" length="7">R.U.C: </text>
+			<text align="left" length="33">${printTicket.getRuc()}</text>
+		</line>
+		
+		<line/>
+		#foreach ($lineaF in $printTicket.getLugarYfechaAsLineasSinFecha().getLineas())
+			<line><text align="left" length="40" >${lineaF}</text> </line>
+		#end
+
+		
+		<line/>
+		
+		<line><text align="left" length="40">Sr./Sra.</text></line>
+		#if (!${ticket.getCliente().isClienteGenerico()})
+			#foreach ($lineaN in $printTicket.getNombreAsLineasSinNombre().getLineas())
+			<line><text align="left" length="40" >${lineaN}</text> </line>
+			#end
+		#end
+		<line><text align="left" length="40">Presente.-</text></line>
+		<line/>
+		<line><text align="left" length="40">Tenemos el agrado de cotizar la </text></line>
+		<line><text align="left" length="40">siguiente mercadería:</text></line>
+		<line/>
+		<line><text align="left" length="40">CODIGO     CANTID  V.UNITARIO  V.TOTAL </text></line>
+		<line><text align="left" length="40">DESC.      DESCRIPCION                 </text></line>
+		<line><text align="left" length="40">CODIGO DE BARRAS                       </text></line>
+		<line><text align="left" length="40">---------------------------------------</text></line>
+		#foreach ($linea in $ticket.getLineas().getLineas())
+		<line>
+			<text align="left" length="8"> ${linea.getArticulo().getCodmarca().getCodmarca()} </text> 
+            <text align="left" length="6">${linea.getArticulo().getIdItem()} </text>  
+            <text align="right" length="6">${linea.getCantidad().toString()}  </text>			
+			<text align="right" length="10">${linea.getPrecioTotalTarifaOrigen().toString()} </text>
+			<text align="right" length="10">${linea.getImporteTotalFinalPagado().toString()}</text>						
+		</line>
+		<line>
+			<text align="left" length="8"> ${linea.getDescuentoFinal()}% </text> 
+            <text align="left" length="32"> ${linea.getArticulo().getDescForPrint()}</text>  					
+		</line>
+		<line>
+			<text align="left" length="16"> ${linea.getCodigoBarras()} </text> 
+            <text align="right" length="24"> ${linea.getArticulo().getModelo()}</text>  					
+		</line>
+		#if (${linea.getArticulo().getGarantiaOriginal()})
+		<line>
+			<text align="left" length="16">** GARANTIA : </text> 
+            <text align="center" length="24"> ${linea.getArticulo().getGarantiaOriginal()} meses </text>  					
+		</line>
+		#end
+		#end
+		<line><text align="left" length="24">-----------------------</text><text align="right" length="16"> ${ticket.getTotales().getTotalAPagar()}</text></line>
+		<line/>
+		
+		#foreach($lineaMensaje in $mensaje.getLineas())
+			<line><text align="left" lenght="40">${lineaMensaje}</text></line>
+		#end
+	
+		<line/>
+        #if (!${ticket.isObservacionVacia()})
+            #foreach ($lineaObservacion in $ticket.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">${lineaObservacion}</text></line>
+            #end
+        #end
+		
+		<line/>
+		#foreach ($lineaNC in $printTicket.getNombreCajeroAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaNC}</text> </line>
+		#end
+		<line/>
+		#foreach ($lineaA in $printTicket.getDesAutorizadorAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaA}</text> </line>
+		#end
+		<line><text align="left" length="40" >${tiendaDescripcion}</text> </line>
+		<line><text align="left" length="40" >Tlfno: ${telefono}</text> </line>
+		<line/>
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>		
+		<line/>
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>	
+		<line/>
+    </ticket>
+</output>

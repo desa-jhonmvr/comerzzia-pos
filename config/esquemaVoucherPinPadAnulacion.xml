@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>
+                <line>
+                    <text align="center" length="40">${printVoucher.getNombreEmpresa()}</text>
+		</line>
+		<line>
+			<text align="center" length="40">${printVoucher.getNombreTienda()}</text>
+		</line>
+		#foreach ($linea in $printVoucher.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+                #if (${printVoucher.isTieneTelefonoTienda()} )
+                    <line>
+                            <text align="left" length="10">Teléfono: </text>
+                            <text align="left" length="30">${printVoucher.getTelefonoTienda()}</text>
+                    </line>
+                #end
+		<line>
+			<text align="left" length="11">    R.U.C: </text>
+			<text align="left" length="29">${printVoucher.getRuc()}</text>
+		</line>                
+		<line/>
+                #if (!${printVoucher.isVoucherTarjetaBonoNavidad()})
+                <line>
+                        <text align="center" length="40">${printVoucher.getMidTidML()}</text>
+                </line>
+                <line>
+                        <text align="center" length="40" bold="true">${printVoucher.getNombreGrupoTarjeta()}</text>
+                </line>
+                #end
+                <line/>
+                <line>
+                        <text align="left" length="40">TARJETA : ${printVoucher.getNumeroTarjeta()} </text>
+                </line>
+                #if (!${printVoucher.isVoucherTarjetaBonoNavidad()})
+                <line>
+                        <text align="left" length="6">LOTE: </text>
+                        <text align="left" length="6">${printVoucher.getLotePinpad()}</text>
+                        <text align="right" length="22">Ref: </text>
+                        <text align="left" legth="6">${printVoucher.getSecuencialTransaccion()}</text>
+                </line> 
+                <line>
+                        <text align="left" length="13">ADQUIRIENTE: </text>
+                        <text align="right" length="27">${printVoucher.getBancoAdquiriente()}</text>
+                </line>  
+                #end
+                #if (${printVoucher.isVoucherTarjetaBonoNavidad()})
+                <line>
+                        <text align="left" length="8">CEDULA: </text>
+                        <text align="left" legth="15">${printVoucher.getCedula()}</text>
+                </line>
+                <line>
+                        <text align="left" length="5">Ref: </text>
+                        <text align="left" legth="6">${printVoucher.getSecuencialTransaccion()}</text>
+                </line>
+                <line>
+                        <text align="left" length="17">ESTABLECIMIENTO: </text>
+                        <text align="left" legth="10">${printVoucher.getCodigoEstablecimiento()}</text>
+                </line>
+                <line>
+                        <text align="left" length="10">TERMINAL: </text>
+                        <text align="left" length="30">${printVoucher.getTerminalId()}</text>
+                </line>  
+                #end
+                <line>
+                        <text align="left" length="16">FECHA: ${printVoucher.getFecha()}</text>
+                        <text align="right" length="24">HORA: ${printVoucher.getHora()}</text>
+                </line>                             
+
+		<line>
+			<original align="left" length="14">Transaccion : </original>
+			<original align="left" length="26">${printVoucher.getTransaccion()}</original>
+		</line>
+		#if (${printVoucher.getAutorizacion()})
+                    <line>
+                            <text align="center" length="40">ANULACIÓN: ${printVoucher.getAutorizacion()}</text>
+                    </line>
+		#end
+                <line/>
+
+                <line>
+                        <text align="left" length="13">Total      :$ </text>
+                        <text align="right" length="27">${printVoucher.getTotal()} US DOLARES   </text>
+                </line>
+                <line>
+                        <text align="center" length="40"></text>
+                </line>                                
+                <line/>
+                <line><text align="center" length="40">CAPTURA ELECTRÓNICA</text></line>
+                #if (${printVoucher.isDatafast()})
+                    <line><text align="center" length="40">DATAFAST</text></line>                
+                #else
+                    <line><text align="center" length="40">MEDIANET</text></line>
+                #end
+
+                <line/>
+
+		<line/>
+		<line/>
+		<line/>
+                #if (${printVoucher.isVoucherTarjetaCredito()})
+                    #if (${printVoucher.getVerificacionPin()})
+                        <line>
+                            <original align="left" length="15">${printVoucher.getVerificacionPin()}</original>
+                        </line>
+                    #end  
+                    #if (${printVoucher.getAidEmv()})
+                        <line>
+                            <original align="left" length="20">${printVoucher.getAidEmv()}</original>
+                        </line>
+                    #end                                      
+                    #if (${printVoucher.getArqc()})
+                        <line>
+                            <original align="left" length="16">${printVoucher.getArqc()}</original>
+                        </line>
+                    #end                                
+                    #if (${printVoucher.getCriptoEmv()})
+                        <line>
+                            <original align="left" length="22">${printVoucher.getCriptoEmv()}</original>
+                        </line>
+                    #end
+                #end   
+                <line/> 
+                <line><pie align="center" length="40" bold="true"></pie></line>            
+		<line/>     
+                #if (${printVoucher.isVoucherTarjetaCredito()})
+                    #foreach ($linea in $printVoucher.getPublicidadAsLineas().getLineas())
+                            <line><text align="left" length="40" >${linea}</text> </line>
+                    #end
+                #end
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+    </ticket>
+</output>

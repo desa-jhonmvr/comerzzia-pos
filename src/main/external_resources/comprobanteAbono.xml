@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>
+		<line/><line><text align="left" length="35"></text></line>
+		<barcode type="CODE128" position="none">${codigoBarras.getCodigoBarras()}</barcode>	
+		<line/>
+		<line>
+			<text align="left" length="35" bold="true">${codigoBarras.getCodigoBarras()}</text>
+		</line>
+		<line/>	
+		<line>
+			<text align="left" length="40" >${empresa.getNombreComercial()}</text>
+		</line>
+		<line>
+		<text align="left" length="40" >MATRIZ:${empresa.getDireccionForPrint(33)}</text>
+		</line>
+		<line>
+			<text align="left" length="40" >${region} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >SUCURSAL:${tienda.getDireccionForPrint(31)} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >${tienda.getPoblacionForPrint(40)} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >${tienda.getDesalmForPrint(36)} ${tienda.getCodalm()} </text>
+		</line>
+		<line>
+			<text align="left" length="40" >RUC : ${empresa.getCif()}</text>
+		</line>
+		<line/>
+		<line>
+			<text align="left" length="35" bold="true">RECIBO DE ABONO A ${comprobante.getTipo()}</text>
+		</line>				
+		<line>
+			<text align="left" length="35">LOCAL: ${comprobante.getCodTienda()}</text>
+		</line>
+                <line>
+			<text align="left" length="35">CAJA: ${caja}</text>
+		</line>
+		<line>
+			<text align="left" length="35">CLIENTE: ${facturacion.getTipoDocumento()}: ${facturacion.getDocumento()}</text>
+		</line>
+
+			<line>
+				<text align="left" length="35">  Nombre: ${facturacion.getNombreImpresion()} ${facturacion.getApellidosImpresion()}</text>
+			</line>
+		
+		#if (${facturacion.getTelefono()}&&${facturacion.getTelefono().length()}==9)
+		<line>
+			<text align="left" length="35">  Teléfono: ${facturacion.getTelefono()}</text>
+		</line>
+		#end
+		#if (${facturacion.getDireccionImpresion()})
+		<line>
+			<text align="left" length="35">  Dirección: ${facturacion.getDireccionImpresion()}</text>
+		</line>
+		#end
+        <line></line>
+		
+		<line>
+			<text align="center" length="40">Abono Reservación Nº ${codReserva}-${comprobante.numAbono}</text>
+		</line>
+		<line>
+			<text align="center" length="40">El cliente ha realizado un abono </text>
+		</line>
+
+		#if (!${isPlanNovio})
+			#if (${comprobante.getTotalConDescuentos()})
+			<line>
+				<text align="center" length="40" bold="true"> Abono de $${totalAbonoEntregado} con descuentos </text>
+			</line>
+			#end		
+			#if (${totalAbonoEntregado})
+			<line>
+				<text align="center" length="40">( Abono de $${comprobante.getTotalConDescuentos()} sin descuentos )</text>
+			</line>
+			#end
+		#end
+		#if (${isPlanNovio})
+			<line>
+				<text align="center" length="40" bold="true"> Abono de $${comprobante.getTotalConDescuentos()}</text>
+			</line>
+			<line>
+				<text align="center" length="40" bold="true"> ${comprobante.getNombreBoda()}</text>
+			</line>                        
+		#end
+		<line/>
+        <line>
+            <text align="left" length="35" bold="true">FORMA DE PAGO:</text>
+        </line>
+         
+        #foreach ($pago in $pagos.getPagos())
+			<line>         
+				#if (!(${pago.isPagoTarjeta()}))
+					<text align="left" length="27">   ${pago.getMedioPagoActivo().getDesMedioPago()}</text>
+				#end
+				#if (${pago.isPagoTarjeta()})
+					<text align="left" length="27">   ${pago.getMedioPagoActivo().getDesMedioPago()} (${pago.getPlanSeleccionado().getNumCuotas()})</text>
+				#end
+				<text align="right" length="5">US$:</text>		
+				<text align="right" length="8"> ${pago.getUstedPagaPrint().toString()}</text>
+			</line>	
+			#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()} || ${pago.getMedioPagoActivo().isEfectivo()})          
+				#if (${pago.getVueltaAsBD()}>0)
+					<line>
+						<text align="right" length = "16">   Recibido  </text>
+						<text align="right" length = "24">US$:  ${pago.getEntregado().toString()}</text>
+					</line>					
+					#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()})
+						<line>
+							<text align="left" lenght="40">Su cambio en Bono Efectivo : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>
+					#else
+						<line>
+							<text align="left" lenght="40">Su cambio en ${pago.toString()} : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>                                
+					#end
+					<line/>
+				#end
+			#end		
+        #end
+        <line></line>
+        
+                #if (${comprobante.isObservacionVacia()})
+                    <line><text align="left" lenght="40">Observ : REVISADO </text> </line>
+                #else
+                    <line><text align="left" lenght="40">Observ:</text></line>
+                    #foreach ($lineaObservacion in $comprobante.getObservacionesLineaEnTicket().getLineas())
+                        <line><text align="left" lenght="40">$lineaObservacion </text></line>
+                    #end
+                #end
+		<line/>
+		#if (!${isPlanNovio})
+		<line>
+			<text align="left" length="35">NÚMERO DE ABONOS: ${comprobante.getNumeroAbonos()}</text>
+		</line>
+		#end
+		#if (${comprobante.getAbonosRestantes()})
+		<line>
+			<text align="left" length="35">POR ABONAR: $${comprobante.getAbonosRestantes()}</text>
+		</line>
+		#end
+		<line><text align="left" length="40">FIN DE VALIDEZ ${comprobante.getFechaYHoraFin()}</text></line>
+		<line></line>
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${cajero.getDesUsuario()}, gracias.</text></line>
+        <line><text align="center" length="35">${fecha}</text></line>   
+		<line></line>		
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+    </ticket>
+</output>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line>
+            <cabecera align="center" length="40" bold="true"></cabecera>
+        </line>
+        <line>
+            <text align="center" length="40">${printNC.getNombreEmpresa()}</text>
+        </line>
+        <line>
+            <text align="center" length="40">${printNC.getNombreTienda()}</text>
+        </line>
+		
+        #foreach ($linea in $printNC.getDireccionEmpresaAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${linea}</text> 
+        </line>
+        #end
+		
+        #foreach ($lineaDL in $printNC.getDireccionLocalAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaDL}</text> 
+        </line>
+        #end
+        <line/>
+        <line>
+            <text align="left" length="7">R.U.C: </text>
+            <text align="left" length="33">${printNC.getRuc()}</text>
+        </line>
+		
+        <line/>
+        <line>
+            <text align="center" length="40">DETALLE NOTA DE CREDITO </text>
+        </line>
+        <line>
+            <text align="center" length="40"> ${printNC.getNumeroTransaccion()}</text>
+        </line>
+        <line/>
+        #if (${devolucion.isAnulacion()})
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >ESTE DOCUMENTO TIENE DISPONIBLE USD 0.00</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        #end
+        #foreach ($lineaF in $printNC.getLugarYfechaAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaF}</text> 
+        </line>
+        #end
+        <line>
+            <text align="left" length="40" >HORA : ${printNC.getHora()} </text>
+        </line>
+
+		
+        #foreach ($lineaC in $printNC.getNombreClienteAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaC}</text> 
+        </line>
+        #end
+        <line>
+            <text align="left" length="40" >Ced./RUC : ${printNC.getCedRuc()} </text>
+        </line>
+		
+  		
+        #foreach ($lineaD in $printNC.getDireccionClienteAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaD}</text> 
+        </line>
+        #end		
+        <line>
+            <text align="left" length="40">Telefono: ${printNC.getTelefono()}</text>
+        </line>	
+        <line>
+            <text align="left" length="40">Docu.Original: ${printNC.getFacturaOriginal()}</text>
+        </line>
+        #foreach ($lineaMotivos in $printNC.getMotivoDevolucionAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaMotivos}</text> 
+        </line>
+        #end
+        #foreach ($lineaObservaciones in $printNC.getObservacionesAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaObservaciones}</text> 
+        </line>
+        #end
+        <line/>		
+        #if (${devolucion.isAnulacion()})
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >ESTE DOCUMENTO TIENE DISPONIBLE USD 0.00</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        #end
+        <line>
+            <text align="left" length="40">CODIGO     CANTID  V.UNITARIO  V.TOTAL </text>
+        </line>
+        <line>
+            <text align="left" length="40">DESC.      DESCRIPCION                 </text>
+        </line>
+        <line>
+            <text align="left" length="40">CODIGO DE BARRAS                       </text>
+        </line>
+        <line>
+            <text align="left" length="40">---------------------------------------</text>
+        </line>	
+        #foreach ($linea in $printNC.getTicket().getLineas().getLineas()) 
+        <line>
+            <text align="left" length="8"> ${linea.getArticulo().getCodmarca().getCodmarca()} </text> 
+            <text align="left" length="6">${linea.getArticulo().getIdItem()} </text>  
+            <text align="right" length="6">${linea.getCantidad().toString()}  </text>			
+            <text align="left" length="10">${linea.getPrecioTarifaOrigenPantalla().toString()}</text>
+            <text align="left" length="10">${linea.getImporteFinalPagadoPantalla().toString()}</text>				
+        </line>	
+        <line>
+            <text align="left" length="8"> ${linea.getDescuentoFinalDevTicket()}% </text> 
+            <text align="left" length="32"> ${linea.getArticulo().getDescForPrint()} </text>  					
+        </line>
+        <line>
+            <text align="left" length="16"> ${linea.getCodigoBarras()} </text> 
+            <text align="right" length="24"> ${linea.getArticulo().getModeloForPrint()} </text>  					
+        </line>		
+        #end 
+        <line>
+            <text align="left" length="24">-----------------------</text>
+            <text align="right" length="16"> ${devolucion.getTicketDevolucion().getTotales().getBasePantalla()}</text>
+        </line>
+        <line>
+            <text align="left" length="7">  Dto. </text>                            
+            <text align="right" length="10">${printNC.getPorcentajeAhorros()}% : </text>
+            <text align="right" length="12">${printNC.getAhorroPago()}</text>
+        </line>
+                 
+        <line>
+            <text align="left" length="17">  Subtotal  0% : </text>
+            <text align="right" length="12">${printNC.getSubtotal0()}</text>
+        </line>	
+        <line>
+            <text align="left" length="17">  Subtotal ${printNC.getPorcentajeIvaEmpresa()}% : </text>
+            <text align="right" length="12">${printNC.getSubtotal12()}</text>
+        </line>	
+        <line>
+            <text align="left" length="17">  Iva ${printNC.getPorcentajeIvaEmpresa()}%      : </text>
+            <text align="right" length="12">${printNC.getIva()}</text>
+        </line>
+        <line>
+            <text align="left" length="20">  Ice          : </text>
+            <text align="right" length="9">${devolucion.getTicketDevolucion().getTotales().getImpuestosIce().toString()}</text>
+        </line>
+        <line>
+            <text align="left" length="17">  Total Vale   : </text>
+            <text align="right" length="23">${devolucion.getTicketDevolucion().getTotales().getTotalAPagar().toString()} US DOLARES</text>
+        </line>
+        <line/>
+        #if (${devolucion.isAnulacion()})
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >ESTE DOCUMENTO TIENE DISPONIBLE USD 0.00</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >****************************************</text> 
+        </line>
+        #end
+        #foreach ($pago in $devolucion.getTicketOriginal().getListaPagos())		
+        #foreach ($lineaP in $pago.getDesMedioPagoAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaP}</text> 
+        </line>
+        #end		
+        <line/>
+        #end
+        <line /> 
+        #foreach ($lineaNC in $$printNC.getNombreCajeroAsLineas().getLineas())
+        <line>
+            <text align="left" length="40" >${lineaNC}</text> 
+        </line>
+        #end
+        <line/>
+        <line>
+            <text align="left" length="40">Autorizado por : ${devolucion.getAutorizadorDevolucion().getDesUsuario()}</text>
+        </line>        
+        <line/>
+        <line>
+            <text align="left" length="40">Firma del Cliente: _____________________</text>
+        </line>
+        <line/>           
+        <line>
+            <text align="left" length="40">      C.I.     : _____________________</text>
+        </line>
+        <line/>           
+        
+        <line>
+            <text align="left" length="40">ESTE DOCUMENTO TIENE VALIDEZ DE UN AÑO A</text> 
+        </line>  
+        <line>
+            <text align="left" length="40">PARTIR DE LA FECHA DE EXPEDICIÓN</text> 
+        </line>  		
+        <line/>
+        <line>
+            <text align="left" length="40" >EXCLUYEN DE GARANTIA DANOS POR MAL USO V</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >ARIACION DE VOLTAJE - OPTICOS Y CABEZAS</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >DE GRABACIÓN.. EN MERCADERIA CON DESCUEN</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >TO NO SE ACEPTA CAMBIOS NI DEVOLUCIONES </text> 
+        </line>
+        <line>
+            <text align="left" length="40" >NUESTROS ARTICULOS SON PARA USO DOMESTIC</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >O.</text> 
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="40" >PARA DEVOLUCIONES DE MERCADERIA FAVOR</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >PRESENTAR  LA FACTURA ORIGINAL CON EL </text> 
+        </line>
+        <line>
+            <text align="left" length="40" >PRODUCTO  Y  SU  EMPAQUE EN PERFECTAS</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >CONDICIONES.                         </text> 
+        </line>
+        <line>
+            <text align="left" length="40" >PLAZO MAXIMO PARA CAMBIOS Y DEVOLUCIONES</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >30 DIAS.                              </text> 
+        </line> 
+        <line/>
+        <line/>
+        <line>
+            <text align="left" length="40" bold="true" >${printNC.getHoraContinua()}</text> 
+        </line>
+        <line/>
+        <line/>	
+        <line/>	
+        <line>
+            <text align="center" length="40" >GRACIAS POR SU COMPRA</text> 
+        </line>
+        <line/>	
+        <line>
+            <text align="center" length="40" >SOMOS CONTRIBUYENTES ESPECIALES</text> 
+        </line>
+        <line>
+            <text align="center" length="40" >RESOLUCION ${printNC.getNroResolucionContribuyente()} del 02-JUN-95</text> 
+        </line>
+        <line/>	
+        <line>
+            <text align="left" length="40" >ESTE DOCUMENTO NO TIENE VALIDEZ </text>
+        </line>
+        <line>
+            <text align="left" length="40" >TRIBUTARIA.</text> 
+        </line>
+        <line/>	
+        <line/>	
+        <line/>
+        <line>
+            <text align="center" length="40" bold="true">${printNC.getFecha()} </text> 
+        </line>	
+        <line/>	
+        <line/>
+        <line>
+            <anulada align="center" length="40" bold="true"></anulada>
+        </line>                
+        <line>
+            <pie align="center" length="40" bold="true"></pie>
+        </line>
+        <line/>	
+        <line/>
+        <line>
+            <text align="left" length="40" >Estimado cliente, para obtener sus documentos</text> 
+        </line>
+        <line>
+            <text align="left" length="40" >electrónicos ingrese a: </text> 
+        </line>
+        <line> 
+            <text align="left" length="40" >https://ecuador.e-factura.net/ECUADOR/</text>	
+        </line>
+        <line> 
+            <text align="left" length="40" >comprobantes?IDENT=1790746119001</text>	
+        </line>	
+        <line/>
+        <line/>	
+        <line/>
+        <line/>	
+        <line/>
+        <line/>	
+        <line/>
+        <line/>					
+    </ticket>
+</output>

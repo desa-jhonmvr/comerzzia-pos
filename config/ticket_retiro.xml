@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>		
+		<line>
+			<text align="left" length="35">COMPROBANTE DE RETIRO:</text>
+		</line>
+		<line><text align="left" length="12">CAJERO: </text><text align="left" length="28">${cajero.getDesUsuario()}</text></line>
+		<line></line>
+		<line><text align="left" length="12">RETIRO: $</text><text align="left" length="28">${importeRetiro}</text></line>
+		<line></line>
+        <line><text align="left" length="12">FECHA: </text><text align="center" length="35">${fechaRetiro}</text></line>      
+        <line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+    </ticket>
+	
+</output>

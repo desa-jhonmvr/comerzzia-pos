@@ -1,0 +1,45 @@
+12:04:20	DEBUG : Se envia trama de seguridad=SHFFEE5C535013344F
+12:04:21	DEBUG : Se espera la respuesta
+12:04:21	DEBUG : Se envia trama al puerto al pinpad  LT
+12:05:12	DEBUG : Se envia ACK al pinpad proceso OK
+12:05:12	DEBUG : Se envia respuesta a la caja respuesta=LT2000                         TRANS CANCELADA     
+12:09:04	DEBUG : Se envia trama de seguridad=SHC3E702C4F7D3C384
+12:09:05	DEBUG : Se espera la respuesta
+12:09:05	DEBUG : Se envia trama al puerto al pinpad  LT
+12:09:15	DEBUG : Se envia ACK al pinpad proceso OK
+12:09:15	DEBUG : Se envia respuesta a la caja respuesta=LT0000360218XXXX6727           LECTURA OK          
+12:09:17	DEBUG : Se envia trama de seguridad=SHDB4A9368E8787BDAm
+12:09:18	DEBUG : Se espera la respuesta
+12:09:18	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000000299000000000267000000000000000000000032                                          12090320171204      1000000101     SUKASA01'
+12:09:35	DEBUG : Se envia ACK al pinpad proceso OK
+12:09:35	DEBUG : Se envia respuesta a la caja respuesta=PP200100NO HUBO RESPUESTA                                                                                                                                                                                                                                                                                                                                                                   
+12:18:37	DEBUG : Se envia trama de seguridad=SH3A90705E33EF815En
+12:18:38	DEBUG : Se espera la respuesta
+12:18:38	DEBUG : Se envia trama al puerto al pinpad  LT
+12:18:56	DEBUG : Se envia ACK al pinpad proceso OK
+12:18:56	DEBUG : Se envia respuesta a la caja respuesta=LT0000360218XXXX6727           LECTURA OK          
+12:18:58	DEBUG : Se envia trama de seguridad=SH437F8A902FEF56F5
+12:18:59	DEBUG : Se espera la respuesta
+12:18:59	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000000298000000000266000000000000000000000032                                          12183620171204      1000000101     SUKASA01!
+12:19:17	DEBUG : Se envia ACK al pinpad proceso OK
+12:19:17	DEBUG : Se envia respuesta a la caja respuesta=PP200100NO HUBO RESPUESTA                                                                                                                                                                                                                                                                                                                                                                   
+12:22:15	DEBUG : Se envia trama de seguridad=SH2F5B80C4822B461Al
+12:22:16	DEBUG : Se espera la respuesta
+12:22:16	DEBUG : Se envia trama al puerto al pinpad  LT
+12:22:26	DEBUG : Se envia ACK al pinpad proceso OK
+12:22:26	DEBUG : Se envia respuesta a la caja respuesta=LT0000360218XXXX6727           LECTURA OK          
+12:22:28	DEBUG : Se envia trama de seguridad=SH8CDE62E4C2CAF926
+12:22:29	DEBUG : Se espera la respuesta
+12:22:29	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000000299000000000267000000000000000000000032                                          12221320171204      1000000101     SUKASA01/
+12:22:52	DEBUG : Se envia ACK al pinpad proceso OK
+12:22:52	DEBUG : Se envia respuesta a la caja respuesta=PP000102Llame C. Autoriz    00000900100312221320171204      SUKASA011000000101                                                                                                                                  DINERS CLUB              03SANCHEZ LOPEZ/JOHANA                                                                                                                             
+13:05:33	DEBUG : Se envia trama de seguridad=SH5D4FF79DC9EDB26Ci
+13:05:34	DEBUG : Se espera la respuesta
+13:05:34	DEBUG : Se envia trama al puerto al pinpad  LT
+13:05:46	DEBUG : Se envia ACK al pinpad proceso OK
+13:05:46	DEBUG : Se envia respuesta a la caja respuesta=LT0000360218XXXX6727           LECTURA OK          
+13:05:48	DEBUG : Se envia trama de seguridad=SH80DC1951559860CC
+13:05:49	DEBUG : Se espera la respuesta
+13:05:49	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000000299000000000267000000000000000000000032                                          13053120171204      1000000101     SUKASA01+
+13:06:33	DEBUG : Se envia ACK al pinpad proceso OK
+13:06:33	DEBUG : Se envia respuesta a la caja respuesta=PP000102Llame C. Autoriz    00001000100313053120171204      SUKASA011000000101                                                                                                                                  DINERS CLUB              03SANCHEZ LOPEZ/JOHANA                                                                                                                             

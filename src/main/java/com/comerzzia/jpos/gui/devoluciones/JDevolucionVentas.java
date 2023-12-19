@@ -1,0 +1,1219 @@
+package com.comerzzia.jpos.gui.devoluciones;
+
+import com.comerzzia.jpos.entity.db.Articulos;
+import com.comerzzia.jpos.entity.db.Cupon;
+import com.comerzzia.jpos.entity.db.FacturacionTarjeta;
+import com.comerzzia.jpos.gui.IBusquedasArticulos;
+import com.comerzzia.jpos.gui.IVista;
+import com.comerzzia.jpos.gui.JBuscar;
+import com.comerzzia.jpos.gui.JPrincipal;
+import com.comerzzia.jpos.gui.components.JPanelImagenFondo;
+import com.comerzzia.jpos.gui.eventos.SeleccionaFocusListener;
+import com.comerzzia.jpos.gui.modelos.TicketTableCellRenderer;
+import com.comerzzia.jpos.gui.modelos.TicketTableModel;
+import com.comerzzia.jpos.gui.validation.ValidationFormException;
+import com.comerzzia.jpos.servicios.articulos.ArticulosServices;
+import com.comerzzia.jpos.servicios.articulos.tarifas.TarifasServices;
+import com.comerzzia.jpos.servicios.articulos.ArticuloNotFoundException;
+import com.comerzzia.jpos.servicios.login.Sesion;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.LinkedList;
+import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import com.comerzzia.jpos.gui.components.form.JButtonForm;
+import com.comerzzia.jpos.gui.validation.IViewerValidationFormError;
+import com.comerzzia.jpos.gui.validation.ValidationException;
+import com.comerzzia.jpos.persistencia.facturacion.tarjetas.FacturacionTarjetasDao;
+import com.comerzzia.jpos.persistencia.print.documentos.DocumentosBean;
+import com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean;
+import com.comerzzia.jpos.pinpad.excepciones.AutorizadorException;
+import com.comerzzia.jpos.servicios.devoluciones.DevolucionesServices;
+import com.comerzzia.jpos.servicios.core.variables.Variables;
+import com.comerzzia.jpos.servicios.facturacion.tarjetas.ServicioFacturacionTarjetas;
+import com.comerzzia.jpos.servicios.pagos.Pago;
+import com.comerzzia.jpos.servicios.pagos.credito.PagoCredito;
+import com.comerzzia.jpos.servicios.print.documentos.DocumentosService;
+import com.comerzzia.jpos.servicios.tickets.componentes.LineaTicket;
+import com.comerzzia.jpos.servicios.tickets.componentes.TicketOrigen;
+import com.comerzzia.jpos.util.EnumTipoDevolucion;
+import com.comerzzia.jpos.util.exception.SocketTPVException;
+import com.comerzzia.util.imagenes.Imagenes;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import es.mpsistemas.util.log.Logger;
+import java.awt.Dialog;
+import java.awt.event.KeyAdapter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+
+/**
+ * Pantalla de Ventas
+ * @author MGRI
+ */
+public class JDevolucionVentas extends JPanelImagenFondo implements IVista, KeyListener, IViewerValidationFormError, IBusquedasArticulos {
+
+    private static Logger log = Logger.getMLogger(JDevolucionVentas.class);
+    //opciones de configuracion
+    boolean esNumeroArticulosEitable = true;  // se consulta de la sesion en la creación del panel
+    // servicios y variables
+    JPrincipal ventana_padre = null;
+    ArticulosServices articulosServices = ArticulosServices.getInstance();
+    TarifasServices tarifasServices = new TarifasServices();
+    // definimos los paneles
+    JPanel p_activo = null;
+    //Seleccion de columna de la factura
+    int lineaSelecionada;
+    //Descuentos
+    String codigobarra;
+    int indexLineaAEditar = -1;
+    
+    /** Creates new form JDevolucionVentas */
+    public JDevolucionVentas() {
+        super();
+        initComponents();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param ventana_padre 
+     */
+    public JDevolucionVentas(JPrincipal ventana_padre) {
+        super();
+        this.ventana_padre = ventana_padre;
+        String prefijo = Variables.getVariable(Variables.POS_UI_SKIN);
+
+        try {
+            URL myurl = this.getClass().getResource("/skin/" + prefijo + "/" + prefijo + "_ventas.png");
+
+            this.setImagenFondo((Image) ImageIO.read(new File(myurl.getPath())));
+        }
+        catch (IOException ex) {
+        }
+        initComponents();
+        
+        t_introduccionArticulos.setVisible(false);
+        
+        Imagenes.cambiarImagenPublicidad(jLabel30);
+        URL myurl;
+        myurl = this.getClass().getResource("/com/comerzzia/jpos/imagenes/iconos/iconoTransparente.gif");
+        ImageIcon icon = new ImageIcon(myurl);
+        v_buscar_articulo.setIconImage(icon.getImage());
+        v_seleccion_linea.setIconImage(icon.getImage());
+        v_editar_cantidad.setIconImage(icon.getImage());
+        f_pagos2.setIconImage(icon.getImage());
+
+        // Inicialización de parámetros especificos de componentes de pantalla
+        t_factura.setTableHeader(null);
+        t_introduccionArticulos.getT_Codigo().addKeyListener(this);
+        sp_t_factura.getViewport().setOpaque(false);
+        sp_t_factura.setBorder(null);
+        p_buscar_articulo.setVentana_padre(this);
+        p_buscar_articulo.setContenedor(v_buscar_articulo);
+        
+        p_editar_cantidad.setContenedor(v_editar_cantidad);
+        v_editar_cantidad.setLocationRelativeTo(null);
+
+        SeleccionaFocusListener sFL = new SeleccionaFocusListener();
+
+        //como quitar el borde al scrollpanel
+        Border empty = new EmptyBorder(0, 0, 0, 0);
+        sp_t_factura.setBorder(empty);
+        sp_t_factura.setViewportBorder(empty);
+        
+        crearAccionFocoTabla(this, t_factura, KeyEvent.VK_T, InputEvent.CTRL_MASK);
+        registraEventoBuscar();
+    }
+
+    /**
+     *  Función de Inicialización al cambiar de vista
+     * 
+     */
+    @Override
+    public void iniciaVista() {
+        addFunctionKeys();
+        ActionMap am = v_seleccion_linea.getRootPane().getActionMap();
+        InputMap im = v_seleccion_linea.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        Action listeneresc = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                cancelarOperacion();
+            }
+        };
+
+        lineasTicket.setLineas(Sesion.getTicketDevolucion().getLineas().getLineas());
+
+        im.put(esc, "IdentClientesc");
+        am.put("IdentClientesc", listeneresc);
+        // mostramos el cliente seleccionado
+        t_venta_cliente.setText(Sesion.getTicketDevolucion().getCliente().getNombreVenta());
+
+        // Iniciamos la tabla de tickets
+        // Data model y renderer de la tabla
+        t_factura.setModel(new TicketTableModel(Sesion.getTicketDevolucion().getLineas()));
+        t_factura.setDefaultRenderer(Object.class, new TicketTableCellRenderer());
+
+        // Refrescamos
+        refrescaTablaTicket();
+
+        // Foco en introducción de artículos
+        t_introduccionArticulos.requestFocus();
+        t_introduccionArticulos.reset();
+        l_factura_cabecera_id.setText(Sesion.getTicketDevolucion().getIdFactura());
+        // comprobamos si el cliente puede subir su nivel de afiliación con esta compra
+        
+            
+        //Comprobamos que el ticket a devolver no cuenta con algún Sukupon
+        Cupon SukuponFactura = Sesion.getDevolucion().getSukuponFacturaOrigen();
+        if(SukuponFactura!=null){
+            ventana_padre.crearInformacion("En la factura a devolver se"
+                    + " emitieron uno o más billetones/sukupones");
+        }
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        f_pagos2 = new javax.swing.JFrame();
+        v_seleccion_linea = new javax.swing.JDialog();
+        p_descuento_principal = new javax.swing.JPanel();
+        p_seleccion_cb = new javax.swing.JPanel();
+        t_seleccion_cb = new com.comerzzia.jpos.gui.components.form.JTextFieldForm();
+        jLabel1 = new javax.swing.JLabel();
+        lb_error = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        t_seleccion_cb1 = new com.comerzzia.jpos.gui.components.form.JTextFieldForm();
+        lineasTicket = new com.comerzzia.jpos.servicios.tickets.componentes.LineasTicket();
+        v_buscar_articulo = new javax.swing.JDialog();
+        p_buscar_articulo = new JBuscar(this);
+        v_editar_cantidad = new javax.swing.JDialog();
+        p_editar_cantidad = new com.comerzzia.jpos.gui.devoluciones.JIntroducirCantidad();
+        jPanel1 = new javax.swing.JPanel();
+        p_principal = new javax.swing.JPanel();
+        m_ventas = new javax.swing.JPanel();
+        b_ventas_datoscliente = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_ventas_pagos = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_ventas_appal = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_ventas_otro_local = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_ventas_seleccion = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_ventas_edicion = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        b_anular_voucher = new com.comerzzia.jpos.gui.components.form.JButtonForm();
+        p_descuentos = new javax.swing.JPanel();
+        p_imagen_airticulo = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        p_ingreso_articulos = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        t_introduccionArticulos = new com.comerzzia.jpos.gui.components.ventas.JPanelIntroduccionArticulosComp();
+        p_fatura = new javax.swing.JPanel();
+        l_factura_cabecera_id = new javax.swing.JLabel();
+        l_total = new javax.swing.JLabel();
+        sp_t_factura = new javax.swing.JScrollPane();
+        t_factura = new javax.swing.JTable();
+        l_v_total = new javax.swing.JLabel();
+        l_factura_cabecera1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        p_idcliente = new javax.swing.JPanel();
+        t_venta_cliente = new javax.swing.JLabel();
+        p_publicidad = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+
+        f_pagos2.setAlwaysOnTop(true);
+        f_pagos2.setMinimumSize(new java.awt.Dimension(983, 591));
+        f_pagos2.setResizable(false);
+
+        javax.swing.GroupLayout f_pagos2Layout = new javax.swing.GroupLayout(f_pagos2.getContentPane());
+        f_pagos2.getContentPane().setLayout(f_pagos2Layout);
+        f_pagos2Layout.setHorizontalGroup(
+            f_pagos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 983, Short.MAX_VALUE)
+        );
+        f_pagos2Layout.setVerticalGroup(
+            f_pagos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 591, Short.MAX_VALUE)
+        );
+
+        v_seleccion_linea.setAlwaysOnTop(true);
+        v_seleccion_linea.setMinimumSize(new java.awt.Dimension(450, 200));
+        v_seleccion_linea.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        v_seleccion_linea.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+
+        p_descuento_principal.setMaximumSize(new java.awt.Dimension(450, 200));
+        p_descuento_principal.setPreferredSize(new java.awt.Dimension(450, 200));
+        p_descuento_principal.setLayout(new java.awt.CardLayout());
+
+        p_seleccion_cb.setMaximumSize(new java.awt.Dimension(450, 200));
+        p_seleccion_cb.setMinimumSize(new java.awt.Dimension(450, 200));
+        p_seleccion_cb.setName("seleccion_cb"); // NOI18N
+        p_seleccion_cb.setOpaque(false);
+
+        t_seleccion_cb.setName("descuento_cb"); // NOI18N
+        t_seleccion_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_seleccion_cbActionPerformed(evt);
+            }
+        });
+        t_seleccion_cb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                t_seleccion_cbKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t_seleccion_cbKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Ingrese el código de barras del artículo que desea buscar");
+
+        lb_error.setFont(lb_error.getFont().deriveFont(lb_error.getFont().getStyle() | java.awt.Font.BOLD));
+        lb_error.setForeground(new java.awt.Color(255, 51, 0));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Ingrese el código interno de artículo que desea buscar");
+
+        t_seleccion_cb1.setName("descuento_cb"); // NOI18N
+        t_seleccion_cb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_seleccion_cb1ActionPerformed(evt);
+            }
+        });
+        t_seleccion_cb1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                t_seleccion_cb1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t_seleccion_cb1KeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout p_seleccion_cbLayout = new javax.swing.GroupLayout(p_seleccion_cb);
+        p_seleccion_cb.setLayout(p_seleccion_cbLayout);
+        p_seleccion_cbLayout.setHorizontalGroup(
+            p_seleccion_cbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_seleccion_cbLayout.createSequentialGroup()
+                .addGroup(p_seleccion_cbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p_seleccion_cbLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(p_seleccion_cbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_error, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(p_seleccion_cbLayout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(t_seleccion_cb1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(p_seleccion_cbLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(t_seleccion_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        p_seleccion_cbLayout.setVerticalGroup(
+            p_seleccion_cbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_seleccion_cbLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(t_seleccion_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(t_seleccion_cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_error, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
+        p_descuento_principal.add(p_seleccion_cb, "seleccion_cb");
+
+        javax.swing.GroupLayout v_seleccion_lineaLayout = new javax.swing.GroupLayout(v_seleccion_linea.getContentPane());
+        v_seleccion_linea.getContentPane().setLayout(v_seleccion_lineaLayout);
+        v_seleccion_lineaLayout.setHorizontalGroup(
+            v_seleccion_lineaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(v_seleccion_lineaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(p_descuento_principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(514, 514, 514))
+        );
+        v_seleccion_lineaLayout.setVerticalGroup(
+            v_seleccion_lineaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(v_seleccion_lineaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(p_descuento_principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(357, Short.MAX_VALUE))
+        );
+
+        lineasTicket.setLineas(new LinkedList());
+
+        v_buscar_articulo.setAlwaysOnTop(true);
+        v_buscar_articulo.setMinimumSize(new java.awt.Dimension(1010, 630));
+        v_buscar_articulo.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        v_buscar_articulo.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        v_buscar_articulo.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                v_buscar_articuloWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+
+        p_buscar_articulo.setPreferredSize(new java.awt.Dimension(1010, 630));
+
+        javax.swing.GroupLayout v_buscar_articuloLayout = new javax.swing.GroupLayout(v_buscar_articulo.getContentPane());
+        v_buscar_articulo.getContentPane().setLayout(v_buscar_articuloLayout);
+        v_buscar_articuloLayout.setHorizontalGroup(
+            v_buscar_articuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(v_buscar_articuloLayout.createSequentialGroup()
+                .addComponent(p_buscar_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        v_buscar_articuloLayout.setVerticalGroup(
+            v_buscar_articuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(v_buscar_articuloLayout.createSequentialGroup()
+                .addComponent(p_buscar_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        v_editar_cantidad.setAlwaysOnTop(true);
+        v_editar_cantidad.setMinimumSize(new java.awt.Dimension(445, 215));
+
+        javax.swing.GroupLayout v_editar_cantidadLayout = new javax.swing.GroupLayout(v_editar_cantidad.getContentPane());
+        v_editar_cantidad.getContentPane().setLayout(v_editar_cantidadLayout);
+        v_editar_cantidadLayout.setHorizontalGroup(
+            v_editar_cantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, v_editar_cantidadLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_editar_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        v_editar_cantidadLayout.setVerticalGroup(
+            v_editar_cantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(p_editar_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(0, 51, 153));
+        setMaximumSize(new java.awt.Dimension(1094, 734));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        p_principal.setFocusable(false);
+        p_principal.setMaximumSize(new java.awt.Dimension(1094, 734));
+        p_principal.setMinimumSize(new java.awt.Dimension(1094, 734));
+        p_principal.setOpaque(false);
+        p_principal.setPreferredSize(new java.awt.Dimension(1094, 734));
+        p_principal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        m_ventas.setBackground(new java.awt.Color(255, 255, 255));
+        m_ventas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        b_ventas_datoscliente.setMnemonic(java.util.ResourceBundle.getBundle("atajosTeclado").getString("tpv.ventas.datos.cliente").charAt(0));
+        b_ventas_datoscliente.setText("<html><center>Cancelar <br>Devolución<br/>F2</center></html>");
+        b_ventas_datoscliente.setAlignmentY(0.0F);
+        b_ventas_datoscliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        b_ventas_datoscliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_ventas_datoscliente.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        b_ventas_datoscliente.setPreferredSize(new java.awt.Dimension(90, 37));
+        b_ventas_datoscliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventas_datosclienteActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_datoscliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 80, 56));
+
+        b_ventas_pagos.setMnemonic(java.util.ResourceBundle.getBundle("atajosTeclado").getString("tpv.ventas.pagos").charAt(0));
+        b_ventas_pagos.setText("<html><center>Realizar Devolución<br>F9</center></html>");
+        b_ventas_pagos.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        b_ventas_pagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventas_pagosActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_pagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 160, 55));
+
+        b_ventas_appal.setMnemonic(java.util.ResourceBundle.getBundle("atajosTeclado").getString("tpv.ventas.menu.principal").charAt(0));
+        b_ventas_appal.setText("<html><center>Menú Principal <br/>F12</center></html>");
+        b_ventas_appal.setEnabled(false);
+        b_ventas_appal.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        b_ventas_appal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventas_appalActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_appal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 80, 57));
+
+        b_ventas_otro_local.setText("<html><center>Buscar artículo<br>F8</center></html>");
+        b_ventas_otro_local.setFont(b_ventas_otro_local.getFont());
+        b_ventas_otro_local.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        b_ventas_otro_local.setPreferredSize(new java.awt.Dimension(90, 37));
+        b_ventas_otro_local.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventasBuscarArticuloActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_otro_local, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 80, 56));
+
+        b_ventas_seleccion.setText("<html><center>Selección<br>Artículo<br/>F7</center></html>");
+        b_ventas_seleccion.setActionCommand("<html><center>Selección <br>de Artículo<br/>F7</center></html>");
+        b_ventas_seleccion.setAlignmentY(0.0F);
+        b_ventas_seleccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventas_seleccionActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_seleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 80, 57));
+
+        b_ventas_edicion.setText("<html><center>Editar<br>Artículo<br/>F4</center></html>");
+        b_ventas_edicion.setActionCommand("<html><center>Edición <br>de Artículo<br/>F4</center></html>");
+        b_ventas_edicion.setAlignmentY(0.0F);
+        b_ventas_edicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventas_edicionActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_ventas_edicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 57));
+
+        b_anular_voucher.setText("<html><center>Reversar<br>Voucher<br/>F3</center></html>");
+        b_anular_voucher.setActionCommand("<html><center>Edición <br>de Artículo<br/>F4</center></html>");
+        b_anular_voucher.setAlignmentY(0.0F);
+        b_anular_voucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_anular_voucherActionPerformed(evt);
+            }
+        });
+        m_ventas.add(b_anular_voucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 57));
+
+        p_principal.add(m_ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 320, -1));
+
+        p_descuentos.setOpaque(false);
+        p_descuentos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        p_principal.add(p_descuentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 440, 90));
+
+        p_imagen_airticulo.setForeground(new java.awt.Color(0, 51, 153));
+        p_imagen_airticulo.setOpaque(false);
+        p_imagen_airticulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFocusable(false);
+        p_imagen_airticulo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 400, 330));
+
+        p_principal.add(p_imagen_airticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 440, 350));
+
+        p_ingreso_articulos.setOpaque(false);
+
+        jLabel3.setDisplayedMnemonic('i');
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel3.setLabelFor(t_introduccionArticulos.getT_Codigo());
+        jLabel3.setEnabled(false);
+
+        t_introduccionArticulos.setEnabled(false);
+        t_introduccionArticulos.setNextFocusableComponent(b_ventas_datoscliente);
+        t_introduccionArticulos.setOpaque(false);
+
+        javax.swing.GroupLayout p_ingreso_articulosLayout = new javax.swing.GroupLayout(p_ingreso_articulos);
+        p_ingreso_articulos.setLayout(p_ingreso_articulosLayout);
+        p_ingreso_articulosLayout.setHorizontalGroup(
+            p_ingreso_articulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_ingreso_articulosLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(p_ingreso_articulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t_introduccionArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        p_ingreso_articulosLayout.setVerticalGroup(
+            p_ingreso_articulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_ingreso_articulosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(t_introduccionArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        p_principal.add(p_ingreso_articulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 600, 280, 90));
+
+        p_fatura.setOpaque(false);
+        p_fatura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        l_factura_cabecera_id.setDisplayedMnemonic(java.util.ResourceBundle.getBundle("atajosTeclado").getString("tpv.ventas.tabla.facturas").charAt(0));
+        l_factura_cabecera_id.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        l_factura_cabecera_id.setForeground(new java.awt.Color(0, 0, 204));
+        l_factura_cabecera_id.setLabelFor(t_factura);
+        l_factura_cabecera_id.setText("ID");
+        l_factura_cabecera_id.setFocusable(false);
+        p_fatura.add(l_factura_cabecera_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 190, 20));
+
+        l_total.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        l_total.setText("Total:");
+        l_total.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        l_total.setFocusable(false);
+        p_fatura.add(l_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, -1, -1));
+
+        sp_t_factura.setBackground(new java.awt.Color(153, 255, 255));
+
+        t_factura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        t_factura.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        t_factura.setFocusCycleRoot(true);
+        t_factura.setGridColor(new java.awt.Color(153, 204, 255));
+        t_factura.setRowHeight(18);
+        t_factura.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        sp_t_factura.setViewportView(t_factura);
+
+        p_fatura.add(sp_t_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, 540));
+
+        l_v_total.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        l_v_total.setForeground(new java.awt.Color(0, 0, 204));
+        l_v_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        l_v_total.setText("0");
+        l_v_total.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        l_v_total.setFocusable(false);
+        p_fatura.add(l_v_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 620, 160, 30));
+
+        l_factura_cabecera1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        l_factura_cabecera1.setLabelFor(t_factura);
+        l_factura_cabecera1.setText("Nota de Crédito:");
+        l_factura_cabecera1.setFocusable(false);
+        p_fatura.add(l_factura_cabecera1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, 20));
+
+        String prefijo = Variables.getVariable(Variables.POS_UI_SKIN);
+        URL myurl = prefijo.getClass().getResource("/skin/" + prefijo + "/total.png");
+        ImageIcon icon = new ImageIcon(myurl);
+        jLabel5.setIcon(icon);
+        p_fatura.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, 260, 80));
+
+        p_principal.add(p_fatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 21, 370, 710));
+
+        p_idcliente.setOpaque(false);
+        p_idcliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        t_venta_cliente.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        t_venta_cliente.setText("NOMBRE_DE_CLIENTE");
+        t_venta_cliente.setFocusable(false);
+        p_idcliente.add(t_venta_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 0, -1, -1));
+
+        p_principal.add(p_idcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 23, 430, 70));
+
+        jLabel30.setFocusable(false);
+
+        javax.swing.GroupLayout p_publicidadLayout = new javax.swing.GroupLayout(p_publicidad);
+        p_publicidad.setLayout(p_publicidadLayout);
+        p_publicidadLayout.setHorizontalGroup(
+            p_publicidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        p_publicidadLayout.setVerticalGroup(
+            p_publicidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        p_principal.add(p_publicidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        jPanel1.add(p_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void b_ventas_datosclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventas_datosclienteActionPerformed
+        log.info("ACCION CANCELAR DEVOLUCION");
+        if (ventana_padre.crearVentanaConfirmacion("Esta acción anulará la devolución actual, ¿Desea continuar?")) {
+            ventana_padre.showView("ident-cliente");
+            Sesion.borrarTicket();
+        }
+}//GEN-LAST:event_b_ventas_datosclienteActionPerformed
+
+    private void b_ventas_appalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventas_appalActionPerformed
+        // ventana_padre.mostrarMenu("ventas", "DEVOLUCIONES");
+}//GEN-LAST:event_b_ventas_appalActionPerformed
+
+    @Override
+    public void creaVentanaBusquedaArticulos() {
+        log.info("ACCION BUSCAR ARTÍCULO");
+        p_buscar_articulo.iniciaVista();
+        p_buscar_articulo.iniciaFoco();
+        v_buscar_articulo.setLocationRelativeTo(null);
+        v_buscar_articulo.setVisible(true);
+    }
+    
+    
+private void b_ventasBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventasBuscarArticuloActionPerformed
+    creaVentanaBusquedaArticulos();
+}//GEN-LAST:event_b_ventasBuscarArticuloActionPerformed
+    /**
+     * EVENTO: selección de artículo 
+     * @param evt 
+     */
+private void b_ventas_seleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventas_seleccionActionPerformed
+
+    CardLayout c2 = (CardLayout) (p_descuento_principal.getLayout());
+    c2.show(p_descuento_principal, "seleccion_cb");
+
+    ActionMap am = v_seleccion_linea.getRootPane().getActionMap();
+    InputMap im = v_seleccion_linea.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+    KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+    Action listeneresc = new AbstractAction() {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            cancelarOperacion();
+        }
+    };
+
+    im.put(esc, "IdentClientesc");
+    am.put("IdentClientesc", listeneresc);
+    v_seleccion_linea.setSize(420, 200);
+    p_descuento_principal.setPreferredSize(new Dimension(420, 200));
+    p_seleccion_cb.setPreferredSize(new Dimension(420, 200));
+
+    v_seleccion_linea.setLocationRelativeTo(null);
+    v_seleccion_linea.setVisible(true);
+
+    t_seleccion_cb.setText("");
+    t_seleccion_cb1.setText("");
+    lb_error.setText("");
+    t_seleccion_cb.requestFocus();
+
+}//GEN-LAST:event_b_ventas_seleccionActionPerformed
+
+    /**
+     * EVENTO: Selección de un elemento de la tabla de ventas a partir de su codigo de barras
+     * @param evt 
+     */
+private void b_ventas_pagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventas_pagosActionPerformed
+    if (t_factura.getRowCount() > 0) {
+        try {
+            ventana_padre.showView("ident-cliente");
+            DevolucionesServices.crearDevolucion(Sesion.getDevolucion(), false);
+        }
+        catch (SocketTPVException ex) {
+            ventana_padre.crearError("No se pudo realizar la devolución. " + ex.getResponseDTO().getDescripcion());
+            log.error("Error al crear la devolución: " + ex.getResponseDTO().getDescripcion(), ex);
+        }
+        catch (Exception ex) {
+            ventana_padre.crearError("No se pudo realizar la devolución. " + ex.getMessage());
+            log.error("Error al crear la devolución: " + ex.getMessage(), ex);
+        }
+    }
+    else {
+        ventana_padre.crearAdvertencia("No se puede realizar una devolución sin artículos.");
+    }
+}//GEN-LAST:event_b_ventas_pagosActionPerformed
+
+private void v_buscar_articuloWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_v_buscar_articuloWindowGainedFocus
+    p_buscar_articulo.establecerFoco();
+}//GEN-LAST:event_v_buscar_articuloWindowGainedFocus
+
+    private void t_seleccion_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_seleccion_cbActionPerformed
+
+    }//GEN-LAST:event_t_seleccion_cbActionPerformed
+
+    private void t_seleccion_cbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_seleccion_cbKeyPressed
+        // BUSQUEDA DE LÍNEA DENTRO DEL TICKET A PARTIR DE UN CÓDIGO DE ARTÍCULO
+        try {
+            if (evt.getKeyChar() == '\n') {
+                if (t_seleccion_cb.getText().length() > 0) {
+                    t_seleccion_cb.setText(Articulos.formateaCodigoBarras(t_seleccion_cb.getText()));
+                }                
+                codigobarra = t_seleccion_cb.getText();
+                Integer indexLinea = Sesion.getTicketDevolucion().getIndexLinea(codigobarra);
+                if (indexLinea != null && t_seleccion_cb.getText().length() > 0) {
+                    lb_error.setText("");
+                    v_seleccion_linea.setVisible(false);
+                    t_factura.requestFocus();
+                    ListSelectionModel selectionModel = t_factura.getSelectionModel();
+                    selectionModel.setSelectionInterval(indexLinea.intValue(), indexLinea.intValue());
+                }
+                else if (t_seleccion_cb.getText().length() > 0) {
+                    lb_error.setText("El código de barras ingresado es incorrecto");
+                }
+                else {
+                    lb_error.setText("No se encontro ningún artículo para ese código de barras");
+                    log.debug("No se encontró ningún artículo con código de barras " + codigobarra);
+                }
+            }
+        }
+        catch (Exception e) {
+            log.error("Error al seleccionar línea", e);
+        }
+    }//GEN-LAST:event_t_seleccion_cbKeyPressed
+
+    private void t_seleccion_cbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_seleccion_cbKeyTyped
+
+    }//GEN-LAST:event_t_seleccion_cbKeyTyped
+
+    private void t_seleccion_cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_seleccion_cb1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_t_seleccion_cb1ActionPerformed
+
+    private void t_seleccion_cb1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_seleccion_cb1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_t_seleccion_cb1KeyPressed
+
+    private void t_seleccion_cb1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_seleccion_cb1KeyTyped
+        // BUSQUEDA DE LÍNEA DENTRO DEL TICKET A PARTIR DE UN CÓDIGO DE ARTÍCULO
+        try {
+            if (evt.getKeyChar() == '\n') {                
+                String codigoArticulo = t_seleccion_cb1.getText();
+                Integer indexLinea = Sesion.getTicketDevolucion().getIndexLineaCodigoArticulo(codigoArticulo);
+                if (indexLinea != null && t_seleccion_cb1.getText().length() > 0) {
+                    lb_error.setText("");
+                    v_seleccion_linea.setVisible(false);
+                    t_factura.requestFocus();
+                    ListSelectionModel selectionModel = t_factura.getSelectionModel();
+                    selectionModel.setSelectionInterval(indexLinea.intValue(), indexLinea.intValue());
+                }
+                else if (t_seleccion_cb1.getText().length() > 0) {
+                    lb_error.setText("El código de artículo ingresado es incorrecto");
+                }
+                else {
+                    lb_error.setText("No se encontro ningún artículo con el código de artículo");
+                    log.debug("No se encontro ningún artículo con el código de artículo " + codigoArticulo);
+                }
+            }
+        }
+        catch (Exception e) {
+            log.error("Error al seleccionar línea", e);
+        }
+    }//GEN-LAST:event_t_seleccion_cb1KeyTyped
+
+    private void b_ventas_edicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventas_edicionActionPerformed
+        log.info("ACCION EDITAR LÍNEA");
+        
+        //TODO: Falta edición de la línea
+        try {                
+            lineaSelecionada = t_factura.getSelectedRow();
+            if (lineaSelecionada == -1) {
+                lineaSelecionada = t_factura.getRowCount() - 1;
+            }
+            this.indexLineaAEditar = lineaSelecionada;
+            if (lineaSelecionada >= 0) {
+                LineaTicket lineaTicketSeleccionada = Sesion.getTicketDevolucion().getLineas().getLinea(indexLineaAEditar);
+                Integer cantidad = lineaTicketSeleccionada.getCantidad();
+                p_editar_cantidad.setCantidad(cantidad);
+                
+                v_editar_cantidad.setModalityType(Dialog.ModalityType.TOOLKIT_MODAL);
+                v_editar_cantidad.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);  
+                p_editar_cantidad.iniciaFoco();
+                v_editar_cantidad.setVisible(true);  
+                
+                int nuevaCantidad = p_editar_cantidad.getCantidad();    
+                if(nuevaCantidad > 0) {
+                    // intentamos establecer la cantidad
+                    Sesion.getDevolucion().modificarLineaDevolucion(lineaTicketSeleccionada, nuevaCantidad);              
+                    Sesion.getTicketDevolucion().recalcularTotales();
+                    refrescaTablaTicket();
+                } else {
+                   ventana_padre.crearAdvertencia("Debe insertar un valor positivo."); 
+                }
+            }
+            else {
+                ventana_padre.crearAdvertencia("Debe añadir una línea de ticket para poder editarla.");
+            }
+        }
+        catch (ValidationException e){
+            ventana_padre.crearError(e.getMessage());
+        }
+        catch (ArticuloNotFoundException e){
+            ventana_padre.crearError("Error inesperado. No se ha encontrado la línea en el ticket original");
+        }
+        catch (Exception ex) { //SinPermisos
+            ventana_padre.crearError(ex.getMessage());
+        }
+    }//GEN-LAST:event_b_ventas_edicionActionPerformed
+
+    private void b_anular_voucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_anular_voucherActionPerformed
+        try {
+            // TODO add your handling code here:
+            //Buscar los pagos
+            List<FacturacionTarjeta> facturaciones = FacturacionTarjetasDao.consultarFacturacionTarjetaByFactura(Sesion.getEmf().createEntityManager(), Sesion.getDevolucion().getTicketOriginal().getUid_ticket());
+            if(facturaciones.size() == 1){
+                //Confirmar
+                log.info("CONFIRMA ANULACION");
+                if (ventana_padre.crearVentanaConfirmacion("Esta acción permite REVERSAR/ANULAR el pago de la tarjeta de crédito en el PINPAD y generará automáticamente la nota de crédito, ¿Desea continuar?")) {
+                   // 1. Convertir FacturacionTarjeta en PagoCredito
+                   TicketOrigen ticketOriginal = Sesion.getDevolucion().getTicketOriginal();
+                   FacturacionTarjeta fact = facturaciones.get(0);
+                   DocumentosBean documentosBean = DocumentosService.consultarDocByUniqueKey("FACTURA", ticketOriginal.getTienda(), 
+                           ticketOriginal.getCodcaja(), String.valueOf(ticketOriginal.getId_ticket()));
+                   PagoCredito pagoAnularLista = null;
+                   if(ticketOriginal.getListaPagos() != null && ticketOriginal.getListaPagos().size() >= 1){
+                       for(Pago p : ticketOriginal.getListaPagos()){
+                           if(p instanceof PagoCredito){
+                                pagoAnularLista = (PagoCredito) p;
+                                break;
+                           }
+                       }
+                   }
+                   if(ticketOriginal.getListaPagos() != null && ticketOriginal.getListaPagos().size() == 1){
+                        try{
+                             PagoCredito pagoAnular = fact.convertirFacturacionAPago(fact, pagoAnularLista);
+                             DocumentosImpresosBean  documentosImpresosBean = pagoAnular.anularPago(pagoAnular, Sesion.getDevolucion().getTicketOriginal().getUid_ticket(), 
+                                     pagoAnular.getNumeroAutorizacionTarjeta(), documentosBean, 
+                                     Sesion.getDevolucion().getTicketOriginal().getTienda() + "-" + Sesion.getDevolucion().getTicketOriginal().getCodcaja()
+                                     + "-" + Sesion.getDevolucion().getTicketOriginal().getId_ticket());
+                             fact.setProcesado('N');
+                             fact.setEstatusTransaccion("A");
+                             ServicioFacturacionTarjetas.actualizarFacturacionTarjeta(fact);
+                             documentosBean.setImpresos(new ArrayList<DocumentosImpresosBean>());
+                             documentosBean.addImpreso(documentosImpresosBean);
+                             DocumentosService.crearDocumentoImpreso(documentosBean, DocumentosImpresosBean.TIPO_PAGO);
+                             Sesion.getDevolucion().setAnulacion(true);
+                             b_ventas_pagosActionPerformed(evt);
+                        }catch (AutorizadorException e) {
+                             ventana_padre.crearError("No se pudo realizar la anulación del voucher. Por favor reintente.");
+                        }
+                   }else{
+                       ventana_padre.crearError("La factura tiene más de una forma de pago");
+                   }
+                }
+            }else if(facturaciones.size() == 0){
+                //no tiene pagos con tarjeta
+                log.info("NO TIENE PAGOS");
+                ventana_padre.crearError("Esta factura no tiene pago con tarjeta");
+           }else if(facturaciones.size() > 1){
+                //Solo disponible cuando hay un pago
+                log.info("TIENE MAS DE UN PAGO");
+                ventana_padre.crearError("Esta factura tiene más de un pago con tarjeta");
+            }
+            
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(JDevolucionVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_b_anular_voucherActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_anular_voucher;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_appal;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_datoscliente;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_edicion;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_otro_local;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_pagos;
+    private com.comerzzia.jpos.gui.components.form.JButtonForm b_ventas_seleccion;
+    private javax.swing.JFrame f_pagos2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel l_factura_cabecera1;
+    private javax.swing.JLabel l_factura_cabecera_id;
+    private javax.swing.JLabel l_total;
+    private javax.swing.JLabel l_v_total;
+    private javax.swing.JLabel lb_error;
+    private com.comerzzia.jpos.servicios.tickets.componentes.LineasTicket lineasTicket;
+    private javax.swing.JPanel m_ventas;
+    private com.comerzzia.jpos.gui.JBuscar p_buscar_articulo;
+    private javax.swing.JPanel p_descuento_principal;
+    private javax.swing.JPanel p_descuentos;
+    private com.comerzzia.jpos.gui.devoluciones.JIntroducirCantidad p_editar_cantidad;
+    private javax.swing.JPanel p_fatura;
+    private javax.swing.JPanel p_idcliente;
+    private javax.swing.JPanel p_imagen_airticulo;
+    private javax.swing.JPanel p_ingreso_articulos;
+    private javax.swing.JPanel p_principal;
+    private javax.swing.JPanel p_publicidad;
+    private javax.swing.JPanel p_seleccion_cb;
+    private javax.swing.JScrollPane sp_t_factura;
+    private javax.swing.JTable t_factura;
+    private com.comerzzia.jpos.gui.components.ventas.JPanelIntroduccionArticulosComp t_introduccionArticulos;
+    private com.comerzzia.jpos.gui.components.form.JTextFieldForm t_seleccion_cb;
+    private com.comerzzia.jpos.gui.components.form.JTextFieldForm t_seleccion_cb1;
+    private javax.swing.JLabel t_venta_cliente;
+    private javax.swing.JDialog v_buscar_articulo;
+    private javax.swing.JDialog v_editar_cantidad;
+    private javax.swing.JDialog v_seleccion_linea;
+    // End of variables declaration//GEN-END:variables
+
+    protected void cerrarPanelActivo() {
+        if (this.p_activo != null) {
+            p_activo.setVisible(false);
+        }
+    }
+
+    /**
+     *  Función que habilita los elementos de formulario que quedan debajo de la pantalla de pagos
+     */
+    protected void habilita_elementos_formulario() {
+        m_ventas.setVisible(true);
+        b_ventas_appal.setEnabled(true);
+        b_ventas_datoscliente.setEnabled(true);
+        b_ventas_pagos.setEnabled(true);
+        t_factura.setEnabled(true);
+        t_factura.setVisible(true);
+        sp_t_factura.setEnabled(true);
+        sp_t_factura.setVisible(true);
+        t_introduccionArticulos.setActivo(true);
+    }
+
+    /* Acciones de teclado */
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        // Pulsado enter mientras se esta en el cuadro de insercion de articulos
+        if (ke.getKeyChar() == '\n' && ke.getComponent() instanceof JButtonForm) {
+            ((JButtonForm) ke.getComponent()).doClick(0);
+        }
+        if (t_introduccionArticulos.getT_Codigo().hasFocus() && (ke.getKeyChar() == 'x' || ke.getKeyChar() == 'X') && t_introduccionArticulos.getT_Codigo().getText().length() == 0) {
+            log.info("ACCION DE INTRODUCCIÓN DE CANTIDAD");
+            accionIntroducirCantidad();
+        }        
+        if (t_introduccionArticulos.getT_Codigo().hasFocus() && ke.getKeyChar() == '\n') {
+            crearLineaTicket();
+        }
+    }
+
+    private void accionIntroducirCantidad() {
+        log.info("Estableciendo foco en cantidad");
+        if (TicketTableCellRenderer.isModoConCantidad()) {
+            t_introduccionArticulos.getT_Cantidad().requestFocus();
+        }
+    }
+    
+    
+    private void crearLineaTicket() {
+
+    }
+
+    private void abrirBuscadorPorCodigo(String codigoArticulo) {
+        v_buscar_articulo.setLocationRelativeTo(null);
+        p_buscar_articulo.iniciaVista(codigoArticulo);
+        p_buscar_articulo.establecerFoco();
+        v_buscar_articulo.setVisible(true);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+    }
+
+    private void refrescaTablaTicket() {
+        l_v_total.setText("$ " + Sesion.getTicketDevolucion().getTotales().getTotalAPagar().toString());
+        t_factura.setModel(new TicketTableModel(Sesion.getTicketDevolucion().getLineas()));
+
+        // Anchos de columnas de la tabla
+        t_factura.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        int i = 0;
+        for (int anchura : TicketTableCellRenderer.getAnchosColumna()) {
+            t_factura.getColumnModel().getColumn(i).setPreferredWidth(anchura);
+            i++;
+        }
+
+        // Foco en introducción de artículos
+        //t_introduccionArticulos.requestFocus();
+
+    }
+
+    public void addFunctionKeys() {
+        // botones de menú de la ventana
+        addFuntionKeysBotonesMenu();
+
+        // otros controles
+        KeyStroke ctrlMenos = KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_DOWN_MASK);
+        Action listenerCtrlMenos = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                try {   
+                    if (Sesion.getDevolucion().getTipoDevolucion() != EnumTipoDevolucion.TIPO_DEVOLUCION_DINERO.getValor()) {
+                        lineaSelecionada = t_factura.getSelectedRow();
+                        if (lineaSelecionada >= 0) {
+                            Sesion.getTicketDevolucion().eliminarLineaTicket(lineaSelecionada);
+                        } else if (t_factura.getRowCount() > 0) {
+                            Sesion.getTicketDevolucion().eliminarLineaTicket();
+                        }
+                        Sesion.getDevolucion().recalcularCompensacion();
+                        refrescaTablaTicket();
+                        // Selección de fila para facilitar eliminaciones consecutivas
+                        if (t_factura.getRowCount() > 0 && lineaSelecionada > t_factura.getRowCount() - 1) {
+                            t_factura.getSelectionModel().setSelectionInterval(lineaSelecionada - 1, lineaSelecionada - 1);
+                        } else if (t_factura.getRowCount() > 0) {
+                            t_factura.getSelectionModel().setSelectionInterval(lineaSelecionada, lineaSelecionada);
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    log.error("(Accion Ctrl - ) - Error inesperado eliminando linea de devolución :"+ ex.getMessage(), ex);
+                }
+            }
+        };
+        addHotKey(ctrlMenos, "VentasCtrlMenos", listenerCtrlMenos);
+        
+        KeyStroke ctrlO = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK);
+        Action listenerCtrlO = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                Sesion.getDevolucion().setObservaciones(ventana_padre.crearVentanaObservaciones(Sesion.getDevolucion().getObservaciones()));
+            }
+        };
+        addHotKey(ctrlO, "ObservacionesCtrlO", listenerCtrlO);
+
+    }
+
+    private void addFuntionKeysBotonesMenu() {
+        KeyStroke ksBorrarLinea = KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, 0);
+        Action listenerksBorrarLinea = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_datosclienteActionPerformed(ae);
+            }
+        };
+
+        KeyStroke f2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
+        Action listenerf2 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_datosclienteActionPerformed(ae);
+            }
+        };
+        addHotKey(f2, "IdentClientF2", listenerf2);
+        
+        t_factura.addKeyListener(new KeyAdapter(){
+            public void keyPressed(KeyEvent keyEvent) {
+                if(keyEvent.getKeyCode()==KeyEvent.VK_F2){
+                    int keyCode = keyEvent.getKeyCode();
+                    String keyText = KeyEvent.getKeyText(keyCode);
+                    ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, keyText);
+                    b_ventas_datosclienteActionPerformed(actionEvent);
+                }
+            }
+        });
+
+
+        KeyStroke f9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        Action listenerf9 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_pagosActionPerformed(ae);
+
+            }
+        };
+        addHotKey(f9, "IdentClientF9", listenerf9);
+
+        // F7: selección de artículo
+        KeyStroke f7 = KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0);
+        Action listenerf7 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_seleccionActionPerformed(ae);
+
+            }
+        };
+        addHotKey(f7, "IdentClientF7", listenerf7);
+
+
+        // F8: búsqueda
+        KeyStroke f8 = KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0);
+        Action listenerf8 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventasBuscarArticuloActionPerformed(ae);
+
+            }
+        };
+        addHotKey(f8, "IdentClientF8", listenerf8);
+
+
+        KeyStroke f12 = KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0);
+        Action listenerf12 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_appalActionPerformed(ae);
+            }
+        };
+        addHotKey(f12, "IdentClientF12", listenerf12);
+        
+        KeyStroke f4 = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
+        Action listenerf4 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_ventas_edicionActionPerformed(ae);
+            }
+        };
+        addHotKey(f4, "IdentClientF4", listenerf4);      
+        
+        KeyStroke f3 = KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0);
+        Action listenerf3 = new AbstractAction() {
+
+            public void actionPerformed(ActionEvent ae) {
+                b_anular_voucherActionPerformed(ae);
+
+            }
+        };
+        addHotKey(f3, "IdentClientF3", listenerf3);
+
+    }
+    
+    
+
+    public void setCodigoArticulo(String cb) {
+        this.t_introduccionArticulos.getT_Codigo().setText(cb);
+        this.t_introduccionArticulos.getT_Codigo().requestFocus();
+        crearLineaTicket();
+    }
+
+    private void cancelarOperacion() {
+        v_seleccion_linea.setVisible(false);
+        t_seleccion_cb.setText("");
+
+        lb_error.setText("");
+        CardLayout c2 = (CardLayout) (p_descuento_principal.getLayout());
+        c2.show(p_descuento_principal, "seleccion_cb");
+    }
+
+    @Override
+    public void addError(ValidationFormException e) {
+    }
+
+    @Override
+    public void clearError() {
+    }
+
+    public JPrincipal getVentana_padre() {
+        return this.ventana_padre;
+    }
+
+    @Override
+    public void iniciaFoco() {
+        log.info("Iniciando Foco");
+        //t_introduccionArticulos.requestFocus();
+        t_factura.requestFocus();
+    }
+    
+}

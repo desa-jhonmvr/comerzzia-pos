@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.letras.LetraMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.letras.LetraBean" >
+    <id column="UID_LETRA" property="uidLetra" jdbcType="VARCHAR" />
+    <result column="UID_TICKET" property="uidTicket" jdbcType="VARCHAR" />
+    <result column="CODCLI" property="codCliente" jdbcType="VARCHAR" />
+    <result column="CODALM" property="codAlmacen" jdbcType="VARCHAR" />
+    <result column="CODCAJA" property="codCaja" jdbcType="VARCHAR" />
+    <result column="TOTAL" property="total" jdbcType="DECIMAL" />
+    <result column="PLAZO" property="plazo" jdbcType="DECIMAL" />
+    <result column="INTERESES" property="intereses" jdbcType="DECIMAL" />
+    <result column="FECHA" property="fecha" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="PROCESADO" property="procesado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="IDENTIFICADOR" property="identificador" jdbcType="DECIMAL" />
+    <result column="ID_TICKET" property="idTicket" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_LETRA, UID_TICKET, CODCLI, CODALM, CODCAJA, TOTAL, PLAZO, INTERESES, FECHA, PROCESADO, 
+    ESTADO, IDENTIFICADOR
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.letras.LetraExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_LETRAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_LETRAS_TBL
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from X_LETRAS_TBL
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.letras.LetraExample" >
+    delete from X_LETRAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.letras.LetraBean" >
+    insert into X_LETRAS_TBL (UID_LETRA, UID_TICKET, CODCLI, 
+      CODALM, CODCAJA, TOTAL, 
+      PLAZO, INTERESES, FECHA, 
+      PROCESADO, 
+      ESTADO, IDENTIFICADOR)
+    values (#{uidLetra,jdbcType=VARCHAR}, #{uidTicket,jdbcType=VARCHAR}, #{codCliente,jdbcType=VARCHAR}, 
+      #{codAlmacen,jdbcType=VARCHAR}, #{codCaja,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, 
+      #{plazo,jdbcType=DECIMAL}, #{intereses,jdbcType=DECIMAL}, #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{estado,jdbcType=CHAR}, #{identificador,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.letras.LetraBean" >
+    insert into X_LETRAS_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidLetra != null" >
+        UID_LETRA,
+      </if>
+      <if test="uidTicket != null" >
+        UID_TICKET,
+      </if>
+      <if test="codCliente != null" >
+        CODCLI,
+      </if>
+      <if test="codAlmacen != null" >
+        CODALM,
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA,
+      </if>
+      <if test="total != null" >
+        TOTAL,
+      </if>
+      <if test="plazo != null" >
+        PLAZO,
+      </if>
+      <if test="intereses != null" >
+        INTERESES,
+      </if>
+      <if test="fecha != null" >
+        FECHA,
+      </if>
+      <if test="procesado != null" >
+        PROCESADO,
+      </if>
+      <if test="estado != null" >
+        ESTADO,
+      </if>
+      <if test="identificador != null" >
+        IDENTIFICADOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidLetra != null" >
+        #{uidLetra,jdbcType=VARCHAR},
+      </if>
+      <if test="uidTicket != null" >
+        #{uidTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="codCliente != null" >
+        #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="codAlmacen != null" >
+        #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="plazo != null" >
+        #{plazo,jdbcType=DECIMAL},
+      </if>
+      <if test="intereses != null" >
+        #{intereses,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="procesado != null" >
+        #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="estado != null" >
+        #{estado,jdbcType=CHAR},
+      </if>
+      <if test="identificador != null" >
+        #{identificador,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.letras.LetraExample" resultType="java.lang.Integer" >
+    select count(*) from X_LETRAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_LETRAS_TBL
+    <set >
+      <if test="record.uidLetra != null" >
+        UID_LETRA = #{record.uidLetra,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uidTicket != null" >
+        UID_TICKET = #{record.uidTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCliente != null" >
+        CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codAlmacen != null" >
+        CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codCaja != null" >
+        CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total != null" >
+        TOTAL = #{record.total,jdbcType=DECIMAL},
+      </if>
+      <if test="record.plazo != null" >
+        PLAZO = #{record.plazo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.intereses != null" >
+        INTERESES = #{record.intereses,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fecha != null" >
+        FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.procesado != null" >
+        PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.estado != null" >
+        ESTADO = #{record.estado,jdbcType=CHAR},
+      </if>
+      <if test="record.identificador != null" >
+        IDENTIFICADOR = #{record.identificador,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_LETRAS_TBL
+    set UID_LETRA = #{record.uidLetra,jdbcType=VARCHAR},
+      UID_TICKET = #{record.uidTicket,jdbcType=VARCHAR},
+      CODCLI = #{record.codCliente,jdbcType=VARCHAR},
+      CODALM = #{record.codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{record.codCaja,jdbcType=VARCHAR},
+      TOTAL = #{record.total,jdbcType=DECIMAL},
+      PLAZO = #{record.plazo,jdbcType=DECIMAL},
+      INTERESES = #{record.intereses,jdbcType=DECIMAL},
+      FECHA = #{record.fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      ESTADO = #{record.estado,jdbcType=CHAR},
+      IDENTIFICADOR = #{record.identificador,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.letras.LetraBean" >
+    update X_LETRAS_TBL
+    <set >
+      <if test="uidTicket != null" >
+        UID_TICKET = #{uidTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="codCliente != null" >
+        CODCLI = #{codCliente,jdbcType=VARCHAR},
+      </if>
+      <if test="codAlmacen != null" >
+        CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      </if>
+      <if test="codCaja != null" >
+        CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        TOTAL = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="plazo != null" >
+        PLAZO = #{plazo,jdbcType=DECIMAL},
+      </if>
+      <if test="intereses != null" >
+        INTERESES = #{intereses,jdbcType=DECIMAL},
+      </if>
+      <if test="fecha != null" >
+        FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="procesado != null" >
+        PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="estado != null" >
+        ESTADO = #{estado,jdbcType=CHAR},
+      </if>
+      <if test="identificador != null" >
+        IDENTIFICADOR = #{identificador,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.letras.LetraBean" >
+    update X_LETRAS_TBL
+    set UID_TICKET = #{uidTicket,jdbcType=VARCHAR},
+      CODCLI = #{codCliente,jdbcType=VARCHAR},
+      CODALM = #{codAlmacen,jdbcType=VARCHAR},
+      CODCAJA = #{codCaja,jdbcType=VARCHAR},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      PLAZO = #{plazo,jdbcType=DECIMAL},
+      INTERESES = #{intereses,jdbcType=DECIMAL},
+      FECHA = #{fecha,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      ESTADO = #{estado,jdbcType=CHAR},
+      IDENTIFICADOR = #{identificador,jdbcType=DECIMAL}
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.letras.LetraExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_LETRAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectFromViewByExample" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="View_Base_Column_List" />
+    from X_LETRAS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectFromViewByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="View_Base_Column_List" />
+    from X_LETRAS
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+  </select>
+  <sql id="View_Base_Column_List" >
+    CODCAJA, PROCESADO, CODCLI, ID_TICKET, FECHA, PLAZO, TOTAL, UID_LETRA, CODALM, INTERESES, ESTADO,
+    UID_TICKET
+  </sql>
+</mapper>

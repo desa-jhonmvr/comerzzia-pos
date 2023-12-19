@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+	    <line><cabecera align="center" length="40" bold="true"></cabecera></line>      
+		<line>
+			<text align="center" length="40" >${printPL.getNombreEmpresa()}</text>
+		</line>
+		<line>
+			<text align="left" length="40" >----------------------------------- * *</text>
+		</line>
+		<line>
+			<text align="center" length="40" >${printPL.getFormato()}</text>
+		</line>
+		<line>
+			<text align="center" length="40">R.U.C. ${printPL.getRuc()}</text>
+		</line>
+		<line/>		
+		<line>
+            <text align="center" length="40" >RECIBO DE PAGO</text>
+		</line>		
+		<line>
+            <text align="center" length="40" >No.  ${printPL.getNumeroLetraAbono()}</text>
+		</line>
+		<line/>
+		
+		<line>
+            <text align="left" length="40" >Fecha:  ${printPL.getFechaTransaccion()}</text>
+		</line>
+		<line>
+            <text align="left" length="40" >Nombre:  ${printPL.getNombreCliente()}</text>
+		</line>
+		<line>
+		#foreach ($lineaD in $printPL.getObservacionesAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaD}</text> </line>
+		#end	
+		</line>
+		<line/>
+		<line>
+            <text align="center" length="40">ABONO AL DOCUMENTO A CREDITO</text>
+		</line>
+		<line>
+            <text align="center" length="40" > No. ${printPL.getIdGrupoLetra()} LETRA No. ${printPL.getIdLetra()}</text>
+		</line>
+		<line>
+            <text align="center" length="40" >CON FECHA DE VENCIMIENTO ${printPL.getFechaVencimiento()}</text>
+		</line>			
+		
+	
+		<line></line>
+		      
+		<line>
+			<text length="35">----------------------------------------</text>
+			<text length="5">-----</text>
+		</line>
+		
+		<line></line>
+				
+		<line>
+            <text align="left" length="28">   Por un valor de: </text>
+            <text align="right" length="12"> ${printPL.getValorSinMora()}</text>
+        </line>	
+		<line>
+            <text align="left" length="28">   +(incremento por mora) </text>
+            <text align="right" length="12"> ${printPL.getMoraAdelanto()}</text>
+        </line>
+		<line>
+            <text align="left" length="28">   Total: </text>
+            <text align="right" length="12"> ${printPL.getTotal()}</text>
+        </line>			
+		<line></line>
+        <line>
+            <text align="left" length="35" bold="true">Forma de Pago</text>
+        </line>
+        
+        <line/>
+		#foreach ($pago in $ticket.getPagos().getPagos())
+			
+		<line>
+			<text align="left" length="31" >${pago.getMedioPagoActivo().getDesMedioPago()}</text> 
+			<text align="right" length="9" >${pago.getUstedPagaPrint()}</text> 			
+		</line>
+		
+		#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()} || ${pago.getMedioPagoActivo().isEfectivo()})          
+			#if (${pago.getVueltaAsBD()}>0)
+                                        <line>
+                                                <text align="left" length = "16">Recibido        : </text>
+                                                <text align="right" length = "24">${pago.getEntregado().toString()}</text>
+                                        </line>
+					#if (${pago.getMedioPagoActivo().isNotaCredito()} || ${pago.getMedioPagoActivo().isBonoEfectivo()})
+						<line>
+							<text align="left" lenght="40">Su cambio en Bono Efectivo : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>
+					#else
+						<line>
+							<text align="left" lenght="40">Su cambio en ${pago.toString()} : $ ${pago.getVueltaAsBD()} US DOLARES</text>
+						</line>                                
+					#end
+					<line/>
+			#end
+		#end		
+		<line>
+			<text align="right" length = "40">------------</text>
+		</line>	
+		<line/>
+		
+		#end
+				
+		<line/>
+		#foreach ($lineaNC in $printTicket.getNombreCajeroAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaNC}</text> </line>
+		#end
+		<line></line>
+		<line></line>
+		<line><text align="left" length="40">Firma del cliente: .....................</text></line>
+		<line></line>		
+		<line><text align="center" length="40">GRACIAS POR SU CANCELACIÓN</text></line>
+		<line/>
+		<line/>
+	    <line><pie align="center" length="40" bold="true"></pie></line>		  
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		  
+    </ticket>
+</output>

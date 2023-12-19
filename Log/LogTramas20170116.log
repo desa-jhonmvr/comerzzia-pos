@@ -1,0 +1,1642 @@
+16:10:55.251	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:10:55.256	DEBUG : Genera trama LRC Seguridad
+16:10:55.256	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:10:55.253	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:10:55.256	DEBUG : Configuracion OK
+16:10:55.256	DEBUG : Genera trama mLRC
+16:10:55.271	DEBUG : Configuracion de velocidad de transmision completada
+16:10:55.271	DEBUG : Baudios: 115200
+16:10:55.271	DEBUG : Bits: 8
+16:10:55.275	DEBUG :Lectura de archivo UC-CAJA
+16:10:55.282	DEBUG :  Modo de uso del pinpad: USB
+16:10:55.282	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:10:55.384	DEBUG : Se envia trama de seguridad=SHF25756F90A4EB9A1
+16:10:56.384	DEBUG : Se espera la respuesta
+16:10:56.386	DEBUG : Envio ACK
+16:10:56.405	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:10:56.411	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:10:56.411	DEBUG : Se envia trama al puerto al pinpad  LT
+16:10:57.412	DEBUG : Compra lee respuesta=
+16:10:58.412	DEBUG : Compra lee respuesta=
+16:10:59.413	DEBUG : Compra lee respuesta=
+16:11:00.414	DEBUG : Compra lee respuesta=
+16:11:01.415	DEBUG : Compra lee respuesta=
+16:11:02.415	DEBUG : Compra lee respuesta=
+16:11:03.416	DEBUG : Compra lee respuesta=LT0000404837XXXXXX7987         LECTURA OK          J
+16:11:03.417	DEBUG : Se envia ACK al pinpad proceso OK
+16:11:03.436	DEBUG : Se envia respuesta a la caja respuesta= LT0000404837XXXXXX7987         LECTURA OK          
+16:11:04.939	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:11:04.939	DEBUG : Inputs Parametro "PP0210103   000000028246000000024777000000000000000000003469                                          16105320170116      2000009621     40228500-9-70-1-1"
+16:11:04.940	DEBUG : Configuracion OK
+16:11:04.942	DEBUG : Genera trama mLRC
+16:11:04.943	DEBUG : Genera trama LRC Seguridad
+16:11:04.943	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:11:04.945	DEBUG : Configuracion de velocidad de transmision completada
+16:11:04.946	DEBUG : Baudios: 115200
+16:11:04.946	DEBUG : Bits: 8
+16:11:04.950	DEBUG :Lectura de archivo UC-CAJA
+16:11:04.951	DEBUG :  Modo de uso del pinpad: USB
+16:11:04.952	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:11:04.959	DEBUG : Se envia trama de seguridad=SH5B16CE2B55F36639a
+16:11:05.959	DEBUG : Se espera la respuesta
+16:11:05.960	DEBUG : Envio ACK
+16:11:05.981	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:11:05.988	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:11:05.988	DEBUG : Se envia trama al puerto al pinpad  PP0210103   000000028246000000024777000000000000000000003469                                          16105320170116      2000009621     402285004
+16:11:06.989	DEBUG : Compra lee respuesta=
+16:11:07.990	DEBUG : Compra lee respuesta=
+16:11:08.991	DEBUG : Compra lee respuesta=
+16:11:09.991	DEBUG : Compra lee respuesta=
+16:11:10.992	DEBUG : Compra lee respuesta=
+16:11:11.993	DEBUG : Compra lee respuesta=
+16:11:12.994	DEBUG : Compra lee respuesta=
+16:11:13.994	DEBUG : Compra lee respuesta=
+16:11:14.995	DEBUG : Compra lee respuesta=
+16:11:15.996	DEBUG : Compra lee respuesta=
+16:11:16.997	DEBUG : Compra lee respuesta=
+16:11:17.998	DEBUG : Compra lee respuesta=
+16:11:18.999	DEBUG : Compra lee respuesta=
+16:11:19.999	DEBUG : Compra lee respuesta=
+16:11:21.000	DEBUG : Compra lee respuesta=
+16:11:22.001	DEBUG : Compra lee respuesta=
+16:11:23.001	DEBUG : Compra lee respuesta=
+16:11:24.002	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00083900107816105320170116432952402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     03SUAREZ L/MERCEDES                                   VISA CREDITO        AID:   A000000003101TC:    B27B078CFC9D656               ARQC:  3137DCD81b
+16:11:24.003	DEBUG : Se envia ACK al pinpad proceso OK
+16:11:24.015	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00083900107816105320170116432952402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     03SUAREZ L/MERCEDES                                   VISA CREDITO        AID:   A000000003101TC:    B27B078CFC9D656               ARQC:  3137DCD81
+16:16:45.679	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:16:45.679	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:16:45.680	DEBUG : Configuracion OK
+16:16:45.680	DEBUG : Genera trama mLRC
+16:16:45.681	DEBUG : Genera trama LRC Seguridad
+16:16:45.681	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:16:45.683	DEBUG : Configuracion de velocidad de transmision completada
+16:16:45.683	DEBUG : Baudios: 115200
+16:16:45.683	DEBUG : Bits: 8
+16:16:45.687	DEBUG :Lectura de archivo UC-CAJA
+16:16:45.688	DEBUG :  Modo de uso del pinpad: USB
+16:16:45.688	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:16:45.695	DEBUG : Se envia trama de seguridad=SH52010B521656518E
+16:16:46.696	DEBUG : Se espera la respuesta
+16:16:46.697	DEBUG : Envio ACK
+16:16:46.699	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:16:46.706	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:16:46.706	DEBUG : Se envia trama al puerto al pinpad  LT
+16:16:47.707	DEBUG : Compra lee respuesta=
+16:16:48.707	DEBUG : Compra lee respuesta=
+16:16:49.708	DEBUG : Compra lee respuesta=
+16:16:50.709	DEBUG : Compra lee respuesta=
+16:16:51.710	DEBUG : Compra lee respuesta=
+16:16:52.710	DEBUG : Compra lee respuesta=
+16:16:53.711	DEBUG : Compra lee respuesta=
+16:16:54.712	DEBUG : Compra lee respuesta=
+16:16:55.712	DEBUG : Compra lee respuesta=
+16:16:56.713	DEBUG : Compra lee respuesta=
+16:16:57.714	DEBUG : Compra lee respuesta=
+16:16:58.714	DEBUG : Compra lee respuesta=
+16:16:59.715	DEBUG : Compra lee respuesta=
+16:17:00.716	DEBUG : Compra lee respuesta=
+16:17:01.716	DEBUG : Compra lee respuesta=
+16:17:02.717	DEBUG : Compra lee respuesta=
+16:17:03.718	DEBUG : Compra lee respuesta=
+16:17:04.719	DEBUG : Compra lee respuesta=
+16:17:05.719	DEBUG : Compra lee respuesta=
+16:17:06.720	DEBUG : Compra lee respuesta=
+16:17:07.721	DEBUG : Compra lee respuesta=
+16:17:08.721	DEBUG : Compra lee respuesta=
+16:17:09.722	DEBUG : Compra lee respuesta=
+16:17:10.723	DEBUG : Compra lee respuesta=
+16:17:11.724	DEBUG : Compra lee respuesta=
+16:17:12.724	DEBUG : Compra lee respuesta=
+16:17:13.725	DEBUG : Compra lee respuesta=
+16:17:14.726	DEBUG : Compra lee respuesta=
+16:17:15.727	DEBUG : Compra lee respuesta=
+16:17:16.728	DEBUG : Compra lee respuesta=
+16:17:17.728	DEBUG : Compra lee respuesta=
+16:17:18.729	DEBUG : Compra lee respuesta=
+16:17:19.730	DEBUG : Compra lee respuesta=
+16:17:20.731	DEBUG : Compra lee respuesta=
+16:17:21.732	DEBUG : Compra lee respuesta=
+16:17:22.733	DEBUG : Compra lee respuesta=
+16:17:23.733	DEBUG : Compra lee respuesta=
+16:17:24.734	DEBUG : Compra lee respuesta=
+16:17:25.735	DEBUG : Compra lee respuesta=
+16:17:26.736	DEBUG : Compra lee respuesta=
+16:17:27.736	DEBUG : Compra lee respuesta=
+16:17:28.737	DEBUG : Compra lee respuesta=
+16:17:29.738	DEBUG : Compra lee respuesta=
+16:17:30.742	DEBUG : Compra lee respuesta=
+16:17:31.743	DEBUG : Compra lee respuesta=
+16:17:32.743	DEBUG : Compra lee respuesta=
+16:17:33.744	DEBUG : Compra lee respuesta=
+16:17:34.745	DEBUG : Compra lee respuesta=
+16:17:35.746	ERROR : Exception:  Compra:Input/output error in nativeavailable
+16:18:01.144	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:18:01.146	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:18:01.146	DEBUG : Configuracion OK
+16:18:01.146	DEBUG : Genera trama mLRC
+16:18:01.146	DEBUG : Genera trama LRC Seguridad
+16:18:01.146	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:18:01.147	DEBUG : Configuracion de velocidad de transmision completada
+16:18:01.147	DEBUG : Baudios: 115200
+16:18:01.147	DEBUG : Bits: 8
+16:18:01.153	DEBUG :Lectura de archivo UC-CAJA
+16:18:01.153	DEBUG :  Modo de uso del pinpad: USB
+16:18:01.153	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:18:01.159	DEBUG : Se envia trama de seguridad=SH492D3BFE8002A7D1
+16:18:02.160	DEBUG : Se espera la respuesta
+16:18:02.160	DEBUG : Envio ACK
+16:18:02.181	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:18:02.188	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:18:02.189	DEBUG : Se envia trama al puerto al pinpad  LT
+16:18:03.189	DEBUG : Compra lee respuesta=
+16:18:04.190	DEBUG : Compra lee respuesta=
+16:18:05.191	DEBUG : Compra lee respuesta=
+16:18:06.192	DEBUG : Compra lee respuesta=
+16:18:07.192	DEBUG : Compra lee respuesta=
+16:18:08.193	DEBUG : Compra lee respuesta=
+16:18:09.194	DEBUG : Compra lee respuesta=
+16:18:10.194	DEBUG : Compra lee respuesta=LT0000360857XXXX1852           LECTURA OK          F
+16:18:10.195	DEBUG : Se envia ACK al pinpad proceso OK
+16:18:10.202	DEBUG : Se envia respuesta a la caja respuesta= LT0000360857XXXX1852           LECTURA OK          
+16:18:11.704	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:18:11.704	DEBUG : Inputs Parametro "PP01100     000000001761000000001545000000000000000000000216                                          16175920170116      2000009621     40228500-9-70-1-1"
+16:18:11.705	DEBUG : Configuracion OK
+16:18:11.705	DEBUG : Genera trama mLRC
+16:18:11.706	DEBUG : Genera trama LRC Seguridad
+16:18:11.706	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:18:11.708	DEBUG : Configuracion de velocidad de transmision completada
+16:18:11.708	DEBUG : Baudios: 115200
+16:18:11.709	DEBUG : Bits: 8
+16:18:11.713	DEBUG :Lectura de archivo UC-CAJA
+16:18:11.714	DEBUG :  Modo de uso del pinpad: USB
+16:18:11.714	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:18:11.721	DEBUG : Se envia trama de seguridad=SH037F8C755681EF64
+16:18:12.722	DEBUG : Se espera la respuesta
+16:18:12.722	DEBUG : Envio ACK
+16:18:12.743	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:18:12.750	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:18:12.751	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000001761000000001545000000000000000000000216                                          16175920170116      2000009621     40228500:
+16:18:13.751	DEBUG : Compra lee respuesta=
+16:18:14.752	DEBUG : Compra lee respuesta=
+16:18:15.753	DEBUG : Compra lee respuesta=
+16:18:16.754	DEBUG : Compra lee respuesta=
+16:18:17.754	DEBUG : Compra lee respuesta=
+16:18:18.755	DEBUG : Compra lee respuesta=
+16:18:19.756	DEBUG : Compra lee respuesta=
+16:18:20.756	DEBUG : Compra lee respuesta=
+16:18:21.757	DEBUG : Compra lee respuesta=
+16:18:22.758	DEBUG : Compra lee respuesta=
+16:18:23.759	DEBUG : Compra lee respuesta=
+16:18:24.760	DEBUG : Compra lee respuesta=
+16:18:25.760	DEBUG : Compra lee respuesta=
+16:18:26.761	DEBUG : Compra lee respuesta=
+16:18:27.762	DEBUG : Compra lee respuesta=
+16:18:28.763	DEBUG : Compra lee respuesta=
+16:18:29.763	DEBUG : Compra lee respuesta=
+16:18:30.764	DEBUG : Compra lee respuesta=
+16:18:31.765	DEBUG : Compra lee respuesta=
+16:18:32.766	DEBUG : Compra lee respuesta=
+16:18:33.767	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084000107816175920170116307040402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03CEDENO ESCOBAR/EDUARDO                              DinersClub          AID:   A000000152301TC:    E4273137E0FA86F               ARQC:  1C1DE36EE|
+16:18:33.767	DEBUG : Se envia ACK al pinpad proceso OK
+16:18:33.784	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084000107816175920170116307040402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03CEDENO ESCOBAR/EDUARDO                              DinersClub          AID:   A000000152301TC:    E4273137E0FA86F               ARQC:  1C1DE36EE
+16:27:10.115	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:27:10.115	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:27:10.116	DEBUG : Configuracion OK
+16:27:10.116	DEBUG : Genera trama mLRC
+16:27:10.117	DEBUG : Genera trama LRC Seguridad
+16:27:10.117	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:27:10.119	DEBUG : Configuracion de velocidad de transmision completada
+16:27:10.119	DEBUG : Baudios: 115200
+16:27:10.119	DEBUG : Bits: 8
+16:27:10.123	DEBUG :Lectura de archivo UC-CAJA
+16:27:10.124	DEBUG :  Modo de uso del pinpad: USB
+16:27:10.124	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:27:10.131	DEBUG : Se envia trama de seguridad=SH40CA540CD08CCA59m
+16:27:11.132	DEBUG : Se espera la respuesta
+16:27:11.133	DEBUG : Envio ACK
+16:27:11.135	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:27:11.142	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:27:11.142	DEBUG : Se envia trama al puerto al pinpad  LT
+16:27:12.143	DEBUG : Compra lee respuesta=
+16:27:13.144	DEBUG : Compra lee respuesta=
+16:27:14.144	DEBUG : Compra lee respuesta=
+16:27:15.145	DEBUG : Compra lee respuesta=
+16:27:16.146	DEBUG : Compra lee respuesta=
+16:27:17.147	DEBUG : Compra lee respuesta=LT0000438108XXXXXX9028         LECTURA OK          B
+16:27:17.147	DEBUG : Se envia ACK al pinpad proceso OK
+16:27:17.150	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX9028         LECTURA OK          
+16:27:18.652	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:27:18.652	DEBUG : Inputs Parametro "PP01100     000000003753000000003292000000000000000000000461                                          16270820170116      2000009621     40228500-9-70-1-1"
+16:27:18.653	DEBUG : Configuracion OK
+16:27:18.653	DEBUG : Genera trama mLRC
+16:27:18.654	DEBUG : Genera trama LRC Seguridad
+16:27:18.654	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:27:18.656	DEBUG : Configuracion de velocidad de transmision completada
+16:27:18.656	DEBUG : Baudios: 115200
+16:27:18.656	DEBUG : Bits: 8
+16:27:18.660	DEBUG :Lectura de archivo UC-CAJA
+16:27:18.661	DEBUG :  Modo de uso del pinpad: USB
+16:27:18.661	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:27:18.668	DEBUG : Se envia trama de seguridad=SHAE4A620EEF8AA97Bo
+16:27:19.669	DEBUG : Se espera la respuesta
+16:27:19.669	DEBUG : Envio ACK
+16:27:19.690	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:27:19.696	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:27:19.697	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000003753000000003292000000000000000000000461                                          16270820170116      2000009621     402285007
+16:27:20.698	DEBUG : Compra lee respuesta=
+16:27:21.698	DEBUG : Compra lee respuesta=
+16:27:22.699	DEBUG : Compra lee respuesta=
+16:27:23.700	DEBUG : Compra lee respuesta=
+16:27:24.701	DEBUG : Compra lee respuesta=
+16:27:25.702	DEBUG : Compra lee respuesta=
+16:27:26.702	DEBUG : Compra lee respuesta=
+16:27:27.703	DEBUG : Compra lee respuesta=
+16:27:28.704	DEBUG : Compra lee respuesta=
+16:27:29.704	DEBUG : Compra lee respuesta=
+16:27:30.705	DEBUG : Compra lee respuesta=
+16:27:31.706	DEBUG : Compra lee respuesta=
+16:27:32.706	DEBUG : Compra lee respuesta=
+16:27:33.707	DEBUG : Compra lee respuesta=
+16:27:34.708	DEBUG : Compra lee respuesta=
+16:27:35.708	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084100107816270820170116789364402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03EDWIN CRUZ LOYA                                     VISA DEBITO         AID:   A000000003101TC:    8E886E058DF554A               ARQC:  4B3C7E75D
+16:27:35.709	DEBUG : Se envia ACK al pinpad proceso OK
+16:27:35.719	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084100107816270820170116789364402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03EDWIN CRUZ LOYA                                     VISA DEBITO         AID:   A000000003101TC:    8E886E058DF554A               ARQC:  4B3C7E75D
+16:38:54.847	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:38:54.847	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:38:54.848	DEBUG : Configuracion OK
+16:38:54.849	DEBUG : Genera trama mLRC
+16:38:54.849	DEBUG : Genera trama LRC Seguridad
+16:38:54.849	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:38:54.851	DEBUG : Configuracion de velocidad de transmision completada
+16:38:54.851	DEBUG : Baudios: 115200
+16:38:54.852	DEBUG : Bits: 8
+16:38:54.855	DEBUG :Lectura de archivo UC-CAJA
+16:38:54.856	DEBUG :  Modo de uso del pinpad: USB
+16:38:54.856	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:38:54.862	DEBUG : Se envia trama de seguridad=SH4E6464FFB4ECCCA3k
+16:38:55.863	DEBUG : Se espera la respuesta
+16:38:55.863	DEBUG : Envio ACK
+16:38:55.884	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:38:55.890	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:38:55.891	DEBUG : Se envia trama al puerto al pinpad  LT
+16:38:56.891	DEBUG : Compra lee respuesta=
+16:38:57.892	DEBUG : Compra lee respuesta=
+16:38:58.893	DEBUG : Compra lee respuesta=
+16:38:59.893	DEBUG : Compra lee respuesta=
+16:39:00.894	DEBUG : Compra lee respuesta=LT0000445447XXXXXX0990         LECTURA OK          E
+16:39:00.895	DEBUG : Se envia ACK al pinpad proceso OK
+16:39:00.913	DEBUG : Se envia respuesta a la caja respuesta= LT0000445447XXXXXX0990         LECTURA OK          
+16:39:02.414	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:39:02.415	DEBUG : Inputs Parametro "PP0210112   000000022082000000019370000000000000000000002712                                          16385320170116      2000009621     40228500-9-70-1-1"
+16:39:02.415	DEBUG : Configuracion OK
+16:39:02.416	DEBUG : Genera trama mLRC
+16:39:02.416	DEBUG : Genera trama LRC Seguridad
+16:39:02.416	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:39:02.416	DEBUG : Configuracion de velocidad de transmision completada
+16:39:02.416	DEBUG : Baudios: 115200
+16:39:02.416	DEBUG : Bits: 8
+16:39:02.417	DEBUG :Lectura de archivo UC-CAJA
+16:39:02.417	DEBUG :  Modo de uso del pinpad: USB
+16:39:02.418	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:39:02.423	DEBUG : Se envia trama de seguridad=SH9B13770C59885B3A
+16:39:03.424	DEBUG : Se espera la respuesta
+16:39:03.424	DEBUG : Envio ACK
+16:39:03.442	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:39:03.449	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:39:03.450	DEBUG : Se envia trama al puerto al pinpad  PP0210112   000000022082000000019370000000000000000000002712                                          16385320170116      2000009621     40228500=
+16:39:04.451	DEBUG : Compra lee respuesta=
+16:39:05.451	DEBUG : Compra lee respuesta=
+16:39:06.452	DEBUG : Compra lee respuesta=
+16:39:07.453	DEBUG : Compra lee respuesta=
+16:39:08.453	DEBUG : Compra lee respuesta=
+16:39:09.454	DEBUG : Compra lee respuesta=
+16:39:10.454	DEBUG : Compra lee respuesta=
+16:39:11.455	DEBUG : Compra lee respuesta=
+16:39:12.456	DEBUG : Compra lee respuesta=
+16:39:13.457	DEBUG : Compra lee respuesta=
+16:39:14.457	DEBUG : Compra lee respuesta=
+16:39:15.458	DEBUG : Compra lee respuesta=
+16:39:16.459	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084200107816385320170116866805402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     02RODRIGUEZ/GINA                                                                                                                                   x
+16:39:16.460	DEBUG : Se envia ACK al pinpad proceso OK
+16:39:16.466	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084200107816385320170116866805402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     02RODRIGUEZ/GINA                                                                                                                                   
+16:41:37.037	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:41:37.037	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:41:37.038	DEBUG : Configuracion OK
+16:41:37.039	DEBUG : Genera trama mLRC
+16:41:37.039	DEBUG : Genera trama LRC Seguridad
+16:41:37.039	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:41:37.041	DEBUG : Configuracion de velocidad de transmision completada
+16:41:37.041	DEBUG : Baudios: 115200
+16:41:37.042	DEBUG : Bits: 8
+16:41:37.045	DEBUG :Lectura de archivo UC-CAJA
+16:41:37.046	DEBUG :  Modo de uso del pinpad: USB
+16:41:37.046	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:41:37.053	DEBUG : Se envia trama de seguridad=SHA89B9B817D1C710E
+16:41:38.054	DEBUG : Se espera la respuesta
+16:41:38.054	DEBUG : Envio ACK
+16:41:38.057	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:41:38.064	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:41:38.064	DEBUG : Se envia trama al puerto al pinpad  LT
+16:41:39.065	DEBUG : Compra lee respuesta=
+16:41:40.066	DEBUG : Compra lee respuesta=
+16:41:41.066	DEBUG : Compra lee respuesta=
+16:41:42.067	DEBUG : Compra lee respuesta=
+16:41:43.068	DEBUG : Compra lee respuesta=LT0000445447XXXXXX0990         LECTURA OK          E
+16:41:43.069	DEBUG : Se envia ACK al pinpad proceso OK
+16:41:43.074	DEBUG : Se envia respuesta a la caja respuesta= LT0000445447XXXXXX0990         LECTURA OK          
+16:41:44.575	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:41:44.576	DEBUG : Inputs Parametro "PP0210106   000000010987000000009638000000000000000000001349                                          16413520170116      2000009621     40228500-9-70-1-1"
+16:41:44.576	DEBUG : Configuracion OK
+16:41:44.577	DEBUG : Genera trama mLRC
+16:41:44.577	DEBUG : Genera trama LRC Seguridad
+16:41:44.577	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:41:44.579	DEBUG : Configuracion de velocidad de transmision completada
+16:41:44.579	DEBUG : Baudios: 115200
+16:41:44.580	DEBUG : Bits: 8
+16:41:44.583	DEBUG :Lectura de archivo UC-CAJA
+16:41:44.584	DEBUG :  Modo de uso del pinpad: USB
+16:41:44.585	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:41:44.591	DEBUG : Se envia trama de seguridad=SH02A4331C5D69F32Fb
+16:41:45.592	DEBUG : Se espera la respuesta
+16:41:45.593	DEBUG : Envio ACK
+16:41:45.614	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:41:45.620	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:41:45.621	DEBUG : Se envia trama al puerto al pinpad  PP0210106   000000010987000000009638000000000000000000001349                                          16413520170116      2000009621     40228500:
+16:41:46.622	DEBUG : Compra lee respuesta=
+16:41:47.622	DEBUG : Compra lee respuesta=
+16:41:48.623	DEBUG : Compra lee respuesta=
+16:41:49.624	DEBUG : Compra lee respuesta=
+16:41:50.625	DEBUG : Compra lee respuesta=
+16:41:51.626	DEBUG : Compra lee respuesta=
+16:41:52.627	DEBUG : Compra lee respuesta=
+16:41:53.627	DEBUG : Compra lee respuesta=
+16:41:54.628	DEBUG : Compra lee respuesta=
+16:41:55.629	DEBUG : Compra lee respuesta=
+16:41:56.629	DEBUG : Compra lee respuesta=
+16:41:57.630	DEBUG : Compra lee respuesta=
+16:41:58.631	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084300107816413520170116085503402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     02RODRIGUEZ/GINA                                                                                                                                   y
+16:41:58.632	DEBUG : Se envia ACK al pinpad proceso OK
+16:41:58.639	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084300107816413520170116085503402285002000009621                                                                                                 003BANCO DEL PICHINCHA           VISA                     02RODRIGUEZ/GINA                                                                                                                                   
+16:46:49.575	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:46:49.575	DEBUG : Inputs Parametro "LT-9-70-1-1"
+16:46:49.576	DEBUG : Configuracion OK
+16:46:49.576	DEBUG : Genera trama mLRC
+16:46:49.577	DEBUG : Genera trama LRC Seguridad
+16:46:49.603	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:46:49.608	DEBUG : Configuracion de velocidad de transmision completada
+16:46:49.609	DEBUG : Baudios: 115200
+16:46:49.610	DEBUG : Bits: 8
+16:46:49.611	DEBUG :Lectura de archivo UC-CAJA
+16:46:49.612	DEBUG :  Modo de uso del pinpad: USB
+16:46:49.612	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:46:49.617	DEBUG : Se envia trama de seguridad=SH127E1EF1654BF3BFn
+16:46:50.618	DEBUG : Se espera la respuesta
+16:46:50.618	DEBUG : Envio ACK
+16:46:50.639	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:46:50.645	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:46:50.646	DEBUG : Se envia trama al puerto al pinpad  LT
+16:46:51.647	DEBUG : Compra lee respuesta=
+16:46:52.648	DEBUG : Compra lee respuesta=
+16:46:53.648	DEBUG : Compra lee respuesta=
+16:46:54.649	DEBUG : Compra lee respuesta=
+16:46:55.650	DEBUG : Compra lee respuesta=
+16:46:56.651	DEBUG : Compra lee respuesta=LT0000554574XXXXXX1802         LECTURA OK          N
+16:46:56.651	DEBUG : Se envia ACK al pinpad proceso OK
+16:46:56.655	DEBUG : Se envia respuesta a la caja respuesta= LT0000554574XXXXXX1802         LECTURA OK          
+16:46:58.156	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+16:46:58.156	DEBUG : Inputs Parametro "PP01210     000000001293000000001134000000000000000000000159                                          16464820170116      000000808472   00962012-9-70-1-1"
+16:46:58.157	DEBUG : Configuracion OK
+16:46:58.158	DEBUG : Genera trama mLRC
+16:46:58.158	DEBUG : Genera trama LRC Seguridad
+16:46:58.158	DEBUG : Genera tramaa LRC Seguridad Version 2
+16:46:58.160	DEBUG : Configuracion de velocidad de transmision completada
+16:46:58.160	DEBUG : Baudios: 115200
+16:46:58.160	DEBUG : Bits: 8
+16:46:58.164	DEBUG :Lectura de archivo UC-CAJA
+16:46:58.165	DEBUG :  Modo de uso del pinpad: USB
+16:46:58.165	DEBUG : Puerto de comunicacion=/dev/ttyS9
+16:46:58.172	DEBUG : Se envia trama de seguridad=SHBDC5B823A62338B0
+16:46:59.172	DEBUG : Se espera la respuesta
+16:46:59.173	DEBUG : Envio ACK
+16:46:59.193	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+16:46:59.199	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+16:46:59.200	DEBUG : Se envia trama al puerto al pinpad  PP01210     000000001293000000001134000000000000000000000159                                          16464820170116      000000808472   009620126
+16:47:00.201	DEBUG : Compra lee respuesta=
+16:47:01.201	DEBUG : Compra lee respuesta=
+16:47:02.202	DEBUG : Compra lee respuesta=
+16:47:03.203	DEBUG : Compra lee respuesta=
+16:47:04.204	DEBUG : Compra lee respuesta=
+16:47:05.204	DEBUG : Compra lee respuesta=
+16:47:06.205	DEBUG : Compra lee respuesta=
+16:47:07.206	DEBUG : Compra lee respuesta=
+16:47:08.207	DEBUG : Compra lee respuesta=
+16:47:09.207	DEBUG : Compra lee respuesta=
+16:47:10.208	DEBUG : Compra lee respuesta=
+16:47:11.209	DEBUG : Compra lee respuesta=
+16:47:12.209	DEBUG : Compra lee respuesta=
+16:47:13.210	DEBUG : Compra lee respuesta=
+16:47:14.211	DEBUG : Compra lee respuesta=
+16:47:15.212	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004680006371646482017011641178000962012000000808472                                                                                                                                MASTERCARD/MAESTRO       03BORIS TOLEDO C.          /                          MasterCard                                                                                   i
+16:47:15.213	DEBUG : Se envia ACK al pinpad proceso OK
+16:47:15.227	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004680006371646482017011641178000962012000000808472                                                                                                                                MASTERCARD/MAESTRO       03BORIS TOLEDO C.          /                          MasterCard                                                                                   
+17:02:32.787	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:02:32.788	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:02:32.788	DEBUG : Configuracion OK
+17:02:32.789	DEBUG : Genera trama mLRC
+17:02:32.789	DEBUG : Genera trama LRC Seguridad
+17:02:32.790	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:02:32.791	DEBUG : Configuracion de velocidad de transmision completada
+17:02:32.792	DEBUG : Baudios: 115200
+17:02:32.792	DEBUG : Bits: 8
+17:02:32.796	DEBUG :Lectura de archivo UC-CAJA
+17:02:32.797	DEBUG :  Modo de uso del pinpad: USB
+17:02:32.797	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:02:32.804	DEBUG : Se envia trama de seguridad=SH2BEAFFD4F9223447g
+17:02:33.804	DEBUG : Se espera la respuesta
+17:02:33.805	DEBUG : Envio ACK
+17:02:33.826	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:02:33.833	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:02:33.834	DEBUG : Se envia trama al puerto al pinpad  LT
+17:02:34.834	DEBUG : Compra lee respuesta=
+17:02:35.835	DEBUG : Compra lee respuesta=
+17:02:36.836	DEBUG : Compra lee respuesta=
+17:02:37.836	DEBUG : Compra lee respuesta=
+17:02:38.837	DEBUG : Compra lee respuesta=LT0000546605XXXXXX2727         LECTURA OK          C
+17:02:38.838	DEBUG : Se envia ACK al pinpad proceso OK
+17:02:38.852	DEBUG : Se envia respuesta a la caja respuesta= LT0000546605XXXXXX2727         LECTURA OK          
+17:02:40.353	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:02:40.354	DEBUG : Inputs Parametro "PP01200     000000004269000000003745000000000000000000000524                                          17023120170116      000000808472   00962012-9-70-1-1"
+17:02:40.354	DEBUG : Configuracion OK
+17:02:40.355	DEBUG : Genera trama mLRC
+17:02:40.356	DEBUG : Genera trama LRC Seguridad
+17:02:40.356	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:02:40.356	DEBUG : Configuracion de velocidad de transmision completada
+17:02:40.356	DEBUG : Baudios: 115200
+17:02:40.356	DEBUG : Bits: 8
+17:02:40.357	DEBUG :Lectura de archivo UC-CAJA
+17:02:40.357	DEBUG :  Modo de uso del pinpad: USB
+17:02:40.357	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:02:40.363	DEBUG : Se envia trama de seguridad=SH6F648A6C723F8D6B
+17:02:41.363	DEBUG : Se espera la respuesta
+17:02:41.364	DEBUG : Envio ACK
+17:02:41.384	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:02:41.391	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:02:41.392	DEBUG : Se envia trama al puerto al pinpad  PP01200     000000004269000000003745000000000000000000000524                                          17023120170116      000000808472   009620124
+17:02:42.393	DEBUG : Compra lee respuesta=
+17:02:43.393	DEBUG : Compra lee respuesta=
+17:02:44.394	DEBUG : Compra lee respuesta=
+17:02:45.395	DEBUG : Compra lee respuesta=
+17:02:46.395	DEBUG : Compra lee respuesta=
+17:02:47.396	DEBUG : Compra lee respuesta=
+17:02:48.397	DEBUG : Compra lee respuesta=
+17:02:49.398	DEBUG : Compra lee respuesta=
+17:02:50.398	DEBUG : Compra lee respuesta=
+17:02:51.399	DEBUG : Compra lee respuesta=
+17:02:52.399	DEBUG : Compra lee respuesta=
+17:02:53.400	DEBUG : Compra lee respuesta=
+17:02:54.401	DEBUG : Compra lee respuesta=
+17:02:55.401	DEBUG : Compra lee respuesta=
+17:02:56.402	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004690006371702312017011676491300962012000000808472                                                                                                                                MASTERCARD/MAESTRO       03MENDOZA/ANGELA                                      MASTERCARD                                                                                   
+17:02:56.403	DEBUG : Se envia ACK al pinpad proceso OK
+17:02:56.414	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004690006371702312017011676491300962012000000808472                                                                                                                                MASTERCARD/MAESTRO       03MENDOZA/ANGELA                                      MASTERCARD                                                                                   
+17:16:19.537	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:16:19.538	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:16:19.538	DEBUG : Configuracion OK
+17:16:19.539	DEBUG : Genera trama mLRC
+17:16:19.539	DEBUG : Genera trama LRC Seguridad
+17:16:19.540	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:16:19.541	DEBUG : Configuracion de velocidad de transmision completada
+17:16:19.542	DEBUG : Baudios: 115200
+17:16:19.542	DEBUG : Bits: 8
+17:16:19.545	DEBUG :Lectura de archivo UC-CAJA
+17:16:19.546	DEBUG :  Modo de uso del pinpad: USB
+17:16:19.547	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:16:19.554	DEBUG : Se envia trama de seguridad=SH9718C51FA299E8EE
+17:16:20.555	DEBUG : Se espera la respuesta
+17:16:20.555	DEBUG : Envio ACK
+17:16:20.557	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:16:20.564	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:16:20.564	DEBUG : Se envia trama al puerto al pinpad  LT
+17:16:21.565	DEBUG : Compra lee respuesta=
+17:16:22.566	DEBUG : Compra lee respuesta=
+17:16:23.566	DEBUG : Compra lee respuesta=
+17:16:24.567	ERROR : Exception:  Compra:Input/output error in nativeavailable
+17:16:39.505	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:16:39.507	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:16:39.507	DEBUG : Configuracion OK
+17:16:39.508	DEBUG : Genera trama mLRC
+17:16:39.508	DEBUG : Genera trama LRC Seguridad
+17:16:39.508	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:16:39.510	DEBUG : Configuracion de velocidad de transmision completada
+17:16:39.510	DEBUG : Baudios: 115200
+17:16:39.511	DEBUG : Bits: 8
+17:16:39.515	DEBUG :Lectura de archivo UC-CAJA
+17:16:39.516	DEBUG :  Modo de uso del pinpad: USB
+17:16:39.516	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:16:39.523	DEBUG : Se envia trama de seguridad=SH92711863FB8B488C
+17:16:40.524	DEBUG : Se espera la respuesta
+17:16:41.524	DEBUG : Se espera la respuesta
+17:16:42.525	DEBUG : Se espera la respuesta
+17:16:43.526	DEBUG : Se espera la respuesta
+17:16:44.527	DEBUG : Se espera la respuesta
+17:16:45.528	DEBUG : Se espera la respuesta
+17:16:45.541	DEBUG : Error al abrir el puerto COM9. Exception:Input/output error in nativeavailable
+17:19:11.118	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:19:11.119	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:19:11.119	DEBUG : Configuracion OK
+17:19:11.120	DEBUG : Genera trama mLRC
+17:19:11.120	DEBUG : Genera trama LRC Seguridad
+17:19:11.120	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:19:11.122	DEBUG : Configuracion de velocidad de transmision completada
+17:19:11.122	DEBUG : Baudios: 115200
+17:19:11.123	DEBUG : Bits: 8
+17:19:11.126	DEBUG :Lectura de archivo UC-CAJA
+17:19:11.127	DEBUG :  Modo de uso del pinpad: USB
+17:19:11.128	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:19:11.134	DEBUG : Se envia trama de seguridad=SH3EF33688E736BED2
+17:19:12.135	DEBUG : Se espera la respuesta
+17:19:12.136	DEBUG : Envio ACK
+17:19:12.156	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:19:12.163	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:19:12.164	DEBUG : Se envia trama al puerto al pinpad  LT
+17:19:13.164	DEBUG : Compra lee respuesta=
+17:19:14.165	DEBUG : Compra lee respuesta=
+17:19:15.166	DEBUG : Compra lee respuesta=
+17:19:16.167	DEBUG : Compra lee respuesta=
+17:19:17.168	DEBUG : Compra lee respuesta=LT0000438108XXXXXX2220         LECTURA OK          C
+17:19:17.168	DEBUG : Se envia ACK al pinpad proceso OK
+17:19:17.187	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX2220         LECTURA OK          
+17:19:18.688	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:19:18.688	DEBUG : Inputs Parametro "PP01100     000000013677000000011997000000000000000000001680                                          17190920170116      2000009621     40228500-9-70-1-1"
+17:19:18.689	DEBUG : Configuracion OK
+17:19:18.689	DEBUG : Genera trama mLRC
+17:19:18.690	DEBUG : Genera trama LRC Seguridad
+17:19:18.690	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:19:18.692	DEBUG : Configuracion de velocidad de transmision completada
+17:19:18.692	DEBUG : Baudios: 115200
+17:19:18.693	DEBUG : Bits: 8
+17:19:18.698	DEBUG :Lectura de archivo UC-CAJA
+17:19:18.699	DEBUG :  Modo de uso del pinpad: USB
+17:19:18.699	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:19:19.124	DEBUG : Se envia trama de seguridad=SHFADDCCF025526F14
+17:19:20.125	DEBUG : Se espera la respuesta
+17:19:20.125	DEBUG : Envio ACK
+17:19:20.145	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:19:20.151	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:19:20.152	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000013677000000011997000000000000000000001680                                          17190920170116      2000009621     40228500=
+17:19:21.152	DEBUG : Compra lee respuesta=
+17:19:22.153	DEBUG : Compra lee respuesta=
+17:19:23.154	DEBUG : Compra lee respuesta=
+17:19:24.155	DEBUG : Compra lee respuesta=
+17:19:25.155	DEBUG : Compra lee respuesta=
+17:19:26.156	DEBUG : Compra lee respuesta=
+17:19:27.157	DEBUG : Compra lee respuesta=
+17:19:28.157	DEBUG : Compra lee respuesta=
+17:19:29.158	DEBUG : Compra lee respuesta=
+17:19:30.159	DEBUG : Compra lee respuesta=
+17:19:31.160	DEBUG : Compra lee respuesta=
+17:19:32.160	DEBUG : Compra lee respuesta=
+17:19:33.161	DEBUG : Compra lee respuesta=
+17:19:34.162	DEBUG : Compra lee respuesta=
+17:19:35.162	DEBUG : Compra lee respuesta=
+17:19:36.163	DEBUG : Compra lee respuesta=
+17:19:37.164	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084400107817190920170116647343402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03LLUMIQUINGA VERONICA                                VISA DEBITO         AID:   A000000003101TC:    E017645D7AA7656               ARQC:  A49B64A9Dx
+17:19:37.165	DEBUG : Se envia ACK al pinpad proceso OK
+17:19:37.167	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084400107817190920170116647343402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03LLUMIQUINGA VERONICA                                VISA DEBITO         AID:   A000000003101TC:    E017645D7AA7656               ARQC:  A49B64A9D
+17:46:12.466	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:46:12.467	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:46:12.467	DEBUG : Configuracion OK
+17:46:12.468	DEBUG : Genera trama mLRC
+17:46:12.468	DEBUG : Genera trama LRC Seguridad
+17:46:12.468	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:46:12.470	DEBUG : Configuracion de velocidad de transmision completada
+17:46:12.470	DEBUG : Baudios: 115200
+17:46:12.471	DEBUG : Bits: 8
+17:46:12.474	DEBUG :Lectura de archivo UC-CAJA
+17:46:12.475	DEBUG :  Modo de uso del pinpad: USB
+17:46:12.475	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:46:12.484	DEBUG : Se envia trama de seguridad=SH4277B6B22D2BBAB2o
+17:46:13.485	DEBUG : Se espera la respuesta
+17:46:13.485	DEBUG : Envio ACK
+17:46:13.508	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:46:13.514	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:46:13.514	DEBUG : Se envia trama al puerto al pinpad  LT
+17:46:14.515	DEBUG : Compra lee respuesta=
+17:46:15.515	DEBUG : Compra lee respuesta=
+17:46:16.516	DEBUG : Compra lee respuesta=
+17:46:17.517	DEBUG : Compra lee respuesta=
+17:46:18.518	DEBUG : Compra lee respuesta=
+17:46:19.519	DEBUG : Compra lee respuesta=
+17:46:20.520	DEBUG : Compra lee respuesta=LT0000475395XXXXXX4155         LECTURA OK          K
+17:46:20.521	DEBUG : Se envia ACK al pinpad proceso OK
+17:46:20.538	DEBUG : Se envia respuesta a la caja respuesta= LT0000475395XXXXXX4155         LECTURA OK          
+17:46:22.039	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:46:22.040	DEBUG : Inputs Parametro "PP01200     000000009324000000008179000000000000000000001145                                          17461020170116      000000808472   00962012-9-70-1-1"
+17:46:22.040	DEBUG : Configuracion OK
+17:46:22.041	DEBUG : Genera trama mLRC
+17:46:22.041	DEBUG : Genera trama LRC Seguridad
+17:46:22.042	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:46:22.043	DEBUG : Configuracion de velocidad de transmision completada
+17:46:22.044	DEBUG : Baudios: 115200
+17:46:22.044	DEBUG : Bits: 8
+17:46:22.058	DEBUG :Lectura de archivo UC-CAJA
+17:46:22.059	DEBUG :  Modo de uso del pinpad: USB
+17:46:22.060	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:46:22.066	DEBUG : Se envia trama de seguridad=SHEE6388823CCAC891
+17:46:23.067	DEBUG : Se espera la respuesta
+17:46:23.068	DEBUG : Envio ACK
+17:46:23.109	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:46:23.116	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:46:23.117	DEBUG : Se envia trama al puerto al pinpad  PP01200     000000009324000000008179000000000000000000001145                                          17461020170116      000000808472   009620122
+17:46:24.117	DEBUG : Compra lee respuesta=
+17:46:25.119	DEBUG : Compra lee respuesta=
+17:46:26.119	DEBUG : Compra lee respuesta=
+17:46:27.120	DEBUG : Compra lee respuesta=
+17:46:28.121	DEBUG : Compra lee respuesta=
+17:46:29.122	DEBUG : Compra lee respuesta=
+17:46:30.123	DEBUG : Compra lee respuesta=
+17:46:31.123	DEBUG : Compra lee respuesta=
+17:46:32.124	DEBUG : Compra lee respuesta=
+17:46:33.125	DEBUG : Compra lee respuesta=
+17:46:34.126	DEBUG : Compra lee respuesta=
+17:46:35.126	DEBUG : Compra lee respuesta=
+17:46:36.127	DEBUG : Compra lee respuesta=
+17:46:37.128	DEBUG : Compra lee respuesta=
+17:46:38.129	DEBUG : Compra lee respuesta=
+17:46:39.129	DEBUG : Compra lee respuesta=
+17:46:40.130	DEBUG : Compra lee respuesta=
+17:46:41.131	DEBUG : Compra lee respuesta=
+17:46:42.131	DEBUG : Compra lee respuesta=
+17:46:43.132	DEBUG : Compra lee respuesta=
+17:46:44.133	DEBUG : Compra lee respuesta=
+17:46:45.134	DEBUG : Compra lee respuesta=
+17:46:46.135	DEBUG : Compra lee respuesta=
+17:46:47.135	DEBUG : Compra lee respuesta=
+17:46:48.136	DEBUG : Compra lee respuesta=
+17:46:49.137	DEBUG : Compra lee respuesta=
+17:46:50.138	DEBUG : Compra lee respuesta=
+17:46:51.138	DEBUG : Compra lee respuesta=
+17:46:52.139	DEBUG : Compra lee respuesta=
+17:46:53.140	DEBUG : Compra lee respuesta=
+17:46:54.140	DEBUG : Compra lee respuesta=
+17:46:55.141	DEBUG : Compra lee respuesta=
+17:46:56.142	DEBUG : Compra lee respuesta=
+17:46:57.143	DEBUG : Compra lee respuesta=
+17:46:58.144	DEBUG : Compra lee respuesta=
+17:46:59.144	DEBUG : Compra lee respuesta=
+17:47:00.145	DEBUG : Compra lee respuesta=
+17:47:01.146	DEBUG : Compra lee respuesta=
+17:47:02.146	DEBUG : Compra lee respuesta=
+17:47:03.147	DEBUG : Compra lee respuesta=
+17:47:04.148	DEBUG : Compra lee respuesta=
+17:47:05.148	DEBUG : Compra lee respuesta=
+17:47:06.149	DEBUG : Compra lee respuesta=
+17:47:07.150	DEBUG : Compra lee respuesta=
+17:47:08.150	DEBUG : Compra lee respuesta=
+17:47:09.151	DEBUG : Compra lee respuesta=
+17:47:10.152	DEBUG : Compra lee respuesta=
+17:47:11.152	DEBUG : Compra lee respuesta=
+17:47:12.153	DEBUG : Compra lee respuesta=
+17:47:13.154	DEBUG : Compra lee respuesta=
+17:47:14.154	DEBUG : Compra lee respuesta=
+17:47:15.155	DEBUG : Compra lee respuesta=
+17:47:16.156	DEBUG : Compra lee respuesta=
+17:47:17.157	DEBUG : Compra lee respuesta=
+17:47:18.158	DEBUG : Compra lee respuesta=
+17:47:19.159	DEBUG : Compra lee respuesta=
+17:47:20.160	DEBUG : Compra lee respuesta=
+17:47:21.160	DEBUG : Compra lee respuesta=
+17:47:22.161	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004700006391746102017011610203800962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03VISA DEBIT/                                         VISA DEBIT                                                                                   ~
+17:47:22.162	DEBUG : Se envia ACK al pinpad proceso OK
+17:47:22.168	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004700006391746102017011610203800962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03VISA DEBIT/                                         VISA DEBIT                                                                                   
+17:49:43.206	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:49:43.207	DEBUG : Inputs Parametro "LT-9-70-1-1"
+17:49:43.207	DEBUG : Configuracion OK
+17:49:43.208	DEBUG : Genera trama mLRC
+17:49:43.208	DEBUG : Genera trama LRC Seguridad
+17:49:43.209	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:49:43.210	DEBUG : Configuracion de velocidad de transmision completada
+17:49:43.211	DEBUG : Baudios: 115200
+17:49:43.211	DEBUG : Bits: 8
+17:49:43.215	DEBUG :Lectura de archivo UC-CAJA
+17:49:43.215	DEBUG :  Modo de uso del pinpad: USB
+17:49:43.216	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:49:43.223	DEBUG : Se envia trama de seguridad=SH39677A6B75669DB3
+17:49:44.223	DEBUG : Se espera la respuesta
+17:49:44.224	DEBUG : Envio ACK
+17:49:44.227	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:49:44.233	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:49:44.234	DEBUG : Se envia trama al puerto al pinpad  LT
+17:49:45.235	DEBUG : Compra lee respuesta=
+17:49:46.235	DEBUG : Compra lee respuesta=
+17:49:47.236	DEBUG : Compra lee respuesta=
+17:49:48.237	DEBUG : Compra lee respuesta=
+17:49:49.237	DEBUG : Compra lee respuesta=
+17:49:50.238	DEBUG : Compra lee respuesta=LT0000360857XXXX4470           LECTURA OK          O
+17:49:50.239	DEBUG : Se envia ACK al pinpad proceso OK
+17:49:50.244	DEBUG : Se envia respuesta a la caja respuesta= LT0000360857XXXX4470           LECTURA OK          
+17:49:51.746	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+17:49:51.746	DEBUG : Inputs Parametro "PP01100     000000003576000000003137000000000000000000000439                                          17494120170116      2000009621     40228500-9-70-1-1"
+17:49:51.747	DEBUG : Configuracion OK
+17:49:51.747	DEBUG : Genera trama mLRC
+17:49:51.748	DEBUG : Genera trama LRC Seguridad
+17:49:51.748	DEBUG : Genera tramaa LRC Seguridad Version 2
+17:49:51.750	DEBUG : Configuracion de velocidad de transmision completada
+17:49:51.750	DEBUG : Baudios: 115200
+17:49:51.750	DEBUG : Bits: 8
+17:49:51.754	DEBUG :Lectura de archivo UC-CAJA
+17:49:51.755	DEBUG :  Modo de uso del pinpad: USB
+17:49:51.755	DEBUG : Puerto de comunicacion=/dev/ttyS9
+17:49:51.762	DEBUG : Se envia trama de seguridad=SHABEE65F7E472BB07
+17:49:52.763	DEBUG : Se espera la respuesta
+17:49:52.763	DEBUG : Envio ACK
+17:49:52.766	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+17:49:52.772	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+17:49:52.773	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000003576000000003137000000000000000000000439                                          17494120170116      2000009621     402285007
+17:49:53.774	DEBUG : Compra lee respuesta=
+17:49:54.774	DEBUG : Compra lee respuesta=
+17:49:55.775	DEBUG : Compra lee respuesta=
+17:49:56.776	DEBUG : Compra lee respuesta=
+17:49:57.776	DEBUG : Compra lee respuesta=
+17:49:58.777	DEBUG : Compra lee respuesta=
+17:49:59.778	DEBUG : Compra lee respuesta=
+17:50:00.778	DEBUG : Compra lee respuesta=
+17:50:01.779	DEBUG : Compra lee respuesta=
+17:50:02.780	DEBUG : Compra lee respuesta=
+17:50:03.780	DEBUG : Compra lee respuesta=
+17:50:04.781	DEBUG : Compra lee respuesta=
+17:50:05.782	DEBUG : Compra lee respuesta=
+17:50:06.782	DEBUG : Compra lee respuesta=
+17:50:07.783	DEBUG : Compra lee respuesta=
+17:50:08.784	DEBUG : Compra lee respuesta=
+17:50:09.785	DEBUG : Compra lee respuesta=
+17:50:10.786	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084500107817494120170116000771402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03MOSQUERA/MARLIS                                     DinersClub          AID:   A000000152301TC:    4A2EE4456F4A988               ARQC:  587EFEE81 
+17:50:10.786	DEBUG : Se envia ACK al pinpad proceso OK
+17:50:10.793	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084500107817494120170116000771402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03MOSQUERA/MARLIS                                     DinersClub          AID:   A000000152301TC:    4A2EE4456F4A988               ARQC:  587EFEE81
+18:01:44.659	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+18:01:44.659	DEBUG : Inputs Parametro "LT-9-70-1-1"
+18:01:44.660	DEBUG : Configuracion OK
+18:01:44.660	DEBUG : Genera trama mLRC
+18:01:44.661	DEBUG : Genera trama LRC Seguridad
+18:01:44.661	DEBUG : Genera tramaa LRC Seguridad Version 2
+18:01:44.663	DEBUG : Configuracion de velocidad de transmision completada
+18:01:44.663	DEBUG : Baudios: 115200
+18:01:44.663	DEBUG : Bits: 8
+18:01:44.667	DEBUG :Lectura de archivo UC-CAJA
+18:01:44.668	DEBUG :  Modo de uso del pinpad: USB
+18:01:44.668	DEBUG : Puerto de comunicacion=/dev/ttyS9
+18:01:44.675	DEBUG : Se envia trama de seguridad=SH5475EE28E8AB71F1
+18:01:45.676	DEBUG : Se espera la respuesta
+18:01:45.676	DEBUG : Envio ACK
+18:01:45.679	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+18:01:45.685	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+18:01:45.686	DEBUG : Se envia trama al puerto al pinpad  LT
+18:01:46.686	DEBUG : Compra lee respuesta=
+18:01:47.687	DEBUG : Compra lee respuesta=
+18:01:48.688	DEBUG : Compra lee respuesta=
+18:01:49.688	DEBUG : Compra lee respuesta=
+18:01:50.689	DEBUG : Compra lee respuesta=
+18:01:51.690	DEBUG : Compra lee respuesta=LT0000360857XXXX5346           LECTURA OK          L
+18:01:51.690	DEBUG : Se envia ACK al pinpad proceso OK
+18:01:51.707	DEBUG : Se envia respuesta a la caja respuesta= LT0000360857XXXX5346           LECTURA OK          
+18:01:53.208	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+18:01:53.209	DEBUG : Inputs Parametro "PP01100     000000002493000000002187000000000000000000000306                                          18014320170116      2000009621     40228500-9-70-1-1"
+18:01:53.209	DEBUG : Configuracion OK
+18:01:53.210	DEBUG : Genera trama mLRC
+18:01:53.210	DEBUG : Genera trama LRC Seguridad
+18:01:53.211	DEBUG : Genera tramaa LRC Seguridad Version 2
+18:01:53.212	DEBUG : Configuracion de velocidad de transmision completada
+18:01:53.213	DEBUG : Baudios: 115200
+18:01:53.213	DEBUG : Bits: 8
+18:01:53.216	DEBUG :Lectura de archivo UC-CAJA
+18:01:53.217	DEBUG :  Modo de uso del pinpad: USB
+18:01:53.217	DEBUG : Puerto de comunicacion=/dev/ttyS9
+18:01:53.223	DEBUG : Se envia trama de seguridad=SH8C963AF793C4BB6Bf
+18:01:54.223	DEBUG : Se espera la respuesta
+18:01:54.224	DEBUG : Envio ACK
+18:01:54.244	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+18:01:54.251	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+18:01:54.252	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000002493000000002187000000000000000000000306                                          18014320170116      2000009621     40228500<
+18:01:55.252	DEBUG : Compra lee respuesta=
+18:01:56.253	DEBUG : Compra lee respuesta=
+18:01:57.254	DEBUG : Compra lee respuesta=
+18:01:58.255	DEBUG : Compra lee respuesta=
+18:01:59.255	DEBUG : Compra lee respuesta=
+18:02:00.256	DEBUG : Compra lee respuesta=
+18:02:01.257	DEBUG : Compra lee respuesta=
+18:02:02.258	DEBUG : Compra lee respuesta=
+18:02:03.258	DEBUG : Compra lee respuesta=
+18:02:04.259	DEBUG : Compra lee respuesta=
+18:02:05.260	DEBUG : Compra lee respuesta=
+18:02:06.261	DEBUG : Compra lee respuesta=
+18:02:07.261	DEBUG : Compra lee respuesta=
+18:02:08.262	DEBUG : Compra lee respuesta=
+18:02:09.263	DEBUG : Compra lee respuesta=
+18:02:10.264	DEBUG : Compra lee respuesta=
+18:02:11.265	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084600107818014320170116124501402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03VELASCO ARIAS/CESAR                                 DinersClub          AID:   A000000152301TC:    6665BEAEA17A2E0               ARQC:  ACB088CA9
+18:02:11.265	DEBUG : Se envia ACK al pinpad proceso OK
+18:02:11.272	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084600107818014320170116124501402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03VELASCO ARIAS/CESAR                                 DinersClub          AID:   A000000152301TC:    6665BEAEA17A2E0               ARQC:  ACB088CA9
+18:21:39.127	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+18:21:39.128	DEBUG : Inputs Parametro "LT-9-70-1-1"
+18:21:39.129	DEBUG : Configuracion OK
+18:21:39.129	DEBUG : Genera trama mLRC
+18:21:39.130	DEBUG : Genera trama LRC Seguridad
+18:21:39.130	DEBUG : Genera tramaa LRC Seguridad Version 2
+18:21:39.132	DEBUG : Configuracion de velocidad de transmision completada
+18:21:39.132	DEBUG : Baudios: 115200
+18:21:39.132	DEBUG : Bits: 8
+18:21:39.136	DEBUG :Lectura de archivo UC-CAJA
+18:21:39.137	DEBUG :  Modo de uso del pinpad: USB
+18:21:39.137	DEBUG : Puerto de comunicacion=/dev/ttyS9
+18:21:39.144	DEBUG : Se envia trama de seguridad=SHF3D22C57AF022E48
+18:21:40.144	DEBUG : Se espera la respuesta
+18:21:40.145	DEBUG : Envio ACK
+18:21:40.166	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+18:21:40.173	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+18:21:40.174	DEBUG : Se envia trama al puerto al pinpad  LT
+18:21:41.174	DEBUG : Compra lee respuesta=
+18:21:42.175	DEBUG : Compra lee respuesta=
+18:21:43.176	DEBUG : Compra lee respuesta=
+18:21:44.177	DEBUG : Compra lee respuesta=
+18:21:45.177	DEBUG : Compra lee respuesta=
+18:21:46.178	DEBUG : Compra lee respuesta=LT0000438108XXXXXX5768         LECTURA OK          M
+18:21:46.179	DEBUG : Se envia ACK al pinpad proceso OK
+18:21:46.192	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX5768         LECTURA OK          
+18:21:47.693	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+18:21:47.693	DEBUG : Inputs Parametro "PP01100     000000042491000000037273000000000000000000005218                                          18213720170116      2000009621     40228500-9-70-1-1"
+18:21:47.694	DEBUG : Configuracion OK
+18:21:47.695	DEBUG : Genera trama mLRC
+18:21:47.695	DEBUG : Genera trama LRC Seguridad
+18:21:47.695	DEBUG : Genera tramaa LRC Seguridad Version 2
+18:21:47.697	DEBUG : Configuracion de velocidad de transmision completada
+18:21:47.697	DEBUG : Baudios: 115200
+18:21:47.697	DEBUG : Bits: 8
+18:21:47.698	DEBUG :Lectura de archivo UC-CAJA
+18:21:47.698	DEBUG :  Modo de uso del pinpad: USB
+18:21:47.698	DEBUG : Puerto de comunicacion=/dev/ttyS9
+18:21:47.704	DEBUG : Se envia trama de seguridad=SHE4A43E87F2F8A4F2n
+18:21:48.704	DEBUG : Se espera la respuesta
+18:21:48.705	DEBUG : Envio ACK
+18:21:48.726	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+18:21:48.733	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+18:21:48.734	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000042491000000037273000000000000000000005218                                          18213720170116      2000009621     40228500>
+18:21:49.734	DEBUG : Compra lee respuesta=
+18:21:50.735	DEBUG : Compra lee respuesta=
+18:21:51.736	DEBUG : Compra lee respuesta=
+18:21:52.736	DEBUG : Compra lee respuesta=
+18:21:53.737	DEBUG : Compra lee respuesta=
+18:21:54.738	DEBUG : Compra lee respuesta=
+18:21:55.738	DEBUG : Compra lee respuesta=
+18:21:56.739	DEBUG : Compra lee respuesta=
+18:21:57.740	DEBUG : Compra lee respuesta=
+18:21:58.741	DEBUG : Compra lee respuesta=
+18:21:59.742	DEBUG : Compra lee respuesta=
+18:22:00.742	DEBUG : Compra lee respuesta=
+18:22:01.743	DEBUG : Compra lee respuesta=
+18:22:02.744	DEBUG : Compra lee respuesta=
+18:22:03.745	DEBUG : Compra lee respuesta=
+18:22:04.746	DEBUG : Compra lee respuesta=
+18:22:05.747	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084700107818213720170116524244402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03CARLOS ALVARADO TERAN                               VISA DEBITO         AID:   A000000003101TC:    9BFFA6C18952B93               ARQC:  EC35B8D79f
+18:22:05.747	DEBUG : Se envia ACK al pinpad proceso OK
+18:22:05.756	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084700107818213720170116524244402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03CARLOS ALVARADO TERAN                               VISA DEBITO         AID:   A000000003101TC:    9BFFA6C18952B93               ARQC:  EC35B8D79
+19:11:13.662	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:11:13.663	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:11:13.663	DEBUG : Configuracion OK
+19:11:13.664	DEBUG : Genera trama mLRC
+19:11:13.664	DEBUG : Genera trama LRC Seguridad
+19:11:13.665	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:11:13.666	DEBUG : Configuracion de velocidad de transmision completada
+19:11:13.667	DEBUG : Baudios: 115200
+19:11:13.667	DEBUG : Bits: 8
+19:11:13.668	DEBUG :Lectura de archivo UC-CAJA
+19:11:13.669	DEBUG :  Modo de uso del pinpad: USB
+19:11:13.669	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:11:13.675	DEBUG : Se envia trama de seguridad=SH7A91B368CB07182Bf
+19:11:14.675	DEBUG : Se espera la respuesta
+19:11:14.676	DEBUG : Envio ACK
+19:11:14.696	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:11:14.702	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:11:14.702	DEBUG : Se envia trama al puerto al pinpad  LT
+19:11:15.703	DEBUG : Compra lee respuesta=
+19:11:16.703	DEBUG : Compra lee respuesta=
+19:11:17.704	DEBUG : Compra lee respuesta=
+19:11:18.705	DEBUG : Compra lee respuesta=
+19:11:19.706	DEBUG : Compra lee respuesta=
+19:11:20.707	DEBUG : Compra lee respuesta=
+19:11:21.707	DEBUG : Compra lee respuesta=
+19:11:22.708	DEBUG : Compra lee respuesta=
+19:11:23.709	DEBUG : Compra lee respuesta=
+19:11:24.709	DEBUG : Compra lee respuesta=
+19:11:25.710	DEBUG : Compra lee respuesta=
+19:11:26.711	DEBUG : Compra lee respuesta=
+19:11:27.712	DEBUG : Compra lee respuesta=
+19:11:28.712	DEBUG : Compra lee respuesta=
+19:11:29.713	DEBUG : Compra lee respuesta=
+19:11:30.714	DEBUG : Compra lee respuesta=
+19:11:31.714	DEBUG : Compra lee respuesta=
+19:11:32.715	DEBUG : Compra lee respuesta=
+19:11:33.716	DEBUG : Compra lee respuesta=
+19:11:34.717	DEBUG : Compra lee respuesta=
+19:11:35.717	DEBUG : Compra lee respuesta=
+19:11:36.718	DEBUG : Compra lee respuesta=
+19:11:37.719	DEBUG : Compra lee respuesta=
+19:11:38.720	DEBUG : Compra lee respuesta=
+19:11:39.720	DEBUG : Compra lee respuesta=
+19:11:40.721	DEBUG : Compra lee respuesta=
+19:11:41.722	DEBUG : Compra lee respuesta=
+19:11:42.723	DEBUG : Compra lee respuesta=
+19:11:43.723	DEBUG : Compra lee respuesta=
+19:11:44.724	DEBUG : Compra lee respuesta=
+19:11:45.725	DEBUG : Compra lee respuesta=
+19:11:46.726	DEBUG : Compra lee respuesta=
+19:11:47.726	DEBUG : Compra lee respuesta=
+19:11:48.727	DEBUG : Compra lee respuesta=
+19:11:49.728	DEBUG : Compra lee respuesta=
+19:11:50.729	DEBUG : Compra lee respuesta=
+19:11:51.729	DEBUG : Compra lee respuesta=
+19:11:52.730	DEBUG : Compra lee respuesta=
+19:11:53.731	DEBUG : Compra lee respuesta=
+19:11:54.732	DEBUG : Compra lee respuesta=
+19:11:55.732	DEBUG : Compra lee respuesta=LT2000                         ERROR EN TARJETA    7
+19:11:55.733	DEBUG : Se envia ACK al pinpad proceso OK
+19:11:55.740	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         ERROR EN TARJETA    
+19:16:08.607	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:16:08.607	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:16:08.608	DEBUG : Configuracion OK
+19:16:08.608	DEBUG : Genera trama mLRC
+19:16:08.609	DEBUG : Genera trama LRC Seguridad
+19:16:08.609	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:16:08.611	DEBUG : Configuracion de velocidad de transmision completada
+19:16:08.611	DEBUG : Baudios: 115200
+19:16:08.612	DEBUG : Bits: 8
+19:16:08.615	DEBUG :Lectura de archivo UC-CAJA
+19:16:08.616	DEBUG :  Modo de uso del pinpad: USB
+19:16:08.616	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:16:08.623	DEBUG : Se envia trama de seguridad=SHC861B6FC6FA1AEA3c
+19:16:09.624	DEBUG : Se espera la respuesta
+19:16:09.624	DEBUG : Envio ACK
+19:16:09.626	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:16:09.633	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:16:09.634	DEBUG : Se envia trama al puerto al pinpad  LT
+19:16:10.634	DEBUG : Compra lee respuesta=
+19:16:11.635	DEBUG : Compra lee respuesta=
+19:16:12.635	DEBUG : Compra lee respuesta=
+19:16:13.636	DEBUG : Compra lee respuesta=
+19:16:14.637	DEBUG : Compra lee respuesta=
+19:16:15.638	DEBUG : Compra lee respuesta=LT0000438108XXXXXX8327         LECTURA OK          O
+19:16:15.638	DEBUG : Se envia ACK al pinpad proceso OK
+19:16:15.644	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX8327         LECTURA OK          
+19:16:17.145	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:16:17.146	DEBUG : Inputs Parametro "PP01100     000000017676000000015505000000000000000000002171                                          19160720170116      2000009621     40228500-9-70-1-1"
+19:16:17.146	DEBUG : Configuracion OK
+19:16:17.147	DEBUG : Genera trama mLRC
+19:16:17.148	DEBUG : Genera trama LRC Seguridad
+19:16:17.148	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:16:17.150	DEBUG : Configuracion de velocidad de transmision completada
+19:16:17.150	DEBUG : Baudios: 115200
+19:16:17.150	DEBUG : Bits: 8
+19:16:17.154	DEBUG :Lectura de archivo UC-CAJA
+19:16:17.155	DEBUG :  Modo de uso del pinpad: USB
+19:16:17.155	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:16:17.162	DEBUG : Se envia trama de seguridad=SH79F60F2326FD1CBCd
+19:16:18.163	DEBUG : Se espera la respuesta
+19:16:18.163	DEBUG : Envio ACK
+19:16:18.184	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:16:18.191	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:16:18.191	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000017676000000015505000000000000000000002171                                          19160720170116      2000009621     40228500>
+19:16:19.192	DEBUG : Compra lee respuesta=
+19:16:20.193	DEBUG : Compra lee respuesta=
+19:16:21.194	DEBUG : Compra lee respuesta=
+19:16:22.194	DEBUG : Compra lee respuesta=
+19:16:23.195	DEBUG : Compra lee respuesta=
+19:16:24.196	DEBUG : Compra lee respuesta=
+19:16:25.197	DEBUG : Compra lee respuesta=
+19:16:26.197	DEBUG : Compra lee respuesta=
+19:16:27.198	DEBUG : Compra lee respuesta=
+19:16:28.199	DEBUG : Compra lee respuesta=
+19:16:29.200	DEBUG : Compra lee respuesta=
+19:16:30.201	DEBUG : Compra lee respuesta=
+19:16:31.201	DEBUG : Compra lee respuesta=
+19:16:32.202	DEBUG : Compra lee respuesta=
+19:16:33.203	DEBUG : Compra lee respuesta=
+19:16:34.204	DEBUG : Compra lee respuesta=
+19:16:35.205	DEBUG : Compra lee respuesta=
+19:16:36.205	DEBUG : Compra lee respuesta=
+19:16:37.206	DEBUG : Compra lee respuesta=
+19:16:38.207	DEBUG : Compra lee respuesta=
+19:16:39.208	DEBUG : Compra lee respuesta=
+19:16:40.209	DEBUG : Compra lee respuesta=
+19:16:41.209	DEBUG : Compra lee respuesta=
+19:16:42.211	DEBUG : Compra lee respuesta=
+19:16:43.212	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084800107819160720170116270560402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03PILAR PAVON BALSECA                                 VISA DEBITO         AID:   A000000003101TC:    168DD0772B13058               ARQC:  2A3D17C49q
+19:16:43.212	DEBUG : Se envia ACK al pinpad proceso OK
+19:16:43.219	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084800107819160720170116270560402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03PILAR PAVON BALSECA                                 VISA DEBITO         AID:   A000000003101TC:    168DD0772B13058               ARQC:  2A3D17C49
+19:28:17.746	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:28:17.746	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:28:17.747	DEBUG : Configuracion OK
+19:28:17.747	DEBUG : Genera trama mLRC
+19:28:17.748	DEBUG : Genera trama LRC Seguridad
+19:28:17.748	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:28:17.750	DEBUG : Configuracion de velocidad de transmision completada
+19:28:17.750	DEBUG : Baudios: 115200
+19:28:17.750	DEBUG : Bits: 8
+19:28:17.754	DEBUG :Lectura de archivo UC-CAJA
+19:28:17.755	DEBUG :  Modo de uso del pinpad: USB
+19:28:17.755	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:28:17.762	DEBUG : Se envia trama de seguridad=SH5524B3495BD47F37
+19:28:18.762	DEBUG : Se espera la respuesta
+19:28:18.763	DEBUG : Envio ACK
+19:28:18.784	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:28:18.791	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:28:18.791	DEBUG : Se envia trama al puerto al pinpad  LT
+19:28:19.792	DEBUG : Compra lee respuesta=
+19:28:20.793	DEBUG : Compra lee respuesta=
+19:28:21.794	DEBUG : Compra lee respuesta=
+19:28:22.794	DEBUG : Compra lee respuesta=
+19:28:23.795	DEBUG : Compra lee respuesta=
+19:28:24.796	DEBUG : Compra lee respuesta=LT0000438108XXXXXX4173         LECTURA OK          @
+19:28:24.797	DEBUG : Se envia ACK al pinpad proceso OK
+19:28:24.814	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX4173         LECTURA OK          
+19:28:26.315	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:28:26.315	DEBUG : Inputs Parametro "PP01100     000000005666000000004970000000000000000000000696                                          19281620170116      2000009621     40228500-9-70-1-1"
+19:28:26.316	DEBUG : Configuracion OK
+19:28:26.316	DEBUG : Genera trama mLRC
+19:28:26.317	DEBUG : Genera trama LRC Seguridad
+19:28:26.317	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:28:26.319	DEBUG : Configuracion de velocidad de transmision completada
+19:28:26.319	DEBUG : Baudios: 115200
+19:28:26.320	DEBUG : Bits: 8
+19:28:26.323	DEBUG :Lectura de archivo UC-CAJA
+19:28:26.324	DEBUG :  Modo de uso del pinpad: USB
+19:28:26.324	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:28:26.331	DEBUG : Se envia trama de seguridad=SH3875115DB5486305
+19:28:27.332	DEBUG : Se espera la respuesta
+19:28:27.333	DEBUG : Envio ACK
+19:28:27.335	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:28:27.341	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:28:27.342	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000005666000000004970000000000000000000000696                                          19281620170116      2000009621     402285003
+19:28:28.343	DEBUG : Compra lee respuesta=
+19:28:29.344	DEBUG : Compra lee respuesta=
+19:28:30.344	DEBUG : Compra lee respuesta=
+19:28:31.345	DEBUG : Compra lee respuesta=
+19:28:32.346	DEBUG : Compra lee respuesta=
+19:28:33.347	DEBUG : Compra lee respuesta=
+19:28:34.348	DEBUG : Compra lee respuesta=
+19:28:35.348	DEBUG : Compra lee respuesta=
+19:28:36.349	DEBUG : Compra lee respuesta=
+19:28:37.350	DEBUG : Compra lee respuesta=
+19:28:38.351	DEBUG : Compra lee respuesta=
+19:28:39.351	DEBUG : Compra lee respuesta=
+19:28:40.352	DEBUG : Compra lee respuesta=
+19:28:41.353	DEBUG : Compra lee respuesta=
+19:28:42.354	DEBUG : Compra lee respuesta=
+19:28:43.354	DEBUG : Compra lee respuesta=
+19:28:44.355	DEBUG : Compra lee respuesta=
+19:28:45.356	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00084900107819281620170116382531402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03MARCO VINICIO  PENA                                 VISA DEBITO         AID:   A000000003101TC:    039A21CD1925EAA               ARQC:  8233459F7a
+19:28:45.357	DEBUG : Se envia ACK al pinpad proceso OK
+19:28:45.371	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00084900107819281620170116382531402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03MARCO VINICIO  PENA                                 VISA DEBITO         AID:   A000000003101TC:    039A21CD1925EAA               ARQC:  8233459F7
+19:34:01.627	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:34:01.628	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:34:01.628	DEBUG : Configuracion OK
+19:34:01.629	DEBUG : Genera trama mLRC
+19:34:01.629	DEBUG : Genera trama LRC Seguridad
+19:34:01.630	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:34:01.631	DEBUG : Configuracion de velocidad de transmision completada
+19:34:01.631	DEBUG : Baudios: 115200
+19:34:01.632	DEBUG : Bits: 8
+19:34:01.635	DEBUG :Lectura de archivo UC-CAJA
+19:34:01.636	DEBUG :  Modo de uso del pinpad: USB
+19:34:01.637	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:34:01.643	DEBUG : Se envia trama de seguridad=SH7E9F28C712D16A22j
+19:34:02.644	DEBUG : Se espera la respuesta
+19:34:02.645	DEBUG : Envio ACK
+19:34:02.647	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:34:02.654	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:34:02.654	DEBUG : Se envia trama al puerto al pinpad  LT
+19:34:03.655	DEBUG : Compra lee respuesta=
+19:34:04.656	DEBUG : Compra lee respuesta=
+19:34:05.656	DEBUG : Compra lee respuesta=
+19:34:06.657	DEBUG : Compra lee respuesta=
+19:34:07.658	DEBUG : Compra lee respuesta=
+19:34:08.659	DEBUG : Compra lee respuesta=LT0000518030XXXXXX3656         LECTURA OK          N
+19:34:08.659	DEBUG : Se envia ACK al pinpad proceso OK
+19:34:08.679	DEBUG : Se envia respuesta a la caja respuesta= LT0000518030XXXXXX3656         LECTURA OK          
+19:34:10.180	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:34:10.181	DEBUG : Inputs Parametro "PP0210303   000000025042000000021967000000000000000000003075                                          19340020170116      2000009621     40228500-9-70-1-1"
+19:34:10.181	DEBUG : Configuracion OK
+19:34:10.182	DEBUG : Genera trama mLRC
+19:34:10.182	DEBUG : Genera trama LRC Seguridad
+19:34:10.183	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:34:10.184	DEBUG : Configuracion de velocidad de transmision completada
+19:34:10.185	DEBUG : Baudios: 115200
+19:34:10.185	DEBUG : Bits: 8
+19:34:10.187	DEBUG :Lectura de archivo UC-CAJA
+19:34:10.187	DEBUG :  Modo de uso del pinpad: USB
+19:34:10.187	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:34:10.193	DEBUG : Se envia trama de seguridad=SH31BA3DC75522A3DEi
+19:34:11.193	DEBUG : Se espera la respuesta
+19:34:11.194	DEBUG : Envio ACK
+19:34:11.215	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:34:11.221	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:34:11.222	DEBUG : Se envia trama al puerto al pinpad  PP0210303   000000025042000000021967000000000000000000003075                                          19340020170116      2000009621     402285001
+19:34:12.223	DEBUG : Compra lee respuesta=
+19:34:13.223	DEBUG : Compra lee respuesta=
+19:34:14.224	DEBUG : Compra lee respuesta=
+19:34:15.225	DEBUG : Compra lee respuesta=
+19:34:16.226	DEBUG : Compra lee respuesta=
+19:34:17.226	DEBUG : Compra lee respuesta=
+19:34:18.227	DEBUG : Compra lee respuesta=
+19:34:19.228	DEBUG : Compra lee respuesta=
+19:34:20.229	DEBUG : Compra lee respuesta=
+19:34:21.230	DEBUG : Compra lee respuesta=
+19:34:22.230	DEBUG : Compra lee respuesta=
+19:34:23.231	DEBUG : Compra lee respuesta=
+19:34:24.232	DEBUG : Compra lee respuesta=
+19:34:25.232	DEBUG : Compra lee respuesta=
+19:34:26.233	DEBUG : Compra lee respuesta=
+19:34:27.234	DEBUG : Compra lee respuesta=
+19:34:28.235	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00085000107819340020170116801998402285002000009621                                                                                                 001PACIFICARD                    MASTERCARD               03TANIA TIPANTA D          /                          MasterCard          AID:   A000000004101TC:    0FA8A367CB6B075               ARQC:  645A129BE|
+19:34:28.236	DEBUG : Se envia ACK al pinpad proceso OK
+19:34:28.238	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00085000107819340020170116801998402285002000009621                                                                                                 001PACIFICARD                    MASTERCARD               03TANIA TIPANTA D          /                          MasterCard          AID:   A000000004101TC:    0FA8A367CB6B075               ARQC:  645A129BE
+19:38:05.438	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:38:05.439	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:38:05.439	DEBUG : Configuracion OK
+19:38:05.440	DEBUG : Genera trama mLRC
+19:38:05.440	DEBUG : Genera trama LRC Seguridad
+19:38:05.440	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:38:05.442	DEBUG : Configuracion de velocidad de transmision completada
+19:38:05.442	DEBUG : Baudios: 115200
+19:38:05.443	DEBUG : Bits: 8
+19:38:05.446	DEBUG :Lectura de archivo UC-CAJA
+19:38:05.447	DEBUG :  Modo de uso del pinpad: USB
+19:38:05.447	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:38:05.454	DEBUG : Se envia trama de seguridad=SH2ED971F38BC85B27
+19:38:06.455	DEBUG : Se espera la respuesta
+19:38:06.456	DEBUG : Envio ACK
+19:38:06.458	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:38:06.465	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:38:06.465	DEBUG : Se envia trama al puerto al pinpad  LT
+19:38:07.466	DEBUG : Compra lee respuesta=
+19:38:08.467	DEBUG : Compra lee respuesta=
+19:38:09.468	DEBUG : Compra lee respuesta=
+19:38:10.468	DEBUG : Compra lee respuesta=
+19:38:11.469	DEBUG : Compra lee respuesta=
+19:38:12.470	DEBUG : Compra lee respuesta=LT0000468570XXXXXX0553         LECTURA OK          L
+19:38:12.470	DEBUG : Se envia ACK al pinpad proceso OK
+19:38:12.491	DEBUG : Se envia respuesta a la caja respuesta= LT0000468570XXXXXX0553         LECTURA OK          
+19:38:13.992	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:38:13.993	DEBUG : Inputs Parametro "PP01200     000000028394000000024907000000000000000000003487                                          19380320170116      000000808472   00962012-9-70-1-1"
+19:38:13.993	DEBUG : Configuracion OK
+19:38:13.994	DEBUG : Genera trama mLRC
+19:38:13.994	DEBUG : Genera trama LRC Seguridad
+19:38:13.994	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:38:13.996	DEBUG : Configuracion de velocidad de transmision completada
+19:38:13.996	DEBUG : Baudios: 115200
+19:38:13.996	DEBUG : Bits: 8
+19:38:13.997	DEBUG :Lectura de archivo UC-CAJA
+19:38:13.997	DEBUG :  Modo de uso del pinpad: USB
+19:38:13.997	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:38:14.003	DEBUG : Se envia trama de seguridad=SH9DB4769CB9BAA444e
+19:38:15.004	DEBUG : Se espera la respuesta
+19:38:15.004	DEBUG : Envio ACK
+19:38:15.025	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:38:15.032	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:38:15.033	DEBUG : Se envia trama al puerto al pinpad  PP01200     000000028394000000024907000000000000000000003487                                          19380320170116      000000808472   009620129
+19:38:16.033	DEBUG : Compra lee respuesta=
+19:38:17.034	DEBUG : Compra lee respuesta=
+19:38:18.035	DEBUG : Compra lee respuesta=
+19:38:19.035	DEBUG : Compra lee respuesta=
+19:38:20.036	DEBUG : Compra lee respuesta=
+19:38:21.037	DEBUG : Compra lee respuesta=
+19:38:22.038	DEBUG : Compra lee respuesta=
+19:38:23.038	DEBUG : Compra lee respuesta=
+19:38:24.039	DEBUG : Compra lee respuesta=
+19:38:25.040	DEBUG : Compra lee respuesta=
+19:38:26.041	DEBUG : Compra lee respuesta=
+19:38:27.041	DEBUG : Compra lee respuesta=
+19:38:28.042	DEBUG : Compra lee respuesta=
+19:38:29.043	DEBUG : Compra lee respuesta=
+19:38:30.044	DEBUG : Compra lee respuesta=
+19:38:31.045	DEBUG : Compra lee respuesta=
+19:38:32.045	DEBUG : Compra lee respuesta=
+19:38:33.046	DEBUG : Compra lee respuesta=
+19:38:34.047	DEBUG : Compra lee respuesta=
+19:38:35.048	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004710006411938032017011618541500962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03DIAZ RECALE ROSARIO GUADAL                          VISA DEBITO                                                                                  	
+19:38:35.049	DEBUG : Se envia ACK al pinpad proceso OK
+19:38:35.052	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004710006411938032017011618541500962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03DIAZ RECALE ROSARIO GUADAL                          VISA DEBITO                                                                                  
+19:42:49.559	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:42:49.559	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:42:49.560	DEBUG : Configuracion OK
+19:42:49.560	DEBUG : Genera trama mLRC
+19:42:49.561	DEBUG : Genera trama LRC Seguridad
+19:42:49.561	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:42:49.561	DEBUG : Configuracion de velocidad de transmision completada
+19:42:49.561	DEBUG : Baudios: 115200
+19:42:49.561	DEBUG : Bits: 8
+19:42:49.562	DEBUG :Lectura de archivo UC-CAJA
+19:42:49.563	DEBUG :  Modo de uso del pinpad: USB
+19:42:49.563	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:42:49.569	DEBUG : Se envia trama de seguridad=SHB95603A13A4D64B4e
+19:42:50.569	DEBUG : Se espera la respuesta
+19:42:50.570	DEBUG : Envio ACK
+19:42:50.591	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:42:50.597	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:42:50.598	DEBUG : Se envia trama al puerto al pinpad  LT
+19:42:51.599	DEBUG : Compra lee respuesta=
+19:42:52.599	DEBUG : Compra lee respuesta=
+19:42:53.600	DEBUG : Compra lee respuesta=
+19:42:54.601	DEBUG : Compra lee respuesta=
+19:42:55.602	DEBUG : Compra lee respuesta=
+19:42:56.602	DEBUG : Compra lee respuesta=LT0000436402XXXXXX1267         LECTURA OK          B
+19:42:56.603	DEBUG : Se envia ACK al pinpad proceso OK
+19:42:56.611	DEBUG : Se envia respuesta a la caja respuesta= LT0000436402XXXXXX1267         LECTURA OK          
+19:42:58.113	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:42:58.113	DEBUG : Inputs Parametro "PP01200     000000013801000000012106000000000000000000001695                                          19424820170116      000000808472   00962012-9-70-1-1"
+19:42:58.114	DEBUG : Configuracion OK
+19:42:58.114	DEBUG : Genera trama mLRC
+19:42:58.115	DEBUG : Genera trama LRC Seguridad
+19:42:58.115	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:42:58.116	DEBUG : Configuracion de velocidad de transmision completada
+19:42:58.116	DEBUG : Baudios: 115200
+19:42:58.116	DEBUG : Bits: 8
+19:42:58.117	DEBUG :Lectura de archivo UC-CAJA
+19:42:58.117	DEBUG :  Modo de uso del pinpad: USB
+19:42:58.117	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:42:58.123	DEBUG : Se envia trama de seguridad=SH7D31B57AFF73E67Ai
+19:42:59.123	DEBUG : Se espera la respuesta
+19:42:59.124	DEBUG : Envio ACK
+19:42:59.145	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:42:59.151	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:42:59.152	DEBUG : Se envia trama al puerto al pinpad  PP01200     000000013801000000012106000000000000000000001695                                          19424820170116      000000808472   00962012;
+19:43:00.153	DEBUG : Compra lee respuesta=
+19:43:01.153	DEBUG : Compra lee respuesta=
+19:43:02.154	DEBUG : Compra lee respuesta=
+19:43:03.155	DEBUG : Compra lee respuesta=
+19:43:04.156	DEBUG : Compra lee respuesta=
+19:43:05.157	DEBUG : Compra lee respuesta=
+19:43:06.157	DEBUG : Compra lee respuesta=
+19:43:07.158	DEBUG : Compra lee respuesta=
+19:43:08.159	DEBUG : Compra lee respuesta=
+19:43:09.160	DEBUG : Compra lee respuesta=
+19:43:10.160	DEBUG : Compra lee respuesta=
+19:43:11.161	DEBUG : Compra lee respuesta=
+19:43:12.162	DEBUG : Compra lee respuesta=
+19:43:13.162	DEBUG : Compra lee respuesta=
+19:43:14.163	DEBUG : Compra lee respuesta=
+19:43:15.164	DEBUG : Compra lee respuesta=
+19:43:16.165	DEBUG : Compra lee respuesta=
+19:43:17.165	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004720006411942482017011612332400962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03VILLACRES PERALVO MARIA C                           VISA DEBITO                                                                                  u
+19:43:17.166	DEBUG : Se envia ACK al pinpad proceso OK
+19:43:17.177	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004720006411942482017011612332400962012000000808472                                                                                                                                VISA ELECTRON/DEBIT EC   03VILLACRES PERALVO MARIA C                           VISA DEBITO                                                                                  
+19:45:51.757	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:45:51.757	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:45:51.758	DEBUG : Configuracion OK
+19:45:51.758	DEBUG : Genera trama mLRC
+19:45:51.759	DEBUG : Genera trama LRC Seguridad
+19:45:51.759	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:45:51.761	DEBUG : Configuracion de velocidad de transmision completada
+19:45:51.761	DEBUG : Baudios: 115200
+19:45:51.761	DEBUG : Bits: 8
+19:45:51.765	DEBUG :Lectura de archivo UC-CAJA
+19:45:51.766	DEBUG :  Modo de uso del pinpad: USB
+19:45:51.766	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:45:51.773	DEBUG : Se envia trama de seguridad=SH59E7FD47A939760Cg
+19:45:52.773	DEBUG : Se espera la respuesta
+19:45:52.774	DEBUG : Envio ACK
+19:45:52.795	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:45:52.802	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:45:52.802	DEBUG : Se envia trama al puerto al pinpad  LT
+19:45:53.803	DEBUG : Compra lee respuesta=
+19:45:54.803	DEBUG : Compra lee respuesta=
+19:45:55.804	DEBUG : Compra lee respuesta=
+19:45:56.804	DEBUG : Compra lee respuesta=
+19:45:57.805	DEBUG : Compra lee respuesta=
+19:45:58.806	DEBUG : Compra lee respuesta=
+19:45:59.806	DEBUG : Compra lee respuesta=
+19:46:00.807	DEBUG : Compra lee respuesta=
+19:46:01.807	DEBUG : Compra lee respuesta=
+19:46:02.808	DEBUG : Compra lee respuesta=LT0000438108XXXXXX3073         LECTURA OK          F
+19:46:02.809	DEBUG : Se envia ACK al pinpad proceso OK
+19:46:02.815	DEBUG : Se envia respuesta a la caja respuesta= LT0000438108XXXXXX3073         LECTURA OK          
+19:46:04.316	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:46:04.317	DEBUG : Inputs Parametro "PP01100     000000002929000000001401000000001332000000000196                                          19455020170116      2000009621     40228500-9-70-1-1"
+19:46:04.317	DEBUG : Configuracion OK
+19:46:04.318	DEBUG : Genera trama mLRC
+19:46:04.318	DEBUG : Genera trama LRC Seguridad
+19:46:04.319	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:46:04.320	DEBUG : Configuracion de velocidad de transmision completada
+19:46:04.321	DEBUG : Baudios: 115200
+19:46:04.321	DEBUG : Bits: 8
+19:46:04.341	DEBUG :Lectura de archivo UC-CAJA
+19:46:04.344	DEBUG :  Modo de uso del pinpad: USB
+19:46:04.344	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:46:04.350	DEBUG : Se envia trama de seguridad=SH80239C97603D9C69a
+19:46:05.351	DEBUG : Se espera la respuesta
+19:46:05.352	DEBUG : Envio ACK
+19:46:05.371	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:46:05.378	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:46:05.379	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000002929000000001401000000001332000000000196                                          19455020170116      2000009621     402285003
+19:46:06.380	DEBUG : Compra lee respuesta=
+19:46:07.380	DEBUG : Compra lee respuesta=
+19:46:08.381	DEBUG : Compra lee respuesta=
+19:46:09.382	DEBUG : Compra lee respuesta=
+19:46:10.383	DEBUG : Compra lee respuesta=
+19:46:11.384	DEBUG : Compra lee respuesta=
+19:46:12.385	DEBUG : Compra lee respuesta=
+19:46:13.385	DEBUG : Compra lee respuesta=
+19:46:14.386	DEBUG : Compra lee respuesta=
+19:46:15.387	DEBUG : Compra lee respuesta=
+19:46:16.388	DEBUG : Compra lee respuesta=
+19:46:17.389	DEBUG : Compra lee respuesta=
+19:46:18.389	DEBUG : Compra lee respuesta=
+19:46:19.390	DEBUG : Compra lee respuesta=
+19:46:20.391	DEBUG : Compra lee respuesta=
+19:46:21.392	DEBUG : Compra lee respuesta=
+19:46:22.392	DEBUG : Compra lee respuesta=
+19:46:23.393	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00085100107819455020170116559126402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03MERCY PERALVO                                       VISA DEBITO         AID:   A000000003101TC:    B8AA5F308559671               ARQC:  A054B551En
+19:46:23.394	DEBUG : Se envia ACK al pinpad proceso OK
+19:46:23.400	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00085100107819455020170116559126402285002000009621                                                                                                 003BANCO DEL PICHINCHA           ELECTRON.                03MERCY PERALVO                                       VISA DEBITO         AID:   A000000003101TC:    B8AA5F308559671               ARQC:  A054B551E
+19:49:21.307	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:49:21.308	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:49:21.308	DEBUG : Configuracion OK
+19:49:21.309	DEBUG : Genera trama mLRC
+19:49:21.309	DEBUG : Genera trama LRC Seguridad
+19:49:21.310	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:49:21.311	DEBUG : Configuracion de velocidad de transmision completada
+19:49:21.312	DEBUG : Baudios: 115200
+19:49:21.312	DEBUG : Bits: 8
+19:49:21.315	DEBUG :Lectura de archivo UC-CAJA
+19:49:21.316	DEBUG :  Modo de uso del pinpad: USB
+19:49:21.317	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:49:21.324	DEBUG : Se envia trama de seguridad=SH5A2AB6A93A539FA9`
+19:49:22.324	DEBUG : Se espera la respuesta
+19:49:22.325	DEBUG : Envio ACK
+19:49:22.346	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:49:22.352	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:49:22.352	DEBUG : Se envia trama al puerto al pinpad  LT
+19:49:23.353	DEBUG : Compra lee respuesta=
+19:49:24.354	DEBUG : Compra lee respuesta=
+19:49:25.354	DEBUG : Compra lee respuesta=
+19:49:26.355	DEBUG : Compra lee respuesta=
+19:49:27.356	DEBUG : Compra lee respuesta=
+19:49:28.357	DEBUG : Compra lee respuesta=LT0000414785XXXXXX8011         LECTURA OK          D
+19:49:28.357	DEBUG : Se envia ACK al pinpad proceso OK
+19:49:28.360	DEBUG : Se envia respuesta a la caja respuesta= LT0000414785XXXXXX8011         LECTURA OK          
+19:49:29.861	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:49:29.861	DEBUG : Inputs Parametro "PP01200     000000012999000000011403000000000000000000001596                                          19491920170116      000000808472   00962012-9-70-1-1"
+19:49:29.862	DEBUG : Configuracion OK
+19:49:29.862	DEBUG : Genera trama mLRC
+19:49:29.863	DEBUG : Genera trama LRC Seguridad
+19:49:29.863	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:49:29.865	DEBUG : Configuracion de velocidad de transmision completada
+19:49:29.866	DEBUG : Baudios: 115200
+19:49:29.866	DEBUG : Bits: 8
+19:49:29.870	DEBUG :Lectura de archivo UC-CAJA
+19:49:29.871	DEBUG :  Modo de uso del pinpad: USB
+19:49:29.871	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:49:29.878	DEBUG : Se envia trama de seguridad=SH552318C4F9FB0D73l
+19:49:30.879	DEBUG : Se espera la respuesta
+19:49:30.880	DEBUG : Envio ACK
+19:49:30.882	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:49:30.889	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:49:30.890	DEBUG : Se envia trama al puerto al pinpad  PP01200     000000012999000000011403000000000000000000001596                                          19491920170116      000000808472   009620126
+19:49:31.890	DEBUG : Compra lee respuesta=
+19:49:32.891	DEBUG : Compra lee respuesta=
+19:49:33.892	DEBUG : Compra lee respuesta=
+19:49:34.892	DEBUG : Compra lee respuesta=
+19:49:35.893	DEBUG : Compra lee respuesta=
+19:49:36.894	DEBUG : Compra lee respuesta=
+19:49:37.895	DEBUG : Compra lee respuesta=
+19:49:38.896	DEBUG : Compra lee respuesta=
+19:49:39.896	DEBUG : Compra lee respuesta=
+19:49:40.897	DEBUG : Compra lee respuesta=
+19:49:41.898	DEBUG : Compra lee respuesta=
+19:49:42.898	DEBUG : Compra lee respuesta=
+19:49:43.899	DEBUG : Compra lee respuesta=
+19:49:44.900	DEBUG : Compra lee respuesta=
+19:49:45.900	DEBUG : Compra lee respuesta=
+19:49:46.901	DEBUG : Compra lee respuesta=PP000200AUTORIZACION OK.    0004730006431949192017011602944700962012000000808472                                                                                                                                VISA/ELECTRON            03GUERRA/SANTIAGO                                     VISA CREDITO                                                                                 u
+19:49:46.902	DEBUG : Se envia ACK al pinpad proceso OK
+19:49:46.920	DEBUG : Se envia respuesta a la caja respuesta= PP000200AUTORIZACION OK.    0004730006431949192017011602944700962012000000808472                                                                                                                                VISA/ELECTRON            03GUERRA/SANTIAGO                                     VISA CREDITO                                                                                 
+19:51:15.809	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:51:15.810	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:51:15.810	DEBUG : Configuracion OK
+19:51:15.811	DEBUG : Genera trama mLRC
+19:51:15.811	DEBUG : Genera trama LRC Seguridad
+19:51:15.812	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:51:15.813	DEBUG : Configuracion de velocidad de transmision completada
+19:51:15.814	DEBUG : Baudios: 115200
+19:51:15.814	DEBUG : Bits: 8
+19:51:15.835	DEBUG :Lectura de archivo UC-CAJA
+19:51:15.835	DEBUG :  Modo de uso del pinpad: USB
+19:51:15.835	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:51:15.841	DEBUG : Se envia trama de seguridad=SHE57506E02E08E962
+19:51:16.842	DEBUG : Se espera la respuesta
+19:51:16.842	DEBUG : Envio ACK
+19:51:16.844	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:51:16.851	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:51:16.852	DEBUG : Se envia trama al puerto al pinpad  LT
+19:51:17.852	DEBUG : Compra lee respuesta=
+19:51:18.853	DEBUG : Compra lee respuesta=
+19:51:19.854	DEBUG : Compra lee respuesta=
+19:51:20.855	DEBUG : Compra lee respuesta=
+19:51:21.855	DEBUG : Compra lee respuesta=
+19:51:22.856	DEBUG : Compra lee respuesta=LT0000360218XXXX9441           LECTURA OK          A
+19:51:22.857	DEBUG : Se envia ACK al pinpad proceso OK
+19:51:22.871	DEBUG : Se envia respuesta a la caja respuesta= LT0000360218XXXX9441           LECTURA OK          
+19:51:24.373	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:51:24.373	DEBUG : Inputs Parametro "PP0210106   000000011862000000010405000000000000000000001457                                          19511420170116      2000009621     40228500-9-70-1-1"
+19:51:24.374	DEBUG : Configuracion OK
+19:51:24.374	DEBUG : Genera trama mLRC
+19:51:24.375	DEBUG : Genera trama LRC Seguridad
+19:51:24.375	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:51:24.376	DEBUG : Configuracion de velocidad de transmision completada
+19:51:24.376	DEBUG : Baudios: 115200
+19:51:24.376	DEBUG : Bits: 8
+19:51:24.377	DEBUG :Lectura de archivo UC-CAJA
+19:51:24.377	DEBUG :  Modo de uso del pinpad: USB
+19:51:24.377	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:51:24.383	DEBUG : Se envia trama de seguridad=SHA83B64429A778EBD
+19:51:25.384	DEBUG : Se espera la respuesta
+19:51:25.384	DEBUG : Envio ACK
+19:51:25.387	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:51:25.393	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:51:25.394	DEBUG : Se envia trama al puerto al pinpad  PP0210106   000000011862000000010405000000000000000000001457                                          19511420170116      2000009621     402285000
+19:51:26.395	DEBUG : Compra lee respuesta=
+19:51:27.395	DEBUG : Compra lee respuesta=
+19:51:28.396	DEBUG : Compra lee respuesta=
+19:51:29.397	DEBUG : Compra lee respuesta=
+19:51:30.398	DEBUG : Compra lee respuesta=
+19:51:31.399	DEBUG : Compra lee respuesta=
+19:51:32.399	DEBUG : Compra lee respuesta=
+19:51:33.400	DEBUG : Compra lee respuesta=
+19:51:34.401	DEBUG : Compra lee respuesta=
+19:51:35.401	DEBUG : Compra lee respuesta=
+19:51:36.402	DEBUG : Compra lee respuesta=
+19:51:37.403	DEBUG : Compra lee respuesta=
+19:51:38.404	DEBUG : Compra lee respuesta=
+19:51:39.404	DEBUG : Compra lee respuesta=
+19:51:40.405	DEBUG : Compra lee respuesta=
+19:51:41.406	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00085200107819511420170116050970402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03CARDENAS H/ROBERT                                   DinersClub          AID:   A000000152301TC:    705A57D6740AFDA               ARQC:  BD99DA48Cy
+19:51:41.407	DEBUG : Se envia ACK al pinpad proceso OK
+19:51:41.426	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00085200107819511420170116050970402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03CARDENAS H/ROBERT                                   DinersClub          AID:   A000000152301TC:    705A57D6740AFDA               ARQC:  BD99DA48C
+19:53:22.337	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:53:22.337	DEBUG : Inputs Parametro "LT-9-70-1-1"
+19:53:22.338	DEBUG : Configuracion OK
+19:53:22.338	DEBUG : Genera trama mLRC
+19:53:22.339	DEBUG : Genera trama LRC Seguridad
+19:53:22.339	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:53:22.341	DEBUG : Configuracion de velocidad de transmision completada
+19:53:22.341	DEBUG : Baudios: 115200
+19:53:22.341	DEBUG : Bits: 8
+19:53:22.345	DEBUG :Lectura de archivo UC-CAJA
+19:53:22.346	DEBUG :  Modo de uso del pinpad: USB
+19:53:22.346	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:53:22.353	DEBUG : Se envia trama de seguridad=SH27F178B2172189D3f
+19:53:23.353	DEBUG : Se espera la respuesta
+19:53:23.354	DEBUG : Envio ACK
+19:53:23.375	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:53:23.382	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:53:23.383	DEBUG : Se envia trama al puerto al pinpad  LT
+19:53:24.383	DEBUG : Compra lee respuesta=
+19:53:25.384	DEBUG : Compra lee respuesta=
+19:53:26.385	DEBUG : Compra lee respuesta=
+19:53:27.386	DEBUG : Compra lee respuesta=
+19:53:28.386	DEBUG : Compra lee respuesta=
+19:53:29.387	DEBUG : Compra lee respuesta=LT0000511054XXXXXX3597         LECTURA OK          K
+19:53:29.388	DEBUG : Se envia ACK al pinpad proceso OK
+19:53:29.402	DEBUG : Se envia respuesta a la caja respuesta= LT0000511054XXXXXX3597         LECTURA OK          
+19:53:30.903	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+19:53:30.903	DEBUG : Inputs Parametro "PP01100     000000003164000000002775000000000000000000000389                                          19532020170116      2000009621     40228500-9-70-1-1"
+19:53:30.904	DEBUG : Configuracion OK
+19:53:30.905	DEBUG : Genera trama mLRC
+19:53:30.905	DEBUG : Genera trama LRC Seguridad
+19:53:30.905	DEBUG : Genera tramaa LRC Seguridad Version 2
+19:53:30.906	DEBUG : Configuracion de velocidad de transmision completada
+19:53:30.906	DEBUG : Baudios: 115200
+19:53:30.906	DEBUG : Bits: 8
+19:53:30.907	DEBUG :Lectura de archivo UC-CAJA
+19:53:30.907	DEBUG :  Modo de uso del pinpad: USB
+19:53:30.908	DEBUG : Puerto de comunicacion=/dev/ttyS9
+19:53:30.913	DEBUG : Se envia trama de seguridad=SH74500934414CAB4F
+19:53:31.914	DEBUG : Se espera la respuesta
+19:53:31.914	DEBUG : Envio ACK
+19:53:31.935	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+19:53:31.942	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+19:53:31.943	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000003164000000002775000000000000000000000389                                          19532020170116      2000009621     40228500?
+19:53:32.943	DEBUG : Compra lee respuesta=
+19:53:33.944	DEBUG : Compra lee respuesta=
+19:53:34.945	DEBUG : Compra lee respuesta=
+19:53:35.945	DEBUG : Compra lee respuesta=
+19:53:36.946	DEBUG : Compra lee respuesta=
+19:53:37.947	DEBUG : Compra lee respuesta=
+19:53:38.948	DEBUG : Compra lee respuesta=
+19:53:39.949	DEBUG : Compra lee respuesta=
+19:53:40.949	DEBUG : Compra lee respuesta=
+19:53:41.950	DEBUG : Compra lee respuesta=
+19:53:42.951	DEBUG : Compra lee respuesta=
+19:53:43.952	DEBUG : Compra lee respuesta=
+19:53:44.952	DEBUG : Compra lee respuesta=
+19:53:45.953	DEBUG : Compra lee respuesta=
+19:53:46.954	DEBUG : Compra lee respuesta=
+19:53:47.954	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00085300107819532020170116000853402285002000009621                                                                                                 001PACIFICARD                    MASTERCARD               03CAROLINA FLORES/                                    DEBIT MASTERCARD    AID:   A000000004101TC:    8213A782AEE6258               ARQC:  C82EB2733~
+19:53:47.955	DEBUG : Se envia ACK al pinpad proceso OK
+19:53:47.965	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00085300107819532020170116000853402285002000009621                                                                                                 001PACIFICARD                    MASTERCARD               03CAROLINA FLORES/                                    DEBIT MASTERCARD    AID:   A000000004101TC:    8213A782AEE6258               ARQC:  C82EB2733
+20:01:07.458	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+20:01:07.458	DEBUG : Inputs Parametro "LT-9-70-1-1"
+20:01:07.459	DEBUG : Configuracion OK
+20:01:07.459	DEBUG : Genera trama mLRC
+20:01:07.460	DEBUG : Genera trama LRC Seguridad
+20:01:07.460	DEBUG : Genera tramaa LRC Seguridad Version 2
+20:01:07.462	DEBUG : Configuracion de velocidad de transmision completada
+20:01:07.462	DEBUG : Baudios: 115200
+20:01:07.483	DEBUG : Bits: 8
+20:01:07.486	DEBUG :Lectura de archivo UC-CAJA
+20:01:07.487	DEBUG :  Modo de uso del pinpad: USB
+20:01:07.487	DEBUG : Puerto de comunicacion=/dev/ttyS9
+20:01:07.492	DEBUG : Se envia trama de seguridad=SHDBC5361A795DE365
+20:01:08.493	DEBUG : Se espera la respuesta
+20:01:08.493	DEBUG : Envio ACK
+20:01:08.514	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+20:01:08.520	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+20:01:08.520	DEBUG : Se envia trama al puerto al pinpad  LT
+20:01:09.520	DEBUG : Compra lee respuesta=
+20:01:10.521	DEBUG : Compra lee respuesta=
+20:01:11.522	DEBUG : Compra lee respuesta=
+20:01:12.523	DEBUG : Compra lee respuesta=
+20:01:13.524	DEBUG : Compra lee respuesta=
+20:01:14.525	DEBUG : Compra lee respuesta=
+20:01:15.525	DEBUG : Compra lee respuesta=LT0000360857XXXX6244           LECTURA OK          L
+20:01:15.526	DEBUG : Se envia ACK al pinpad proceso OK
+20:01:15.542	DEBUG : Se envia respuesta a la caja respuesta= LT0000360857XXXX6244           LECTURA OK          
+20:01:17.043	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+20:01:17.043	DEBUG : Inputs Parametro "PP01100     000000009274000000008135000000000000000000001139                                          20010520170116      2000009621     40228500-9-70-1-1"
+20:01:17.044	DEBUG : Configuracion OK
+20:01:17.044	DEBUG : Genera trama mLRC
+20:01:17.045	DEBUG : Genera trama LRC Seguridad
+20:01:17.045	DEBUG : Genera tramaa LRC Seguridad Version 2
+20:01:17.046	DEBUG : Configuracion de velocidad de transmision completada
+20:01:17.046	DEBUG : Baudios: 115200
+20:01:17.046	DEBUG : Bits: 8
+20:01:17.047	DEBUG :Lectura de archivo UC-CAJA
+20:01:17.047	DEBUG :  Modo de uso del pinpad: USB
+20:01:17.047	DEBUG : Puerto de comunicacion=/dev/ttyS9
+20:01:17.053	DEBUG : Se envia trama de seguridad=SHA551894E3E78913F
+20:01:18.054	DEBUG : Se espera la respuesta
+20:01:18.054	DEBUG : Envio ACK
+20:01:18.056	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+20:01:18.063	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+20:01:18.063	DEBUG : Se envia trama al puerto al pinpad  PP01100     000000009274000000008135000000000000000000001139                                          20010520170116      2000009621     40228500=
+20:01:19.064	DEBUG : Compra lee respuesta=
+20:01:20.065	DEBUG : Compra lee respuesta=
+20:01:21.065	DEBUG : Compra lee respuesta=
+20:01:22.066	DEBUG : Compra lee respuesta=
+20:01:23.067	DEBUG : Compra lee respuesta=
+20:01:24.067	DEBUG : Compra lee respuesta=
+20:01:25.068	DEBUG : Compra lee respuesta=
+20:01:26.069	DEBUG : Compra lee respuesta=
+20:01:27.069	DEBUG : Compra lee respuesta=
+20:01:28.070	DEBUG : Compra lee respuesta=
+20:01:29.071	DEBUG : Compra lee respuesta=
+20:01:30.072	DEBUG : Compra lee respuesta=
+20:01:31.072	DEBUG : Compra lee respuesta=
+20:01:32.073	DEBUG : Compra lee respuesta=
+20:01:33.074	DEBUG : Compra lee respuesta=
+20:01:34.075	DEBUG : Compra lee respuesta=
+20:01:35.075	DEBUG : Compra lee respuesta=PP000100APROBADA  TRANS.    00085400107820010520170116345587402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03J PADILLA POZO/MARCOS                               DinersClub          AID:   A000000152301TC:    34480DC3BD9F45B               ARQC:  EEB4A5AE2i
+20:01:35.076	DEBUG : Se envia ACK al pinpad proceso OK
+20:01:35.093	DEBUG : Se envia respuesta a la caja respuesta= PP000100APROBADA  TRANS.    00085400107820010520170116345587402285002000009621                                                                                                 002DINERS CLUB                   DINERS CLUB              03J PADILLA POZO/MARCOS                               DinersClub          AID:   A000000152301TC:    34480DC3BD9F45B               ARQC:  EEB4A5AE2
+21:35:39.196	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+21:35:39.197	DEBUG : Inputs Parametro "PC-9-70-1-1"
+21:35:39.197	DEBUG : Configuracion OK
+21:35:39.198	DEBUG : Genera trama mLRC
+21:35:39.198	DEBUG : Genera trama LRC Seguridad
+21:35:39.199	DEBUG : Genera tramaa LRC Seguridad Version 2
+21:35:39.200	DEBUG : Configuracion de velocidad de transmision completada
+21:35:39.200	DEBUG : Baudios: 115200
+21:35:39.201	DEBUG : Bits: 8
+21:35:39.204	DEBUG :Lectura de archivo UC-CAJA
+21:35:39.205	DEBUG :  Modo de uso del pinpad: USB
+21:35:39.206	DEBUG : Puerto de comunicacion=/dev/ttyS9
+21:35:39.213	DEBUG : Se envia trama de seguridad=SHCDF01B91382319B2`
+21:35:40.213	DEBUG : Se espera la respuesta
+21:35:40.214	DEBUG : Envio ACK
+21:35:40.235	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+21:35:40.242	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+21:35:40.242	DEBUG : Se envia trama al puerto al pinpad  PC
+21:35:41.243	DEBUG : Compra lee respuesta=
+21:35:42.244	DEBUG : Compra lee respuesta=
+21:35:43.245	DEBUG : Compra lee respuesta=
+21:35:44.245	DEBUG : Compra lee respuesta=
+21:35:45.246	DEBUG : Compra lee respuesta=
+21:35:46.247	DEBUG : Compra lee respuesta=
+21:35:47.248	DEBUG : Compra lee respuesta=
+21:35:48.249	DEBUG : Compra lee respuesta=
+21:35:49.250	DEBUG : Compra lee respuesta=
+21:35:50.250	DEBUG : Compra lee respuesta=
+21:35:51.251	DEBUG : Compra lee respuesta=
+21:35:52.252	DEBUG : Compra lee respuesta=
+21:35:53.253	DEBUG : Compra lee respuesta=
+21:35:54.254	DEBUG : Compra lee respuesta=PC0000AUTORIZADO          
+21:35:54.254	DEBUG : Se envia ACK al pinpad proceso OK
+21:35:54.262	DEBUG : Se envia respuesta a la caja respuesta= PC0000AUTORIZADO          

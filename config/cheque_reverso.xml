@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket modoImpresora="SLIP">
+		<line>
+			<text align="left" >              ${printCheque.getDatos()}</text>
+		</line>	
+		<line/>
+		<line>
+			<text align="left" >              ${printCheque.getProvincia()}</text>
+		</line>
+		<line/>
+		<line>
+			<text align="left" >              ${printCheque.getCodCajeroYCodLocal()}</text>
+		</line>
+		<line/>
+		<line/>
+		<line>
+			<text align="left">                                    ${printCheque.getNombreTienda()}</text>
+		</line>
+		<line>
+			<text align="left" >                              DEPOSITAR CTA CTE NR ${printCheque.getNumeroCuenta()}</text>
+		</line>	
+		<line/>
+		<line/>
+		<line>
+			<text align="left" >                                   ${printCheque.getDameRayaPunteada()}</text>
+		</line>
+		<line>
+			<text align="left" >                                   ${printCheque.getNombreEmpresa()}</text>
+		</line>			
+    </ticket>
+</output>

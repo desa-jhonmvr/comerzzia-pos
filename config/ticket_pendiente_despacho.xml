@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>        
+        <line><text align="center" length="40">CAJA No. ${ticketAlm.getCodCaja()}</text></line>
+        <line><text align="center" length="40">-----------------</text></line>
+        <line><text align="center" length="40">---------------------------</text></line>
+        <line><text align="center" length="40">ENTREGA DE ARTÍCULOS PENDIENTES</text></line>
+        <line><text align="center" length="40">${fecha}</text></line>
+        <line><text align="center" length="40">Factura Original: ${ticketOrigen.getIdFactura()}</text></line>
+        <line></line>
+        <line><text align="left" length="40">Comprador: ${ticketAlm.getFactNombre()}</text></line>
+        <line><text align="left" length="40">Cedula: ${ticketAlm.getFactDocumento()}</text></line>
+        #if (${ticketAlm.getFactDireccion()})
+        <line><text align="left" length="40">Direccion: ${ticketAlm.getFactDireccion()}</text></line>
+        <line><text align="left" length="40">Telefono: ${ticketAlm.getFactTelefonon()}</text></line>
+        #else
+        <line><text align="left" length="40">Direccion: .............</text></line>
+        <line><text align="left" length="40">Telefono: ..............</text></line>
+        #end           
+        <line></line>
+        <line></line>
+        <line><text align="left" length="16">CODIGO</text><text align="left" length="24">CANTIDAD</text></line>
+        <line><text align="left" length="40">DESCRIPCION</text></line>
+        <line><text align="left" length="40">----------------------------------------</text></line>
+        #foreach ($entregado in $listaEntregados))
+        <line>
+            <text align="left" length="16">${entregado.getCodigoBarras()}</text>
+            <text align="right" length="8">${entregado.getCantidad()}</text>
+        </line>
+        <line>            
+            <text align="right" length="6">${entregado.getCodMarca()}</text>
+            <text align="right" length="5">${entregado.getIdItem()}</text>
+            <text align="right" length="29">${entregado.getCodart().getDescForPrint()}</text>
+        </line>
+        #end
+        
+        <line></line>
+        <line></line>
+        <line><text align="left" length="40">Elaborado por: ${ticketOrigen.getCajero().getIdUsuario()} - ${ticketOrigen.getCajero().getDesUsuario()}</text></line>
+        <line></line>
+        <line></line>
+        <line><text align="left" length="40">Recibi conforme: ......................</text></line>
+        <line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+	<line></line>
+        <line></line>
+        <line></line>
+
+    </ticket>
+</output>

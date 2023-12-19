@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>		
+		<line>
+			<text align="left" length="35">CONTRATO DE EXTENSIÓN DE GARANTIA</text>
+		</line>
+		<line><text align="left" length="20">NOMBRE DEL CLIENTE: </text></line>
+		<line><text align="left" length="40">   ${ticket.getCliente().getNombreYApellidos()}</text></line>		
+		<line><text align="left" length="12">CED/RUC: </text><text align="left" length="28">${ticket.getCliente().getCodcli()}</text></line>		
+        <line><text align="left" length="20">NÚMERO DE GARANTÍA: </text><text align="left" length="20"> ${idGarantia}</text></line>
+		<line><text align="left" length="18">FACTURA: </text><text align="left" length="22">${ticket.getIdFactura()}</text></line>
+		<line><text align="left" length="18">FECHA DE COMPRA: </text><text align="left" length="22">${fecha}</text></line>
+		<line><text align="left" length="18">PRODUCTO: </text></line>
+		#foreach ($linea in $lineas)
+            <line> 
+				<text align="right" length="3">${linea.getCantidad()}x</text> 
+                <text align="left" length="9">${linea.getReferenciaGarantia().getArticulo().getCodart()} </text> 
+                <text align="left" length="14"> ${linea.getReferenciaGarantia().getArticulo().getDescForPrint()}</text>
+			</line>
+			#if (${linea.getReferenciaGarantia().getArticulo().getModelo()})
+				<line>
+					<text align="right" length="30"> ${linea.getReferenciaGarantia().getArticulo().getModelo()}</text>	
+				</line>
+			#end			
+            <line>
+                <text align="left" length="40"> Ref Factura: ${linea.getReferenciaGarantia().getRefTicketOrigen()}</text>
+            </line>
+        #end		
+		<line></line>
+		#foreach ($linea in $lineasExtensionGarantia.getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line><text align="center" length="40" >________________________________</text></line>
+		<line><text align="center" length="40" >Firma de aceptacion del cliente </text></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>	
+
+    </ticket>
+</output>

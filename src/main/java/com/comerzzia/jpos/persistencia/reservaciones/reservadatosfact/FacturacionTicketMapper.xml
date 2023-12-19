@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean" >
+    <id column="UID_RESERVACION" property="uidReservacion" jdbcType="VARCHAR" />
+    <result column="TIPO_DOCUMENTO" property="tipoDocumento" jdbcType="VARCHAR" />
+    <result column="DOCUMENTO" property="documento" jdbcType="VARCHAR" />
+    <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+    <result column="APELLIDOS" property="apellidos" jdbcType="VARCHAR" />
+    <result column="DIRECCION" property="direccion" jdbcType="VARCHAR" />
+    <result column="PROVINCIA" property="provincia" jdbcType="VARCHAR" />
+    <result column="TELEFONO" property="telefono" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_RESERVACION, TIPO_DOCUMENTO, DOCUMENTO, NOMBRE, APELLIDOS, DIRECCION, PROVINCIA, 
+    TELEFONO, EMAIL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_RESERVA_DATOS_FACT_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_RESERVA_DATOS_FACT_TBL
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from X_RESERVA_DATOS_FACT_TBL
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketExample" >
+    delete from X_RESERVA_DATOS_FACT_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean" >
+    insert into X_RESERVA_DATOS_FACT_TBL (UID_RESERVACION, TIPO_DOCUMENTO, DOCUMENTO, 
+      NOMBRE, APELLIDOS, DIRECCION, 
+      PROVINCIA, TELEFONO, EMAIL)
+    values (#{uidReservacion,jdbcType=VARCHAR}, #{tipoDocumento,jdbcType=VARCHAR}, #{documento,jdbcType=VARCHAR}, 
+      #{nombre,jdbcType=VARCHAR}, #{apellidos,jdbcType=VARCHAR}, #{direccion,jdbcType=VARCHAR}, 
+      #{provincia,jdbcType=VARCHAR}, #{telefono,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean" >
+    insert into X_RESERVA_DATOS_FACT_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidReservacion != null" >
+        UID_RESERVACION,
+      </if>
+      <if test="tipoDocumento != null" >
+        TIPO_DOCUMENTO,
+      </if>
+      <if test="documento != null" >
+        DOCUMENTO,
+      </if>
+      <if test="nombre != null" >
+        NOMBRE,
+      </if>
+      <if test="apellidos != null" >
+        APELLIDOS,
+      </if>
+      <if test="direccion != null" >
+        DIRECCION,
+      </if>
+      <if test="provincia != null" >
+        PROVINCIA,
+      </if>
+      <if test="telefono != null" >
+        TELEFONO,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidReservacion != null" >
+        #{uidReservacion,jdbcType=VARCHAR},
+      </if>
+      <if test="tipoDocumento != null" >
+        #{tipoDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="documento != null" >
+        #{documento,jdbcType=VARCHAR},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="apellidos != null" >
+        #{apellidos,jdbcType=VARCHAR},
+      </if>
+      <if test="direccion != null" >
+        #{direccion,jdbcType=VARCHAR},
+      </if>
+      <if test="provincia != null" >
+        #{provincia,jdbcType=VARCHAR},
+      </if>
+      <if test="telefono != null" >
+        #{telefono,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketExample" resultType="java.lang.Integer" >
+    select count(*) from X_RESERVA_DATOS_FACT_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_RESERVA_DATOS_FACT_TBL
+    <set >
+      <if test="record.uidReservacion != null" >
+        UID_RESERVACION = #{record.uidReservacion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tipoDocumento != null" >
+        TIPO_DOCUMENTO = #{record.tipoDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.documento != null" >
+        DOCUMENTO = #{record.documento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nombre != null" >
+        NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apellidos != null" >
+        APELLIDOS = #{record.apellidos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.direccion != null" >
+        DIRECCION = #{record.direccion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provincia != null" >
+        PROVINCIA = #{record.provincia,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telefono != null" >
+        TELEFONO = #{record.telefono,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>      
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_RESERVA_DATOS_FACT_TBL
+    set UID_RESERVACION = #{record.uidReservacion,jdbcType=VARCHAR},
+      TIPO_DOCUMENTO = #{record.tipoDocumento,jdbcType=VARCHAR},
+      DOCUMENTO = #{record.documento,jdbcType=VARCHAR},
+      NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      APELLIDOS = #{record.apellidos,jdbcType=VARCHAR},
+      DIRECCION = #{record.direccion,jdbcType=VARCHAR},
+      PROVINCIA = #{record.provincia,jdbcType=VARCHAR},
+      TELEFONO = #{record.telefono,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean" >
+    update X_RESERVA_DATOS_FACT_TBL
+    <set >
+      <if test="tipoDocumento != null" >
+        TIPO_DOCUMENTO = #{tipoDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="documento != null" >
+        DOCUMENTO = #{documento,jdbcType=VARCHAR},
+      </if>
+      <if test="nombre != null" >
+        NOMBRE = #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="apellidos != null" >
+        APELLIDOS = #{apellidos,jdbcType=VARCHAR},
+      </if>
+      <if test="direccion != null" >
+        DIRECCION = #{direccion,jdbcType=VARCHAR},
+      </if>
+      <if test="provincia != null" >
+        PROVINCIA = #{provincia,jdbcType=VARCHAR},
+      </if>
+      <if test="telefono != null" >
+        TELEFONO = #{telefono,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean" >
+    update X_RESERVA_DATOS_FACT_TBL
+    set TIPO_DOCUMENTO = #{tipoDocumento,jdbcType=VARCHAR},
+      DOCUMENTO = #{documento,jdbcType=VARCHAR},
+      NOMBRE = #{nombre,jdbcType=VARCHAR},
+      APELLIDOS = #{apellidos,jdbcType=VARCHAR},
+      DIRECCION = #{direccion,jdbcType=VARCHAR},
+      PROVINCIA = #{provincia,jdbcType=VARCHAR},
+      TELEFONO = #{telefono,jdbcType=VARCHAR},
+      EMAIL = #{email, jdbcType=VARCHAR}
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_RESERVA_DATOS_FACT_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

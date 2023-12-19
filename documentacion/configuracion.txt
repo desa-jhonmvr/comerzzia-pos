@@ -1,0 +1,35 @@
+
+PASOS A SEGUIR PARA CONFIGURAR EL ENTORNO DE DESARROLLO en NETBEANS para el PROYECTO
+
+1 ) Configurar Repositorio Maven
+	
+	Herramientas > Opciones > Miscelanea > Pestaña Maven:
+	
+	Local Repository: Ponemos el repositorio local de maven. 
+	Ejemplo: C:\Users\MGRI\.m2\repository
+
+2 ) Configurar Proxy
+
+	Herramientas > Opciones > General . Configuramos el Proxy
+		
+	En Mas
+	Añadimos una excepción para la dirección : software.mpsistemas.es
+	
+3 ) Descargar Dependencias
+	
+	Segundo Botón sobre la carpeta "Dependencies" y seleccionar Descargar dependencias
+	
+4 ) Configurar Proyecto (sobre el proyecto, botón dcho ratón > Propiedades)
+
+    > Menu Run
+        Main Class:  com.comerzzia.jpos.gui.main.TPV
+        VM-Options:  -Xmx256m 
+
+    > Compile 
+		Java PlatForm: JDK 1.6
+
+	> Sources
+		Encoding UTF-8
+
+
+5 ) Borrar de nuestro repositorio local todos los ficheros "_maven.repositories"

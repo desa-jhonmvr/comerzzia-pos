@@ -1,0 +1,16 @@
+# Conexion a base de datos CENTRAL
+comerzzia.jpos.central.database.esquema.config=COMERZZIA_PRO
+comerzzia.jpos.central.database.esquema.empresa=COMERZZIA_PRO
+comerzzia.jpos.central.database.url=jdbc:oracle:thin:@192.168.1.80:1521:xe
+comerzzia.jpos.central.database.driver=oracle.jdbc.driver.OracleDriver
+comerzzia.jpos.central.database.usuario=COMERZZIA_PRO
+comerzzia.jpos.central.database.password=COMERZZIA_PRO
+comerzzia.jpos.central.database.logger=DefaultLogger
+comerzzia.jpos.central.database.logger.level=FINE
+
+
+#TABLA o FICHERO
+comerzzia.jpos.configuracion.validacion.tarjetas.tipo=TABLA
+comerzzia.jpos.configuracion.validacion.tarjetas.ruta.lectura=C:\\SUKASA\\Validacion\\ValEntrada.txt
+comerzzia.jpos.configuracion.validacion.tarjetas.ruta.escritura=C:\\SUKASA\\Validacion\\ValSalida.txt
+comerzzia.jpos.configuracion.esquema.recibo.comprobante.voucher=/esquemaVoucher.xml

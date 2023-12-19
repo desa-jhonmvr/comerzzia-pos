@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>	
+		<line/><line><text align="left" length="35"></text></line>
+		<barcode type="CODE128" position="none">${codigoBarras.getCodigoBarras()}</barcode>
+        <line>
+			<text align="center" length="35" bold="true">${codigoBarras.getCodigoBarras()}</text>
+		</line>
+		
+		<line/>
+		#foreach ($linea in $printBono.getNombreEmpresaLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		#foreach ($linea in $printBono.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		<line>
+			<text align="left" length="11">    R.U.C: </text>
+			<text align="left" length="29">${printBono.getRuc()}</text>
+		</line>
+		<line/>
+		#if (${printBono})
+			#foreach ($lineaF in $printBono.getFechaAsLineas().getLineas())
+				<line><text align="left" length="40" >${lineaF}</text> </line>
+			#end
+		#end
+		<line/>
+		
+		<line/>		
+		#if (!${hayUidNotaCredito})
+		<line>
+			<text align="center" length="40" bold="true">RESERVACIÓN Nº ${reservaOrigen}</text>
+		</line>		
+		#end
+		<line>
+			<text align="center" length="40" bold="true">BONO DE ${tipoBono}</text>
+		</line>
+		<line/>
+		<line>
+			<text align="left" length="40" >Cliente: ${cliente.getCodcli()}</text>
+		</line>		
+		<line>
+			<text align="left" length="40" >${cliente.getNombreYApellidos()}</text>
+		</line>				
+		<line>
+			<text align="left" length="40" >Docu.Inter: ${printBono.getCodalmBono()}-${identificador}</text>
+		</line>
+                <line>
+			<text align="left" length="40" >Caja: ${caja}</text>
+		</line>
+		
+		#if (${hayUidNotaCredito})
+			<line><text align="left" length="40" >Origen Nota Crédito: ${notaCredito.getIdNotaCreditoCompleto()} </text></line>
+			<line><text align="left" length="40" >Valor Nota Crédito: $${notaCredito.getTotal()}</text></line>
+			<line><text align="left" length="40" >Saldo Restante: $${total}</text></line>
+			#if(${consumos.size()}>0)
+				<line><text align="left" length="40" >Consumos: </text></line>
+				#foreach ($consumo in $consumos)
+					<line><text align="center" length="40" >${consumo} </text></line>
+				#end
+			#end
+		#else
+			#if (${referenciaOrigen} && ${referenciaOrigen.length()}>7)
+			<line>
+				<text align="left" length="40" >Referencia Origen: ${referenciaOrigen}</text>
+			</line>
+			#else
+			<line>
+				<text align="left" length="40" >Referencia Origen: ${printBono.getCodalm()}-${referenciaOrigen}</text>
+			</line>
+			
+			#end
+		#end
+		
+		
+		<line/>
+		#if (${hayUidNotaCredito})
+			<line>
+				<text align="center" length="40" bold="true">Bono por: $${total}</text>
+			</line>					
+		#else
+			<line>
+				<text align="center" length="40" bold="true">Valor Original: $${valorOriginal}</text>
+			</line>	
+			<line>
+				<text align="center" length="40" bold="true">Valor Debitado: $${valorDebitado}</text>
+			</line>	
+			<line>
+				<text align="center" length="40" bold="true">Saldo: $${total}</text>
+			</line>		
+		#end
+		<line/>
+		<line><text align="center" length="40" >El bono puede ser usado en sus compras </text> </line>
+		<line><text align="center" length="40" >en Comohogar por el valor del importe </text> </line>
+		<line><text align="center" length="40" >indicado.</text> </line>
+		<line/>
+		<line>
+			<text align="left" length="40">Fecha de caducidad : ${fechaCaducidad}</text>
+		</line>
+		<line/>				
+		<line/>	
+		<line/>	
+		<line/>	
+		<line><text align="left" length="40"> -------------------------  ----------- </text></line>
+		<line><text align="left" length="40">           Firma               Telef.   </text></line>		
+		<line/>	
+		<line/>		
+		#foreach ($linea in $avisoLegal.getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		<line/>	
+		<line/>
+        #if (${bonoObserva.isObservacionLlena()})
+            <line><text align="left" lenght="40">Observ:</text></line>
+            #foreach ($lineaObservacion in $bonoObserva.getObservacionesLineaEnTicket().getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+            #end
+        #end	
+		<line/>		
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+	
+    </ticket>
+</output>

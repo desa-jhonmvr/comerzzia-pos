@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    <id column="UID_LETRA" property="uidLetra" jdbcType="VARCHAR" />
+    <id column="CUOTA" property="cuota" jdbcType="DECIMAL" />
+    <result column="VALOR" property="valor" jdbcType="DECIMAL" />
+    <result column="FECHA_VENCIMIENTO" property="fechaVencimiento" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler" />
+    <result column="FECHA_COBRO" property="fechaCobro" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="MORA" property="mora" jdbcType="DECIMAL" />
+    <result column="PROCESADO" property="procesado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="CODCAJA_ABONO" property="codcajaAbono" jdbcType="VARCHAR" />
+    <result column="USUARIO_ABONO" property="usuarioAbono" jdbcType="VARCHAR" />
+    <result column="ID_ABONO" property="idAbono" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" extends="BaseResultMap" >
+    <result column="PAGOS" property="pagos" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaVencimientoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCobroCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaVencimientoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaCobroCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_LETRA, CUOTA, VALOR, FECHA_VENCIMIENTO, FECHA_COBRO, ESTADO, MORA, PROCESADO, CODCAJA_ABONO, ID_ABONO, USUARIO_ABONO
+  </sql>
+  <sql id="Blob_Column_List" >
+    PAGOS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_LETRAS_CUOTAS_TBL
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+      and CUOTA = #{cuota,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaKey" >
+    delete from X_LETRAS_CUOTAS_TBL
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+      and CUOTA = #{cuota,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" >
+    delete from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    insert into X_LETRAS_CUOTAS_TBL (UID_LETRA, CUOTA, VALOR, 
+      FECHA_VENCIMIENTO, 
+      FECHA_COBRO, 
+      ESTADO, MORA, PROCESADO, 
+      PAGOS, CODCAJA_ABONO, ID_ABONO, USUARIO_ABONO)
+    values (#{uidLetra,jdbcType=VARCHAR}, #{cuota,jdbcType=DECIMAL}, #{valor,jdbcType=DECIMAL}, 
+      #{fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler}, 
+      #{fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{estado,jdbcType=CHAR}, #{mora,jdbcType=DECIMAL}, #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{pagos,jdbcType=BLOB}, #{codcajaAbono,jdbcType=VARCHAR}, #{idAbono,jdbcType=DECIMAL}, #{usuarioAbono, jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    insert into X_LETRAS_CUOTAS_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidLetra != null" >
+        UID_LETRA,
+      </if>
+      <if test="cuota != null" >
+        CUOTA,
+      </if>
+      <if test="valor != null" >
+        VALOR,
+      </if>
+      <if test="fechaVencimiento != null" >
+        FECHA_VENCIMIENTO,
+      </if>
+      <if test="fechaCobro != null" >
+        FECHA_COBRO,
+      </if>
+      <if test="estado != null" >
+        ESTADO,
+      </if>
+      <if test="mora != null" >
+        MORA,
+      </if>
+      <if test="procesado != null" >
+        PROCESADO,
+      </if>
+      <if test="pagos != null" >
+        PAGOS,
+      </if>
+      <if test="codcajaAbono != null" >
+          CODCAJA_ABONO,
+      </if>
+      <if test="idAbono != null" >
+          ID_ABONO,
+      </if>
+      <if test="usuarioAbono != null" >
+          USUARIO_ABONO,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidLetra != null" >
+        #{uidLetra,jdbcType=VARCHAR},
+      </if>
+      <if test="cuota != null" >
+        #{cuota,jdbcType=DECIMAL},
+      </if>
+      <if test="valor != null" >
+        #{valor,jdbcType=DECIMAL},
+      </if>
+      <if test="fechaVencimiento != null" >
+        #{fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      </if>
+      <if test="fechaCobro != null" >
+        #{fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="estado != null" >
+        #{estado,jdbcType=CHAR},
+      </if>
+      <if test="mora != null" >
+        #{mora,jdbcType=DECIMAL},
+      </if>
+      <if test="procesado != null" >
+        #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="pagos != null" >
+        #{pagos,jdbcType=BLOB},
+      </if>
+      <if test="codcajaAbono != null" >
+        #{codcajaAbono,jdbcType=VARCHAR},
+      </if>
+      <if test="idAbono != null" >
+        #{idAbono,jdbcType=DECIMAL},
+      </if>
+      <if test="usuarioAbono != null" >
+        #{usuarioAbono,jdbcType=VARCHAR},
+      </if>      
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" resultType="java.lang.Integer" >
+    select count(*) from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_LETRAS_CUOTAS_TBL
+    <set >
+      <if test="record.uidLetra != null" >
+        UID_LETRA = #{record.uidLetra,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cuota != null" >
+        CUOTA = #{record.cuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valor != null" >
+        VALOR = #{record.valor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fechaVencimiento != null" >
+        FECHA_VENCIMIENTO = #{record.fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      </if>
+      <if test="record.fechaCobro != null" >
+        FECHA_COBRO = #{record.fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.estado != null" >
+        ESTADO = #{record.estado,jdbcType=CHAR},
+      </if>
+      <if test="record.mora != null" >
+        MORA = #{record.mora,jdbcType=DECIMAL},
+      </if>
+      <if test="record.procesado != null" >
+        PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.pagos != null" >
+        PAGOS = #{record.pagos,jdbcType=BLOB},
+      </if>
+      <if test="codcajaAbono != null" >
+        CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      </if>
+      <if test="idAbono != null" >
+        ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      </if>  
+      <if test="codcajaAbono != null" >
+        USUARIO_ABONO = #{usuarioAbono,jdbcType=VARCHAR},
+      </if>          
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update X_LETRAS_CUOTAS_TBL
+    set UID_LETRA = #{record.uidLetra,jdbcType=VARCHAR},
+      CUOTA = #{record.cuota,jdbcType=DECIMAL},
+      VALOR = #{record.valor,jdbcType=DECIMAL},
+      FECHA_VENCIMIENTO = #{record.fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      FECHA_COBRO = #{record.fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      ESTADO = #{record.estado,jdbcType=CHAR},
+      MORA = #{record.mora,jdbcType=DECIMAL},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      PAGOS = #{record.pagos,jdbcType=BLOB},
+      CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      USUARIO_ABONO = #{usuarioAbono, jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_LETRAS_CUOTAS_TBL
+    set UID_LETRA = #{record.uidLetra,jdbcType=VARCHAR},
+      CUOTA = #{record.cuota,jdbcType=DECIMAL},
+      VALOR = #{record.valor,jdbcType=DECIMAL},
+      FECHA_VENCIMIENTO = #{record.fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      FECHA_COBRO = #{record.fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      ESTADO = #{record.estado,jdbcType=CHAR},
+      MORA = #{record.mora,jdbcType=DECIMAL},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      USUARIO_ABONO = #{usuarioAbono, jdbcType=VARCHAR}      
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    update X_LETRAS_CUOTAS_TBL
+    <set >
+      <if test="valor != null" >
+        VALOR = #{valor,jdbcType=DECIMAL},
+      </if>
+      <if test="fechaVencimiento != null" >
+        FECHA_VENCIMIENTO = #{fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      </if>
+      <if test="fechaCobro != null" >
+        FECHA_COBRO = #{fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="estado != null" >
+        ESTADO = #{estado,jdbcType=CHAR},
+      </if>
+      <if test="mora != null" >
+        MORA = #{mora,jdbcType=DECIMAL},
+      </if>
+      <if test="procesado != null" >
+        PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="pagos != null" >
+        PAGOS = #{pagos,jdbcType=BLOB},
+      </if>
+      <if test="codcajaAbono != null" >
+        CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      </if>
+      <if test="idAbono != null" >
+        ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      </if>
+      <if test="codcajaAbono != null" >
+        USUARIO_ABONO = #{usuarioAbono,jdbcType=VARCHAR},
+      </if>             
+    </set>
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+      and CUOTA = #{cuota,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    update X_LETRAS_CUOTAS_TBL
+    set VALOR = #{valor,jdbcType=DECIMAL},
+      FECHA_VENCIMIENTO = #{fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      FECHA_COBRO = #{fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      ESTADO = #{estado,jdbcType=CHAR},
+      MORA = #{mora,jdbcType=DECIMAL},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      PAGOS = #{pagos,jdbcType=BLOB},
+      CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      USUARIO_ABONO = #{usuarioAbono,jdbcType=VARCHAR}          
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+      and CUOTA = #{cuota,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaBean" >
+    update X_LETRAS_CUOTAS_TBL
+    set VALOR = #{valor,jdbcType=DECIMAL},
+      FECHA_VENCIMIENTO = #{fechaVencimiento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaTypeHandler},
+      FECHA_COBRO = #{fechaCobro,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      ESTADO = #{estado,jdbcType=CHAR},
+      MORA = #{mora,jdbcType=DECIMAL},
+      PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODCAJA_ABONO = #{codcajaAbono,jdbcType=VARCHAR},
+      ID_ABONO = #{idAbono,jdbcType=DECIMAL},
+      USUARIO_ABONO = #{usuarioAbono,jdbcType=VARCHAR}           
+    where UID_LETRA = #{uidLetra,jdbcType=VARCHAR}
+      and CUOTA = #{cuota,jdbcType=DECIMAL}
+  </update>
+  <select resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" id="selectByExampleWithBLOBsWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.letras.detalles.LetraCuotaExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_LETRAS_CUOTAS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,463 @@
+11:55:13.951	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+11:55:13.956	DEBUG : Inputs Parametro "LT-9-70-1-1"
+11:55:13.964	DEBUG : Configuracion OK
+11:55:13.966	DEBUG : Genera trama mLRC
+11:55:13.968	DEBUG : Genera trama LRC Seguridad
+11:55:13.970	DEBUG : Genera tramaa LRC Seguridad Version 2
+11:55:13.987	DEBUG : Configuracion de velocidad de transmision completada
+11:55:13.988	DEBUG : Baudios: 115200
+11:55:13.988	DEBUG : Bits: 8
+11:55:13.995	DEBUG :Lectura de archivo UC-CAJA
+11:55:14.000	DEBUG :  Modo de uso del pinpad: USB
+11:55:14.007	DEBUG : Puerto de comunicacion=/dev/ttyS9
+11:55:14.141	DEBUG : Se envia trama de seguridad=SH8A3D10D4688A699Ag
+11:55:15.142	DEBUG : Se espera la respuesta
+11:55:15.144	DEBUG : Envio ACK
+11:55:15.202	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+11:55:15.228	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+11:55:15.230	DEBUG : Se envia trama al puerto al pinpad  LT
+11:55:16.233	DEBUG : Compra lee respuesta=
+11:55:17.235	DEBUG : Compra lee respuesta=
+11:55:18.237	DEBUG : Compra lee respuesta=
+11:55:19.239	DEBUG : Compra lee respuesta=
+11:55:20.241	DEBUG : Compra lee respuesta=
+11:55:21.243	DEBUG : Compra lee respuesta=
+11:55:22.245	DEBUG : Compra lee respuesta=
+11:55:23.246	DEBUG : Compra lee respuesta=
+11:55:24.248	DEBUG : Compra lee respuesta=
+11:55:25.250	DEBUG : Compra lee respuesta=
+11:55:26.252	DEBUG : Compra lee respuesta=
+11:55:27.253	DEBUG : Compra lee respuesta=
+11:55:28.255	DEBUG : Compra lee respuesta=
+11:55:29.256	DEBUG : Compra lee respuesta=
+11:55:30.257	DEBUG : Compra lee respuesta=
+11:55:31.259	DEBUG : Compra lee respuesta=
+11:55:32.264	DEBUG : Compra lee respuesta=
+11:55:33.266	DEBUG : Compra lee respuesta=
+11:55:34.268	DEBUG : Compra lee respuesta=
+11:55:35.270	DEBUG : Compra lee respuesta=
+11:55:36.272	DEBUG : Compra lee respuesta=
+11:55:37.275	DEBUG : Compra lee respuesta=
+11:55:38.276	DEBUG : Compra lee respuesta=
+11:55:39.278	DEBUG : Compra lee respuesta=
+11:55:40.281	DEBUG : Compra lee respuesta=
+11:55:41.283	DEBUG : Compra lee respuesta=
+11:55:42.284	DEBUG : Compra lee respuesta=
+11:55:43.286	DEBUG : Compra lee respuesta=LT2000                         TRANS CANCELADA     !
+11:55:43.289	DEBUG : Se envia ACK al pinpad proceso OK
+11:55:43.352	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         TRANS CANCELADA     
+15:34:38.317	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:34:38.321	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:34:38.329	DEBUG : Configuracion OK
+15:34:38.331	DEBUG : Genera trama mLRC
+15:34:38.334	DEBUG : Genera trama LRC Seguridad
+15:34:38.335	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:34:38.347	DEBUG : Configuracion de velocidad de transmision completada
+15:34:38.348	DEBUG : Baudios: 115200
+15:34:38.349	DEBUG : Bits: 8
+15:34:38.363	DEBUG :Lectura de archivo UC-CAJA
+15:34:38.390	DEBUG :  Modo de uso del pinpad: USB
+15:34:38.395	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:34:38.557	DEBUG : Se envia trama de seguridad=SHF21A6C04CC9123ADa
+15:34:39.558	DEBUG : Se espera la respuesta
+15:34:39.560	DEBUG : Envio ACK
+15:34:39.633	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+15:34:39.657	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+15:34:39.658	DEBUG : Se envia trama al puerto al pinpad  LT
+15:34:40.659	DEBUG : Compra lee respuesta=
+15:34:41.664	DEBUG : Compra lee respuesta=
+15:34:42.669	DEBUG : Compra lee respuesta=
+15:34:43.671	DEBUG : Compra lee respuesta=
+15:34:44.673	DEBUG : Compra lee respuesta=
+15:34:45.675	DEBUG : Compra lee respuesta=
+15:34:46.677	DEBUG : Compra lee respuesta=LT2000                         TRANS CANCELADA     !
+15:34:46.679	DEBUG : Se envia ACK al pinpad proceso OK
+15:34:46.744	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         TRANS CANCELADA     
+15:34:50.382	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:34:50.384	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:34:50.386	DEBUG : Configuracion OK
+15:34:50.388	DEBUG : Genera trama mLRC
+15:34:50.390	DEBUG : Genera trama LRC Seguridad
+15:34:50.397	DEBUG : Configuracion de velocidad de transmision completada
+15:34:50.399	DEBUG : Baudios: 115200
+15:34:50.391	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:34:50.401	DEBUG : Bits: 8
+15:34:50.413	DEBUG :Lectura de archivo UC-CAJA
+15:34:50.414	DEBUG :  Modo de uso del pinpad: USB
+15:34:50.414	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:34:50.445	DEBUG : Se envia trama de seguridad=SH8E0AE389149DEEEA
+15:34:51.446	DEBUG : Se espera la respuesta
+15:34:51.448	DEBUG : Envio ACK
+15:34:51.501	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+15:34:51.523	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+15:34:51.525	DEBUG : Se envia trama al puerto al pinpad  LT
+15:34:52.528	DEBUG : Compra lee respuesta=
+15:34:53.530	DEBUG : Compra lee respuesta=
+15:34:54.531	DEBUG : Compra lee respuesta=
+15:34:55.533	DEBUG : Compra lee respuesta=LT2000                         TRANS CANCELADA     !
+15:34:55.535	DEBUG : Se envia ACK al pinpad proceso OK
+15:34:55.599	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         TRANS CANCELADA     
+15:35:12.139	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:35:12.140	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:35:12.141	DEBUG : Configuracion OK
+15:35:12.142	DEBUG : Genera trama mLRC
+15:35:12.143	DEBUG : Genera trama LRC Seguridad
+15:35:12.144	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:35:12.146	DEBUG : Configuracion de velocidad de transmision completada
+15:35:12.153	DEBUG : Baudios: 115200
+15:35:12.155	DEBUG : Bits: 8
+15:35:12.162	DEBUG :Lectura de archivo UC-CAJA
+15:35:12.167	DEBUG :  Modo de uso del pinpad: USB
+15:36:10.367	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:36:10.370	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:36:10.376	DEBUG : Configuracion OK
+15:36:10.378	DEBUG : Genera trama mLRC
+15:36:10.381	DEBUG : Genera trama LRC Seguridad
+15:36:10.383	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:36:10.399	DEBUG : Configuracion de velocidad de transmision completada
+15:36:10.400	DEBUG : Baudios: 115200
+15:36:10.400	DEBUG : Bits: 8
+15:36:10.408	DEBUG :Lectura de archivo UC-CAJA
+15:36:10.415	DEBUG :  Modo de uso del pinpad: USB
+15:36:10.421	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:36:13.853	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:36:13.855	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:36:13.857	DEBUG : Configuracion OK
+15:36:13.859	DEBUG : Genera trama mLRC
+15:36:13.860	DEBUG : Genera trama LRC Seguridad
+15:36:13.862	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:36:13.864	DEBUG : Configuracion de velocidad de transmision completada
+15:36:13.868	DEBUG : Baudios: 115200
+15:36:13.870	DEBUG : Bits: 8
+15:36:13.877	DEBUG :Lectura de archivo UC-CAJA
+15:36:13.880	DEBUG :  Modo de uso del pinpad: USB
+15:36:13.886	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:37:39.966	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:37:39.971	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:37:39.971	DEBUG : Configuracion OK
+15:37:39.973	DEBUG : Genera trama mLRC
+15:37:39.975	DEBUG : Genera trama LRC Seguridad
+15:37:39.979	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:37:39.980	DEBUG : Configuracion de velocidad de transmision completada
+15:37:39.980	DEBUG : Baudios: 115200
+15:37:39.982	DEBUG : Bits: 8
+15:37:40.003	DEBUG :Lectura de archivo UC-CAJA
+15:37:40.004	DEBUG :  Modo de uso del pinpad: USB
+15:37:40.006	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:38:21.457	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:38:21.459	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:38:21.461	DEBUG : Configuracion OK
+15:38:21.463	DEBUG : Genera trama mLRC
+15:38:21.465	DEBUG : Genera trama LRC Seguridad
+15:38:21.466	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:38:21.473	DEBUG : Configuracion de velocidad de transmision completada
+15:38:21.475	DEBUG : Baudios: 115200
+15:38:21.477	DEBUG : Bits: 8
+15:38:21.482	DEBUG :Lectura de archivo UC-CAJA
+15:38:21.482	DEBUG :  Modo de uso del pinpad: USB
+15:38:21.483	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:38:24.575	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:38:24.576	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:38:24.577	DEBUG : Configuracion OK
+15:38:24.579	DEBUG : Genera trama mLRC
+15:38:24.584	DEBUG : Genera trama LRC Seguridad
+15:38:24.588	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:38:24.590	DEBUG : Configuracion de velocidad de transmision completada
+15:38:24.597	DEBUG : Baudios: 115200
+15:38:24.599	DEBUG : Bits: 8
+15:38:24.607	DEBUG :Lectura de archivo UC-CAJA
+15:38:24.609	DEBUG :  Modo de uso del pinpad: USB
+15:38:24.612	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:05.614	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:05.613	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:05.626	DEBUG : Configuracion OK
+15:39:05.630	DEBUG : Genera trama mLRC
+15:39:05.631	DEBUG : Genera trama LRC Seguridad
+15:39:05.633	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:05.636	DEBUG : Configuracion de velocidad de transmision completada
+15:39:05.641	DEBUG : Baudios: 115200
+15:39:05.643	DEBUG : Bits: 8
+15:39:05.647	DEBUG :Lectura de archivo UC-CAJA
+15:39:05.650	DEBUG :  Modo de uso del pinpad: USB
+15:39:05.651	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:29.815	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:29.817	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:29.819	DEBUG : Configuracion OK
+15:39:29.822	DEBUG : Genera trama mLRC
+15:39:29.826	DEBUG : Genera trama LRC Seguridad
+15:39:29.827	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:29.831	DEBUG : Configuracion de velocidad de transmision completada
+15:39:29.835	DEBUG : Baudios: 115200
+15:39:29.836	DEBUG : Bits: 8
+15:39:29.842	DEBUG :Lectura de archivo UC-CAJA
+15:39:29.844	DEBUG :  Modo de uso del pinpad: USB
+15:39:29.845	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:33.756	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:33.757	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:33.760	DEBUG : Configuracion OK
+15:39:33.762	DEBUG : Genera trama mLRC
+15:39:33.769	DEBUG : Genera trama LRC Seguridad
+15:39:33.770	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:33.776	DEBUG : Configuracion de velocidad de transmision completada
+15:39:33.781	DEBUG : Baudios: 115200
+15:39:33.782	DEBUG : Bits: 8
+15:39:33.793	DEBUG :Lectura de archivo UC-CAJA
+15:39:33.797	DEBUG :  Modo de uso del pinpad: USB
+15:39:33.799	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:36.159	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:36.161	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:36.163	DEBUG : Configuracion OK
+15:39:36.164	DEBUG : Genera trama mLRC
+15:39:36.166	DEBUG : Genera trama LRC Seguridad
+15:39:36.168	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:36.170	DEBUG : Configuracion de velocidad de transmision completada
+15:39:36.175	DEBUG : Baudios: 115200
+15:39:36.198	DEBUG :Lectura de archivo UC-CAJA
+15:39:36.200	DEBUG :  Modo de uso del pinpad: USB
+15:39:36.176	DEBUG : Bits: 8
+15:39:36.201	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:38.323	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:38.325	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:38.326	DEBUG : Configuracion OK
+15:39:38.328	DEBUG : Genera trama mLRC
+15:39:38.334	DEBUG : Genera trama LRC Seguridad
+15:39:38.335	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:38.338	DEBUG : Configuracion de velocidad de transmision completada
+15:39:38.340	DEBUG : Baudios: 115200
+15:39:38.341	DEBUG : Bits: 8
+15:39:38.347	DEBUG :Lectura de archivo UC-CAJA
+15:39:38.348	DEBUG :  Modo de uso del pinpad: USB
+15:39:38.350	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:41.409	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:41.410	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:41.412	DEBUG : Configuracion OK
+15:39:41.414	DEBUG : Genera trama mLRC
+15:39:41.416	DEBUG : Genera trama LRC Seguridad
+15:39:41.417	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:41.421	DEBUG : Configuracion de velocidad de transmision completada
+15:39:41.423	DEBUG : Baudios: 115200
+15:39:41.426	DEBUG : Bits: 8
+15:39:41.432	DEBUG :Lectura de archivo UC-CAJA
+15:39:41.433	DEBUG :  Modo de uso del pinpad: USB
+15:39:41.434	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:44.424	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:44.425	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:44.427	DEBUG : Configuracion OK
+15:39:44.429	DEBUG : Genera trama mLRC
+15:39:44.430	DEBUG : Genera trama LRC Seguridad
+15:39:44.432	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:44.435	DEBUG : Configuracion de velocidad de transmision completada
+15:39:44.437	DEBUG : Baudios: 115200
+15:39:44.439	DEBUG : Bits: 8
+15:39:44.445	DEBUG :Lectura de archivo UC-CAJA
+15:39:44.446	DEBUG :  Modo de uso del pinpad: USB
+15:39:44.446	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:39:50.203	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:39:50.205	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:39:50.206	DEBUG : Configuracion OK
+15:39:50.208	DEBUG : Genera trama mLRC
+15:39:50.210	DEBUG : Genera trama LRC Seguridad
+15:39:50.211	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:39:50.214	DEBUG : Configuracion de velocidad de transmision completada
+15:39:50.216	DEBUG : Baudios: 115200
+15:39:50.217	DEBUG : Bits: 8
+15:39:50.227	DEBUG :Lectura de archivo UC-CAJA
+15:39:50.229	DEBUG :  Modo de uso del pinpad: USB
+15:39:50.230	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:40:06.052	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:40:06.053	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:40:06.056	DEBUG : Configuracion OK
+15:40:06.057	DEBUG : Genera trama mLRC
+15:40:06.059	DEBUG : Genera trama LRC Seguridad
+15:40:06.061	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:40:06.063	DEBUG : Configuracion de velocidad de transmision completada
+15:40:06.065	DEBUG : Baudios: 115200
+15:40:06.067	DEBUG : Bits: 8
+15:40:06.073	DEBUG :Lectura de archivo UC-CAJA
+15:40:06.074	DEBUG :  Modo de uso del pinpad: USB
+15:40:06.076	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:41:05.969	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:41:05.973	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:41:05.981	DEBUG : Configuracion OK
+15:41:05.983	DEBUG : Genera trama mLRC
+15:41:05.984	DEBUG : Genera trama LRC Seguridad
+15:41:05.984	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:41:05.995	DEBUG : Configuracion de velocidad de transmision completada
+15:41:05.996	DEBUG : Baudios: 115200
+15:41:05.997	DEBUG : Bits: 8
+15:41:06.009	DEBUG :Lectura de archivo UC-CAJA
+15:41:06.014	DEBUG :  Modo de uso del pinpad: USB
+15:41:06.020	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:41:06.137	DEBUG : Se envia trama de seguridad=SH96C0E450DC646333
+15:41:07.138	DEBUG : Se espera la respuesta
+15:41:07.142	DEBUG : Envio ACK
+15:41:07.212	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+15:41:07.235	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+15:41:07.236	DEBUG : Se envia trama al puerto al pinpad  LT
+15:41:08.239	DEBUG : Compra lee respuesta=
+15:41:09.240	DEBUG : Compra lee respuesta=
+15:41:10.241	DEBUG : Compra lee respuesta=
+15:41:11.242	DEBUG : Compra lee respuesta=
+15:41:12.243	DEBUG : Compra lee respuesta=
+15:41:13.244	DEBUG : Compra lee respuesta=
+15:41:14.245	DEBUG : Compra lee respuesta=
+15:41:15.246	DEBUG : Compra lee respuesta=
+15:41:16.249	DEBUG : Compra lee respuesta=
+15:41:17.253	DEBUG : Compra lee respuesta=
+15:41:18.254	DEBUG : Compra lee respuesta=
+15:41:19.256	DEBUG : Compra lee respuesta=
+15:41:20.258	DEBUG : Compra lee respuesta=
+15:41:21.260	DEBUG : Compra lee respuesta=
+15:41:22.261	DEBUG : Compra lee respuesta=
+15:41:23.263	DEBUG : Compra lee respuesta=
+15:41:24.265	DEBUG : Compra lee respuesta=
+15:41:25.266	DEBUG : Compra lee respuesta=
+15:41:26.268	DEBUG : Compra lee respuesta=
+15:41:27.270	DEBUG : Compra lee respuesta=
+15:41:28.272	DEBUG : Compra lee respuesta=LT2000                         TRANS CANCELADA     !
+15:41:28.273	DEBUG : Se envia ACK al pinpad proceso OK
+15:41:28.334	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         TRANS CANCELADA     
+15:41:30.982	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:41:30.984	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:41:30.985	DEBUG : Configuracion OK
+15:41:30.988	DEBUG : Genera trama mLRC
+15:41:30.989	DEBUG : Genera trama LRC Seguridad
+15:41:30.990	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:41:30.993	DEBUG : Configuracion de velocidad de transmision completada
+15:41:30.994	DEBUG : Baudios: 115200
+15:41:30.996	DEBUG : Bits: 8
+15:41:31.006	DEBUG :Lectura de archivo UC-CAJA
+15:41:31.007	DEBUG :  Modo de uso del pinpad: USB
+15:42:49.203	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:42:49.207	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:42:49.214	DEBUG : Configuracion OK
+15:42:49.216	DEBUG : Genera trama mLRC
+15:42:49.222	DEBUG : Genera trama LRC Seguridad
+15:42:49.225	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:42:49.237	DEBUG : Configuracion de velocidad de transmision completada
+15:42:49.237	DEBUG : Baudios: 115200
+15:42:49.238	DEBUG : Bits: 8
+15:42:49.245	DEBUG :Lectura de archivo UC-CAJA
+15:42:49.251	DEBUG :  Modo de uso del pinpad: USB
+15:42:49.256	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:42:52.902	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:42:52.904	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:42:52.906	DEBUG : Configuracion OK
+15:42:52.907	DEBUG : Genera trama mLRC
+15:42:52.909	DEBUG : Genera trama LRC Seguridad
+15:42:52.915	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:42:52.919	DEBUG : Configuracion de velocidad de transmision completada
+15:42:52.924	DEBUG : Baudios: 115200
+15:42:52.927	DEBUG : Bits: 8
+15:42:52.932	DEBUG :Lectura de archivo UC-CAJA
+15:42:52.933	DEBUG :  Modo de uso del pinpad: USB
+15:42:52.937	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:43:03.006	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:43:03.007	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:43:03.007	DEBUG : Configuracion OK
+15:43:03.008	DEBUG : Genera trama mLRC
+15:43:03.008	DEBUG : Genera trama LRC Seguridad
+15:43:03.009	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:43:03.010	DEBUG : Configuracion de velocidad de transmision completada
+15:43:03.012	DEBUG : Baudios: 115200
+15:43:03.012	DEBUG : Bits: 8
+15:43:03.016	DEBUG :Lectura de archivo UC-CAJA
+15:43:03.017	DEBUG :  Modo de uso del pinpad: USB
+15:43:03.017	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:43:05.093	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:43:05.095	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:43:05.097	DEBUG : Configuracion OK
+15:43:05.099	DEBUG : Genera trama mLRC
+15:43:05.100	DEBUG : Genera trama LRC Seguridad
+15:43:05.101	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:43:05.107	DEBUG : Configuracion de velocidad de transmision completada
+15:43:05.108	DEBUG : Baudios: 115200
+15:43:05.110	DEBUG : Bits: 8
+15:43:05.114	DEBUG :Lectura de archivo UC-CAJA
+15:43:05.116	DEBUG :  Modo de uso del pinpad: USB
+15:43:05.117	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:43:55.576	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:43:55.579	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:43:55.587	DEBUG : Configuracion OK
+15:43:55.589	DEBUG : Genera trama mLRC
+15:43:55.590	DEBUG : Genera trama LRC Seguridad
+15:43:55.591	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:43:55.606	DEBUG : Configuracion de velocidad de transmision completada
+15:43:55.607	DEBUG : Baudios: 115200
+15:43:55.607	DEBUG : Bits: 8
+15:43:55.618	DEBUG :Lectura de archivo UC-CAJA
+15:43:55.625	DEBUG :  Modo de uso del pinpad: USB
+15:43:55.631	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:44:06.937	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:44:06.937	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:44:06.938	DEBUG : Configuracion OK
+15:44:06.938	DEBUG : Genera trama mLRC
+15:44:06.938	DEBUG : Genera trama LRC Seguridad
+15:44:06.939	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:44:06.939	DEBUG : Configuracion de velocidad de transmision completada
+15:44:06.940	DEBUG : Baudios: 115200
+15:44:06.940	DEBUG : Bits: 8
+15:44:06.944	DEBUG :Lectura de archivo UC-CAJA
+15:44:06.944	DEBUG :  Modo de uso del pinpad: USB
+15:44:06.945	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:44:09.431	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:44:09.433	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:44:09.435	DEBUG : Configuracion OK
+15:44:09.436	DEBUG : Genera trama mLRC
+15:44:09.438	DEBUG : Genera trama LRC Seguridad
+15:44:09.439	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:44:09.442	DEBUG : Configuracion de velocidad de transmision completada
+15:44:09.446	DEBUG : Baudios: 115200
+15:44:09.448	DEBUG : Bits: 8
+15:44:09.456	DEBUG :Lectura de archivo UC-CAJA
+15:44:09.458	DEBUG :  Modo de uso del pinpad: USB
+15:44:09.459	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:44:11.643	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:44:11.645	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:44:11.648	DEBUG : Configuracion OK
+15:44:11.650	DEBUG : Genera trama mLRC
+15:44:11.652	DEBUG : Genera trama LRC Seguridad
+15:44:11.653	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:44:11.660	DEBUG : Configuracion de velocidad de transmision completada
+15:44:11.663	DEBUG : Baudios: 115200
+15:44:11.665	DEBUG : Bits: 8
+15:44:11.668	DEBUG :Lectura de archivo UC-CAJA
+15:44:11.672	DEBUG :  Modo de uso del pinpad: USB
+15:44:11.673	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:44:13.857	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:44:13.858	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:44:13.860	DEBUG : Configuracion OK
+15:44:13.862	DEBUG : Genera trama mLRC
+15:44:13.864	DEBUG : Genera trama LRC Seguridad
+15:44:13.865	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:44:13.868	DEBUG : Configuracion de velocidad de transmision completada
+15:44:13.870	DEBUG : Baudios: 115200
+15:44:13.872	DEBUG : Bits: 8
+15:44:13.877	DEBUG :Lectura de archivo UC-CAJA
+15:44:13.879	DEBUG :  Modo de uso del pinpad: USB
+15:44:13.880	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:47:17.282	DEBUG : SendPinpad ---- Timeout de las transacciones: 70 segundos
+15:47:17.285	DEBUG : Inputs Parametro "LT-9-70-1-1"
+15:47:17.293	DEBUG : Configuracion OK
+15:47:17.294	DEBUG : Genera trama mLRC
+15:47:17.296	DEBUG : Genera trama LRC Seguridad
+15:47:17.297	DEBUG : Genera tramaa LRC Seguridad Version 2
+15:47:17.318	DEBUG : Configuracion de velocidad de transmision completada
+15:47:17.319	DEBUG : Baudios: 115200
+15:47:17.319	DEBUG : Bits: 8
+15:47:17.327	DEBUG :Lectura de archivo UC-CAJA
+15:47:17.332	DEBUG :  Modo de uso del pinpad: USB
+15:47:17.339	DEBUG : Puerto de comunicacion=/dev/ttyS9
+15:47:17.462	DEBUG : Se envia trama de seguridad=SHE0CFAA0033B7F5ACl
+15:47:18.464	DEBUG : Se espera la respuesta
+15:47:18.465	DEBUG : Envio ACK
+15:47:18.521	DEBUG : Antes de conectarme al puerto: "/dev/ttyS9" para enviar trama
+15:47:18.544	DEBUG : Conexion exitosa al puerto... se procede a enviar trama
+15:47:18.545	DEBUG : Se envia trama al puerto al pinpad  LT
+15:47:19.547	DEBUG : Compra lee respuesta=
+15:47:20.549	DEBUG : Compra lee respuesta=
+15:47:21.550	DEBUG : Compra lee respuesta=
+15:47:22.552	DEBUG : Compra lee respuesta=
+15:47:23.553	DEBUG : Compra lee respuesta=LT2000                         TRANS CANCELADA     !
+15:47:23.555	DEBUG : Se envia ACK al pinpad proceso OK
+15:47:23.623	DEBUG : Se envia respuesta a la caja respuesta= LT2000                         TRANS CANCELADA     

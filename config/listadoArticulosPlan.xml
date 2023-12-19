@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line>
+            <text align="center" length="40" bold="true">LISTADO DE ARTICULOS DEL PLAN NOVIOS</text>			
+		</line>
+		<line></line>
+		<line>
+            <text align="center" length="40" bold="true">${titulo}</text>			
+		</line>
+		
+        <line></line>
+		
+		<line>
+			<text align="center" length="10">COD. </text>
+			<text align="center" length="9">ART. </text>
+			<text align="center" length="9">PVP.</text>
+			<text align="center" length="5">COM. </text>
+			<text align="center" length="7">INV.</text>
+		</line> 		
+		#foreach ($articulo in $articulos)			
+			<line>
+				<text align="left" length="10">${articulo.getCodArt()}</text>
+				<text align="left" length="9">${articulo.getDesArt()}</text>
+				<text align="right" length="9">${articulo.getPrecioTotal()}</text>
+				<text align="center" length="5">${articulo.getComprado()}</text>
+				
+				#if (${articulo.getInvitadoPlanNovio()})
+					<text align="left" length="7">${articulo.getInvitadoPlanNovio().getNombre()} ${articulo.getInvitadoPlanNovio().getApellido()}</text>
+				#end
+				#if (!${articulo.getInvitadoPlanNovio()} && ${articulo.isCompradoOReservado()})
+					<text align="center" length="7">BODA</text>
+				#end
+				#if (!${articulo.getInvitadoPlanNovio()} && !${articulo.isCompradoOReservado()})
+					<text align="center" length="7"></text>
+				#end	
+			</line> 			
+		#end
+		<line></line>
+		
+		<line></line>
+        <line><text align="center" length="35">${fecha.getStringHora()}</text></line>      
+    </ticket>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	
+</output>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>
+		<line/><line><text align="left" length="35"></text></line>
+		<barcode type="CODE128" position="none">${tramaGC}</barcode>	
+				<line/>
+				<line>
+					<text align="left" length="35" bold="true">RECIBO DE ${operacion} DE PERFECT GIFT</text>
+				</line>		
+				<line>
+					<text align="center" length="35">${idGC}</text>
+				</line>
+				<line>
+					<text align="left" length="35">LOCAL: ${tienda}</text>
+				</line>
+
+		#if (!${cliente.isClienteGenerico()}) 
+			#if (${cliente.isSocio()})
+				<line>
+					<text align="left" length="35">SOCIA: ${facturacion.getTipoIdent()}: ${facturacion.getIdent()}</text>
+				</line>
+			#end
+			#if (!${cliente.isSocio()})
+				<line>
+					<text align="left" length="35">CLIENTE: ${facturacion.getTipoIdent()}: ${facturacion.getIdent()}</text>
+				</line>
+			#end
+			<line>
+				<text align="left" length="35">  Nombre: ${facturacion.getNombreImpresion()} ${facturacion.getApellidosImpresion()}</text>
+			</line>
+		#end
+		#if (${cliente.isClienteGenerico()})
+			<line>
+				<text align="left" length="35">CLIENTE: ${facturacion.getNombre()} ${facturacion.getApellidos()}</text>
+			</line>
+		#end
+		#if (${facturacion.getTelefono()}&&${facturacion.getTelefono().length()}==9)
+		<line>
+			<text align="left" length="35">  Teléfono: ${facturacion.getTelefono()}</text>
+		</line>
+		#end
+		#if (${facturacion.getDireccion()})
+		<line>
+			<text align="left" length="35">  Dirección: ${facturacion.getDireccionImpresion()}</text>
+		</line>
+		#end
+		
+        <line></line>
+		
+		<line>
+			<text align="left" length="40">El cliente ha comprado una </text>
+		</line>
+		<line>
+			<text align="left" length="40">Perfect Gift de US$ ${pagoTotal.toString()}</text>
+		</line>
+		<line/>
+		<line>
+			<text align="center" length="40"> Forma de Pago</text>
+		</line>
+		
+         
+        #foreach ($pago in $pagos)
+        <line>         
+			#if (!(${pago.isPagoTarjeta()}))
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()}</text>
+			#end
+			#if (${pago.isPagoTarjeta()})
+				<text align="left" length="28">    ${pago.getMedioPagoActivo().getDesMedioPago()}</text>
+			#end
+			<text align="right" length="5">US$:</text>		
+            <text align="right" length="7"> ${pago.getUstedPagaPrint().toString()}</text>
+        </line>
+			#if (!(${pago.getVuelta().isEmpty()}))
+			<line>
+				<text align="left" length="28">       Cambio:</text>
+				<text align="right" length="5">US$:</text>		
+				<text align="right" length="7"> ${pago.getVuelta()}</text>
+			</line>
+			#end
+		
+        #end
+        <line></line>
+	
+        #if (${observaciones.getLineas().isEmpty()})
+            <line><text align="left" lenght="40">Observ : REVISADO </text> </line>
+        #else
+            <line><text align="left" lenght="40">Observ:</text></line>
+            #foreach ($lineaObservacion in $observaciones.getLineas())
+                <line><text align="left" lenght="40">$lineaObservacion </text></line>
+            #end
+        #end
+		
+		
+		<line></line>
+		<line><text align="left" length="12">LE ATENDIÓ: </text><text align="left" length="28">${cajero.getDesUsuario()}, gracias.</text></line>
+        <line><text align="center" length="35">${fecha}</text></line>   
+		<line></line>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+    </ticket>
+</output>

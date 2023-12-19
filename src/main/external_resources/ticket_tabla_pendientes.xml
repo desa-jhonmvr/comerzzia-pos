@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>   
+        <line>
+            <text align="center"  length="40">CAJA No. ${printPendiente.getCajaNumero()}</text>
+        </line> 
+        <line>
+            <text align="center"  length="40">_____________</text>
+        </line>  
+        <line>
+            <text align="left" length="40">________________________________________</text>	
+        </line>  
+        <line>
+            <text align="center"  length="40">${printPendiente.getCabecera()}</text>
+        </line>
+        <line>
+            <text align="center" length="40">${printPendiente.getFecha()}</text>
+        </line>
+         <line>
+            <text align="center" length="40">No. ${printPendiente.getCajaSecuencial()}</text>
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="14">Comprador:</text>
+            <text align="right" length="26">${printPendiente.getComprador()}</text>
+        </line>
+        <line>
+            <text align="left" length="14">Cedula:</text>
+            <text align="right" length="26">${printPendiente.getCedula()}</text>
+        </line>
+        <line>
+            <text align="left" length="14">Dirección:</text>
+            <text align="right" length="26">${printPendiente.getDireccion()}</text>
+        </line>                             
+        <line>
+            <text align="left" length="14">Telefono:</text>
+            <text align="right" length="26">${printPendiente.getTelefono()}</text>
+        </line>
+        <line>
+            <text align="left" length="14">Observaciones:</text>
+            <text align="right" length="26"></text>
+        </line>       
+  	   <line>
+            <text align="left" length="40">________________________________________</text>	
+        </line>
+        #foreach ($linea in $printPendiente.getArticulos())
+        <line>
+            <text align="left" length="40">----------------------------------------</text>	
+        </line> 
+        <line>
+            <text align="left" length="40" >Cod Vendedor: ${linea.getCodVendedor()}</text> 
+        </line> 	
+        <line>
+            <text align="left" length="40" >Cod Barras: ${linea.getCodigoBarras()}</text> 
+        </line>
+         <line>
+            <text align="left" length="40" >Cod Interno: ${linea.getCodart().getCodart()}</text> 
+          
+        </line>
+        <line>
+            <text align="left" length="40">Cantidad: ${linea.getCantidad()}</text>
+        </line>
+        <line>
+            <text align="left" length="40" >Descripción: ${linea.getCodart().getDescForPrint()}</text> 
+        </line>    
+        #end
+        <line>
+            <text align="left" length="40">----------------------------------------</text>	
+        </line>
+        <line>
+            <text align="left" length="40">________________________________________</text>	
+        </line>
+         <line/>
+        <line>
+            <text align="left" length="14">Elaborado Por:</text>
+             </line>
+              <line>
+            <text align="left" length="40">${printPendiente.getElaborado()}</text> 
+        </line>                    
+        <line/>
+        <line>
+            <text align="left" length="40">Recibí Conforme :_______________________</text>           
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="40">________________________________________</text>	
+        </line>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>	
+    </ticket>
+</output>

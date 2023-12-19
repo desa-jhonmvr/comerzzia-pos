@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line>
+            <text align="center" length="40" bold="true">LISTADO DE CANCELACIONES PENDIENTES</text>			
+		</line>
+		<line></line>	
+        <line></line>
+		
+		<line><text align="center" length="35">CANCELACIONES PENDIENTES</text></line> 
+		<line>
+			<text align="center" length="15"> AUDITORIA </text>
+			<text align="center" length="12">AUTORIZACION</text>
+			<text align="center" length="13"> VALOR </text>
+		</line> 		
+		#foreach ($cancelacion in $listaCancelaciones)			
+			<line>			
+				<text align="center" length="15">${cancelacion.getNumeroAuditoria()}</text>
+				<text align="center" length="12">${cancelacion.getNumeroAutorizacion()}</text>
+				<text align="center" length="13">${cancelacion.getValor()}</text>
+			</line> 			
+		#end
+		<line></line>
+		
+		<line></line>
+        <line><text align="center" length="35">${fecha} ${hora}</text></line>      
+    </ticket>
+</output>

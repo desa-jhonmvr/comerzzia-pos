@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaBean" >
+    <id column="UID_RESERVACION" property="uidReservacion" jdbcType="VARCHAR" />
+    <result column="CODCLI" property="codcli" jdbcType="VARCHAR" />
+    <result column="COD_TIPO" property="codTipo" jdbcType="VARCHAR" />
+    <result column="CADUCIDAD" property="caducidad" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="FECHA_ALTA" property="fechaAlta" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="LIQUIDADO" property="liquidado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="CODALM" property="codalm" jdbcType="VARCHAR" />
+    <result column="CANCELADO" property="cancelado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="PROCESADO" property="procesado" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="CODCAJA" property="codcaja" jdbcType="VARCHAR" />
+    <result column="ID_USUARIO" property="idUsuario" jdbcType="DECIMAL" />
+    <result column="CUOTA_INICIAL" property="cuotaInicial" jdbcType="DECIMAL" />
+    <result column="FECHA_LIQUIDACION" property="fechaLiquidacion" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="CODVENDEDOR" property="codvendedor" jdbcType="VARCHAR" />
+    <result column="PROCESADO_TIENDA" property="procesadoTienda" jdbcType="VARCHAR" typeHandler="es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler" />
+    <result column="COD_RESERVACION" property="codReservacion" jdbcType="DECIMAL" />
+    <result column="NOMBRE_ORGANIZADORA" property="nombreOrganizadora" jdbcType="VARCHAR" />
+    <result column="APELLIDOS_ORGANIZADORA" property="apellidosOrganizadora" jdbcType="VARCHAR" />
+    <result column="TELEFONO_ORGANIZADORA" property="telefonoOrganizadora" jdbcType="VARCHAR" />
+    <result column="DIRECCION_EVENTO" property="direccionEvento" jdbcType="VARCHAR" />
+    <result column="FECHA_HORA_EVENTO" property="fechaHoraEvento" jdbcType="DATE" typeHandler="es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler" />
+    <result column="RESERVACION_FACT" property="reservacionFact" jdbcType="VARCHAR" />
+    <result column="NOMBRE_ORG" property="nombreOrg" jdbcType="VARCHAR" />
+    <result column="APELLIDOS_ORG" property="apellidosOrg" jdbcType="VARCHAR" />
+    <result column="CODCLIENTE" property="codcliente" jdbcType="VARCHAR" />
+    <result column="TIPODOCU" property="tipoDocu" jdbcType="VARCHAR" />
+    <result column="NOMBRECLIENTE" property="nombrecliente" jdbcType="VARCHAR" />
+    <result column="APELLIDOSCLIENTE" property="apellidoscliente" jdbcType="VARCHAR" />
+    <result column="CODTIPORESERVA" property="codTipoReserva" jdbcType="VARCHAR" />
+    <result column="DESTIPORESERVA" property="desTipoReserva" jdbcType="VARCHAR" />  
+    <result column="BONO" property="bono" jdbcType="VARCHAR" />   
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.caducidadCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaAltaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.liquidadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.canceladoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaLiquidacionCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoTiendaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaHoraEventoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.caducidadCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaAltaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.liquidadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.canceladoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaLiquidacionCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.procesadoTiendaCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.fechaHoraEventoCriteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler} and #{criterion.secondValue,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_RESERVACION, CODCLI, COD_TIPO, CADUCIDAD, FECHA_ALTA, LIQUIDADO, CODALM, CANCELADO, 
+    CODCAJA, ID_USUARIO, CUOTA_INICIAL, FECHA_LIQUIDACION, CODVENDEDOR, PROCESADO_TIENDA, 
+    COD_RESERVACION, NOMBRE_ORGANIZADORA, APELLIDOS_ORGANIZADORA, TELEFONO_ORGANIZADORA, 
+    DIRECCION_EVENTO, FECHA_HORA_EVENTO, TIPODOCU, NOMBRECLIENTE, APELLIDOSCLIENTE, 
+    CODTIPORESERVA, DESTIPORESERVA, BONO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_RESERVA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from X_RESERVA_TBL
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from X_RESERVA_TBL
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaExample" >
+    delete from X_RESERVA_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaBean" >
+    insert into X_RESERVA_TBL (UID_RESERVACION, CODCLI, COD_TIPO, 
+      CADUCIDAD, 
+      FECHA_ALTA, 
+      LIQUIDADO, 
+      CODALM, CANCELADO, 
+      CODCAJA, ID_USUARIO, CUOTA_INICIAL, 
+      FECHA_LIQUIDACION, 
+      CODVENDEDOR, PROCESADO_TIENDA, 
+      COD_RESERVACION, NOMBRE_ORGANIZADORA, APELLIDOS_ORGANIZADORA, 
+      TELEFONO_ORGANIZADORA, DIRECCION_EVENTO, 
+      FECHA_HORA_EVENTO, BONO
+      )
+    values (#{uidReservacion,jdbcType=VARCHAR}, #{codcli,jdbcType=VARCHAR}, #{codTipo,jdbcType=VARCHAR}, 
+      #{caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{codalm,jdbcType=VARCHAR}, #{cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{codcaja,jdbcType=VARCHAR}, #{idUsuario,jdbcType=DECIMAL}, #{cuotaInicial,jdbcType=DECIMAL}, 
+      #{fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler}, 
+      #{codvendedor,jdbcType=VARCHAR}, #{procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}, 
+      #{codReservacion,jdbcType=DECIMAL}, #{nombreOrganizadora,jdbcType=VARCHAR}, #{apellidosOrganizadora,jdbcType=VARCHAR}, 
+      #{telefonoOrganizadora,jdbcType=VARCHAR}, #{direccionEvento,jdbcType=VARCHAR}, 
+      #{fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      #{bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaBean" >
+    insert into X_RESERVA_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidReservacion != null" >
+        UID_RESERVACION,
+      </if>
+      <if test="codcli != null" >
+        CODCLI,
+      </if>
+      <if test="codTipo != null" >
+        COD_TIPO,
+      </if>
+      <if test="caducidad != null" >
+        CADUCIDAD,
+      </if>
+      <if test="fechaAlta != null" >
+        FECHA_ALTA,
+      </if>
+      <if test="liquidado != null" >
+        LIQUIDADO,
+      </if>
+      <if test="codalm != null" >
+        CODALM,
+      </if>
+      <if test="cancelado != null" >
+        CANCELADO,
+      </if>
+      <if test="procesado != null" >
+        PROCESADO,
+      </if>
+      <if test="codcaja != null" >
+        CODCAJA,
+      </if>
+      <if test="idUsuario != null" >
+        ID_USUARIO,
+      </if>
+      <if test="cuotaInicial != null" >
+        CUOTA_INICIAL,
+      </if>
+      <if test="fechaLiquidacion != null" >
+        FECHA_LIQUIDACION,
+      </if>
+      <if test="codvendedor != null" >
+        CODVENDEDOR,
+      </if>
+      <if test="procesadoTienda != null" >
+        PROCESADO_TIENDA,
+      </if>
+      <if test="codReservacion != null" >
+        COD_RESERVACION,
+      </if>
+      <if test="nombreOrganizadora != null" >
+        NOMBRE_ORGANIZADORA,
+      </if>
+      <if test="apellidosOrganizadora != null" >
+        APELLIDOS_ORGANIZADORA,
+      </if>
+      <if test="telefonoOrganizadora != null" >
+        TELEFONO_ORGANIZADORA,
+      </if>
+      <if test="direccionEvento != null" >
+        DIRECCION_EVENTO,
+      </if>
+      <if test="fechaHoraEvento != null" >
+        FECHA_HORA_EVENTO,
+      </if>
+      <if test="bono != null" >
+        BONO,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidReservacion != null" >
+        #{uidReservacion,jdbcType=VARCHAR},
+      </if>
+      <if test="codcli != null" >
+        #{codcli,jdbcType=VARCHAR},
+      </if>
+      <if test="codTipo != null" >
+        #{codTipo,jdbcType=VARCHAR},
+      </if>
+      <if test="caducidad != null" >
+        #{caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="fechaAlta != null" >
+        #{fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="liquidado != null" >
+        #{liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codalm != null" >
+        #{codalm,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelado != null" >
+        #{cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="procesado != null" >
+        #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codcaja != null" >
+        #{codcaja,jdbcType=VARCHAR},
+      </if>
+      <if test="idUsuario != null" >
+        #{idUsuario,jdbcType=DECIMAL},
+      </if>
+      <if test="cuotaInicial != null" >
+        #{cuotaInicial,jdbcType=DECIMAL},
+      </if>
+      <if test="fechaLiquidacion != null" >
+        #{fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="codvendedor != null" >
+        #{codvendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="procesadoTienda != null" >
+        #{procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codReservacion != null" >
+        #{codReservacion,jdbcType=DECIMAL},
+      </if>
+      <if test="nombreOrganizadora != null" >
+        #{nombreOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="apellidosOrganizadora != null" >
+        #{apellidosOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="telefonoOrganizadora != null" >
+        #{telefonoOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="direccionEvento != null" >
+        #{direccionEvento,jdbcType=VARCHAR},
+      </if>
+      <if test="fechaHoraEvento != null" >
+        #{fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="tipoDocu != null" >
+        #{tipoDocu,jdbcType=VARCHAR},
+      </if>
+      <if test="bono != null" >
+        #{bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaExample" resultType="java.lang.Integer" >
+    select count(*) from X_RESERVA_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_RESERVA_TBL
+    <set >
+      <if test="record.uidReservacion != null" >
+        UID_RESERVACION = #{record.uidReservacion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codcli != null" >
+        CODCLI = #{record.codcli,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codTipo != null" >
+        COD_TIPO = #{record.codTipo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caducidad != null" >
+        CADUCIDAD = #{record.caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.fechaAlta != null" >
+        FECHA_ALTA = #{record.fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.liquidado != null" >
+        LIQUIDADO = #{record.liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.codalm != null" >
+        CODALM = #{record.codalm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancelado != null" >
+        CANCELADO = #{record.cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.procesado != null" >
+        PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.codcaja != null" >
+        CODCAJA = #{record.codcaja,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idUsuario != null" >
+        ID_USUARIO = #{record.idUsuario,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cuotaInicial != null" >
+        CUOTA_INICIAL = #{record.cuotaInicial,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fechaLiquidacion != null" >
+        FECHA_LIQUIDACION = #{record.fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.codvendedor != null" >
+        CODVENDEDOR = #{record.codvendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procesadoTienda != null" >
+        PROCESADO_TIENDA = #{record.procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="record.codReservacion != null" >
+        COD_RESERVACION = #{record.codReservacion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nombreOrganizadora != null" >
+        NOMBRE_ORGANIZADORA = #{record.nombreOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apellidosOrganizadora != null" >
+        APELLIDOS_ORGANIZADORA = #{record.apellidosOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telefonoOrganizadora != null" >
+        TELEFONO_ORGANIZADORA = #{record.telefonoOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="record.direccionEvento != null" >
+        DIRECCION_EVENTO = #{record.direccionEvento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fechaHoraEvento != null" >
+        FECHA_HORA_EVENTO = #{record.fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="record.bono != null" >
+        BONO = #{record.bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_RESERVA_TBL
+    set UID_RESERVACION = #{record.uidReservacion,jdbcType=VARCHAR},
+      CODCLI = #{record.codcli,jdbcType=VARCHAR},
+      COD_TIPO = #{record.codTipo,jdbcType=VARCHAR},
+      CADUCIDAD = #{record.caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      FECHA_ALTA = #{record.fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      LIQUIDADO = #{record.liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODALM = #{record.codalm,jdbcType=VARCHAR},
+      CANCELADO = #{record.cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      PROCESADO = #{record.procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODCAJA = #{record.codcaja,jdbcType=VARCHAR},
+      ID_USUARIO = #{record.idUsuario,jdbcType=DECIMAL},
+      CUOTA_INICIAL = #{record.cuotaInicial,jdbcType=DECIMAL},
+      FECHA_LIQUIDACION = #{record.fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      CODVENDEDOR = #{record.codvendedor,jdbcType=VARCHAR},
+      PROCESADO_TIENDA = #{record.procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      COD_RESERVACION = #{record.codReservacion,jdbcType=DECIMAL},
+      NOMBRE_ORGANIZADORA = #{record.nombreOrganizadora,jdbcType=VARCHAR},
+      APELLIDOS_ORGANIZADORA = #{record.apellidosOrganizadora,jdbcType=VARCHAR},
+      TELEFONO_ORGANIZADORA = #{record.telefonoOrganizadora,jdbcType=VARCHAR},
+      DIRECCION_EVENTO = #{record.direccionEvento,jdbcType=VARCHAR},
+      FECHA_HORA_EVENTO = #{record.fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      BONO = #{record.bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaBean" >
+    update X_RESERVA_TBL
+    <set >
+      <if test="codcli != null" >
+        CODCLI = #{codcli,jdbcType=VARCHAR},
+      </if>
+      <if test="codTipo != null" >
+        COD_TIPO = #{codTipo,jdbcType=VARCHAR},
+      </if>
+      <if test="caducidad != null" >
+        CADUCIDAD = #{caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="fechaAlta != null" >
+        FECHA_ALTA = #{fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="liquidado != null" >
+        LIQUIDADO = #{liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codalm != null" >
+        CODALM = #{codalm,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelado != null" >
+        CANCELADO = #{cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="procesado != null" >
+        PROCESADO = #{procesado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codcaja != null" >
+        CODCAJA = #{codcaja,jdbcType=VARCHAR},
+      </if>
+      <if test="idUsuario != null" >
+        ID_USUARIO = #{idUsuario,jdbcType=DECIMAL},
+      </if>
+      <if test="cuotaInicial != null" >
+        CUOTA_INICIAL = #{cuotaInicial,jdbcType=DECIMAL},
+      </if>
+      <if test="fechaLiquidacion != null" >
+        FECHA_LIQUIDACION = #{fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="codvendedor != null" >
+        CODVENDEDOR = #{codvendedor,jdbcType=VARCHAR},
+      </if>
+      <if test="procesadoTienda != null" >
+        PROCESADO_TIENDA = #{procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>
+      <if test="codReservacion != null" >
+        COD_RESERVACION = #{codReservacion,jdbcType=DECIMAL},
+      </if>
+      <if test="nombreOrganizadora != null" >
+        NOMBRE_ORGANIZADORA = #{nombreOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="apellidosOrganizadora != null" >
+        APELLIDOS_ORGANIZADORA = #{apellidosOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="telefonoOrganizadora != null" >
+        TELEFONO_ORGANIZADORA = #{telefonoOrganizadora,jdbcType=VARCHAR},
+      </if>
+      <if test="direccionEvento != null" >
+        DIRECCION_EVENTO = #{direccionEvento,jdbcType=VARCHAR},
+      </if>
+      <if test="fechaHoraEvento != null" >
+        FECHA_HORA_EVENTO = #{fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      </if>
+      <if test="bono != null" >
+        BONO = #{bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      </if>      
+    </set>
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaBean" >
+    update X_RESERVA_TBL
+    set CODCLI = #{codcli,jdbcType=VARCHAR},
+      COD_TIPO = #{codTipo,jdbcType=VARCHAR},
+      CADUCIDAD = #{caducidad,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      FECHA_ALTA = #{fechaAlta,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      LIQUIDADO = #{liquidado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODALM = #{codalm,jdbcType=VARCHAR},
+      CANCELADO = #{cancelado,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      CODCAJA = #{codcaja,jdbcType=VARCHAR},
+      ID_USUARIO = #{idUsuario,jdbcType=DECIMAL},
+      CUOTA_INICIAL = #{cuotaInicial,jdbcType=DECIMAL},
+      FECHA_LIQUIDACION = #{fechaLiquidacion,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      CODVENDEDOR = #{codvendedor,jdbcType=VARCHAR},
+      PROCESADO_TIENDA = #{procesadoTienda,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler},
+      COD_RESERVACION = #{codReservacion,jdbcType=DECIMAL},
+      NOMBRE_ORGANIZADORA = #{nombreOrganizadora,jdbcType=VARCHAR},
+      APELLIDOS_ORGANIZADORA = #{apellidosOrganizadora,jdbcType=VARCHAR},
+      TELEFONO_ORGANIZADORA = #{telefonoOrganizadora,jdbcType=VARCHAR},
+      DIRECCION_EVENTO = #{direccionEvento,jdbcType=VARCHAR},
+      FECHA_HORA_EVENTO = #{fechaHoraEvento,jdbcType=DATE,typeHandler=es.mpsistemas.util.mybatis.typehandlers.FechaHoraTypeHandler},
+      BONO = #{bono,jdbcType=VARCHAR,typeHandler=es.mpsistemas.util.mybatis.typehandlers.BooleanTypeHandler}
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_RESERVA_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectFromViewByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.reservaciones.reserva.ReservaExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="View_Base_Column_List" />
+    from X_RESERVA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectFromViewByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="View_Base_Column_List" />
+    from X_RESERVA
+    where UID_RESERVACION = #{uidReservacion,jdbcType=VARCHAR}
+  </select>
+  <sql id="View_Base_Column_List" >
+    APELLIDOSCLIENTE, CODVENDEDOR, PROCESADO, NOMBRE_ORG, COD_RESERVACION, RESERVACION_FACT, 
+    CADUCIDAD, DIRECCION_EVENTO, FECHA_HORA_EVENTO, ID_USUARIO, APELLIDOS_ORGANIZADORA, 
+    COD_TIPO, APELLIDOS_ORG, PROCESADO_TIENDA, CODCLIENTE, UID_RESERVACION, CANCELADO, 
+    TELEFONO_ORGANIZADORA, CODALM, LIQUIDADO, CODCAJA, FECHA_ALTA, NOMBRECLIENTE, FECHA_LIQUIDACION, 
+    CUOTA_INICIAL, NOMBRE_ORGANIZADORA, CODCLI, TIPODOCU, BONO
+  </sql>
+</mapper>

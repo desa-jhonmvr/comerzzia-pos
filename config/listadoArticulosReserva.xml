@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>	
+        <line>
+            <text align="center" length="40" bold="true">LISTADO DE ARTICULOS RESERVADOS</text>			
+		</line>
+		#if (!${reserva.getCliente().isClienteGenerico()}) 
+			#if (${reserva.getCliente().isSocio()})
+				<line>
+				<text align="center" length="20" bold="true">RESERVA </text>
+				<text length="20">${reserva.getCodReservacion().toString()}</text>
+				</line>			
+				<line>
+				<text align="center" length="20" bold="true">A FAVOR DE: </text>
+				</line>
+				<line>
+					<text align="left" length="35">SOCIA: ${reserva.getCliente().getTipoIdentificacion()}: ${reserva.getCliente().getIdentificacion()}</text>
+				</line>
+			#end			
+			<line>
+				<text align="left" length="35">  Nombre: ${reserva.getCliente().getNombreImpresion()} ${reserva.getCliente().getApellidoImpresion()}</text>
+			</line>
+		#end
+		
+        <line/>
+		<line><text align="center" length="40">${reserva.getIdRes()}</text></line>
+		<line/>
+		
+		<line><text align="center" length="35">ARTICULOS COMPRADOS</text></line> 
+		<line>
+			<text align="center" length="15"> ARTICULO </text>
+			<text align="center" length="10"> COMPRADO </text>
+			<text align="center" length="15"> INVITADO </text>
+		</line> 		
+		#foreach ($articulo in $articulos)
+			#foreach ($comprador in $articulo.getCompradores())
+			<line>			
+				<text align="left" length="20">${articulo.getArticulo().getDesart()}</text>
+				<text align="center" length="5">${comprador.getCantidad()}</text>
+				<text align="left" length="20">${comprador.getInvitado().getNombreImpresion()} ${comprador.getInvitado().getApellidosImpresion()}</text>
+			
+			</line> 
+			#end
+		#end
+		<line></line>
+		<line><text align="center" length="35">ARTICULOS NO COMPRADOS</text></line> 
+		<line>
+			<text align="center" length="20"> ARTICULO </text>
+			<text align="center" length="20">RESERVADO - COMPRADO</text>
+		</line> 
+		#foreach ($articulo in $articulos)
+		<line>	
+			#if ((${articulo.getCantidadReservados()}-${articulo.getCantidadComprados()})>0)		
+				<text align="left" length="20">${articulo.getArticulo().getDesart()}</text>
+				<text align="center" length="20">${articulo.getCantidadReservados()} - ${articulo.getCantidadComprados()} </text>
+			#end
+		</line> 
+		#end
+		<line></line>
+        <line><text align="center" length="35">${fecha.getStringHora()}</text></line>      
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+    </ticket>
+</output>

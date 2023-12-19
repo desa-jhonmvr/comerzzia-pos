@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosMapper" >
+  <resultMap id="BaseResultMap" type="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    <id column="UID_DOCUMENTO" property="uidDocumento" jdbcType="VARCHAR" />
+    <id column="ID_IMPRESO" property="idImpreso" jdbcType="DECIMAL" />
+    <id column="ORIGEN" property="idImpreso" jdbcType="DECIMAL" />
+    <result column="TIPO_IMPRESO" property="tipoImpreso" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" extends="BaseResultMap" >
+    <result column="IMPRESO" property="impreso" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UID_DOCUMENTO, ID_IMPRESO, TIPO_IMPRESO
+  </sql>
+  <sql id="Blob_Column_List" >
+    IMPRESO
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" resultSetType="SCROLL_INSENSITIVE" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_DOCUMENTOS_IMPRESOS_TBL
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+      and ID_IMPRESO = #{idImpreso,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosKey" >
+    delete from X_DOCUMENTOS_IMPRESOS_TBL
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+      and ID_IMPRESO = #{idImpreso,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" >
+    delete from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    insert into X_DOCUMENTOS_IMPRESOS_TBL (UID_DOCUMENTO, ID_IMPRESO, TIPO_IMPRESO, 
+      IMPRESO, ORIGEN)
+    values (#{uidDocumento,jdbcType=VARCHAR}, #{idImpreso,jdbcType=DECIMAL}, #{tipoImpreso,jdbcType=VARCHAR}, 
+      #{impreso,jdbcType=BLOB}, #{origen,jdbcType=VARCHAR} )
+  </insert>
+  <insert id="insertSelective" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    insert into X_DOCUMENTOS_IMPRESOS_TBL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uidDocumento != null" >
+        UID_DOCUMENTO,
+      </if>
+      <if test="idImpreso != null" >
+        ID_IMPRESO,
+      </if>
+      <if test="tipoImpreso != null" >
+        TIPO_IMPRESO,
+      </if>
+      <if test="impreso != null" >
+        IMPRESO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uidDocumento != null" >
+        #{uidDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="idImpreso != null" >
+        #{idImpreso,jdbcType=DECIMAL},
+      </if>
+      <if test="tipoImpreso != null" >
+        #{tipoImpreso,jdbcType=VARCHAR},
+      </if>
+      <if test="impreso != null" >
+        #{impreso,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" resultType="java.lang.Integer" >
+    select count(*) from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    <set >
+      <if test="record.uidDocumento != null" >
+        UID_DOCUMENTO = #{record.uidDocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idImpreso != null" >
+        ID_IMPRESO = #{record.idImpreso,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tipoImpreso != null" >
+        TIPO_IMPRESO = #{record.tipoImpreso,jdbcType=VARCHAR},
+      </if>
+      <if test="record.impreso != null" >
+        IMPRESO = #{record.impreso,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    set UID_DOCUMENTO = #{record.uidDocumento,jdbcType=VARCHAR},
+      ID_IMPRESO = #{record.idImpreso,jdbcType=DECIMAL},
+      TIPO_IMPRESO = #{record.tipoImpreso,jdbcType=VARCHAR},
+      IMPRESO = #{record.impreso,jdbcType=BLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    set UID_DOCUMENTO = #{record.uidDocumento,jdbcType=VARCHAR},
+      ID_IMPRESO = #{record.idImpreso,jdbcType=DECIMAL},
+      TIPO_IMPRESO = #{record.tipoImpreso,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    <set >
+      <if test="tipoImpreso != null" >
+        TIPO_IMPRESO = #{tipoImpreso,jdbcType=VARCHAR},
+      </if>
+      <if test="impreso != null" >
+        IMPRESO = #{impreso,jdbcType=BLOB},
+      </if>
+    </set>
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+      and ID_IMPRESO = #{idImpreso,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    set TIPO_IMPRESO = #{tipoImpreso,jdbcType=VARCHAR},
+      IMPRESO = #{impreso,jdbcType=BLOB}
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+      and ID_IMPRESO = #{idImpreso,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosBean" >
+    update X_DOCUMENTOS_IMPRESOS_TBL
+    set TIPO_IMPRESO = #{tipoImpreso,jdbcType=VARCHAR}
+    where UID_DOCUMENTO = #{uidDocumento,jdbcType=VARCHAR}
+      and ID_IMPRESO = #{idImpreso,jdbcType=DECIMAL}
+  </update>
+  <select resultMap="ResultMapWithBLOBs" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" id="selectByExampleWithBLOBsWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select resultMap="BaseResultMap" parameterType="com.comerzzia.jpos.persistencia.print.documentos.impresos.DocumentosImpresosExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from X_DOCUMENTOS_IMPRESOS_TBL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

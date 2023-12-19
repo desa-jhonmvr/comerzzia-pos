@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line><cabecera align="center" length="40" bold="true"></cabecera></line>       
+        <line>
+            <text align="left" length="40">Estimado Cliente:</text>
+        </line>
+	<line/>
+	<line/>
+	<line>
+            <text align="left" length="40">A partir del próximo corte, en lugar del</text>
+	</line>
+	<line>
+            <text align="left" length="40">Estado de Crédito impreso, usted</text>
+	</line>
+	<line>
+		<text align="left" length="40">recibirá en su Correo Electrónico una</text>
+	</line>
+	<line>
+		<text align="left" length="40">copia digital.</text>
+	</line>
+	<line/>
+	<line>
+		<text align="left" length="40">Por favor llene el siguiente espacio</text>
+	</line>
+	<line>
+		<text align="left" length="40">con su correo electrónico:</text>
+	</line>
+	<line/>
+	<line/>
+	<line/>
+	<line/>
+	<line>
+		<text align="left" length="40">Número de cédula o tarjeta:</text>
+	</line>
+	<line><text align="left" length="40">${documento}</text></line>
+	<line/>
+	<line/>
+	<line>
+		<text align="left" length="40">Nombre:</text>
+	</line>
+	<line><text align="left" length="40">${nombreApellidos}</text></line>
+	<line/>
+	<line/>
+	<line>
+		<text align="left" length="40">Ahora su Estado de Crédito con mayores</text>
+	</line>
+	<line>
+		<text align="left" length="40">ventajas Verdes:</text>
+	</line>
+	<line>
+                <text align="left" length="40">Menos desperdicio de papel. Colabora con</text>
+        </line>
+        <line>
+                <text align="left" length="40">el medio ambiente</text>
+        </line>
+        <line>
+                <text align="left" length="40">Envío puntual y sin retrasos</text>
+        </line>
+        <line>
+                <text align="left" length="40">Sin extravío y de consulta permanente</text>
+        </line>
+        <line>
+                <text align="left" length="40">en tu computador</text>
+        </line>
+        <line/>
+        <line><pie align="center" length="40" bold="true"></pie></line>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>                
+    </ticket>
+</output>
