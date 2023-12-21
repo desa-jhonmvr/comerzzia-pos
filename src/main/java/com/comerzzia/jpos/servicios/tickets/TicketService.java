@@ -374,6 +374,7 @@ public class TicketService {
                     connSukasa.abrirConexion(Database.getConnectionSukasa());
                     connSukasa.iniciaTransaccion();
                 }
+
                 Integer numeroCredito;
                 for (PagoCreditoSK pago : listaPagosTarjetaSK) {
                     numeroCredito = ((PagoCreditoSK) pago).getPlastico() != null ? ((PagoCreditoSK) pago).getPlastico().getNumeroCredito() : ((TarjetaCreditoSK) ((PagoCreditoSK) pago).getTarjetaCredito()).getPlastico().getNumeroCredito();
@@ -486,13 +487,18 @@ public class TicketService {
 
     public static void escribirTicket(EntityManager em, TicketS ticket, boolean procesarPagos, boolean realizarRecalculo) throws CuponException, TicketException {
         // recalculamos el total final pagado para cada línea
+        log.debug("recalcularFinalPagado");
         ticket.recalcularFinalPagado();
+        log.debug("recalcularFinalPagadoFinal");
         ticket.recalcularFinalPagadoFinal(false);
 
         // obtenemos ids para los cupones que se emitirán
+        log.debug("obtenerIdCupones");
         ServicioCupones.obtenerIdCupones(ticket.getCuponesEmitidos());
 
         // Creamos el objeto ticketAlm que será el que se salvará en base de datos
+
+        log.debug("Creamos el objeto ticketAlm que será el que se salvará en base de datos");
         TicketsAlm ticketAlm = new TicketsAlm();
         ticketAlm.setFecha(new Date());
         ticketAlm.setIdTicket(ticket.getId_ticket());
@@ -528,6 +534,7 @@ public class TicketService {
         }
 
         //rescatamos el efectivo previo en caja
+        log.debug("rescatamos el efectivo previo en caja");
         BigDecimal efectivoEnCajaAnt = Sesion.getCajaActual().getEfectivoEnCaja();
 
         try {
@@ -541,6 +548,7 @@ public class TicketService {
 
             // registramos posibles líneas de garantía extendida
             GarantiaExtendidaServices.salvarItemsGarantia(em, ticket);
+            log.debug("registramos posibles líneas de garantía extendida");
 
             //G.S. Asigna el vendedor del EGO al articulo
             asignarVendedorExtencionGarantia(ticket);
@@ -553,9 +561,11 @@ public class TicketService {
             String generarClaveAccesoTemp = generarClaveAcceso(ticket);
             //}
             ticketAlm.setClaveAcceso(generarClaveAccesoTemp);
+            log.debug("TicketsDao.escribir ...");
             TicketsDao.escribirTicket(em, ticketAlm);
             em.flush(); // Obligamos a que se realice la operación en base de datos antes de salvar las lineas
             // registramos las lineas del ticket en base de datos
+            log.debug("registramos las lineas del ticket en base de datos ...");
             if (Sesion.isSukasa()) {
                 log.debug("escribirTicket() - Salvamos las líneas del ticket en base de datos...");
                 salvarLineas(em, ticket);
@@ -594,6 +604,8 @@ public class TicketService {
             ServicioPromocionesClientes.registrarPromocionesAplicadas(conn, ticket);
 
             // Tratamiento de promociones de artículos
+
+            log.error("Tratamiento de promociones de artículos.");
             ServicioPromocionArticulo.insert(conn, ticket);
 
             //Guardar Impuestos

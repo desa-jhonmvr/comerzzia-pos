@@ -195,6 +195,7 @@ public class NotaCreditoXMLServices {
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_IMPORTE, Numero.redondear(linea.getImporte()).toString());
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_DESCUENTO_FINAL, Numero.redondear(linea.getDescuentoFinal()).toString());
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_MODELO, linea.getArticulo().getModelo());
+        root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_INTERES, Numero.redondear(linea.getInteres()).toString());
         if (linea.getReferenciaKit() != null){
             root.añadirHijo(construirTagRefKit(xml, linea.getReferenciaKit()));
         }        

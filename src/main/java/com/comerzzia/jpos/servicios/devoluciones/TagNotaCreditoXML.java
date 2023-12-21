@@ -85,6 +85,7 @@ public class TagNotaCreditoXML {
     public static String TAG_LINEA_CODIMP               = "codImpuesto";
     public static String TAG_LINEA_DESCUENTO_FINAL      = "descuentoFinal";
     public static String TAG_LINEA_MODELO               = "modelo";
+    public static String TAG_LINEA_INTERES              = "interes";
     
     // kit instalacion
     public static String TAG_KIT                  = "referenciaKitInstalacion"; // significa que la factura es de kit de instalación y está asociada a otra anterior

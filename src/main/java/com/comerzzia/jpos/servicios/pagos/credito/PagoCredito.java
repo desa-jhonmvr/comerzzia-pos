@@ -132,6 +132,7 @@ public class PagoCredito extends Pago {
     }
 
     public void recalcularPlanesFromTotal(BigDecimal total) throws PromocionArticuloException, PromocionFormaPagoException {
+        log.info("entra a recalcularPlanesFromTotal>>>>>>");
         this.total = total;
         this.ustedPaga = null;
         this.cuota = null;

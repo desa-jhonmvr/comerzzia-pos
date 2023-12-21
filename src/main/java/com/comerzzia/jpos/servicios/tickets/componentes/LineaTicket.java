@@ -62,6 +62,7 @@ public class LineaTicket implements Comparable<LineaTicket> {
     private BigDecimal descuentoFinal; // % descuento final entre el precio de tarifa y el precio final pagado
     private BigDecimal descuentoFinalDev; // % descuento final entre el precio de tarifa y el precio final pagado de la factura origen (solo para uso en devoluciones)
     private BigDecimal descuentoFinalFunda;
+    private BigDecimal interes; //interes calculado por credito
 
     private DescuentoTicket impresionLineaDescuento; // linea de descuento que se imprimirá junto a esta línea
 
@@ -334,6 +335,9 @@ public class LineaTicket implements Comparable<LineaTicket> {
     }
 
     protected void recalcularFinalPagado(BigDecimal dtoPromoSubtotales, BigDecimal dtoPagos) {
+        log.debug("recalcularFinalPagado>>>>>");
+        log.debug("dtoPromoSubtotales>>>>>"+dtoPromoSubtotales);
+        log.debug("dtoPagos>>>>>"+dtoPagos);
         importeTotalFinalPagado = importeTotal.subtract(getImporteTotalPromocion());
         importeTotalFinalMenosPromocionCabeceraYMedioPago = importeTotalFinalPagado;
         descuentosPromocionesLineas = getImporteTotalPromocion();
@@ -1323,6 +1327,20 @@ public class LineaTicket implements Comparable<LineaTicket> {
 
     public void setEntregaDomicilio(boolean entregaDomicilio) {
         this.entregaDomicilio = entregaDomicilio;
+    }
+
+    /**
+     * @return the interes
+     */
+    public BigDecimal getInteres() {
+        return interes;
+    }
+
+    /**
+     * @param interes the interes to set
+     */
+    public void setInteres(BigDecimal interes) {
+        this.interes = interes;
     }
 
 }

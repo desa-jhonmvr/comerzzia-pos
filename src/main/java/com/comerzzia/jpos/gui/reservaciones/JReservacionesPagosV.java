@@ -1924,6 +1924,9 @@ public class JReservacionesPagosV extends JPanelImagenFondo implements IVista, K
             jPagosTarjeta.setModalityType(Dialog.ModalityType.TOOLKIT_MODAL);
             jPagosTarjeta.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
             log.debug("Mostrando ventana de planes de tarjeta...");
+            log.debug("Mostrando ventana de planes de tarjeta... 2");
+            
+            log.info("Listado de los planes " + tb_pagos.toString());
             JPrincipal.setPopupActivo(jPagosTarjeta);
             jPagosTarjeta.setVisible(true);
             JPrincipal.setPopupActivo(null);
