@@ -28,8 +28,8 @@ public class NotaCreditoDetalleDao extends MantenimientoDao{
         String sql = null;
         PreparedStatement pstmt = null;
         
-        sql = "INSERT INTO " + TABLA + " (UID_NOTA_CREDITO, ID_CAJERO, COD_VENDEDOR, ID_LINEA, CODART, CODIGO_BARRAS, CANTIDAD, PRECIO, PRECIO_TOTAL, IMPORTE_FINAL, IMPORTE_TOTAL_FINAL, UID_TICKET, CODIMP, PORCENTAJE,COSTO_LANDED) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO " + TABLA + " (UID_NOTA_CREDITO, ID_CAJERO, COD_VENDEDOR, ID_LINEA, CODART, CODIGO_BARRAS, CANTIDAD, PRECIO, PRECIO_TOTAL, IMPORTE_FINAL, IMPORTE_TOTAL_FINAL, UID_TICKET, CODIMP, PORCENTAJE,COSTO_LANDED, VALOR_INTERES) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try{
             pstmt = new PreparedStatement(conn, sql);
@@ -48,6 +48,7 @@ public class NotaCreditoDetalleDao extends MantenimientoDao{
             pstmt.setString(13, detalle.getCodImp());
             pstmt.setBigDecimal(14, detalle.getPorcentaje());
             pstmt.setBigDecimal(15, detalle.getCostoLanded());
+            pstmt.setBigDecimal(16, detalle.getValorInteres());
             
             log.debug("insert() - " + pstmt);
 

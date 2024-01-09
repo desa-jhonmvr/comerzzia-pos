@@ -4,11 +4,15 @@
  */
 package com.comerzzia.jpos.servicios.pagos.credito;
 
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.EnumTipoTablaAmortizacion;
+import com.comerzzia.jpos.persistencia.mediospagos.MedioPagoBean;
 import com.comerzzia.jpos.persistencia.mediospagos.VencimientoBean;
 import com.comerzzia.jpos.pinpad.PinPad;
 import com.comerzzia.jpos.servicios.credito.tabla.amortizacion.TablaAmortizacionService;
 import com.comerzzia.jpos.servicios.pagos.Pago;
 import com.comerzzia.util.numeros.bigdecimal.Numero;
+import org.apache.commons.lang.StringUtils;
+
 import java.math.BigDecimal;
 
 /**
@@ -38,11 +42,14 @@ public class PlanPagoCredito implements Comparable<PlanPagoCredito> {
     private BigDecimal cuotaMasInteres;
     private BigDecimal ahorroMasInteres;
     private BigDecimal totalGarantiaExtendida;
+    protected MedioPagoBean medioPagoActivo;
 
     public PlanPagoCredito(VencimientoBean vencimiento, Pago pago, boolean afiliadoPromo) {
         idPlan = vencimiento.getIdMedioPagoVencimiento();
         plan = vencimiento.getDesVencimiento();
         descuento = vencimiento.getDescuento(pago, afiliadoPromo);
+        medioPagoActivo = pago.getMedioPagoActivo();
+
         if(pago.getTotal()!=null){
             descuento = pago.calculaDescuento(descuento);
         }
@@ -70,18 +77,25 @@ public class PlanPagoCredito implements Comparable<PlanPagoCredito> {
             this.total = total;
             ahorro = total.multiply(descuento).divide(CTE_100, 2, BigDecimal.ROUND_HALF_UP);
             aPagar = total.subtract(ahorro);
-            importeInteres = Numero.porcentajeR(aPagar, porcentajeInteres);
             ahorro = total.subtract(aPagar); // al ahorro le quitamos lo que se paga por intereses
             cuota = aPagar.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
             System.out.println("recalcularFromTotal cuota1 " + cuota);
             System.out.println("recalcularFromTotal " + cuota);
             // con intereses
-            aPagarMasInteres = aPagar.add(importeInteres); // con intereses
-            //cuotaMasInteres = aPagarMasInteres.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
-            cuotaMasInteres = TablaAmortizacionService.init(aPagar,numCuotas,porcentajeInteres).getValorPrimeraCuota();
+           
+            if(StringUtils.isNotEmpty(getVencimiento().getCalculaInteres())
+                    && getVencimiento().getCalculaInteres().equals(TablaAmortizacionService.APLICA_INTERES_SI)){
+                cuotaMasInteres = TablaAmortizacionService.init(aPagar,numCuotas,porcentajeInteres, getVencimiento().getTipoAmortizacion() ).getValorPrimeraCuota();
+                importeInteres = TablaAmortizacionService.getTablaAmortizacion().getValorInteres();
+            }else{
+                aPagarMasInteres = Numero.masPorcentajeR(aPagar, porcentajeInteres);
+                cuotaMasInteres = aPagarMasInteres.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
+                importeInteres = Numero.porcentajeR(aPagar, porcentajeInteres);
+            }
+             aPagarMasInteres = aPagar.add(importeInteres); // con intereses
+            //
             System.out.println("recalcularFromTotal cuotaMasInteres " + cuotaMasInteres);
             ahorroMasInteres = total.subtract(aPagarMasInteres);
-            System.out.println("recalcularFromTotal getValorPrimeraCuota " + cuota);
             System.out.println("recalcularFromTotal total " + total);
             System.out.println("recalcularFromTotal ahorro " + ahorro);
             System.out.println("recalcularFromTotal aPagar " + aPagar);
@@ -90,8 +104,8 @@ public class PlanPagoCredito implements Comparable<PlanPagoCredito> {
             total = total.add(valorRetencion);
             this.total = total;
             ahorro = total.multiply(descuento).divide(CTE_100, 2, BigDecimal.ROUND_HALF_UP);
-            aPagar = total.subtract(valorRetencion).subtract(ahorro); 
-            importeInteres = Numero.porcentajeR(aPagar, porcentajeInteres);
+            aPagar = total.subtract(valorRetencion).subtract(ahorro);
+
             ahorro = ahorro.subtract(valorRetencion); // al ahorro le quitamos lo que se paga por intereses
             cuota = aPagar.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
             System.out.println("recalcularFromTotal cuota1 " + cuota);
@@ -102,9 +116,17 @@ public class PlanPagoCredito implements Comparable<PlanPagoCredito> {
              System.out.println("recalcularFromTotalR aPagar " + aPagar);
              System.out.println("recalcularFromTotalR valorRetencion " + valorRetencion);
             // con intereses
+            
+            if(StringUtils.isNotEmpty(getVencimiento().getCalculaInteres())
+                    && getVencimiento().getCalculaInteres().equals(TablaAmortizacionService.APLICA_INTERES_SI)){
+                cuotaMasInteres = TablaAmortizacionService.init(aPagar,numCuotas,porcentajeInteres, getVencimiento().getTipoAmortizacion() ).getValorPrimeraCuota();
+                importeInteres = TablaAmortizacionService.getTablaAmortizacion().getValorInteres();
+            }else{
+                aPagarMasInteres = Numero.masPorcentajeR(aPagar, porcentajeInteres);
+                cuotaMasInteres = aPagarMasInteres.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
+                importeInteres = Numero.porcentajeR(aPagar, porcentajeInteres);
+            }
             aPagarMasInteres = aPagar.add(importeInteres); // con intereses
-            //cuotaMasInteres = aPagarMasInteres.divide(numCuotas, 2, BigDecimal.ROUND_HALF_UP);
-            cuotaMasInteres = TablaAmortizacionService.init(aPagar,numCuotas,porcentajeInteres).getValorPrimeraCuota();
             System.out.println("recalcularFromTotalR cuotaMasInteres " + cuotaMasInteres);
 
             ahorroMasInteres = total.subtract(aPagarMasInteres).subtract(valorRetencion);

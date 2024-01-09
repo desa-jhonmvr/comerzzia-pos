@@ -115,6 +115,8 @@ public class LineaTicketOrigen implements Serializable {
     @Transient 
     public BigDecimal importeIce;
 
+    @Column(name = "VALOR_INTERES")
+    private BigDecimal valorInteres;
     public LineaTicketOrigen() {
     }
 
@@ -438,6 +440,13 @@ public class LineaTicketOrigen implements Serializable {
     public void setImporteIce(BigDecimal importeIce) {
         this.importeIce = importeIce;
     }
-    
-    
+
+
+    public BigDecimal getValorInteres() {
+        return valorInteres;
+    }
+
+    public void setValorInteres(BigDecimal valorInteres) {
+        this.valorInteres = valorInteres;
+    }
 }

@@ -57,16 +57,20 @@ public class PlanesTarjetaCellRenderer implements TableCellRenderer {
             //etiqueta.setForeground(totalyAhorro);
         }
         else if (col == 4) {
+            etiqueta.setText(" $ " +pago.getImporteInteres());
+            etiqueta.setHorizontalAlignment(SwingConstants.RIGHT);
+        }
+        else if (col == 5) {
             etiqueta.setText(pago.getNumCuotas() + " x " + pago.getCuotaMasInteres() + " = "+ " $ " + pago.getaPagarMasInteres() );
             etiqueta.setHorizontalAlignment(SwingConstants.RIGHT);
         }
         
-        else if (col == 5) {
+        else if (col == 6) {
             etiqueta.setText(" $ " +pago.getTotal());
             etiqueta.setHorizontalAlignment(SwingConstants.RIGHT);
             //etiqueta.setForeground(totalyAhorro);
         }
-        else if (col == 6) {
+        else if (col == 7) {
             BigDecimal ahorroConIntereses = pago.getAhorroConInteres();
             if (ahorroConIntereses.compareTo(BigDecimal.ZERO) < 0){
                 ahorroConIntereses = BigDecimal.ZERO;

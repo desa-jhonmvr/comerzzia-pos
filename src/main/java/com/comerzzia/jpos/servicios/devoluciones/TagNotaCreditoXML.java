@@ -6,7 +6,6 @@ package com.comerzzia.jpos.servicios.devoluciones;
  * @author amos
  */
 public class TagNotaCreditoXML {
-    
     public static String TAG_NOTA_CREDITO       = "notaCredito";
 
     // ticket
@@ -130,5 +129,6 @@ public class TagNotaCreditoXML {
     public static String TAG_TOTALES_SUBTOTAL_IVA_VALOR         = "valorSubtotalIVA";
     public static String TAG_TOTALES_SUBTOTAL_IVA_PORCENTAJE    = "porcentajeSubtotalIVA";
     public static String TAG_TOTALES_COMPENSACION               = "compensacionGobierno";
+    public static final String TAG_TOTAL_INTERES                =  "totalInteres";
 
 }

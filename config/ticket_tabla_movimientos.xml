@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<output>
+    <ticket>
+        <line>
+            <text align="center"  length="40">MOVIMIENTOS CAJA ${printMovimiento.getNumeroCaja()}</text>
+        </line>
+        <line>
+            <text align="center" length="40">${printMovimiento.getFecha()}</text>
+        </line>
+        <line/>
+        #foreach ($linea in $printMovimiento.getData())
+        <line>
+            <text align="left" length="40">----------------------------------------</text>	
+        </line>
+        <line>
+            <text align="left" length="40" >Medio De Pago: ${linea.getMedioPago().getDesmedpag()}</text> 
+        </line>
+        <line>
+            <text align="left" length="40">Entrada  : $${linea.getEntrada()}</text>
+        </line>
+        <line>
+            <text align="left" length="40">Salida   : $${linea.getSalida()}</text> 
+        </line> 
+        <line>
+            <text align="left" length="40">Total    : $${linea.getTotal()}</text> 
+        </line>   
+        <line>
+            <text align="left" length="40">Recuento : $${linea.getRecuento()}</text> 
+        </line> 
+        <line>
+            <text align="left" length="40">Descuadre: $${linea.getDescuadre()}</text> 
+        </line>  
+        #end
+        <line>
+            <text align="left" length="40">----------------------------------------</text>	
+        </line>
+        <line>
+            <text align="left" length="40">________________________________________</text>	
+        </line>
+        <line/>                   
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>
+        <line/>       		
+    </ticket>
+</output>

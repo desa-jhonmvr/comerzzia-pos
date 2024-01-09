@@ -32,6 +32,7 @@ import com.comerzzia.jpos.servicios.clientes.ClientesServices;
 import com.comerzzia.jpos.servicios.core.contadores.ContadorException;
 import com.comerzzia.jpos.servicios.core.variables.Variables;
 import com.comerzzia.jpos.servicios.core.variables.VariablesAlm;
+import com.comerzzia.jpos.servicios.credito.tabla.amortizacion.TablaAmortizacionService;
 import com.comerzzia.jpos.servicios.login.Sesion;
 import com.comerzzia.jpos.servicios.marcatarjeta.MarcaTarjetaServices;
 import com.comerzzia.jpos.servicios.mediospago.MedioPagoException;
@@ -299,6 +300,18 @@ public class FormaPagoServicesImpl implements FormaPagoServices {
                             PlanPagoDTO planPromo = obtenerPlanUnicoPago(medioPago, totalConPromocion, totalGarantiaExtendida, "00",
                                     Boolean.TRUE, vencimientoBean.getIdMedioPagoVencimiento());
                             planPromo.setItems(items);
+                            if(StringUtils.isNotEmpty(vencimientoBean.getCalculaInteres()) && vencimientoBean.getCalculaInteres().equals(TablaAmortizacionService.APLICA_INTERES_SI)){
+                                planPromo.setTablaAmortizacion(TablaAmortizacionService.init(
+                                        planPromo.getaPagar(),
+                                        BigDecimal.valueOf(planPromo.getNumCuotas()),
+                                        planPromo.getPorcentajeInteres(),
+                                        vencimientoBean.getTipoAmortizacion()));
+                                if(planPromo.getTablaAmortizacion().getValorPrimeraCuota() != null){
+                                    planPromo.setCuota(planPromo.getTablaAmortizacion().getValorPrimeraCuota());
+                                }
+
+                                planPromo.setImporteInteres(planPromo.getTablaAmortizacion().getValorInteres());
+                            }
                             if (planPromo.getCuota().compareTo(CUOTA_MINIMA) >= 0 || planPromo.getNumCuotas() == 1L) {
                                 listaPlanes.add(0, planPromo);
                             }

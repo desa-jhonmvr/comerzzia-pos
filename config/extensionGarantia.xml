@@ -18,9 +18,9 @@
                 <text align="left" length="9">${linea.getReferenciaGarantia().getArticulo().getCodart()} </text> 
                 <text align="left" length="14"> ${linea.getReferenciaGarantia().getArticulo().getDescForPrint()}</text>
 			</line>
-			#if (${linea.getReferenciaGarantia().getArticulo().getModelo()})
+			#if (${linea.getReferenciaGarantia().getArticulo().getModeloForPrint()})
 				<line>
-					<text align="right" length="30"> ${linea.getReferenciaGarantia().getArticulo().getModelo()}</text>	
+					<text align="right" length="30"> ${linea.getReferenciaGarantia().getArticulo().getModeloForPrint()}</text>	
 				</line>
 			#end			
             <line>

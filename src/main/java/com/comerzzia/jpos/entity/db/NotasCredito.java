@@ -128,6 +128,9 @@ public class NotasCredito implements Serializable {
     private String claveAcceso;
     @Column(name = "FACT_DOCUMENTO")
     private String factDocumento;
+
+    @Column(name = "VALOR_INTERES")
+    private BigDecimal valorInteres;
     @Transient
     private String cliProceso;
 
@@ -450,5 +453,13 @@ public class NotasCredito implements Serializable {
     public void setFactDocumento(String factDocumento) {
         this.factDocumento = factDocumento;
     }
-    
+
+
+    public BigDecimal getValorInteres() {
+        return valorInteres;
+    }
+
+    public void setValorInteres(BigDecimal valorInteres) {
+        this.valorInteres = valorInteres;
+    }
 }

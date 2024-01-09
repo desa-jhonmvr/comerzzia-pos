@@ -5,6 +5,9 @@
 package com.comerzzia.jpos.servicios.tickets;
 
 import com.comerzzia.jpos.dto.ClienteDTO;
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.EnumTipoTablaAmortizacion;
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.TablaAmortizacionCabDTO;
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.TablaAmortizacionDetDTO;
 import com.comerzzia.jpos.dto.envioDomicilio.EnvioDomicilioDTO;
 import com.comerzzia.jpos.dto.ItemDTO;
 import com.comerzzia.jpos.dto.ResponseDTO;
@@ -22,22 +25,10 @@ import com.comerzzia.jpos.dto.ventas.paginaweb.PagoFacturaInputDTO;
 import com.comerzzia.jpos.dto.ventas.paginaweb.TrazabilidadEntregaDTO;
 import com.comerzzia.jpos.dto.ventas.paginaweb.paymentez.DebitRequestDTO;
 import com.comerzzia.jpos.dto.ventas.paginaweb.placeToPay.CollectRequest;
-import com.comerzzia.jpos.entity.db.Articulos;
+import com.comerzzia.jpos.entity.db.*;
+import com.comerzzia.jpos.persistencia.mediospagos.VencimientoBean;
+import com.comerzzia.jpos.servicios.credito.tabla.amortizacion.TablaAmortizacionService;
 import com.comerzzia.jpos.servicios.tickets.xml.TicketXMLServices;
-import com.comerzzia.jpos.entity.db.Bono;
-import com.comerzzia.jpos.entity.db.CabPrefactura;
-import com.comerzzia.jpos.entity.db.CajaDet;
-import com.comerzzia.jpos.entity.db.Cliente;
-import com.comerzzia.jpos.entity.db.ConfigImpPorcentaje;
-import com.comerzzia.jpos.entity.db.CupoVirtual;
-import com.comerzzia.jpos.entity.db.DetPrefactura;
-import com.comerzzia.jpos.entity.db.FacturacionTarjeta;
-import com.comerzzia.jpos.entity.db.LineaTicketOrigen;
-import com.comerzzia.jpos.entity.db.NotasCredito;
-import com.comerzzia.jpos.entity.db.PedidoOnlineTbl;
-import com.comerzzia.jpos.entity.db.PwFormasPago;
-import com.comerzzia.jpos.entity.db.Tarifas;
-import com.comerzzia.jpos.entity.db.TicketsAlm;
 import com.comerzzia.jpos.entity.services.ParIdValor;
 import com.comerzzia.jpos.gui.JPrincipal;
 import com.comerzzia.jpos.gui.validation.ValidationException;
@@ -168,6 +159,8 @@ public class TicketService {
     public static final String VOUCHER_MANUAL = "VOUCHER MANUAL";
     public static final int maxLength = 3000;
 
+    public static List<TablaAmortizacionCabDTO> listaPagosConInteres;
+
     public static byte[] consultarXmlTicket(Long idTicket, String codCaja, String codAlmacen) throws TicketException {
         try {
             return TicketsDao.consultarXmlTicket(idTicket, codCaja, codAlmacen);
@@ -209,10 +202,18 @@ public class TicketService {
     }
 
     public static void procesarMediosPagos(EntityManager em, List<Pago> pagos, ReferenciaTicket referencia, String tipo, String documento)
-            throws PagoInvalidException, Exception {
+            throws Exception {
         procesarMediosPagos(em, pagos, referencia, null, tipo, documento);
     }
-
+    private static Pago buscarMedioPago(CajaDet cajaDet, List<Pago> pagos) {
+        for (Pago pago : pagos) {
+             if (cajaDet.getCodmedpag().getCodmedpag().equals(pago.getMedioPagoActivo().getCodMedioPago())
+                    && cajaDet.getCodmedpag().getDesmedpag().equals(pago.getMedioPagoActivo().getDesMedioPago())) {
+                return pago;
+            }
+        }
+        return null;
+    }
     /**
      *
      * @param em
@@ -223,7 +224,7 @@ public class TicketService {
      */
     public static void procesarMediosPagos(EntityManager em, List<Pago> pagos, ReferenciaTicket referencia, Long idAbono,
             String tipo, String documento)
-            throws PagoInvalidException, Exception {
+            throws Exception {
         Connection connSukasa = new Connection();
         List<ParIdValor> listaPagosNC = new LinkedList<ParIdValor>();
         List<PagoGiftCard> listaPagosGiftCard = new LinkedList<PagoGiftCard>();
@@ -236,12 +237,21 @@ public class TicketService {
         log.debug("procesarMediosPagos() - Procesamos los movimientos de caja...");
         Character tipoMovimiento = referencia.getTipoMovimientoCaja();
         List<CajaDet> listaMovimientos = Sesion.getCajaActual().crearApunteVenta(pagos, referencia, tipoMovimiento, idAbono);
+        listaPagosConInteres = new ArrayList<>();
         for (CajaDet caj : listaMovimientos) {
+
             if (referencia.isVentaOnline()) {
                 caj.setPrefactura("S");
             }
             em.persist(caj);
+            TablaAmortizacionCabDTO tablaAmortizacion = guardarTablaAmortizacion(em, pagos, caj);
+            if(tablaAmortizacion != null){
+                listaPagosConInteres.add(tablaAmortizacion);
+            }
+
         }
+
+
         log.debug("\t\tMovimientos de caja registrados: " + listaMovimientos.size());
 
         log.debug("procesarMediosPagos() - Recorremos lista de medios de pago para su tratamiento...");
@@ -416,6 +426,62 @@ public class TicketService {
         }
     }
 
+    private static TablaAmortizacionCabDTO guardarTablaAmortizacion(EntityManager em, List<Pago> pagos, CajaDet caj) {
+        Pago pago = buscarMedioPago(caj, pagos);
+        if (pago != null && pago.getMedioPagoActivo().isTarjetaSukasa() && pago.getVencimiento().getCalculaInteres() != null
+                && pago.getVencimiento().getCalculaInteres().equals(TablaAmortizacionService.APLICA_INTERES_SI)) {
+
+           TablaAmortizacionCabDTO tablaCab = TablaAmortizacionService.init(
+                   caj.getCargo().subtract(caj.getInteres()),
+                   BigDecimal.valueOf(caj.getNumCuotas()),
+                   caj.getPorcentajeInteres(),
+                   pago.getVencimiento().getTipoAmortizacion()
+           );
+           if(tablaCab == null){
+               return null;
+           }
+            TablaAmortizacionCab cab = new TablaAmortizacionCab();
+            cab.setCodmedpag(caj.getCodmedpag());
+            cab.setIdDocumento(caj.getIdDocumento());
+            if(tablaCab.getTipo().equals(EnumTipoTablaAmortizacion.FRANCES)){
+                cab.setTipo(TablaAmortizacionService.FRANCES);
+            }else if(tablaCab.getTipo().equals(EnumTipoTablaAmortizacion.ALEMAN)){
+                cab.setTipo(TablaAmortizacionService.ALEMAN);
+            }
+            cab.setNumeroCuotas(tablaCab.getNumeroCuotas());
+            cab.setInteresEquivalente(tablaCab.getInteresEquivalente());
+            cab.setDCajaDetTbl(caj);
+            cab.setTasaInteres(tablaCab.getTasaInteres());
+            cab.setValorPrimeraCuota(tablaCab.getValorPrimeraCuota());
+            cab.setUidTablaAmortizacion(UUID.randomUUID().toString());
+            cab.setNumeroPagosPorAnio(tablaCab.getNumeroPagosPorAnio());
+            cab.setValorPrestamo(tablaCab.getValorPrestamo());
+            cab.setValorInteres(tablaCab.getValorInteres());
+            log.debug(TablaAmortizacionService.imprimir());
+            em.persist(cab);
+            guardarDetalleTablaAmortizacion(em, tablaCab, cab);
+            return tablaCab;
+
+        }
+        return null;
+    }
+
+    private static void guardarDetalleTablaAmortizacion(EntityManager em, TablaAmortizacionCabDTO tablaCab, TablaAmortizacionCab cab) {
+        for(TablaAmortizacionDetDTO detalle : tablaCab.getCuotas()){
+            TablaAmortizacionDetPK pk = new TablaAmortizacionDetPK();
+            pk.setUidTablaAmortizacion(cab.getUidTablaAmortizacion());
+            pk.setNumeroCuota(detalle.getNumeroCuota());
+            TablaAmortizacionDet det = new TablaAmortizacionDet();
+            det.setId(pk);
+            det.setUidTablaAmortizacion(cab);
+            det.setInteres(detalle.getInteres());
+            det.setCapitalAmortizado(detalle.getCapitalAmortizado());
+            det.setCapitalVivo(detalle.getCapitalVivo());
+            det.setCuotaAPagar(detalle.getCuotaAPagar());
+            em.persist(det);
+        }
+    }
+
     public static void escribirTicket(TicketS ticket) throws TicketException, CuponException {
         escribirTicket(ticket, true, true);
     }
@@ -543,7 +609,25 @@ public class TicketService {
                 ReferenciaTicket referencia = ReferenciaTicket.getReferenciaFactura(ticket);
                 procesarMediosPagos(em, ticket.getPagos().getPagos(), referencia, "FAC", referencia.getNumTicket());
             }
+            if(listaPagosConInteres != null &&  !listaPagosConInteres.isEmpty()){
+                ticket.setInteresTotal(BigDecimal.ZERO);
+                for(TablaAmortizacionCabDTO cab : listaPagosConInteres){
+                    ticket.setInteresTotal( ticket.getInteresTotal().add(cab.getValorInteres()) );
+                }
+            }
+            ticketAlm.setTotalInteres(ticket.getInteresTotal());
             log.debug("escribirTicket() - Salvamos el ticket en base de datos...");
+            //log.debug("TablaAmortizacionService.calcularInteresPorProducto - getTotales ticket" + ticket.getTotales().toString());
+
+            for(LineaTicket linea : ticket.getLineas().getLineas()){
+
+                linea.setInteres(TablaAmortizacionService.calcularInteresPorProducto(
+                        ticket.getTotales().getTotalPagado(),
+                        ticket.getInteresTotal(),
+                        linea.getImporteTotalFinalPagado()));
+            }
+
+
             ticketAlm.setTicket(TicketXMLServices.getXMLTicket(ticket));
 
             // registramos posibles líneas de garantía extendida
@@ -561,6 +645,7 @@ public class TicketService {
             String generarClaveAccesoTemp = generarClaveAcceso(ticket);
             //}
             ticketAlm.setClaveAcceso(generarClaveAccesoTemp);
+
             log.debug("TicketsDao.escribir ...");
             TicketsDao.escribirTicket(em, ticketAlm);
             em.flush(); // Obligamos a que se realice la operación en base de datos antes de salvar las lineas
@@ -669,6 +754,7 @@ public class TicketService {
                 linTO.setPorcentaje(BigDecimal.ZERO);
             }
 
+            linTO.setValorInteres(linea.getInteres());
             TicketsDao.escribirLineaTicket(em, linTO);
         }
     }
@@ -756,7 +842,7 @@ public class TicketService {
     /**
      * @author Gabriel Simbania
      * @param ticket
-     * @param cabIdPedido
+     * @param cabPrefactura
      */
     private static void generarCompletarOrdenPrefactura(TicketS ticket, CabPrefactura cabPrefactura) {
 
@@ -1202,7 +1288,7 @@ public class TicketService {
     /**
      * Ingresa informacionAdicional
      *
-     * @param items
+     * @param ventaOnlineDTO
      */
     private static void ingresarInformacionAdicional(VentaOnlineDTO ventaOnlineDTO) {
         for (ItemOnlineDTO itemOnlineDTO : ventaOnlineDTO.getItems()) {

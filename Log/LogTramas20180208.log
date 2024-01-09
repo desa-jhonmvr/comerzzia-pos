@@ -1,5 +1,0 @@
-14:20:20	DEBUG : Se envia trama de seguridad=SH168218CD58CC00D7e
-14:20:21	DEBUG : Se espera la respuesta
-14:20:21	DEBUG : Se envia trama al puerto al pinpad  PA
-14:20:32	DEBUG : Se envia ACK al pinpad proceso OK
-14:20:32	DEBUG : Se envia respuesta a la caja respuesta=PA2001ERROR EN PROCESO    

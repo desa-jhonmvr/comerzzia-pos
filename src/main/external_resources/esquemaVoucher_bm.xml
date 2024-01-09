@@ -88,7 +88,7 @@
 			<line/>
 			
 			<line>
-				<text align="left" length="13">BASE ${printVoucher.getPorcentajeIvaEmpresa()}%  :$ </text>
+				<text align="left" length="13">BASE 12%  :$ </text>
 				<text align="right" length="27">${printVoucher.getBase12()} US DOLARES   </text>
 			</line>
 			<line>
@@ -96,7 +96,7 @@
 				<text align="right" length="27">${printVoucher.getBase0()} US DOLARES   </text>
 			</line>
 			<line>
-				<text align="left" length="13">IVA  ${printVoucher.getPorcentajeIvaEmpresa()}%  :$ </text>
+				<text align="left" length="13">IVA  12%  :$ </text>
 				<text align="right" length="27">${printVoucher.getIva12()} US DOLARES   </text>
 			</line>
 			<line>

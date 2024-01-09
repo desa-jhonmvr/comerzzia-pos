@@ -451,7 +451,7 @@ public class JAnulacionDocumento extends JVentanaDialogo implements IViewerValid
                  *Rd Se agrega el campo Observacion
                  */
              
-                PrintServices.getInstance().reimpresionFactura(documentoBean,true,true,false,false,false,"", false);
+                PrintServices.getInstance().reimpresionFactura(documentoBean,true,true,false,false,false,"", false, false);
                 }
                 if(tipo.equals(DocumentosBean.NOTA_CREDITO)){
                     /**

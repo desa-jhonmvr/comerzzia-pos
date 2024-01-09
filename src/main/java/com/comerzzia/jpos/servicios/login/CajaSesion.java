@@ -12,6 +12,7 @@ import com.comerzzia.jpos.persistencia.core.usuarios.UsuarioBean;
 import com.comerzzia.jpos.persistencia.cajas.GestionDeCajasDao;
 import com.comerzzia.jpos.persistencia.mediospagos.MedioPagoBean;
 import com.comerzzia.jpos.servicios.cajas.CajasServices;
+import com.comerzzia.jpos.servicios.credito.tabla.amortizacion.TablaAmortizacionService;
 import com.comerzzia.jpos.servicios.mediospago.MediosPago;
 import com.comerzzia.jpos.servicios.pagos.Pago;
 import com.comerzzia.jpos.servicios.pagos.especiales.PagoBono;
@@ -36,6 +37,8 @@ import com.comerzzia.jpos.entity.db.XCintaAuditoraTblPK;
 
 import com.comerzzia.jpos.servicios.cintaauditora.CintaAuditoraServices;
 import com.comerzzia.jpos.servicios.core.contadores.ServicioContadores;
+import org.apache.commons.lang.StringUtils;
+
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -453,7 +456,17 @@ public class CajaSesion {
                 if (p.getMedioPagoActivo().isTarjetaSukasa()) {
                     p.setReferencia(((PagoCredito) p).getTarjetaCredito().getNumero());
                     importe = importe.add(p.getImporteInteres());
+                    if(StringUtils.isNotEmpty(p.getPlanSeleccionado().getVencimiento().getCalculaInteres())
+                            && p.getPlanSeleccionado().getVencimiento().getCalculaInteres().equals(TablaAmortizacionService.APLICA_INTERES_SI)){
+                        TablaAmortizacionService.init(
+                                p.getUstedPaga(),BigDecimal.valueOf(p.getPlanSeleccionado().getVencimiento().getNumeroVencimientos().doubleValue()),
+                                p.getPlanSeleccionado().getVencimiento().getInteres(p),
+                                p.getPlanSeleccionado().getVencimiento().getTipoAmortizacion());
+                        importe = p.getUstedPaga();
+                        importe = importe.add(TablaAmortizacionService.getTablaAmortizacion().getValorInteres());
+                    }
                 }
+
                 if (p instanceof PagoBono) {
                     importe = ((PagoBono) p).getSaldoBono();
                 } else if (p instanceof PagoNotaCredito) {
@@ -461,10 +474,18 @@ public class CajaSesion {
                 } else if (p.getMedioPagoActivo().isRetencion()) {
                     importe = p.getTotal();
                 }
+
+
                 CajaDet detalleCaja = new CajaDet(cajaActual, getCajaParcialActual(), numerolinea, concepto, documento, importe, referencia.getIdReferencia(), p.getMedioPagoActivo(), tipo, diferido);
-                detalleCaja.setInteres(p.getImporteInteres());
+
+                detalleCaja.setInteres(TablaAmortizacionService.getTablaAmortizacion() != null ?TablaAmortizacionService.getTablaAmortizacion().getValorInteres():BigDecimal.ZERO);
                 detalleCaja.setNumCuotas(p.getNumCuotas());
                 detalleCaja.setReferencia(p.getReferencia());
+                detalleCaja.setPorcentajeInteres(p.getPorcentajeInteres());
+                if (p.getMedioPagoActivo().isTarjetaSukasa()) {
+                    detalleCaja.setCodigoDiferido(p.getPlanSeleccionado().getVencimiento().getCodigoSyscard());
+                }
+
                 if (idAbono != null) {
                     detalleCaja.setIdAbono(idAbono);
                 }

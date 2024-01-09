@@ -167,7 +167,13 @@ public class ClaseConfiguracionTest {
                 //Si no existe, que coja automáticamente manual
                 datosConf.setTipoModoPinPad(DatosConfiguracion.VALIDACION_MANUAL);
             }
-
+            try {
+                datosConf.setUsuarioVentaOnline(recursos.getString("comerzzia.jpos.configuracion.usuario.venta.online"));
+                datosConf.setPasswordVentaOnline(recursos.getString("comerzzia.jpos.configuracion.password.venta.online"));
+                datosConf.setVentaEnLinea(recursos.getString("comerzzia.jpos.configuracion.activo.venta.online"));
+            } catch (MissingResourceException ex) {
+                log.error("No existe la variable para la venta online");
+            }
             // leer datos de base de datos
             DatosDatabase datosDatabase = Sesion.datosDatabase;
 

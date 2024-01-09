@@ -103,8 +103,8 @@ public class TotalesXML {
      * promociones sobre subtotales.
      */
     public void resetearTotales() {
-        impuestos = BigDecimal.ZERO;
         impuestosIce = BigDecimal.ZERO;
+        interes = BigDecimal.ZERO;
         totalSinPromociones = BigDecimal.ZERO;
         totalPromocionesLineas = BigDecimal.ZERO;
         base = BigDecimal.ZERO;
@@ -183,9 +183,21 @@ public class TotalesXML {
             importeTarifaOrigen = importeTarifaOrigen.add(linea.getPrecioTarifaOrigen().multiply(new BigDecimal(linea.getCantidad())));
 //            impuestosIce = impuestosIce.add(linea.getImpuestosIce());
 
+            interes = interes.add(linea.getInteres());
+            log.debug("LineaTicket<<<>>> idLinea:"+linea.getIdlinea());
+            log.debug("LineaTicket<<<>>> codigo:"+linea.getArticulo().getCodart());
+            log.debug("LineaTicket<<<>>> cantidad:"+linea.getCantidad());
+            log.debug("LineaTicket<<<>>> interes:"+linea.getInteres());
+
         }
+        log.debug("recalcularTotalesLineas<<<>>> interes:"+interes);
+        interes = interes.setScale(BigDecimal.ROUND_CEILING,RoundingMode.HALF_UP);
         totalPromociones = totalPromocionesLineas; // no se incluyen las promociones sobre subtotales
         totalAPagar = totalSinPromociones.subtract(totalPromociones); // no se incluyen las promociones sobre subtotales
+        log.debug("recalcularTotalesLineas<<<>>> getTotalAPagar:"+totalAPagar);
+        totalAPagar = totalAPagar.add(interes);
+
+        log.debug("recalcularTotalesLineas<<<>>> totalAPagar.add(interes):"+totalAPagar);
     }
 
     /**
@@ -300,13 +312,14 @@ public class TotalesXML {
                 }
 
                 base = base.add(linea.getImporteFinalPagado());
-
+                interes = interes.add(linea.getInteres());
             }
             totalDeducibleAlimentacion = Numero.redondear(totalDeducibleAlimentacion);
             totalDeducibleMedicina = Numero.redondear(totalDeducibleMedicina);
             totalDeducibleRopa = Numero.redondear(totalDeducibleRopa);
             totalDeducibleEducacion = Numero.redondear(totalDeducibleEducacion);
             totalDeducibleVivienda = Numero.redondear(totalDeducibleVivienda);
+
         }
 
         // Cálculo real de subtotales
@@ -353,7 +366,7 @@ public class TotalesXML {
                 //pago.setIva(Numero.porcentajeR(impuestos, porcentajePago));
                 pago.setIva(Numero.porcentajeR(pago.getSubtotalIva12(), porcentajeIva));
             }
-            interes = interes.add(pago.getImporteInteres());
+            //interes = interes.add(pago.getImporteInteres());
 
             BigDecimal ustedPagaAnterior = pago.getUstedPaga();
             log.debug("calcularSubtotalesProrrateados() 1  pago.getTotal() " + pago.getTotal() + " " + pago.getMedioPagoActivo());
@@ -408,6 +421,7 @@ public class TotalesXML {
             promocion.setImportesAhorro(importeAhorro, promocion.getImporteTotalAhorro());
             promocion.getDescuentoTicket().setDescuento(promocion.getImporteAhorro());
         }
+
     }
 
     public BigDecimal getImpuestos() {
@@ -604,6 +618,10 @@ public class TotalesXML {
     }
 
     public BigDecimal getInteres() {
+
+        if(interes == null ){
+            return BigDecimal.ZERO;
+        }
         return interes;
     }
 
@@ -724,6 +742,10 @@ public class TotalesXML {
     }
 
     public void calculaIVA() {
+        if(interes != null && interes.compareTo(BigDecimal.ZERO) != 0){
+            impuestos = totalAPagar.subtract(base).subtract(interes);
+            return;
+        }
         impuestos = totalAPagar.subtract(base);
     }
 
@@ -918,4 +940,46 @@ public class TotalesXML {
         descuentoPromocionesMedioPago = totalDtoPagos;
     }
 
+    @Override
+    public String toString() {
+        return "TotalesXML{" +
+                "ticket=" + ticket +
+                "\n, importeTarifaOrigen=" + importeTarifaOrigen +
+                "\n, importeTotalTarifaOrigen=" + importeTotalTarifaOrigen +
+                "\n, importeTotalImporteFinal=" + importeTotalImporteFinal +
+                "\n, totalSinPromociones=" + totalSinPromociones +
+                "\n, totalPromocionesLineas=" + totalPromocionesLineas +
+                "\n, totalPromocionesTotales=" + totalPromocionesTotales +
+                "\n, totalPromocionesMedioPago=" + totalPromocionesMedioPago +
+                "\n, totalPromocionesCabecera=" + totalPromocionesCabecera +
+                "\n, descuentoPromocionesMedioPago=" + descuentoPromocionesMedioPago +
+                "\n, descuentoPromocionesCabecera=" + descuentoPromocionesCabecera +
+                "\n, totalPromociones=" + totalPromociones +
+                "\n, totalAPagar=" + totalAPagar +
+                "\n, totalLineasSinPromocion=" + totalLineasSinPromocion +
+                "\n, totalAhorroPagos=" + totalAhorroPagos +
+                "\n, totalDtoPagos=" + totalDtoPagos +
+                "\n, ahorroPagos=" + ahorroPagos +
+                "\n, totalDtoPromoSubtotales=" + totalDtoPromoSubtotales +
+                "\n, totalPagado=" + totalPagado +
+                "\n, base=" + base +
+                "\n, impuestos=" + impuestos +
+                "\n, impuestosIce=" + impuestosIce +
+                "\n, baseImponibleIce=" + baseImponibleIce +
+                "\n, tarifaIce=" + tarifaIce +
+                "\n, subtotalesImpuestos=" + subtotalesImpuestos +
+                "\n, totalDeducibleAlimentacion=" + totalDeducibleAlimentacion +
+                "\n, totalDeducibleMedicina=" + totalDeducibleMedicina +
+                "\n, totalDeducibleRopa=" + totalDeducibleRopa +
+                "\n, totalDeducibleVivienda=" + totalDeducibleVivienda +
+                "\n, totalDeducibleEducacion=" + totalDeducibleEducacion +
+                "\n, totalDescuentosManuales=" + totalDescuentosManuales +
+                "\n, promocionesATotal=" + promocionesATotal +
+                "\n, interes=" + interes +
+                "\n, totalDescuentoFinalElectronico=" + totalDescuentoFinalElectronico +
+                "\n, totalGarantiaExtendida=" + totalGarantiaExtendida +
+                "\n, compensacionGobierno=" + compensacionGobierno +
+                "\n, totalesAsociadosABases=" + totalesAsociadosABases +
+                '}';
+    }
 }

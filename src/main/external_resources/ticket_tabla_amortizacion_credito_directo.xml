@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+        <line>
+            <text align="center"  length="40">TABLA DE AMORTIZACÓN CRÉDITO DIRECTO</text>
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="21">Fecha de venta:</text>
+            <text align="right" length="19">${printTableAmortizacion.getFechaVenta()}</text>
+        </line>
+        <line>
+            <text align="left" length="21">Factura número:</text>
+            <text align="right" length="19">${printTableAmortizacion.getFacturaNumero()}</text>
+        </line>
+        <line>
+            <text align="left" length="19">Local:</text>
+            <text align="right" length="21">${printTableAmortizacion.getLocal()}</text>
+        </line>
+        <line>
+            <text align="left" length="22">Precio final de venta:</text>
+            <text align="right" length="18">$${printTableAmortizacion.getPrecioFinalVenta()}</text>
+        </line>
+        <line>
+            <text align="left" length="21">Plazo de crédito</text>
+
+        </line>
+        <line>
+            <text align="left" length="21">pactado:</text>
+            <text align="right" length="19">${printTableAmortizacion.getPlazo()}</text>
+        </line>
+        <line>
+            <text align="left" length="21">Tasa de interés de</text>
+        </line>
+        <line>
+            <text align="left" length="21">financiamiento:</text>
+            <text align="right" length="19">${printTableAmortizacion.getTazaInteresFinanciamiento()}</text>
+        </line>
+        <line>
+            <text align="right" length="4">N.</text>
+            <text align="right" length="9">Capital</text>
+            <text align="right" length="13">Amortizacion</text>
+            <text align="right" length="8">Interes</text>
+            <text align="right" length="8">Cuota</text>
+
+        </line>
+
+        #foreach ($linea in $printTableAmortizacion.getCuotas())
+
+        <line>
+            <text align="right" length="4" >${linea.getNumeroCuota()}</text>
+            <text align="right" length="9" >${linea.getCapitalVivo()}</text>
+            <text align="right" length="13" >${linea.getCapitalAmortizado()}</text>
+            <text align="right" length="8" >${linea.getInteres()}</text>
+            <text align="right" length="8" >${linea.getCuotaAPagar()}</text>
+        </line>
+        #end
+        <line>
+            <text align="left" length="21" > </text>
+            <text align="right" length="19">-------------------</text>
+        </line>
+        <line>
+            <text align="left" length="21">Total a pagar por el</text>
+
+        </line>
+        <line>
+            <text align="left" length="21">cliente al final del</text>
+
+        </line>
+        <line>
+            <text align="left" length="21">plazo:</text>
+            <text align="right" length="19">$${printTableAmortizacion.getTotalPagarCliente()}</text>
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="21">Firma:____________   </text>
+            <text align="left" length="19">Cedula:____________</text>
+        </line>
+        <line/>
+        <line>
+            <text align="left" length="40">Estoy de acuerdo de la presente tabla de</text>
+        </line>
+        <line>
+            <text align="left" length="40">amortización.</text>
+        </line>
+        <line>
+            <text align="left" length="40">________________________________________</text>
+        </line>
+        <line/>
+        <line>
+            <text align="center" length="40">${printTableAmortizacion.getPie()}</text>
+        </line>
+
+    </ticket>
+</output>

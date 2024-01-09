@@ -95,7 +95,15 @@ public class CajaDet implements Serializable {
     private Long idAbono;
     @Column(name = "PREFACTURA")
     private String prefactura;
-    
+
+
+    @Column(name = "PORCENTAJE_INTERES")
+    private BigDecimal porcentajeInteres;
+
+    @Column(name = "CODIGO_DIFERIDO")
+    private String codigoDiferido;
+
+
     @Transient
     private String cruzaEfectivo;
     
@@ -365,5 +373,20 @@ public class CajaDet implements Serializable {
     public void setPrefactura(String prefactura) {
         this.prefactura = prefactura;
     }
-    
+
+    public BigDecimal getPorcentajeInteres() {
+        return porcentajeInteres;
+    }
+
+    public void setPorcentajeInteres(BigDecimal porcentajeInteres) {
+        this.porcentajeInteres = porcentajeInteres;
+    }
+
+    public String getCodigoDiferido() {
+        return codigoDiferido;
+    }
+
+    public void setCodigoDiferido(String codigoDiferido) {
+        this.codigoDiferido = codigoDiferido;
+    }
 }

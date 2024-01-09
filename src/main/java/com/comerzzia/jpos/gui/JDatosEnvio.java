@@ -760,11 +760,11 @@ public class JDatosEnvio extends JVentanaDialogo implements IVentanaDialogo, IVi
                 cliente.setNumeroTelefono(t_env_telefono.getText());
                 cliente.setNumeroCelular(t_env_movil.getText());
                 cliente.setProvincia(t_env_ciudad.getText());
-                 DatosCamionDTO datosCamion = new DatosCamionDTO();
+                DatosCamionDTO datosCamion = new DatosCamionDTO();
                 try {
-                   datosCamion = new DatosCamionDTO(l_env_horario.getSelectedItem().toString(), l_env_camion.getSelectedItem().toString(), fechaComoCadena);
+                    datosCamion = new DatosCamionDTO(l_env_horario.getSelectedItem().toString(), l_env_camion.getSelectedItem().toString(), fechaComoCadena);
                 } catch (Exception e) {
-                     datosCamion.setFechaEntrega(new Date().toString());
+                    datosCamion.setFechaEntrega(new Date().toString());
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 fechaComoCadena = null;
@@ -1652,7 +1652,9 @@ public class JDatosEnvio extends JVentanaDialogo implements IVentanaDialogo, IVi
     private void l_env_camionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_l_env_camionItemStateChanged
         // TODO add your handling code here:
         try {
-            llenarComboCamion(l_env_camion.getSelectedItem().toString());
+            if (l_env_camion.getSelectedItem() != null) {
+                llenarComboCamion(l_env_camion.getSelectedItem().toString());
+            }
         } catch (Exception ex) {
             ventana_padre.crearError(ex.getMessage());
 

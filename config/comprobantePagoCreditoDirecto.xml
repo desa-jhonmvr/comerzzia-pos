@@ -41,9 +41,12 @@
 		<line>
 		<text align="left" length="40" >HORA : ${printPC.getHora()} </text>
 		</line>
-		<line>
-		<text align="left" length="40" >Nombre : ${printPC.getNombreCliente()} </text>
-		</line>      
+                <line>
+		<text align="left" length="40" >CED : ${printPC.getNumeroDocumento()} </text>
+		</line>  
+        	<line>
+		<text align="left" length="40" >NOMBRE : ${printPC.getNombreCliente()} </text>
+		</line>  
 		<line>
 			<text align="left" length="40">-------------------------------------------</text>
 		</line>

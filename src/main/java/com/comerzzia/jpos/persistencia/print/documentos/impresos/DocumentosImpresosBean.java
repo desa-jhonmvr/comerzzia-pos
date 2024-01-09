@@ -6,6 +6,7 @@ public class DocumentosImpresosBean extends DocumentosImpresosKey {
     public static final String TIPO_PAGO = "FAC_PAGO";
     public static final String TIPO_EXTGAR = "FAC_EXTGAR";
     public static final String TIPO_CUPON = "FAC_CUPON";
+    public static final String TIPO_TABLA= "FAC_TABLA";
     public static final String TIPO_BONO = "FAC_BONO";
     public static final String TIPO_COT = "COTIZACION";
     public static final String TIPO_GIFTCAR = "GIFTCARD";
@@ -74,6 +75,9 @@ public class DocumentosImpresosBean extends DocumentosImpresosKey {
 
     public boolean isExtensionGarantia() {
         return (tipoImpreso != null && tipoImpreso.trim().equals(TIPO_EXTGAR));
+    }
+    public boolean isTablaAmortizacion() {
+        return (tipoImpreso != null && tipoImpreso.trim().equals(TIPO_TABLA));
     }
 
     public String getOrigen() {

@@ -408,7 +408,7 @@ public class JReimpresionDocumento extends JVentanaDialogo implements IViewerVal
             if (documentoBean != null) {
                 if (tipo.equals(DocumentosBean.FACTURA)) {
                     boolean imprimirVoucher = JPrincipal.getInstance().crearVentanaConfirmacion("¿Desea reimprimir los voucher de pago?", "Sí", "No");
-                    PrintServices.getInstance().reimpresionFactura(documentoBean, false, true, imprimirVoucher, false, false, "", false);
+                    PrintServices.getInstance().reimpresionFactura(documentoBean, false, true, imprimirVoucher, false, false, "", false, imprimirVoucher);
                 }
                 if (tipo.equals(DocumentosBean.NOTA_CREDITO)) {
                     String variablesNCR = Variables.getVariable(Variables.VARIABLES_TIEMPO_REIMPRESION_NOTA_CREDITO);
@@ -459,7 +459,7 @@ public class JReimpresionDocumento extends JVentanaDialogo implements IViewerVal
             if (documentoBean != null) {
                 if (tipo.equals(DocumentosBean.FACTURA)) {
                     //se aumenta el estado cupen false se agrega billeton false
-                    PrintServices.getInstance().reimpresionFactura(documentoBean, true, true, false, false, false, "", false);
+                    PrintServices.getInstance().reimpresionFactura(documentoBean, true, true, false, false, false, "", false, false);
                 }
                 if (tipo.equals(DocumentosBean.NOTA_CREDITO)) {
                     PrintServices.getInstance().reimpresionNotaCredito(documentoBean, true, "");

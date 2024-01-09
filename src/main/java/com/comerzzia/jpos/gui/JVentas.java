@@ -1306,9 +1306,10 @@ public class JVentas extends JPanelImagenFondo implements IVista, KeyListener, I
                 P_descuento_valor.setPreferredSize(new Dimension(400, 350));
 
                 v_descuento_linea.setLocationRelativeTo(null);
-                if (!lineaTicketSeleccionada.getArticulo().getCodseccion().equals(Constantes.SECCION_OBSEQUIOS)) {
-                    t_cantidad_valor.requestFocus();
-                }
+//                if (!lineaTicketSeleccionada.getArticulo().getCodseccion().equals(Constantes.SECCION_OBSEQUIOS)) {
+//                    t_cantidad_valor.requestFocus();
+//                }
+                t_cantidad_valor.requestFocus();
                 JPrincipal.setPopupActivo(v_descuento_linea);
                 v_descuento_linea.setVisible(true);
                 JPrincipal.setPopupActivo(null);
@@ -1541,6 +1542,8 @@ private void v_buscar_articuloWindowGainedFocus(java.awt.event.WindowEvent evt) 
         } else {
             o_pedido_facturado.setVisible(false);
             o_pedido_facturado.setSelected(false);
+            o_intercambio.setVisible(false);
+            o_intercambio.setSelected(false);
         }
     }//GEN-LAST:event_o_env_adomicilioActionPerformed
 

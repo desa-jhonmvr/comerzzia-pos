@@ -5,6 +5,7 @@
 package com.comerzzia.jpos.servicios.tickets;
 
 import com.comerzzia.jpos.dto.ProcesoEnvioDomicilioDTO;
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.TablaAmortizacionCabDTO;
 import com.comerzzia.jpos.dto.ventas.online.ItemOnlineDTO;
 import com.comerzzia.jpos.entity.codigosBarra.CodigoBarrasCuponPromo;
 import com.comerzzia.jpos.entity.db.ArticuloPlanNovio;
@@ -130,6 +131,9 @@ public class TicketS {
     private List<LineaTicket> promoAceptada = new ArrayList<LineaTicket>();
     private Cupon cupon;
     private boolean ventaOnline;
+    private BigDecimal interesTotal;
+
+    private static List<TablaAmortizacionCabDTO> listaPagosConInteres;
 
     public TicketS() {
     }
@@ -1909,4 +1913,11 @@ public class TicketS {
         this.procesoEnvioDomicilioDTO = procesoEnvioDomicilioDTO;
     }
 
+    public BigDecimal getInteresTotal() {
+        return interesTotal;
+    }
+
+    public void setInteresTotal(BigDecimal interesTotal) {
+        this.interesTotal = interesTotal;
+    }
 }

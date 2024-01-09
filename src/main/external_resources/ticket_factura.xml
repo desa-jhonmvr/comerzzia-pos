@@ -31,7 +31,7 @@
         <line>
             <text align="left" length="49">${numeroAutorizacion}</text>
         </line>	
-       <line>
+        <line>
             <reimpresion align="center" length="40" bold="true"></reimpresion>
         </line>
         <line>
@@ -87,7 +87,7 @@
         </line>
         #end		
         <line/>
-       <line>
+        <line>
             <reimpresionDetalle align="center" length="40" bold="true"></reimpresionDetalle>
         </line>
         #if (${ticket.isObservacionVacia()})
@@ -135,6 +135,11 @@
         <line>
             <text align="left" length="40">************ E. DOMICILIO *************</text>
         </line>
+        #end
+        #if (${linea.isIntercambio()})
+        <line>
+            <text align="left" length="40">************* INTERCAMBIO *************</text>
+        </line>		
         #end
         <line>
             <text align="left" length="3"> ${linea.getIdlinea()}</text> 
@@ -241,19 +246,33 @@
         #end
         #if (${pago.isHayInteres()})
         <line>
-            <text align="left" length = "16">Interes      : $</text>
-            <text align="right" length = "13">${pago.getImporteInteres().toString()}</text>
-            <text align="left" length = "11"> US DOLARES</text>
-				
-        </line>		
+            <text align="left" length = "16">Tasa de </text>
+        </line>
+        #set( $interes = $pago.getPorcentajeInteres().setScale(2, 1)) )
         <line>
-            <text align="left" length = "15"></text>
-            <text align="left" length = "25">------------</text>
-        </line>	
+            <text align="left" length = "16">Interes      :  </text>
+            <text align="right" length = "13">${interes}</text>
+            <text align="left" length = "11"> %         </text>
+
+        </line>
         <line>
-            <text align="right" length = "16">$</text>
-            <text align="right" length = "13">${pago.getUstedPagaConIntereses().toString()}</text>
+            <text align="left" length = "16">Interes de </text>
+        </line>
+        <line>
+            <text align="left" length = "16">Financiamiento:$</text>
+            <text align="right" length = "13">${pago.getImporteInteres()}</text>
             <text align="left" length = "11"> US DOLARES</text>
+
+        </line>
+        <line>
+            <text align="left" length = "16">Total a Pagar </text>
+        </line>
+
+        <line>
+            <text align="left" length = "16">Financiamiento:$</text>
+            <text align="right" length = "13">${pago.getUstedPagaConIntereses()}</text>
+            <text align="left" length = "11"> US DOLARES</text>
+
         </line>
         <line>
             <text align="right" length = "16">-Recibido    : $</text>

@@ -4,15 +4,26 @@
     <ticket modoImpresora="SLIP">
 		<line/><line/>
 		<line>
-			<text align="left">           ${printCheque.getNombreEmpresayValorCheque()}</text>
+                    <line></line>
+                    <line></line>
+                  
+			<text align="left" >              <br/>${printCheque.getNombreEmpresayValorCheque()}</text>
+                        <!--<text align="right" >              <br/>${printCheque.getValorChequeNumero()}</text>-->
 		</line>	
 		<line/>
 		<line>
-			<text align="left">           ${printCheque.getValorChequeLetrasAsImpresion()}</text>
-		</line>	
+                   
+			<text align="left">          ${printCheque.getValorChequeLetrasAsImpresion()}</text>
+                        
+		</line>
+                	
 		<line/>	
-		<line>
-			<text align="left">${printCheque.getLugarYfecha()}</text>
-		</line>				
+                <line>
+                    <!-- <line></line> -->
+                     
+                         <text align="left">${printCheque.getLugarYfecha()}</text>                     
+                </line>	
+                
+                                      			
     </ticket>
 </output>

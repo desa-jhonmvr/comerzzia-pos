@@ -190,7 +190,7 @@ public class MediosPagoDao extends MantenimientoDao {
                 + "PERMITE_PAGAR_GIFTC_DIFERIDO, ADMITE_PAGO_CREDITO_TEMPORAL, ADMITE_ABONO_TARJETA_PROPIA, "
                 + "CORRIENTE, DIFERIDO_SIN_INTERES, DIFERIDO_CON_INTERES, TARJETA_SUKASA, TIPO_PAGO_CORRIENTE, TIPO_PAGO_DIFERIDO, "
                 + "ADMITE_AUTOMATICA_DIFERIDO, ADMITE_AUTOMATICA_CORRIENTE, ADMITE_MANUAL_DIFERIDO, ADMITE_MANUAL_CORRIENTE, "
-                + "REQUIERE_LECTURA_MANUAL, MONTO_MAX_AUTORIZA, CODMEDPAG_ELEC, PAG.CODBAN  "
+                + "REQUIERE_LECTURA_MANUAL, MONTO_MAX_AUTORIZA, CODMEDPAG_ELEC, PAG.CODBAN "
                 + "FROM " + getNombreElementoEmpresa(TABLA) + " PAG "
                 + "INNER JOIN " + getNombreElementoEmpresa(TABLA_TIENDA) + " TIE ON (PAG.CODMEDPAG = TIE.CODMEDPAG) "
                 + "WHERE ACTIVO = 'S' "
@@ -410,7 +410,8 @@ public class MediosPagoDao extends MantenimientoDao {
         ResultSet rs = null;
         String sql = null;
 
-        sql = "SELECT ID_MEDPAG_VEN, DESMEDPAG_VEN, NUMERO_VENCIMIENTOS, PISO_MAXIMO, TIPO_CREDITO, CODMEDPAG, PLACE_TO_PAY "
+        sql = "SELECT ID_MEDPAG_VEN, DESMEDPAG_VEN, NUMERO_VENCIMIENTOS, PISO_MAXIMO, TIPO_CREDITO, CODMEDPAG, PLACE_TO_PAY, "
+                + " CALCULA_INTERES, CODIGO_SYSCARD, TIPO_AMORTIZACION, INTERES_AFILIADO "
                 + " FROM " + getNombreElementoEmpresa(TABLA_VENCIMIENTOS)
                 + " WHERE ACTIVO = 'S' "
                 + " ORDER BY TO_NUMBER(CODMEDPAG) DESC,NUMERO_VENCIMIENTOS DESC";
@@ -430,6 +431,10 @@ public class MediosPagoDao extends MantenimientoDao {
                 vencimiento.setPisoMaximo(rs.getBigDecimal("PISO_MAXIMO"));
                 vencimiento.setTipoCredito(rs.getString("TIPO_CREDITO"));
                 vencimiento.setPlaceToPay("S".equals(rs.getString("PLACE_TO_PAY")));
+                vencimiento.setCalculaInteres(rs.getString("CALCULA_INTERES"));
+                vencimiento.setCodigoSyscard(rs.getString("CODIGO_SYSCARD"));
+                vencimiento.setTipoAmortizacion(rs.getString("TIPO_AMORTIZACION"));
+                vencimiento.setInteresAfiliado(rs.getBigDecimal("INTERES_AFILIADO"));
 
                 mediosPago.addVencimiento(vencimiento);
             }

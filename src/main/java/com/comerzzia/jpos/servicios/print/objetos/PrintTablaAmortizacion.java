@@ -58,9 +58,10 @@ public class PrintTablaAmortizacion extends PrintDocument {
 //////////////////////////////////////////////////
                 valorCreditoDirecto = creditoDirecto.getPlanSeleccionado().getaPagar().doubleValue();
                 log.debug("valorCreditoDirecto " + valorCreditoDirecto);
-                this.tazaInteresFinanciamiento = creditoDirecto.getPlanSeleccionado().getPorcentajeInteres() + "%";
-                double valortotal = 0;
                 DecimalFormat df = new DecimalFormat("#.00");
+                this.tazaInteresFinanciamiento = df.format(creditoDirecto.getPlanSeleccionado().getPorcentajeInteres())  + "%";
+                double valortotal = 0;
+
                 this.cuotas = new ArrayList<ValorIndice>();
                 valortotalProductos = (Double) (Math.round(valortotalProductos * 100.00) / 100.00);
                 if (valortotalProductos >= valorCreditoDirecto) {

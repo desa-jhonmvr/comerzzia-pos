@@ -10,19 +10,16 @@
 			<text align="center" length="40">${printVoucher.getNombreTienda()}</text>
 		</line>
 		#foreach ($linea in $printVoucher.getDireccionLocalAsLineas().getLineas())
-			<line><text align="left" length="40" >${linea}</text> </line>
+			<line><text align="center" length="40" >${linea}</text> </line>
 		#end
                 #if (${printVoucher.isTieneTelefonoTienda()} )
                     <line>
-                            <text align="left" length="10">Teléfono: </text>
-                            <text align="left" length="30">${printVoucher.getTelefonoTienda()}</text>
+                            <text align="center" length="40">Telefono:  ${printVoucher.getTelefonoTienda()}</text>
                     </line>
                 #end
 		<line>
-			<text align="left" length="11">    R.U.C: </text>
-			<text align="left" length="29">${printVoucher.getRuc()}</text>
+			<text align="center" length="40">R.U.C: ${printVoucher.getRuc()}</text>
 		</line>                
-		<line/>
                 #if (!${printVoucher.isVoucherTarjetaBonoNavidad()})
                 <line>
                         <text align="center" length="40">${printVoucher.getMidTidML()}</text>
@@ -31,7 +28,9 @@
                         <text align="center" length="40" bold="true">${printVoucher.getNombreGrupoTarjeta()}</text>
                 </line>
                 #end
-                <line/>
+                <line>
+                        <text algin="left" length="40">${printVoucher.getTarjeta()} </text>
+                </line>	                
                 <line>
                         <text align="left" length="40">TARJETA : ${printVoucher.getNumeroTarjeta()} </text>
                 </line>
@@ -71,45 +70,43 @@
                 </line>                             
 
 		<line>
-			<original align="left" length="14">Transaccion : </original>
-			<original align="left" length="26">${printVoucher.getTransaccion()}</original>
+			<text align="left" length="14">Transaccion : </text>
+			<text align="left" length="26">${printVoucher.getTransaccion()}</text>
 		</line>
                 #if (!${printVoucher.isCorriente()})
                     <line>
                         #if (${printVoucher.hayValorDiferidoInteres()})
                             <text align="left" length="21" bold="true">DIF CON INTERESES : </text>
                         #else
-                            <text align="left" length="21" bold="true">DIF SIN INTERESES : </text>
+                            <text align="left" length="21" bold="true">DIF CORRIENTE : </text>
                         #end
                             <text align="right" length="19">${printVoucher.getPlazo()} Mes(es)</text>
                     </line>
                 #end
 		#if (${printVoucher.getAutorizacion()})
                     <line>
-                            <text align="center" length="40">APROBACIÓN: ${printVoucher.getAutorizacion()}</text>
+                            <text align="center" length="40">APROBACION: ${printVoucher.getAutorizacion()}</text>
                     </line>
 		#end
-                <line/>
-
                 <line>
-                        <text align="left" length="13">BASE ${printVoucher.getPorcentajeIvaEmpresa()}%  :$ </text>
-                        <text align="right" length="27">${printVoucher.getBase12()} US DOLARES   </text>
+                        <text align="left" length="15">BASE ${printVoucher.getPorcentajeIvaEmpresa()}%  :US$ </text>
+                        <text align="right" length="25">${printVoucher.getBase12()}</text>
                 </line>
                 <line>
-                        <text align="left" length="13">BASE 0%   :$ </text>
-                        <text align="right" length="27">${printVoucher.getBase0()} US DOLARES   </text>
+                        <text align="left" length="15">BASE 0%   :US$ </text>
+                        <text align="right" length="25">${printVoucher.getBase0()}</text>
                 </line>
                 <line>
-                        <text align="left" length="13">SUBTOTAL  :$ </text>
-                        <text align="right" length="27">${printVoucher.getSubtotalBase()} US DOLARES   </text>                    
+                        <text align="left" length="15">SUBTOTAL  :US$ </text>
+                        <text align="right" length="25">${printVoucher.getSubtotalBase()}</text>                    
                 </line>
                 <line>
-                        <text align="left" length="13">IVA  ${printVoucher.getPorcentajeIvaEmpresa()}%  :$ </text>
-                        <text align="right" length="27">${printVoucher.getIva12()} US DOLARES   </text>
+                        <text align="left" length="15">IVA  ${printVoucher.getPorcentajeIvaEmpresa()}%  :US$ </text>
+                        <text align="right" length="25">${printVoucher.getIva12()}</text>
                 </line>
                 <line>
-                        <text align="left" length="13">Total      :$ </text>
-                        <text align="right" length="27">${printVoucher.getTotal()} US DOLARES   </text>
+                        <text align="left" length="15">Total     :US$ </text>
+                        <text align="right" length="25">${printVoucher.getTotal()}</text>
                 </line>
                 <line>
                         <text align="center" length="40"></text>
@@ -123,70 +120,67 @@
                             <text align="left" length="13">Gran Total :$ </text>
                             <text align="right" length="27">${printVoucher.getGranTotal()} US DOLARES   </text>
                     </line> 
-                #end               
-                <line/>
-                <line><text align="center" length="40">CAPTURA ELECTRÓNICA</text></line>
-                #if (${printVoucher.isDatafast()})
-                    <line><text align="center" length="40">DATAFAST</text></line>                
-                #else
-                    <line><text align="center" length="40">MEDIANET</text></line>
-                #end
-
-                <line/>
-
-                #if (${printVoucher.getNumeroTarjeta()})
-                <line><text align="left" length="40" >DEBO  Y  PAGARE INCONDICIONALMENTE, Y  </text> </line>
-                <line><text align="left" length="40" >SIN PROTESTO EL TOTAL DE ESTE PAGARE   </text> </line>
-                <line><text align="left" length="40" >MAS LOS INTERESES Y CARGOS POR SERVICIO</text> </line>
-                <line><text align="left" length="40" >, EN CASO DE MORA PAGARE LA TASA MAXIMA</text> </line>
-                <line><text align="left" length="40" >AUTORIZADA PARA EL EMISOR.</text> </line>
-                <line><text align="left" length="40" > </text> </line>
-                <line><text align="left" length="40" >DECLARO QUE, EL PROPÓSITO Y DESTINO DE </text></line>
-                <line><text align="left" length="40" >LOS BIENES/SERVICIOS ADQUIRIDOS CON    </text></line>
-                <line><text align="left" length="40" >ESTA TRANSACCIÓN ES LÍCITO. EXIMO AL   </text></line>
-                <line><text align="left" length="40" >EMISOR DE TODA RESPONSABILIDAD FRENTE A</text></line>
-                <line><text align="left" length="40" >ESTA AFIRMACIÓN.</text></line>
-                #end
-		<line/>
-		<line/>
+                #end         
+                #if (${textoPie.length()} == 8)      
+                    #if (${printVoucher.isDatafast()})
+                          <line><original align="center" length="40">CAP ELEC DATAFAST</original></line>               
+                    #else
+                          <line><original align="center" length="40">CAP ELEC MEDIANET</original></line>
+                    #end
+                #end    
+                #if (${textoPie.length()} != 8)     
+                    #if (${printVoucher.isDatafast()})
+                          <line><text align="center" length="40">DATAFAST</text></line>   
+                    #else
+                          <line><text align="center" length="40">MEDIANET</text></line>   
+                    #end                 
+                                
+                #end    
+                #if (${textoPie.length()} == 8)                     
+                    #if (${printVoucher.getNumeroTarjeta()})
+                    <line><original align="left" length="40" >DEBO  Y  PAGARE  INCONDICIONALMENTE,   Y</original> </line>
+                    <line><original align="left" length="40" >SIN  PROTESTO  EL  TOTAL  DE ESTE PAGARE</original> </line>
+                    <line><original align="left" length="40" >MAS LOS INTERESES Y CARGOS POR SERVICIO,</original> </line>
+                    <line><original align="left" length="40" >EN CASO DE  MORA  PAGARE LA TASA  MAXIMA</original> </line>
+                    <line><original align="left" length="40" >AUTORIZADA PARA EL EMISOR.</original> </line>
+                    <line><original align="left" length="40" >DECLARO  QUE  EL  PRODUCTO  DE  LA TRAN-</original> </line>
+                    <line><original align="left" length="40" >SACCION NO SERA UTILIZADO EN ACTIVIDADES</original> </line>
+                    <line><original align="left" length="40" >DE LAVADO DE ACTIVOS, FINANCIAMIENTO DEL</original> </line>
+                    <line><original align="left" length="40" >TERRORISMO Y OTROS DELITOS.</original> </line>           
+                    #end
+                #end       
                 <line>
                     <text align="left" length="40">NOMBRE: ${printVoucher.getNombreTarjetaHabiente()}</text>
                 </line>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line><text align="left" length="40" >___________________________________</text> </line>
-                <line><text align="left" length="40">EL ESTABLECIMIENTO VERIFICA QUE LA </text></line>
-                <line><text align="left" length="40">FIRMA DEL CLIENTE ES AUTÉNTICA</text></line>   
-                <line/>             
-		<line><text align="left" length="40" >___________________________________</text> </line>
-		<line><text align="left" length="40" >          C.I.                     </text> </line>
-		<line><text align="left" length="40" >___________________________________</text> </line>
-		<line><text align="left" length="40" >         Teléfono                  </text> </line>                               
-		<line/>
-		<line/>
-                #if (${printVoucher.isVoucherTarjetaCredito()})
-                    #if (${printVoucher.getVerificacionPin()})
-                        <line>
-                            <original align="left" length="15">${printVoucher.getVerificacionPin()}</original>
-                        </line>
-                    #end  
-                    #if (${printVoucher.getAidEmv()})
-                        <line>
-                            <original align="left" length="20">${printVoucher.getAidEmv()}</original>
-                        </line>
-                    #end                                      
-                    #if (${printVoucher.getArqc()})
-                        <line>
-                            <original align="left" length="16">${printVoucher.getArqc()}</original>
-                        </line>
-                    #end                                
-                    #if (${printVoucher.getCriptoEmv()})
-                        <line>
-                            <original align="left" length="22">${printVoucher.getCriptoEmv()}</original>
-                        </line>
-                    #end
+                #if (${textoPie.length()} == 8)    
+                    <line/>
+                    <line><original align="left" length="40" >___________________________________</original> </line>
+                    <line><original align="left" length="40">EL ESTABLECIMIENTO VERIFICA QUE LA </original></line>
+                    <line><original align="left" length="40">FIRMA DEL CLIENTE ES AUTENTICA</original></line>   
+                    <line/>             
+                    <line><original align="left" length="40" >___________________________________</original> </line>
+                    <line><original align="left" length="40" >C.I.                               </original> </line>
+                    <line><original align="left" length="40" >___________________________________</original> </line>
+                    <line><original align="left" length="40" >Telefono                           </original> </line>                               
+                    <line/>
+                    <line/>
+                    #if (${printVoucher.isVoucherTarjetaCredito()})
+                        #if (${printVoucher.getVerificacionPin()})
+                            <line>
+                                <original align="left" length="15">${printVoucher.getVerificacionPin()}</original>
+                            </line>
+                        #end  
+                        #if (${printVoucher.getAidEmv()})
+                            <line>
+                             <original align="left" length="20">${printVoucher.getAidEmv()}</original>
+                            </line>
+                        #end                                      
+                        #if (${printVoucher.getIdAppEmv()})
+                            <line>
+                             <original align="left" length="20">AID : ${printVoucher.getIdAppEmv()}</original>
+                            </line>
+                        #end                                             
+                    #end   
                 #end   
                 <line/> 
                 <line><pie align="center" length="40" bold="true"></pie></line>            
@@ -196,18 +190,5 @@
                             <line><text align="left" length="40" >${linea}</text> </line>
                     #end
                 #end
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
-		<line/>
     </ticket>
 </output>

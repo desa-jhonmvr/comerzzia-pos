@@ -36,6 +36,11 @@
 			#foreach ($lineaN in $printTicket.getNombreAsLineasSinNombre().getLineas())
 			<line><text align="left" length="40" >${lineaN}</text> </line>
 			#end
+                        <line><text align="left" length="40">Ced./RUC : ${printTicket.getCedRuc()}</text></line>
+			#foreach ($lineaD in $printTicket.getDireccionAsLineas().getLineas())
+				<line><text align="left" length="40" >${lineaD}</text> </line>
+			#end
+			<line><text align="left" length="40">Telefono : ${printTicket.getTelefono()}</text></line>                        
 		#end
 		<line><text align="left" length="40">Presente.-</text></line>
 		<line/>
@@ -60,7 +65,7 @@
 		</line>
 		<line>
 			<text align="left" length="16"> ${linea.getCodigoBarras()} </text> 
-            <text align="right" length="24"> ${linea.getArticulo().getModelo()}</text>  					
+            <text align="right" length="24"> ${linea.getArticulo().getModeloForPrint()}</text>  					
 		</line>
 		#if (${linea.getArticulo().getGarantiaOriginal()})
 		<line>
@@ -69,7 +74,13 @@
 		</line>
 		#end
 		#end
-		<line><text align="left" length="24">-----------------------</text><text align="right" length="16"> ${ticket.getTotales().getTotalAPagar()}</text></line>
+                <line><text align="left" length="40">----------------------------------------</text></line>
+		<line><text align="left" length="30">TOTAL ITEMS COTIZADOS:</text><text align="right" length="10"></text></line>
+                <line><text align="right" length="40"> $ ${ticket.getTotales().getTotalCotizacion()} USD</text></line>
+                <line><text align="left" length="30">TOTAL GARANTIA EXTENDIDA:</text><text align="right" length="10"></text></line>
+                <line><text align="right" length="40"> $ ${ticket.getTotales().getTotalGarantiaExtendida()} USD </text></line>
+                <line><text align="left" length="30">TOTAL GENERAL:</text><text align="right" length="10"></text></line>
+                <line><text align="right" length="40">$ ${ticket.getTotales().getTotalAPagar()} USD</text></line>
 		<line/>
 		
 		#foreach($lineaMensaje in $mensaje.getLineas())

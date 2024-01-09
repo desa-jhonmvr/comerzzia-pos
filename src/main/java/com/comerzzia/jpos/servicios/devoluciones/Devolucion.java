@@ -177,6 +177,7 @@ public class Devolucion {
                 linea.setReferenciaGarantia(lineaOriginal.getReferenciaGarantia());
                 linea.setReferenciaKit(lineaOriginal.getReferenciaKit());
                 linea.setPorcentajeIva(lineaOriginal.getPorcentajeIva());
+                linea.setInteres(lineaOriginal.getInteres().divide(cantidadLineaOrigen,BigDecimal.ROUND_HALF_EVEN,RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(cantPosibleDevolucion)));
             }
         }
 
@@ -202,6 +203,7 @@ public class Devolucion {
      * @throws Exception
      */
     public Devolucion(TicketOrigen ticketOriginal, TicketS ticket, MotivoDevolucion motivoDevolucion, String estadoMercaderia, String observaciones, Long tipoDevolucion, String localOrigen) throws Exception {
+
         this.ticketOriginal = ticketOriginal;
         this.devolucion = new com.comerzzia.jpos.entity.db.Devolucion();
         this.devolucion.setMotivo(motivoDevolucion);
@@ -315,6 +317,8 @@ public class Devolucion {
     }
 
     public void modificarLineaDevolucion(LineaTicket lineaTicketSeleccionada, Integer nuevaCantidad) throws ArticuloNotFoundException, ValidationException {
+        log.debug("modificarLineaDevolucion Devolucion.java");
+        log.debug("lineaTicketSeleccionada.interes:" +lineaTicketSeleccionada.getInteres());
         LineaTicket lineaOriginal = ticketOriginal.getLinea(lineaTicketSeleccionada.getLineaOriginal());
         if (lineaOriginal == null) {
             log.error("modificarLineaDevolucion() - No se ha encontrado la línea original en el ticket");
@@ -337,6 +341,8 @@ public class Devolucion {
             lineaTicketSeleccionada.setCantidad(nuevaCantidad);
             lineaTicketSeleccionada.recalcularImportes();
             lineaTicketSeleccionada.setDescuentoFinalDev(lineaOriginal.getDescuentoFinalDev());
+            BigDecimal nuevoInteres = lineaOriginal.getInteres().divide(BigDecimal.valueOf(lineaOriginal.getCantidad()),BigDecimal.ROUND_CEILING,RoundingMode.DOWN).multiply(BigDecimal.valueOf(nuevaCantidad)).setScale(BigDecimal.ROUND_CEILING,RoundingMode.DOWN);
+            lineaTicketSeleccionada.setInteres(nuevoInteres);
             lineaTicketSeleccionada.redondear();
             ticketDevolucion.getTotales().recalcularTotalesLineas(ticketDevolucion.getLineas());
             ticketDevolucion.getTotales().redondear();

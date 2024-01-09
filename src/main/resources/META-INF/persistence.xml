@@ -74,6 +74,8 @@
     <class>com.comerzzia.jpos.entity.db.CodigoOtp</class>
     <class>com.comerzzia.jpos.entity.db.EnvioDomicilioTbl</class>
     <class>com.comerzzia.jpos.entity.db.AutorizacionConsumoCredito</class>
+    <class>com.comerzzia.jpos.entity.db.TablaAmortizacionCab</class>
+    <class>com.comerzzia.jpos.entity.db.TablaAmortizacionDet</class>
     <properties>
       <property name="eclipselink.session.customizer" value="com.comerzzia.util.log.JPAEclipseLinkSessionCustomizer"/>
       <property name="eclipselink.logging.level" value="FINE"/>
@@ -152,6 +154,8 @@
     <class>com.comerzzia.jpos.entity.db.PedidoOnlineDireccionTbl</class>
     <class>com.comerzzia.jpos.entity.db.CodigoOtp</class>
     <class>com.comerzzia.jpos.entity.db.AutorizacionConsumoCredito</class>
+    <class>com.comerzzia.jpos.entity.db.TablaAmortizacionCab</class>
+    <class>com.comerzzia.jpos.entity.db.TablaAmortizacionDet</class>
     <properties>
       <property name="eclipselink.session.customizer" value="com.comerzzia.util.log.JPAEclipseLinkSessionCustomizer"/>
       <property name="eclipselink.logging.level" value="FINE"/>

@@ -77,6 +77,8 @@ public class SriCaja implements Serializable {
     private String mascaraPinpad;
     @Column(name = "GATEWAY_PINPAD")
     private String gatewayPinpad;
+     @Column(name = "SECUENCIAL_SUPER")
+    private Integer secuencialSuper;
     
     public SriCaja() {
     }
@@ -289,6 +291,14 @@ public class SriCaja implements Serializable {
             return contNotaCredito.longValue();
         }
         return 1L;
+    }
+
+    public Integer getSecuencialSuper() {
+        return secuencialSuper;
+    }
+
+    public void setSecuencialSuper(Integer secuencialSuper) {
+        this.secuencialSuper = secuencialSuper;
     }
     
 }

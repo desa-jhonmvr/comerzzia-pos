@@ -484,6 +484,7 @@ public class TicketXMLServices {
         root.añadirHijo(TagTicketXML.TAG_LINEA_IMPORTE, Numero.redondear(linea.getImporte()).toString());
         root.añadirHijo(TagTicketXML.TAG_LINEA_IMPORTE_TOTAL_FINAL, Numero.redondear(linea.getImporteTotalFinalPagado()).toString());
         root.añadirHijo(TagTicketXML.TAG_LINEA_IMPORTE_FINAL, Numero.redondear(linea.getImporteFinalPagado()).toString());
+        root.añadirHijo(TagTicketXML.TAG_LINEA_INTERES, Numero.redondear(linea.getInteres()).toString());
         if (linea.getArticulo().getCodimp().equals(ConfigImpPorcentaje.COD_IMPUESTO_NORMAL)) {
             root.añadirHijo(TagTicketXML.TAG_PORCENTAJE_IVA, Sesion.getEmpresa().getPorcentajeIva().toString());
         } else {

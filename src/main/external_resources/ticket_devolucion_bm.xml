@@ -47,11 +47,11 @@
 			    <text align="right" length="12">-${printNC.getSubtotal0()}</text>
 		</line>	
 		<line>
-				<text align="left" length="17">  Subtotal ${printNC.getPorcentajeIvaEmpresa()}% : </text>
+				<text align="left" length="17">  Subtotal 12% : </text>
 			    <text align="right" length="12">-${printNC.getSubtotal12()}</text>
 		</line>	
 		<line>
-				<text align="left" length="17">  Iva ${printNC.getPorcentajeIvaEmpresa()}%      : </text>
+				<text align="left" length="17">  Iva 12%      : </text>
 				<text align="right" length="12">-${printNC.getIva()}</text>
 		</line>
 		<line>

@@ -5,37 +5,10 @@
 		<line>
 			<text align="left" length="35">CONTRATO DE EXTENSIÓN DE GARANTIA</text>
 		</line>
-                
-                <line>
-                    <text align="left" length="20">NOMBRE DEL CLIENTE:</text>
-                </line>
-                
-                #if (${ticket.facturacionConOtrosDatos()})
-                    <line>
-                        <text align="left" length="40">   ${ticket.getFacturacion().getNombreApellidoImpresion()}</text>                    
-                    </line>
-                #end
-                #if (${ticket.facturacionConDatosDelCliente()})
-                    <line>
-                        <text align="left" length="40">   ${ticket.getCliente().getNombreYApellidos()}</text>                    
-                    </line>
-                #end
-                           		
-		<line>
-                    <text align="left" length="9">CED/RUC:</text>               
-
-                    #if (${ticket.facturacionConOtrosDatos()})
-                        <text align="left" length="31">   ${ticket.getFacturacion().getDocumento()}</text>
-                    #end
-                    #if (${ticket.facturacionConDatosDelCliente()})
-                        <text align="left" length="31">${ticket.getCliente().getCodcli()}</text>
-                    #end
-                </line>
-                
-                <line>
-                    <text align="left" length="20">NÚMERO DE GARANTÍA: </text>
-                    <text align="left" length="20"> ${idGarantia}</text>
-                </line>
+		<line><text align="left" length="20">NOMBRE DEL CLIENTE: </text></line>
+		<line><text align="left" length="40">   ${ticket.getCliente().getNombreYApellidos()}</text></line>		
+		<line><text align="left" length="12">CED/RUC: </text><text align="left" length="28">${ticket.getCliente().getCodcli()}</text></line>		
+        <line><text align="left" length="20">NÚMERO DE GARANTÍA: </text><text align="left" length="20"> ${idGarantia}</text></line>
 		<line><text align="left" length="18">FACTURA: </text><text align="left" length="22">${ticket.getIdFactura()}</text></line>
 		<line><text align="left" length="18">FECHA DE COMPRA: </text><text align="left" length="22">${fecha}</text></line>
 		<line><text align="left" length="18">PRODUCTO: </text></line>
@@ -45,9 +18,9 @@
                 <text align="left" length="9">${linea.getReferenciaGarantia().getArticulo().getCodart()} </text> 
                 <text align="left" length="14"> ${linea.getReferenciaGarantia().getArticulo().getDescForPrint()}</text>
 			</line>
-			#if (${linea.getReferenciaGarantia().getArticulo().getModelo()})
+			#if (${linea.getReferenciaGarantia().getArticulo().getModeloForPrint()})
 				<line>
-					<text align="right" length="30"> ${linea.getReferenciaGarantia().getArticulo().getModelo()}</text>	
+					<text align="right" length="30"> ${linea.getReferenciaGarantia().getArticulo().getModeloForPrint()}</text>	
 				</line>
 			#end			
             <line>

@@ -29,6 +29,7 @@ public class NotaCreditoDetalleBean extends MantenimientoBean {
     private String uidTicket;
     private String codImp;
     private BigDecimal porcentaje;
+    private BigDecimal valorInteres;
     //UTILIDAD RD
     private BigDecimal costoLanded;
     public String getUidNotaCredito() {
@@ -154,5 +155,12 @@ public class NotaCreditoDetalleBean extends MantenimientoBean {
     public void setCostoLanded(BigDecimal costoLanded) {
         this.costoLanded = costoLanded;
     }
-     
+
+    public BigDecimal getValorInteres() {
+        return valorInteres;
+    }
+
+    public void setValorInteres(BigDecimal valorInteres) {
+        this.valorInteres = valorInteres;
+    }
 }

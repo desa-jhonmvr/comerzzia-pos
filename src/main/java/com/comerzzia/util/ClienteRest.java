@@ -62,7 +62,7 @@ public class ClienteRest {
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
             os.flush();
-
+            conn.setConnectTimeout(30000);
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED && conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new ConnectException("Failed : HTTP error code : " + conn.getResponseCode());
             }

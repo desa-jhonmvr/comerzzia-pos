@@ -38,10 +38,17 @@
 			<text align="center" length="40" bold="true">BONO DE ${tipoBono}</text>
 		</line>
 		<line/>
-		
-		
+		<line>
+			<text align="left" length="40" >Cliente: ${cliente.getCodcli()}</text>
+		</line>		
+		<line>
+			<text align="left" length="40" >${cliente.getNombreYApellidos()}</text>
+		</line>				
 		<line>
 			<text align="left" length="40" >Docu.Inter: ${printBono.getCodalmBono()}-${identificador}</text>
+		</line>
+                <line>
+			<text align="left" length="40" >Caja: ${caja}</text>
 		</line>
 		
 		#if (${hayUidNotaCredito})

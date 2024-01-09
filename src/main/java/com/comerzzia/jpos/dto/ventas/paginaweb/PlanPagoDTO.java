@@ -5,6 +5,7 @@
  */
 package com.comerzzia.jpos.dto.ventas.paginaweb;
 
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.TablaAmortizacionCabDTO;
 import com.comerzzia.jpos.dto.ventas.online.ItemOnlineDTO;
 import com.comerzzia.jpos.dto.ventas.online.PedidoOnlineDTO;
 import com.comerzzia.jpos.servicios.pagos.credito.PagoCredito;
@@ -34,6 +35,7 @@ public class PlanPagoDTO implements Cloneable {
     private BigDecimal descuentosPromocion;
     private BigDecimal importeInteres;
     private List<PedidoOnlineDTO> pedidos;
+    private TablaAmortizacionCabDTO tablaAmortizacion;
 
     private transient PagoCredito pagoCredito;
     private transient List<ItemOnlineDTO> items = new ArrayList<>();
@@ -174,8 +176,12 @@ public class PlanPagoDTO implements Cloneable {
         this.items = items;
     }
 
-    
-    
-    
 
+    public TablaAmortizacionCabDTO getTablaAmortizacion() {
+        return tablaAmortizacion;
+    }
+
+    public void setTablaAmortizacion(TablaAmortizacionCabDTO tablaAmortizacion) {
+        this.tablaAmortizacion = tablaAmortizacion;
+    }
 }

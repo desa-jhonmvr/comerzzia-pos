@@ -443,18 +443,19 @@ public class JReservacionesPagosTarjetas extends JDialog implements KeyListener 
             t_aPagar.setText(pagoCredito.getUstedPaga().toString());
         }
 
-        t_planes.setMinimumSize(new Dimension(729, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
-        t_planes.setSize(new Dimension(729, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
-        t_planes.setPreferredSize(new Dimension(729, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
+        t_planes.setMinimumSize(new Dimension(750, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
+        t_planes.setSize(new Dimension(750, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
+        t_planes.setPreferredSize(new Dimension(750, t_planes.getRowCount() * t_planes.getRowHeight() + 2));
 
         t_planes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         t_planes.getColumnModel().getColumn(0).setPreferredWidth(27);
         t_planes.getColumnModel().getColumn(1).setPreferredWidth(140); // 113->181
         t_planes.getColumnModel().getColumn(2).setPreferredWidth(75);
         t_planes.getColumnModel().getColumn(3).setPreferredWidth(75); // Interes        
-        t_planes.getColumnModel().getColumn(4).setPreferredWidth(160);
-        t_planes.getColumnModel().getColumn(5).setPreferredWidth(90);
+        t_planes.getColumnModel().getColumn(4).setPreferredWidth(115);
+        t_planes.getColumnModel().getColumn(5).setPreferredWidth(160);
         t_planes.getColumnModel().getColumn(6).setPreferredWidth(90);
+        t_planes.getColumnModel().getColumn(7).setPreferredWidth(90);
 
     }
 

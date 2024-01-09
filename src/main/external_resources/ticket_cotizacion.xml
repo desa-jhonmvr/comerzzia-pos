@@ -65,7 +65,7 @@
 		</line>
 		<line>
 			<text align="left" length="16"> ${linea.getCodigoBarras()} </text> 
-            <text align="right" length="24"> ${linea.getArticulo().getModelo()}</text>  					
+            <text align="right" length="24"> ${linea.getArticulo().getModeloForPrint()}</text>  					
 		</line>
 		#if (${linea.getArticulo().getGarantiaOriginal()})
 		<line>

@@ -5,6 +5,7 @@
 package com.comerzzia.jpos.servicios.tickets.componentes;
 
 import com.comerzzia.jpos.entity.db.Articulos;
+import com.comerzzia.jpos.entity.db.CajaDet;
 import com.comerzzia.jpos.entity.db.Impuestos;
 import com.comerzzia.jpos.entity.db.Tarifas;
 import com.comerzzia.jpos.servicios.core.impuestos.ImpuestosServices;
@@ -1523,4 +1524,6 @@ public class LineasTicket {
             }    
         }
     }
+
+
 }

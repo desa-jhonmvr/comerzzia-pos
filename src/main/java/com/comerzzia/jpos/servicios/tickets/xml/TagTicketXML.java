@@ -9,7 +9,8 @@ package com.comerzzia.jpos.servicios.tickets.xml;
  * @author amos
  */
 public class TagTicketXML {
-    
+
+    public static final String TAG_LINEA_INTERES = "interes";
     public static String TAG_TIKET              = "ticket";
 
     // ticket

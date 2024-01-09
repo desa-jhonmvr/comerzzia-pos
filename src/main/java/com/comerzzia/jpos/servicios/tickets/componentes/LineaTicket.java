@@ -224,6 +224,7 @@ public class LineaTicket implements Comparable<LineaTicket> {
             importe = linea.getNodo(TagTicketXML.TAG_LINEA_IMPORTE).getValueAsBigDecimal();
             importeTotalFinalPagado = linea.getNodo(TagTicketXML.TAG_LINEA_IMPORTE_TOTAL_FINAL).getValueAsBigDecimal();
             importeFinalPagado = linea.getNodo(TagTicketXML.TAG_LINEA_IMPORTE_FINAL).getValueAsBigDecimal();
+            interes = linea.getNodo(TagTicketXML.TAG_LINEA_INTERES).getValueAsBigDecimal();
             codimp = linea.getNodo(TagTicketXML.TAG_LINEA_CODIMP).getValue();
             try {
                 porcentajeIva = linea.getNodo(TagTicketXML.TAG_PORCENTAJE_IVA).getValueAsBigDecimal();
@@ -1333,6 +1334,10 @@ public class LineaTicket implements Comparable<LineaTicket> {
      * @return the interes
      */
     public BigDecimal getInteres() {
+        if(interes == null){
+            return BigDecimal.ZERO;
+        }
+
         return interes;
     }
 

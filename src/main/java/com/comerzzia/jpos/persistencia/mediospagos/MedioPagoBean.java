@@ -62,6 +62,7 @@ public class MedioPagoBean extends MantenimientoBean {
     private String codMedPagElec;
     private String codBan;
 
+
     public MedioPagoBean() {
         bancos = new ArrayList<BancoBean>();
         planes = new ArrayList<VencimientoBean>();

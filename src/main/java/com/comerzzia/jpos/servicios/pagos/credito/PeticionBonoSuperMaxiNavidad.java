@@ -7,8 +7,12 @@ package com.comerzzia.jpos.servicios.pagos.credito;
 
 import com.comerzzia.jpos.dto.supermaxi.RespuestaSupermaxiDTO;
 import com.comerzzia.jpos.dto.supermaxi.SolicitudSupermaxiDTO;
+import com.comerzzia.jpos.entity.db.SriCaja;
 import com.comerzzia.jpos.persistencia.mediospagos.MedioPagoBean;
+import com.comerzzia.jpos.servicios.core.tiendas.TiendasException;
+import com.comerzzia.jpos.servicios.core.tiendas.TiendasServices;
 import com.comerzzia.jpos.servicios.core.variables.Variables;
+import com.comerzzia.jpos.servicios.login.DatosConfiguracion;
 import com.comerzzia.jpos.servicios.login.Sesion;
 import com.comerzzia.jpos.servicios.mediospago.MedioPagoException;
 import com.comerzzia.jpos.servicios.mediospago.MediosPago;
@@ -75,7 +79,7 @@ public class PeticionBonoSuperMaxiNavidad {
     public static final String ERROR_TARJETA_NO_VALIDA = "Tarjeta no V\u00E1lida";
     public static final String URL_ENVIO_SUPERMAXI = "/supermaxi/consultaTarjeta";
 
-    public PeticionBonoSuperMaxiNavidad(PagoCredito pago, int mensaje, String factura, String numAutorizacion) {
+    public PeticionBonoSuperMaxiNavidad(PagoCredito pago, int mensaje, String factura, String numAutorizacion, String numSecuencialEnvio) {
         tipoMensaje = "0200";
         if (mensaje == REVERSA) {
             tipoMensaje = "0400";
@@ -97,7 +101,11 @@ public class PeticionBonoSuperMaxiNavidad {
         }
 //        codigoProceso = "004000"; //Compras
         if (mensaje == ANULACION) {
-            codigoProceso = "204000"; //Anulaciones
+            if (pago.getMedioPagoActivo().getCodMedioPago().equals("239") || pago.getMedioPagoActivo().getCodMedioPago().equals("220")) {
+                codigoProceso = "203000";
+            } else {
+                codigoProceso = "204000"; //Anulaciones
+            }
         }
 
         int longitudTarjetaYCaducidad = pago.getTarjetaCredito().getNumero().length() + String.valueOf(pago.getTarjetaCredito().getCaducidad()).length() + 1;
@@ -110,20 +118,47 @@ public class PeticionBonoSuperMaxiNavidad {
         montoTransaccion = Numero.completaconCeros(montoTransaccion, 12);
         //Cambio para solucionar problema de trama Rd
         //cambio Rd para tener parte entera de secuencial 
-        int idsecuencial = Integer.parseInt(factura);
+        //Cambio M.E se trae secuencial de la tabla SRI_TIENDAS_CAJAS_TBL para envio tramaSupermaxi.
+        DatosConfiguracion datosConf = Sesion.getDatosConfiguracion();
+        SriCaja cajaSecuencial = null;
+        try {
+            cajaSecuencial = TiendasServices.consultarSecuencialCajaSupermaxi(datosConf.getCodcaja(), Sesion.getTienda().getSriTienda().getCodalmsri());
+        } catch (TiendasException ex) {
+            java.util.logging.Logger.getLogger(PeticionBonoSuperMaxiNavidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int idsecuencial = cajaSecuencial.getSecuencialSuper();
+        SriCaja sriCaja = Sesion.getTienda().getSriTienda().getCajaActiva();
+        if (idsecuencial >= 99980) { //El secuencial no debe superar los 5 digitos por lo que se reinicia el numero cuando llegue a 99980
+            sriCaja.setSecuencialSuper(1);
+        } else {
+            sriCaja.setSecuencialSuper(idsecuencial + 1);
+        }
+        try {
+            TiendasServices.actualizarSecuencial(sriCaja);
+        } catch (TiendasException ex) {
+            java.util.logging.Logger.getLogger(PeticionBonoSuperMaxiNavidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        System.out.println("idfactura :"+factura);
 //        String  nuevosecuencialCreado=factura.substring(1);
 //        System.out.println("Secuncial menos un caracter "+nuevosecuencialCreado);
 //        secuencialTransaccion = Numero.completaconCeros((nuevosecuencialCreado+pago.getIdTramaSuper()), 6);//6
-//        System.out.println("Nuevo Secuencial: "+secuencialTransaccion);
-//Correccion secuenciales 
-        System.out.println("Secuncial menos un caracter " + idsecuencial);
+//        System.out.println("Nuevo Secuencial: "+secuencialTransaccion); 
+        System.out.println("Secuencial menos un caracter " + idsecuencial);
+        //Se reali
         String valorAenviar = idsecuencial + pago.getIdTramaSuper();
-        while (valorAenviar.length() > 6) {
+        while (valorAenviar.length() > 5) {
             valorAenviar = valorAenviar.substring(1);
         }
 //        secuencialTransaccion = Numero.completaconCeros((idsecuencial+pago.getIdTramaSuper()), 6);//6
-        secuencialTransaccion = Numero.completaconCeros((valorAenviar), 6);//6
+        String secuencialSuper = Numero.completaconCeros((valorAenviar), 5);//6
+        if (Sesion.getTicket() != null) {
+            secuencialTransaccion = "1" + secuencialSuper;
+        } else {
+            secuencialTransaccion = "2" + secuencialSuper;
+        }
+        if (mensaje == ANULACION) {
+            secuencialTransaccion = numSecuencialEnvio;
+        }
         System.out.println("Nuevo Secuencial: " + secuencialTransaccion);
         //Antes 
 //        secuencialTransaccion = Numero.completaconCeros(factura, 6);//6
@@ -333,6 +368,29 @@ public class PeticionBonoSuperMaxiNavidad {
             ClienteRest clienteRest = new ClienteRest();
             RespuestaSupermaxiDTO responseSupermaxiDTO = clienteRest.clientRestPOST(url + URL_ENVIO_SUPERMAXI, solicitudSupermaxiDTO, null, RespuestaSupermaxiDTO.class);
             respuesta = responseSupermaxiDTO.getTrama();
+
+            log.info(respuesta);
+
+        } catch (Exception ex) {
+            log.error("enviarTramaServicioWeb() - Error al enviar la trama de petición de bono supermaxi navideño con Servicio Web:  " + ex.getMessage(), ex);
+            if (ex instanceof SocketTimeoutException) {
+                throw new SocketTimeoutException(ex.getMessage());
+            } else {
+                throw new IOException(ex.getMessage());
+            }
+        }
+        return respuesta;
+    }
+
+    public boolean enviarTramaServicioWebAnulacion(SolicitudSupermaxiDTO solicitudSupermaxiDTO) throws SocketTimeoutException, IOException {
+        boolean respuesta = false;
+        log.debug("enviarTramaServicioWebAnulacion() - Enviando trama navideña con Servicio Web de Anulación- " + solicitudSupermaxiDTO.getTrama());
+
+        try {
+            String url = Variables.getVariable(Variables.WEBSERVICE_ERP_MOVIL_ENDPOINT_URL);
+            ClienteRest clienteRest = new ClienteRest();
+            RespuestaSupermaxiDTO responseSupermaxiDTO = clienteRest.clientRestPOST(url + URL_ENVIO_SUPERMAXI, solicitudSupermaxiDTO, null, RespuestaSupermaxiDTO.class);
+            respuesta = responseSupermaxiDTO.getExito();
 
             log.info(respuesta);
 

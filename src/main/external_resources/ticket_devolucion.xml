@@ -157,6 +157,10 @@
             <text align="right" length="9">${devolucion.getTicketDevolucion().getTotales().getImpuestosIce().toString()}</text>
         </line>
         <line>
+            <text align="left" length="20">  Interes      : </text>
+            <text align="right" length="9">${devolucion.getTicketDevolucion().getTotales().getInteres().toString()}</text>
+        </line>
+        <line>
             <text align="left" length="17">  Total Vale   : </text>
             <text align="right" length="23">${devolucion.getTicketDevolucion().getTotales().getTotalAPagar().toString()} US DOLARES</text>
         </line>

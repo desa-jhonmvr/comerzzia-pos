@@ -5,7 +5,7 @@
         <line><text align="center" length="40">CAJA No. ${ticketAlm.getCodCaja()}</text></line>
         <line><text align="center" length="40">-----------------</text></line>
         <line><text align="center" length="40">---------------------------</text></line>
-        <line><text align="center" length="40">ENTREGA DE ARTÍCULOS PENDIENTES</text></line>
+        <line><text align="center" length="40">ARTÍCULOS ENTREGADOS</text></line>
         <line><text align="center" length="40">${fecha}</text></line>
         <line><text align="center" length="40">Factura Original: ${ticketOrigen.getIdFactura()}</text></line>
         <line></line>

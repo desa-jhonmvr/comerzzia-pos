@@ -33,7 +33,10 @@
 			<text align="left" length="35" bold="true">RECIBO DE RESERVACIÓN</text>
 		</line>
 		<line>
-			<text align="left" length="35">LOCAL: ${tienda}</text>
+			<text align="left" length="35">LOCAL: ${tienda}</text>                      
+		</line>
+                <line>
+                        <text align="left" length="35">CAJA: ${caja}</text>                       
 		</line>
 		<line>
 			<text align="left" length="35">CLIENTE: ${facturacion.getTipoDocumento()}: ${facturacion.getDocumento()}</text>
@@ -69,7 +72,7 @@
 		#foreach ($linea in $ticket.getLineas().getLineas())
         <line>
             <text align="center" length="3">${linea.getCantidad().toString()} </text>  
-            <text align="center" length="14">${linea.getCodigoBarras()} </text> 
+            <text align="center" length="14">${linea.getArticulo().getCodart()} </text> 
             <text align="left" length="14"> ${linea.getArticulo().getDescForPrint()}</text>
 			<text align="right" length="9"> ${linea.getImporteTotalPantalla().toString()}</text>				
 		</line>
@@ -81,6 +84,24 @@
 			#end
         #end
 		<line></line>
+        #if (${ticket.getTotales().getTotalAhorroPagos()})
+        <line>
+            <text align="left" length="31">Dto.Pagos:                $ </text>                            
+            <text align="right" length="9">${ticket.getTotales().getTotalAhorroPagosString()}</text>
+        </line>
+        <line>
+            <text align="left" length="31">TOTAL RESERVACION:        $ </text>  
+            <text align="right" length="9"> ${ticket.getTotales().getTotalPagado().toString()}</text>				
+	</line>          
+        #end                
+
+         #if (${reserva.getReservaTipo().getDesTipo().length()} == 10)
+        <line>
+            <text align="left" length="31">TOTAL RESERVACION:        $ </text>  
+            <text align="right" length="9"> ${ticket.getTotales().getTotalAPagar().toString()}</text>				
+	</line>          
+        #end 
+                      
         #if (!($ticket.getLineas().getDescuentos().isEmpty()))
 		<line>
 			<text length="35">----------------------------------------</text>

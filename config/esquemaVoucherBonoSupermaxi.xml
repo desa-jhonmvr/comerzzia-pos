@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<output>
+    <ticket>
+		<line><cabecera align="center" length="40" bold="true"></cabecera></line>
+		#foreach ($linea in $printVoucherBonoSupermaxi.getNombreEmpresaLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+		#foreach ($linea in $printVoucherBonoSupermaxi.getDireccionLocalAsLineas().getLineas())
+			<line><text align="left" length="40" >${linea}</text> </line>
+		#end
+                #if (${printVoucherBonoSupermaxi.isTieneTelefonoTienda()} )
+                    <line>
+                            <text align="left" length="10">Teléfono: </text>
+                            <text align="left" length="30">${printVoucherBonoSupermaxi.getTelefonoTienda()}</text>
+                    </line>
+                #end
+		<line>
+			<text align="left" length="11">    R.U.C: </text>
+			<text align="left" length="29">${printVoucherBonoSupermaxi.getRuc()}</text>
+		</line>
+		<line/>
+
+		#foreach ($lineaF in $printVoucherBonoSupermaxi.getLugarYfechaAsLineas().getLineas())
+			<line><text align="left" length="40" >${lineaF}</text> </line>
+		#end
+		<line>
+			<text align="left" length="14">Transaccion : </text>
+			<text align="left" length="26">${printVoucherBonoSupermaxi.getTransaccion()}</text>
+		</line>
+                <line></line>
+		<line>
+			<text align="left" length="9">Hora   : </text>
+			<text align="left" length="5">${printVoucherBonoSupermaxi.getHora()}</text>
+		</line>
+		<line>
+			<text align="left" length="22">Tipo de Transaccion : </text>
+			<text align="left" length="18">${printVoucherBonoSupermaxi.getTipoTransaccion()}</text>
+		</line>
+                <line>
+			<text align="left" length="9">TARJETA: </text>
+                        <text algin="left" length="31">${printVoucherBonoSupermaxi.getTarjeta()} </text>
+		</line>
+                <line></line>
+                <line><text align="left" length="40">NUMERO           AUTORIZACION    VALOR </text></line>
+                <line><text align="left" length="40">---------------------------------------</text></line>
+                
+                #foreach ($linea in $printVoucherBonoSupermaxi.getBonosSupermaxi())
+                    <line>
+                        <text align="left" length="20">${linea.getNumeroTarjeta()}</text>
+                        <text align="right" length="10">${linea.getAutorizacion()}</text>
+                        <text align="right" length="10">${linea.getValor()}</text>
+                    </line>
+                #end
+                
+                <line></line>
+		#if (!${printVoucherBonoSupermaxi.isVoucherGiftCard()})
+			<line>
+				<text align="left" length="13">BASE ${printVoucherBonoSupermaxi.getPorcentajeIvaEmpresa()}%  :$ </text>
+				<text align="right" length="27">${printVoucherBonoSupermaxi.getBase12()} US DOLARES   </text>
+			</line>
+			<line>
+				<text align="left" length="13">BASE 0%   :$ </text>
+				<text align="right" length="27">${printVoucherBonoSupermaxi.getBase0()} US DOLARES   </text>
+			</line>
+			<line>
+				<text align="left" length="13">IVA  ${printVoucherBonoSupermaxi.getPorcentajeIvaEmpresa()}%  :$ </text>
+				<text align="right" length="27">${printVoucherBonoSupermaxi.getIva12()} US DOLARES   </text>
+			</line>
+			<line>
+				<text align="left" length="13">Intereses :$ </text>
+				<text align="right" length="27">${printVoucherBonoSupermaxi.getIntereses()} US DOLARES   </text>
+			</line>
+			<line>
+				<text align="center" length="40"></text>
+			</line>
+			<line>
+				<text align="left" length="13">Total      :$ </text>
+				<text align="right" length="27">${printVoucherBonoSupermaxi.getTotal()} US DOLARES   </text>
+			</line>
+			<line/>
+
+			#if (${printVoucherBonoSupermaxi.getNumeroTarjeta()})
+			<line><text align="left" length="40" >DEBO  Y  PAGARE INCONDICIONALMENTE, AL</text> </line>
+			<line><text align="left" length="40" >EMISOR AL PLAZO ESTABLECIDO,LA SUMA DE</text> </line>
+			<line><text align="left" length="40" >DINERO INDICADO EN EL TOTAL DE ESTE PA-</text> </line>
+			<line><text align="left" length="40" >GARE. EN CASO DE MORA, PAGARE  LA TASA</text> </line>
+			<line><text align="left" length="40" >MAXIMA PERMISIBLE COBRAR AL EMISOR CON</text> </line>
+			<line><text align="left" length="40" >LOS RECARGOS CORRESPONDIENTES.        </text> </line>
+			#end
+
+		#else
+			<line/>
+			<line>
+				<text align="left" length="19">Valor Original  :$ </text>
+				<text align="right" length="21">${printVoucherBonoSupermaxi.getValorOriginal()} US DOLARES</text>
+			</line>
+			<line>
+				<text align="left" length="19">Valor Debitado  :$ </text>
+				<text align="right" length="21">${printVoucherBonoSupermaxi.getValorDebitado()} US DOLARES</text>
+			</line>
+			<line>
+				<text align="left" length="19">Saldo           :$ </text>
+				<text align="right" length="21">${printVoucherBonoSupermaxi.getSaldo()} US DOLARES</text>
+			</line>
+			<line/>
+		#end
+
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line><text align="left" length="40" >_______________________   ___________</text> </line>
+		<line><text align="left" length="40" >         Firma               Telef.  </text> </line>
+		<line/>
+		<line><pie align="center" length="40" bold="true"></pie></line>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+		<line/>
+    </ticket>
+</output>

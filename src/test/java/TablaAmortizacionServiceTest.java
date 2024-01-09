@@ -5,10 +5,9 @@ import java.math.BigDecimal;
 class TablaAmortizacionServiceTest {
 
     public static void main(String[] args) {
-        TablaAmortizacionService.init(
-                BigDecimal.valueOf(Double.valueOf("68.84")),
-                BigDecimal.valueOf(Double.valueOf("3")),
-                BigDecimal.valueOf(Double.valueOf("0"))
+        TablaAmortizacionService.init(BigDecimal.valueOf(Double.valueOf("1426.95")),
+                BigDecimal.valueOf(Double.valueOf("36")),
+                BigDecimal.valueOf(Double.valueOf("15.5")),null
         );
 
         System.out.println("Valores2>>>>>>>>>>>");

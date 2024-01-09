@@ -193,6 +193,13 @@
             <text align="right" length="27">${printVoucher.getIva12()} US DOLARES   </text>
         </line>
         <line>
+            <text align="left" length="13">Tasa de  </text>
+        </line>
+        <line>
+            <text align="left" length="13">Interes   : </text>
+            <text align="right" length="27">${printVoucher.getTasaInteres()} %            </text>
+        </line>
+        <line>
             <text align="left" length="13">Intereses :$ </text>
             <text align="right" length="27">${printVoucher.getIntereses()} US DOLARES   </text>
         </line>
@@ -200,7 +207,7 @@
             <text align="center" length="40"></text>
         </line>
         <line>
-            <text align="left" length="13">Total      :$ </text>
+            <text align="left" length="13">Total     :$ </text>
             <text align="right" length="27">${printVoucher.getTotal()} US DOLARES   </text>
         </line>
         <line/>

@@ -56,7 +56,7 @@ public class EnvioDomicilioDao {
 
         try {
             pstmt = new PreparedStatement(conn, sql);
-            log.debug("consultarCamionEntregaDomicilio() - " + pstmt);
+            log.debug("getParametrosEntrega() - " + pstmt);
 
             rs = pstmt.executeQuery();
 

@@ -106,7 +106,9 @@ public class TicketsAlm implements Serializable {
     private String claveAcceso;
     @Column(name ="ESTADO_FE")
     private String estadoFE;
-    
+
+    @Column(name = "TOTAL_INTERES")
+    private BigDecimal totalInteres;
     public TicketsAlm() {
         this.procesado='N';
         this.anulado='N';
@@ -390,7 +392,13 @@ public class TicketsAlm implements Serializable {
     public void setEstadoFE(String estadoFE) {
         this.estadoFE = estadoFE;
     }
-    
-    
-    
+
+
+    public BigDecimal getTotalInteres() {
+        return totalInteres;
+    }
+
+    public void setTotalInteres(BigDecimal totalInteres) {
+        this.totalInteres = totalInteres;
+    }
 }

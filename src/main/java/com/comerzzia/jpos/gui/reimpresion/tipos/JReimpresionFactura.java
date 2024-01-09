@@ -70,6 +70,7 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
             cupon.setSelected(Boolean.FALSE);
             fac.setSelected(Boolean.FALSE);
             vch.setSelected(Boolean.FALSE);
+            tch.setSelected(Boolean.FALSE);
         } catch (Exception e) {
 
         }
@@ -149,6 +150,7 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
         factura = new javax.swing.JLabel();
         l_factura_cabecera1 = new javax.swing.JLabel();
         gch = new javax.swing.JCheckBox();
+        tch = new javax.swing.JCheckBox();
 
         setMaximumSize(new java.awt.Dimension(520,270));
         setMinimumSize(new java.awt.Dimension(520,340));
@@ -248,6 +250,13 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
             }
         });
 
+        tch.setText("TABLA AMORTIZACION");
+        tch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,49 +267,52 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(b_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lb_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(28, 28, 28))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(l_factura_cabecera1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(115, 115, 115)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(l_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(t_factura1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(t_factura2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(t_factura3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(174, 174, 174))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cupon)
-                                .addComponent(vch)
-                                .addComponent(fac)
-                                .addComponent(billeton)
-                                .addComponent(jLabel1)
-                                .addComponent(gch))
-                            .addGap(32, 32, 32)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(81, 81, 81))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(218, 218, 218)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lb_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(l_factura_cabecera1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tch)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(l_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(t_factura1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(t_factura2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(t_factura3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(174, 174, 174))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cupon)
+                                        .addComponent(vch)
+                                        .addComponent(fac)
+                                        .addComponent(billeton)
+                                        .addComponent(jLabel1)
+                                        .addComponent(gch))
+                                    .addGap(32, 32, 32)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(81, 81, 81))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(218, 218, 218))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,12 +350,14 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
                         .addComponent(fac)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(billeton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cupon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gch)))
+                        .addComponent(gch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tch)))
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -413,6 +427,10 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
         // TODO add your handling code here:
     }//GEN-LAST:event_vchActionPerformed
 
+    private void tchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.comerzzia.jpos.gui.components.form.JButtonForm b_aceptar1;
     private com.comerzzia.jpos.gui.components.form.JButtonForm b_cancelar;
@@ -435,6 +453,7 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
     private com.comerzzia.jpos.gui.components.form.JTextFieldForm t_factura1;
     private com.comerzzia.jpos.gui.components.form.JTextFieldForm t_factura2;
     private com.comerzzia.jpos.gui.components.form.JTextFieldForm t_factura3;
+    private javax.swing.JCheckBox tch;
     private javax.swing.JCheckBox vch;
     // End of variables declaration//GEN-END:variables
 
@@ -451,19 +470,20 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
             if (documentoBean != null) {
                 if (tipo.equals(DocumentosBean.FACTURA)) {
 //                    boolean imprimirVoucher = JPrincipal.getInstance().crearVentanaConfirmacion("¿Desea reimprimir los voucher de pago?", "Sí", "No");
-                    if (!fac.isSelected() && !vch.isSelected() && !cupon.isSelected() && !billeton.isSelected() && !gch.isSelected()) {
+                    if (!fac.isSelected() && !vch.isSelected() && !cupon.isSelected() && !billeton.isSelected() && !gch.isSelected() && !tch.isSelected()) {
 
                         this.contenedor.setVisible(false);
                         JPrincipal.getInstance().crearAdvertencia("Selecione al menos una opción.");
                         this.contenedor.setVisible(true);
-                    } else {
-                        String respuesta = PrintServices.getInstance().reimpresionFactura(documentoBean, false, fac.isSelected(), vch.isSelected(), cupon.isSelected(), billeton.isSelected(), jTextArea.getText(), gch.isSelected());
-                        if (!PrintServices.MENSAJE_RESPUESTA.equals(respuesta)) {
-                            this.contenedor.setVisible(false);
-                            JPrincipal.getInstance().crearAdvertencia(respuesta);
-                            this.contenedor.setVisible(true);
-                        }
+                        return;
                     }
+                    String respuesta = PrintServices.getInstance().reimpresionFactura(documentoBean, false, fac.isSelected(), vch.isSelected(), cupon.isSelected(), billeton.isSelected(), jTextArea.getText(), gch.isSelected(), tch.isSelected());
+                    if (!PrintServices.MENSAJE_RESPUESTA.equals(respuesta)) {
+                        this.contenedor.setVisible(false);
+                        JPrincipal.getInstance().crearAdvertencia(respuesta);
+                        this.contenedor.setVisible(true);
+                    }
+
                 }
                 if (tipo.equals(DocumentosBean.NOTA_CREDITO)) {
                     PrintServices.getInstance().reimpresionNotaCredito(documentoBean, false, jTextArea.getText());
@@ -498,7 +518,7 @@ public class JReimpresionFactura extends JVentanaDialogo implements IViewerValid
             if (documentoBean != null) {
                 if (tipo.equals(DocumentosBean.FACTURA)) {
                     //se aumenta el estado cupen false se agrega billeton false
-                    PrintServices.getInstance().reimpresionFactura(documentoBean, true, true, false, false, false, "", false);
+                    PrintServices.getInstance().reimpresionFactura(documentoBean, true, true, false, false, false, "", false, tch.isSelected());
                 }
                 if (tipo.equals(DocumentosBean.NOTA_CREDITO)) {
                     PrintServices.getInstance().reimpresionNotaCredito(documentoBean, true, "Previsualizar");

@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  * @author amos
  */
 public class PlanesTarjetaTableModel extends AbstractTableModel {
-    private String[] columnNames = {"n", "PLAN","DTO.","INTERÉS","CUOTAS","TOTAL", "AHORRO"};
+    private String[] columnNames = {"n", "PLAN","DTO.","INTERÉS","TOTAL INTERÉS","CUOTAS","TOTAL", "AHORRO"};
     private List<PlanPagoCredito> data;    
 
     

@@ -845,6 +845,7 @@ public class ReservacionesServicios {
                 p.establecerDescuento(dctoAbonos.setScale(0, RoundingMode.HALF_UP));
                 p.setUstedPaga(ustedPagaMedioPagoAbonos);
                 p.establecerEntregado(ustedPagaMedioPagoAbonos.toString());
+
                 
                 factura.crearNuevaLineaPago(p);
             }

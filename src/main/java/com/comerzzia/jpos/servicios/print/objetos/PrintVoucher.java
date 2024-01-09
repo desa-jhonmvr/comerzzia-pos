@@ -81,6 +81,8 @@ public class PrintVoucher extends PrintDocument {
     private String valorTvr;
     private String valorTsi;
 
+    private String tasaInteres;
+
     public PrintVoucher(String documento, String procedencia) {
         super(true, new Fecha());
 
@@ -237,6 +239,7 @@ public class PrintVoucher extends PrintDocument {
         subtotalBase = (pagoCredito.getSubtotalIva12().setScale(2, RoundingMode.HALF_UP).add(pagoCredito.getSubtotalIva0().setScale(2, RoundingMode.HALF_UP))).toString();
         iva12 = pagoCredito.getIva().toString();
         intereses = pagoCredito.getImporteInteres().setScale(2, RoundingMode.HALF_UP).toString();
+        tasaInteres = String.format("%.2f",pagoCredito.getPorcentajeInteres());
         valorInteresPropio = pagoCredito.getImporteInteres().setScale(2, RoundingMode.HALF_UP);
         total = pagoCredito.getUstedPaga().add(pagoCredito.getImporteInteres()).setScale(2, RoundingMode.HALF_UP).toString();
         granTotal = (pagoCredito.getUstedPaga().add(pagoCredito.getImporteInteres()).setScale(2, RoundingMode.HALF_UP).add(interesFinanciamiento)).toString();
@@ -743,5 +746,13 @@ public class PrintVoucher extends PrintDocument {
         } else {
             return modoLectura;
         }
+    }
+
+    public String getTasaInteres() {
+        return tasaInteres;
+    }
+
+    public void setTasaInteres(String tasaInteres) {
+        this.tasaInteres = tasaInteres;
     }
 }

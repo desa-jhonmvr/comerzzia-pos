@@ -18,9 +18,17 @@ public class VencimientoBean  implements Comparable<VencimientoBean> {
     private String desVencimiento;
     private Integer numeroVencimientos;
     private BigDecimal pisoMaximo;
+    private BigDecimal interesAfiliado;
     private String tipoCredito;
     private boolean placeToPay;
     private final MediosPago mediosPago;
+
+
+    private String calculaInteres;
+
+    private String codigoSyscard;
+    private String tipoAmortizacion;
+
     
 
 
@@ -158,4 +166,35 @@ public class VencimientoBean  implements Comparable<VencimientoBean> {
     }
 
 
+    public String getTipoAmortizacion() {
+        return tipoAmortizacion;
+    }
+
+    public void setTipoAmortizacion(String tipoAmortizacion) {
+        this.tipoAmortizacion = tipoAmortizacion;
+    }
+
+    public String getCodigoSyscard() {
+        return codigoSyscard;
+    }
+
+    public void setCodigoSyscard(String codigoSyscard) {
+        this.codigoSyscard = codigoSyscard;
+    }
+
+    public String getCalculaInteres() {
+        return calculaInteres;
+    }
+
+    public void setCalculaInteres(String calculaInteres) {
+        this.calculaInteres = calculaInteres;
+    }
+
+    public BigDecimal getInteresAfiliado() {
+        return interesAfiliado;
+    }
+
+    public void setInteresAfiliado(BigDecimal interesAfiliado) {
+        this.interesAfiliado = interesAfiliado;
+    }
 }

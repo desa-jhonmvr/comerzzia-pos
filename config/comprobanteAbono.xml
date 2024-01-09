@@ -38,6 +38,9 @@
 		<line>
 			<text align="left" length="35">LOCAL: ${comprobante.getCodTienda()}</text>
 		</line>
+                <line>
+			<text align="left" length="35">CAJA: ${caja}</text>
+		</line>
 		<line>
 			<text align="left" length="35">CLIENTE: ${facturacion.getTipoDocumento()}: ${facturacion.getDocumento()}</text>
 		</line>
@@ -81,6 +84,9 @@
 			<line>
 				<text align="center" length="40" bold="true"> Abono de $${comprobante.getTotalConDescuentos()}</text>
 			</line>
+			<line>
+				<text align="center" length="40" bold="true"> ${comprobante.getNombreBoda()}</text>
+			</line>                        
 		#end
 		<line/>
         <line>

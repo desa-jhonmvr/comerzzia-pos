@@ -43,6 +43,8 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
     private String establecimiento;
     private String idFactura;
     private String peticionTramaEnvio;
+    private boolean respuestaAnulacion;
+    private String respuestaAnular;
 
     public PagoBonoSuperMaxiNavidad(PagosTicket pagos, Cliente cliente, String factura, String autorizador) {
         super(pagos, cliente, autorizador);
@@ -165,51 +167,114 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
 //    }
     @Override
     public void anularAutorizacionPago(List<Pago> anuladosImpresos) throws AutorizadorException {
-        try {
-            if (isValidadoManual()) {
-                setValidadoManual(false);
-            } else if (isValidadoAutomatico()) { // Validado automático     
-                setValidadoAutomatico(false);
-                log.error("autorizarPago() - No se ha podido procesar el pago, enviamos una trama de Anulación");
-                //d factura Rd
-                PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.ANULACION, idFactura, numAutorizacion);
-                String trama = peticionBonoSuperMaxiNavidad.devolverTrama();
-                String respuestaAnulacion = peticionBonoSuperMaxiNavidad.enviarTrama(trama);
-                log.debug("autorizarPago() - Respuesta de la trama de anulación: " + respuestaAnulacion);
-
-                RespuestaProcesoPagos respuestaPago = new RespuestaProcesoPagos();
-                //Construimos la respuesta
-                respuestaPago.setSecuencialTransaccion(respuestaAnulacion.substring(10, 16));
-                respuestaPago.setNumeroAutorizacion(numAutorizacion);
-                establecimiento = respuestaAnulacion.substring(66, 76);
-                respuestaPago.setNombreTarjetaHabiente(respuestaAnulacion.substring(76, 116));
-                cedula = respuestaAnulacion.substring(116, 131);
-                respuestaPago.setTerminalId(respuestaAnulacion.substring(58, 66));
-                setPinpadRespuesta(respuestaPago);
-
-                log.debug("autorizarPago() - Insertando FacturacionTarjeta 5");
-                FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
-                ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
-                ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
-                ft.setCodigoRespuesta(respuestaAnulacion.substring(36, 38));
-                ft.setMensajeProceso(respuestaAnulacion.substring(38, 58));
-                ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
-                setUidFacturacion(ft.getId());
-                setTramaEnvio(trama);
-                setTramaRespuesta(respuestaAnulacion);
-            }
-        } catch (Exception e2) {
+        if (Variables.getVariable(Variables.ACTIVO_SERVICIO_WEB_SUPERMAXI).equals("S")) {
             try {
-                log.debug("autorizarPago() - Ha ocurrido un error al enviar la trama de Anulación");
-                FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
-                ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
-                ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
-                ft.setCodigoRespuesta(null);
-                ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
-                setUidFacturacion(ft.getId());
-                throw new AutorizadorException("Ha ocurrido un error al procesar la Anulación");
-            } catch (FacturacionTarjetaException ex) {
-                java.util.logging.Logger.getLogger(PagoBonoSuperMaxiNavidad.class.getName()).log(Level.SEVERE, null, ex);
+                if (isValidadoManual()) {
+                    setValidadoManual(false);
+                } else if (isValidadoAutomatico()) { // Validado automático     
+                    setValidadoAutomatico(false);
+                    log.error("autorizarPago() - No se ha podido procesar el pago, enviamos una trama de Anulación");
+                    //d factura Rd
+                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.ANULACION, idFactura, numAutorizacion, numSecuencialEnvio);
+                    String trama = peticionBonoSuperMaxiNavidad.devolverTrama();
+//                String respuestaAnulacion = peticionBonoSuperMaxiNavidad.enviarTrama(trama);
+                    SolicitudSupermaxiDTO solicitudSupermaxiDTO = new SolicitudSupermaxiDTO();
+                    solicitudSupermaxiDTO.setUidTicket(UUID.randomUUID().toString());
+                    solicitudSupermaxiDTO.setTrama(trama);
+                    peticionTramaEnvio = peticionJson(solicitudSupermaxiDTO);
+                    log.info("Se envia trama de anulación.....Entrada ");
+                    respuestaAnulacion = peticionBonoSuperMaxiNavidad.enviarTramaServicioWebAnulacion(solicitudSupermaxiDTO);
+                    log.info("Se envia trama de anulación.....Salida ");
+                    setTramaEnvio(peticionTramaEnvio);
+                    respuestaAnular = (respuestaAnulacion) ? "true" : "false";
+                    setTramaRespuesta(respuestaAnular);
+                    log.debug("autorizarPago() - Respuesta de la trama de anulación: " + respuestaAnulacion);
+
+//                    RespuestaProcesoPagos respuestaPago = new RespuestaProcesoPagos();
+                    //Construimos la respuesta
+//                    respuestaPago.setSecuencialTransaccion(respuestaAnulacion.substring(10, 16));
+//                    respuestaPago.setNumeroAutorizacion(numAutorizacion);
+//                    establecimiento = respuestaAnulacion.substring(66, 76);
+//                    respuestaPago.setNombreTarjetaHabiente(respuestaAnulacion.substring(76, 116));
+//                    cedula = respuestaAnulacion.substring(116, 131);
+//                    respuestaPago.setTerminalId(respuestaAnulacion.substring(58, 66));
+//                    setPinpadRespuesta(respuestaAnular);
+                    log.debug("autorizarPago() - Insertando FacturacionTarjeta 5");
+                    FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
+                    ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
+                    ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
+                    ft.setMensajeProceso(respuestaAnular);
+                    ft.setTramaEnvio(peticionTramaEnvio);
+                    ft.setTramaRespuesta(respuestaAnular);
+                    ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
+                    setUidFacturacion(ft.getId());
+//            setTramaEnvio(trama);
+//            setTramaRespuesta(respuestaAnulacion);
+                }
+            } catch (Exception e2) {
+                try {
+                    log.debug("autorizarPago() - Ha ocurrido un error al enviar la trama de Anulación");
+                    FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
+                    ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
+                    ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
+                    ft.setCodigoRespuesta(null);
+                    ft.setTramaEnvio(peticionTramaEnvio);
+                    ft.setTramaRespuesta(respuestaAnular);
+                    ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
+                    setUidFacturacion(ft.getId());
+                    throw new AutorizadorException("Ha ocurrido un error al procesar la Anulación");
+                } catch (FacturacionTarjetaException ex) {
+                    java.util.logging.Logger.getLogger(PagoBonoSuperMaxiNavidad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } else {
+            try {
+                if (isValidadoManual()) {
+                    setValidadoManual(false);
+                } else if (isValidadoAutomatico()) { // Validado automático     
+                    setValidadoAutomatico(false);
+                    log.error("autorizarPago() - No se ha podido procesar el pago, enviamos una trama de Anulación");
+                    //d factura Rd
+                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.ANULACION, idFactura, numAutorizacion, numSecuencialEnvio);
+                    String trama = peticionBonoSuperMaxiNavidad.devolverTrama();
+                    String respuestaAnulacion = peticionBonoSuperMaxiNavidad.enviarTrama(trama);
+                    log.debug("autorizarPago() - Respuesta de la trama de anulación: " + respuestaAnulacion);
+
+                    RespuestaProcesoPagos respuestaPago = new RespuestaProcesoPagos();
+                    //Construimos la respuesta
+                    respuestaPago.setSecuencialTransaccion(respuestaAnulacion.substring(10, 16));
+                    respuestaPago.setNumeroAutorizacion(numAutorizacion);
+                    establecimiento = respuestaAnulacion.substring(66, 76);
+                    respuestaPago.setNombreTarjetaHabiente(respuestaAnulacion.substring(76, 116));
+                    cedula = respuestaAnulacion.substring(116, 131);
+                    respuestaPago.setTerminalId(respuestaAnulacion.substring(58, 66));
+                    setPinpadRespuesta(respuestaPago);
+
+                    log.debug("autorizarPago() - Insertando FacturacionTarjeta 5");
+                    FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
+                    ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
+                    ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
+                    ft.setCodigoRespuesta(respuestaAnulacion.substring(36, 38));
+                    ft.setMensajeProceso(respuestaAnulacion.substring(38, 58));
+                    ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
+                    setUidFacturacion(ft.getId());
+                    setTramaEnvio(trama);
+                    setTramaRespuesta(respuestaAnulacion);
+                }
+            } catch (Exception e2) {
+                try {
+                    log.debug("autorizarPago() - Ha ocurrido un error al enviar la trama de Anulación");
+                    FacturacionTarjeta ft = new FacturacionTarjeta(PagoBonoSuperMaxiNavidad.this, this.getTicket(), "R");
+                    ft.setValor(Cadena.ofuscarTarjeta(this.getTarjetaCredito().getNumero()).replaceAll(" ", ""));
+                    ft.setLongitudTarjeta(this.getNumeroTarjeta().length());
+                    ft.setCodigoRespuesta(null);
+                    ServicioFacturacionTarjetas.insertarFacturacionTarjeta(ft);
+                    setUidFacturacion(ft.getId());
+                    throw new AutorizadorException("Ha ocurrido un error al procesar la Anulación");
+                } catch (FacturacionTarjetaException ex) {
+                    java.util.logging.Logger.getLogger(PagoBonoSuperMaxiNavidad.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -269,12 +334,14 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
             String msmAprobacion = "";
             numAutorizacion = "      ";
             try {
-                PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.COMPRA, idFactura, null);
+                PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.COMPRA, idFactura, null, null);
                 trama = peticionBonoSuperMaxiNavidad.devolverTrama();
                 solicitudSupermaxiDTO.setUidTicket(UUID.randomUUID().toString());
                 solicitudSupermaxiDTO.setTrama(trama);
                 peticionTramaEnvio = peticionJson(solicitudSupermaxiDTO);
+                log.info("Se envía trama al servicio..... Entrada...");
                 respuesta = peticionBonoSuperMaxiNavidad.enviarTramaServicioWeb(solicitudSupermaxiDTO);
+                log.info("Se envía trama al servicio..... Salida....");
                 if (respuesta == null) {
                     throw new AutorizadorException("No se ha podido realizar el pago");
                 }
@@ -356,7 +423,7 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
                     setUidFacturacion(ft.getId());
                     setTramaEnvio(peticionTramaEnvio);
                     setTramaRespuesta(respuesta);
-                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.REVERSA, idFactura, null);
+                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.REVERSA, idFactura, null, null);
                     solicitudSupermaxiDTO = new SolicitudSupermaxiDTO();
                     trama = peticionBonoSuperMaxiNavidad.devolverTrama();
                     solicitudSupermaxiDTO.setUidTicket(UUID.randomUUID().toString());
@@ -412,7 +479,8 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
             String respuesta = "";
             numAutorizacion = "      ";
             try {
-                PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.COMPRA, idFactura, null);
+                PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad;
+                peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.COMPRA, idFactura, null, null);
                 trama = peticionBonoSuperMaxiNavidad.devolverTrama();
                 respuesta = peticionBonoSuperMaxiNavidad.enviarTrama(trama);
                 numAutorizacion = respuesta.substring(30, 36); //Rescatamos el numero de autorización de la respuesta
@@ -484,7 +552,7 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
                     setUidFacturacion(ft.getId());
                     setTramaEnvio(peticionTramaEnvio);
                     setTramaRespuesta(respuesta);
-                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.REVERSA, idFactura, null);
+                    PeticionBonoSuperMaxiNavidad peticionBonoSuperMaxiNavidad = new PeticionBonoSuperMaxiNavidad(this, PeticionBonoSuperMaxiNavidad.REVERSA, idFactura, null, null);
                     trama = peticionBonoSuperMaxiNavidad.devolverTrama();
                     String respuestaReversa = peticionBonoSuperMaxiNavidad.enviarTrama(trama);
                     log.debug("autorizarPago() - Respuesta de la trama de reversa: " + respuestaReversa);
@@ -577,6 +645,14 @@ public class PagoBonoSuperMaxiNavidad extends PagoCredito {
 
     public void setIdFactura(String idFactura) {
         this.idFactura = idFactura;
+    }
+
+    public String getNumSecuencialRespuesta() {
+        return numSecuencialRespuesta;
+    }
+
+    public void setNumSecuencialRespuesta(String numSecuencialRespuesta) {
+        this.numSecuencialRespuesta = numSecuencialRespuesta;
     }
 
 }

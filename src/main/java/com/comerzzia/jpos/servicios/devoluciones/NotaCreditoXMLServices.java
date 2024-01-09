@@ -195,7 +195,7 @@ public class NotaCreditoXMLServices {
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_IMPORTE, Numero.redondear(linea.getImporte()).toString());
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_DESCUENTO_FINAL, Numero.redondear(linea.getDescuentoFinal()).toString());
         root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_MODELO, linea.getArticulo().getModelo());
-        root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_INTERES, Numero.redondear(linea.getInteres()).toString());
+        //root.añadirHijo(TagNotaCreditoXML.TAG_LINEA_INTERES, Numero.redondear(linea.getInteres()).toString());
         if (linea.getReferenciaKit() != null){
             root.añadirHijo(construirTagRefKit(xml, linea.getReferenciaKit()));
         }        
@@ -253,6 +253,7 @@ public class NotaCreditoXMLServices {
         totales.añadirHijo(TagNotaCreditoXML.TAG_TOTALES_SUBTOTAL0, devolucion.getTicketDevolucion().getTotales().getSubtotal0().toString());
         totales.añadirHijo(TagNotaCreditoXML.TAG_TOTALES_SUBTOTAL_IVA_VALOR, devolucion.getTicketDevolucion().getTotales().getSubtotal12().toString());
         totales.añadirHijo(TagNotaCreditoXML.TAG_TOTALES_SUBTOTAL_IVA_PORCENTAJE, devolucion.getTicketDevolucion().getTotales().getPorcentajeSubtotal().toString());
+        totales.añadirHijo(TagNotaCreditoXML.TAG_TOTAL_INTERES, devolucion.getTicketDevolucion().getTotales().getInteres().toString());
         totales.añadirHijo(TagNotaCreditoXML.TAG_TOTALES_COMPENSACION, devolucion.getTicketDevolucion().getTotales().getCompensacionGobierno().toString());
         
         root.añadirHijo(totales);

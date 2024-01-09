@@ -259,6 +259,7 @@ public class DevolucionesServices {
             nota.setSaldo(devolucion.getTicketDevolucion().getTotales().getTotalAPagar());
             nota.setUidNotaCredito(devolucion.getTicketDevolucion().getUid_ticket());
             nota.setAutorizador(devolucion.getAutorizador());
+            nota.setValorInteres(devolucion.getTicketDevolucion().getTotales().getInteres());
             if (devolucion.isAnulacion()) {
                 nota.setMotivoAnulacion("VOUCHER ANULADO");
                 nota.setFechaAnulacion(new Date());
@@ -409,6 +410,8 @@ public class DevolucionesServices {
                 String documento = nota.getCodalm() + "-" + nota.getCodcaja() + "-" + String.format("%09d", nota.getIdNotaCredito());
                 movimientoCaja.setDocumento(documento);
                 movimientoCaja.setIdDocumento(nota.getUidNotaCredito());
+                movimientoCaja.setInteres(devolucion.getTicketDevolucion().getTotales().getInteres().multiply(BigDecimal.valueOf(Double.parseDouble("-1"))));
+
 
 //            if (VariablesAlm.getVariableAsBoolean(VariablesAlm.REALIZA_FACT_ELECTRONICA) && (!Variables.getVariableAsBoolean(Variables.FACT_ELECTRONICA_SOLO_RUC) || devolucion.getTicketDevolucion().getCliente().isTipoRuc())) {
                 log.info("INGRESO A GENERAR EL XML DE LA  F.E.");
@@ -474,6 +477,7 @@ public class DevolucionesServices {
                 detalle.setImporteTotalFinal(linea.getImporteTotal());
                 detalle.setUidTicket(devolucion.getTicketOriginal().getUid_ticket());
                 detalle.setCodImp(linea.getCodimp());
+                detalle.setValorInteres(linea.getInteres());
 
                 //DR agregar el vendedor del item (Comentado pq al liquidar los plan novios falla pq el cod vendedor viene null)
                 detalle.setCodVendedor(linea.getCodEmpleado());

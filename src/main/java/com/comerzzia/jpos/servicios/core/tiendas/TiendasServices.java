@@ -22,79 +22,90 @@ import javax.persistence.NoResultException;
 public class TiendasServices {
 
     private static final Logger log = Logger.getMLogger(TiendasServices.class);
-    
-    
+
     public static Tienda consultaTienda(String codAlm) throws TiendasException {
         EntityManagerFactory emf = Sesion.getEmf();
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             return TiendasDao.consultaTienda(em, codAlm);
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             log.error("La tienda con la que se encuentra configurada el POS no existe en la bbdd. Código de tienda: " + codAlm);
             throw e;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             String msg = "Error consultando tienda: " + e.getMessage();
             log.error("consultaTienda()- " + msg, e);
             throw new TiendasException(msg, e);
-        }
-        finally{
+        } finally {
             em.close();
         }
-    }    
-    
+    }
+
     public static void consultarCajaTiendaASesion(String caja, String codalm) throws TiendasException {
         EntityManagerFactory emf = Sesion.getEmf();
         EntityManager em = emf.createEntityManager();
-        try{
-            Sesion.getTienda().getSriTienda().setCajaActiva(TiendasDao.consultaCaja(em,caja,codalm));
-        
-        }
-        catch (NoResultException e) {
-           log.debug("consultarCajaTienda() No se ha encontrado la caja configurada "+caja);
-        }
-        catch (Exception e){
+        try {
+            Sesion.getTienda().getSriTienda().setCajaActiva(TiendasDao.consultaCaja(em, caja, codalm));
+
+        } catch (NoResultException e) {
+            log.debug("consultarCajaTienda() No se ha encontrado la caja configurada " + caja);
+        } catch (Exception e) {
             String msg = "Error consultando lista de tiendas: " + e.getMessage();
             log.error("consultarListaTiendas()- " + msg, e);
             throw new TiendasException(msg, e);
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
-    
-     public static void actualizarVersion(SriCaja sriCaja) throws TiendasException {
+
+    public static void actualizarVersion(SriCaja sriCaja) throws TiendasException {
         EntityManagerFactory emf = Sesion.getEmf();
         EntityManager em = emf.createEntityManager();
-        try{
-            TiendasDao.actualizarVersion(em,sriCaja);
-        
-        }
-        catch (Exception e){
+        try {
+            TiendasDao.actualizarVersion(em, sriCaja);
+
+        } catch (Exception e) {
             String msg = "Error actualiando la version: " + e.getMessage();
             log.error("actualizarVersion()- " + msg, e);
             throw new TiendasException(msg, e);
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
+
     public static List<Almacen> consultarListaTiendas() throws TiendasException {
         EntityManagerFactory emf = Sesion.getEmf();
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             return TiendasDao.consultaTiendas(em);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             String msg = "Error consultando lista de tiendas: " + e.getMessage();
             log.error("consultarListaTiendas()- " + msg, e);
             throw new TiendasException(msg, e);
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
-    
-    
+
+    public static SriCaja consultarSecuencialCajaSupermaxi(String caja, String codalm) throws TiendasException {
+        EntityManagerFactory emf = Sesion.getEmf();
+        EntityManager em = emf.createEntityManager();
+        try {
+            return TiendasDao.consultaCaja(em, caja, codalm);
+        } catch (Exception e) {
+            String msg = "Error consultando lista de tiendas: " + e.getMessage();
+            log.error("consultarListaTiendas()- " + msg, e);
+            throw new TiendasException(msg, e);
+        } finally {
+            em.close();
+        }
+    }
+
+    public static void actualizarSecuencial(SriCaja sriCaja) throws TiendasException {
+        EntityManagerFactory emf = Sesion.getEmf();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(sriCaja);
+        em.getTransaction().commit();
+    }
+
 }

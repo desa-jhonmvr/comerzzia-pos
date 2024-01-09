@@ -45,14 +45,9 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.MissingResourceException;
+import java.util.*;
 import javax.swing.LookAndFeel;
 
-import java.util.ResourceBundle;
 import javax.persistence.EntityManagerFactory;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -72,6 +67,7 @@ public class TPV {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
         log.info("-------------------------------------------------");
         log.info("-------------------------------------------------");
         log.info("---- COMERZZIA POS - " + Constantes.VERSION_NUMERO_POS + " - SUKASA --------------- ");

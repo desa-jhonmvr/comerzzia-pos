@@ -1162,6 +1162,7 @@ private void v_buscar_articuloWindowGainedFocus(java.awt.event.WindowEvent evt) 
     }
 
     private void cargarDevolucion() throws Exception {
+        log.debug("JdevolucionVentasOtroLocal cargarDevolucion");
         TicketOrigen ticketOrigen;
 
         ticketOrigen = TicketOrigen.getTicketOrigen(new XMLDocument(documentoDTO.getBlob()));
@@ -1200,6 +1201,7 @@ private void v_buscar_articuloWindowGainedFocus(java.awt.event.WindowEvent evt) 
     }
 
     public void modificarLineaDevolucion(LineaTicket lineaTicketSeleccionada, ItemDTO item, Integer nuevaCantidad) throws ArticuloNotFoundException, ValidationException {
+        log.debug("modificarLineaDevolucion ventasOtroLocal");
         LineaTicket lineaOriginal = lineaTicketSeleccionada;
         if (lineaOriginal == null) {
             log.error("modificarLineaDevolucion() - No se ha encontrado la línea original en el ticket");
@@ -1218,6 +1220,8 @@ private void v_buscar_articuloWindowGainedFocus(java.awt.event.WindowEvent evt) 
             lineaTicketSeleccionada.setCantidad(nuevaCantidad);
             lineaTicketSeleccionada.recalcularImportes();
             lineaTicketSeleccionada.setDescuentoFinalDev(lineaOriginal.getDescuentoFinalDev());
+            BigDecimal nuevoInteres = lineaOriginal.getInteres().divide(BigDecimal.valueOf(lineaOriginal.getCantidad()),BigDecimal.ROUND_CEILING,RoundingMode.DOWN).multiply(BigDecimal.valueOf(nuevaCantidad)).setScale(BigDecimal.ROUND_CEILING,RoundingMode.DOWN);
+            lineaTicketSeleccionada.setInteres(nuevoInteres);
             lineaTicketSeleccionada.redondear();
             devolucionPorOtroLocal.getTicketDevolucion().getTotales().recalcularTotalesLineas(devolucionPorOtroLocal.getTicketDevolucion().getLineas());
             devolucionPorOtroLocal.getTicketDevolucion().getTotales().redondear();

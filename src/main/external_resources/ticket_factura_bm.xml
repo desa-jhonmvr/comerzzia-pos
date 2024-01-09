@@ -147,7 +147,7 @@
 			#end
 		#end
 		<line>
-            <text align="left" length="28">    IVA ${printTicket.getPorcentajeIvaEmpresa()}%</text>
+            <text align="left" length="28">    IVA 12%</text>
 			<text align="right" length="5">US$:</text>
             <text align="right" length="7"> ${ticket.getTotales().getImpuestosString()}</text>
         </line>

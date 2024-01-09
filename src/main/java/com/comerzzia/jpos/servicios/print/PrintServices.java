@@ -3,21 +3,13 @@
  */
 package com.comerzzia.jpos.servicios.print;
 
-import com.comerzzia.jpos.entity.db.Cliente;
+import com.comerzzia.jpos.dto.credito.tabla.amortizacion.TablaAmortizacionCabDTO;
+import com.comerzzia.jpos.entity.db.*;
 import com.comerzzia.jpos.servicios.bonos.ComprobanteBono;
 import com.comerzzia.jpos.entity.services.reservaciones.ComprobanteReservacion;
 import com.comerzzia.jpos.entity.codigosBarra.CodigoBarrasAbono;
 import com.comerzzia.jpos.entity.codigosBarra.CodigoBarrasBonoEfectivo;
 import com.comerzzia.jpos.entity.codigosBarra.CodigoBarrasReservacion;
-import com.comerzzia.jpos.entity.db.ArticuloPlanNovio;
-import com.comerzzia.jpos.entity.db.Articulos;
-import com.comerzzia.jpos.entity.db.Bono;
-import com.comerzzia.jpos.entity.db.Cupon;
-import com.comerzzia.jpos.entity.db.FacturacionTicket;
-import com.comerzzia.jpos.entity.db.InvitadoPlanNovio;
-import com.comerzzia.jpos.entity.db.LineaTicketOrigen;
-import com.comerzzia.jpos.entity.db.NotasCredito;
-import com.comerzzia.jpos.entity.db.TicketsAlm;
 import com.comerzzia.jpos.entity.gui.reservaciones.ArticuloReservado;
 import com.comerzzia.jpos.entity.services.cierrecaja.CierreCaja;
 import com.comerzzia.jpos.servicios.core.variables.ConfigImpresion;
@@ -29,6 +21,7 @@ import com.comerzzia.jpos.entity.services.reservaciones.plannovio.PlanNovioOBJ;
 import com.comerzzia.jpos.gui.JPrincipal;
 import com.comerzzia.jpos.persistencia.bonos.BonosDao;
 import com.comerzzia.jpos.servicios.print.documentos.DocumentoException;
+import com.comerzzia.jpos.servicios.print.objetos.*;
 import com.comerzzia.jpos.servicios.tickets.componentes.LineaTicket;
 import com.comerzzia.jpos.servicios.tickets.componentes.PagosTicket;
 import com.comerzzia.jpos.servicios.tickets.TicketS;
@@ -68,16 +61,6 @@ import com.comerzzia.jpos.servicios.mediospago.tarjetas.TarjetaCreditoSK;
 import com.comerzzia.jpos.servicios.pagos.credito.PagoCreditoSK;
 import com.comerzzia.jpos.servicios.pagos.especiales.PagoGiftCard;
 import com.comerzzia.jpos.servicios.print.documentos.DocumentosService;
-import com.comerzzia.jpos.servicios.print.objetos.PrintBono;
-import com.comerzzia.jpos.servicios.print.objetos.PrintCheque;
-import com.comerzzia.jpos.servicios.print.objetos.PrintMovimientos;
-import com.comerzzia.jpos.servicios.print.objetos.PrintNotaCredito;
-import com.comerzzia.jpos.servicios.print.objetos.PrintPagoCredito;
-import com.comerzzia.jpos.servicios.print.objetos.PrintPagoLetra;
-import com.comerzzia.jpos.servicios.print.objetos.PrintSukupon;
-import com.comerzzia.jpos.servicios.print.objetos.PrintTicket;
-import com.comerzzia.jpos.servicios.print.objetos.PrintVoucher;
-import com.comerzzia.jpos.servicios.print.objetos.PrintVoucherAnulacion;
 import com.comerzzia.jpos.servicios.tickets.componentes.TicketOrigen;
 import es.mpsistemas.util.fechas.Fecha;
 
@@ -103,16 +86,12 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
-import com.comerzzia.jpos.entity.db.Caja;
-import com.comerzzia.jpos.entity.db.LogOperaciones;
-import com.comerzzia.jpos.entity.db.XCintaAuditoraTbl;
 import com.comerzzia.jpos.persistencia.logs.logacceso.LogException;
 import com.comerzzia.jpos.persistencia.mediospagos.MedioPagoBean;
 import com.comerzzia.jpos.persistencia.promociones.TipoPromocionBean;
 import com.comerzzia.jpos.persistencia.promociones.cupones.CuponesDao;
 import com.comerzzia.jpos.persistencia.reservaciones.reservadatosfact.FacturacionTicketBean;
 import com.comerzzia.jpos.persistencia.tickets.TicketsDao;
-import com.comerzzia.jpos.servicios.afiliacion.ITarjetaAfiliacion;
 import com.comerzzia.jpos.servicios.articulos.ArticulosServices;
 import com.comerzzia.jpos.servicios.logs.logsacceso.ServicioLogAcceso;
 import com.comerzzia.jpos.servicios.mediospago.MedioPagoException;
@@ -120,10 +99,6 @@ import com.comerzzia.jpos.servicios.mediospago.MediosPago;
 import com.comerzzia.jpos.servicios.mediospago.tarjetas.TarjetaCredito;
 import com.comerzzia.jpos.servicios.mediospago.tarjetas.TarjetaCreditoBuilder;
 import com.comerzzia.jpos.servicios.pagos.credito.PagoBonoSuperMaxiNavidad;
-import com.comerzzia.jpos.servicios.print.objetos.PrintCintaAuditora;
-import com.comerzzia.jpos.servicios.print.objetos.PrintPendiente;
-import com.comerzzia.jpos.servicios.print.objetos.PrintTablaAmortizacion;
-import com.comerzzia.jpos.servicios.print.objetos.PrintVoucherBonoSupermaxi;
 import com.comerzzia.jpos.servicios.promociones.tipos.PromocionTipoDtoManualTotal;
 import com.comerzzia.jpos.servicios.tickets.TicketService;
 import com.comerzzia.jpos.servicios.tickets.componentes.LineasTicket;
@@ -138,14 +113,13 @@ import com.comerzzia.jpos.util.db.Database;
 import es.mpsistemas.util.xml.XMLDocumentException;
 import es.mpsistemas.util.xml.XMLDocumentNode;
 import es.mpsistemas.util.xml.XMLDocumentNodeNotFoundException;
-import java.math.BigInteger;
+
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * Clases de servicio de soporte para Gestión de Altas y bajas de artículos en
@@ -595,7 +569,13 @@ public class PrintServices {
             ///Prueba Validacion Para Credito Directo 
             ///////////////////////////////////////////////////////////////
 //            //IMPRESIÓN DE LA TABLA DE AMORTIZACIÓM
-            if (ticket.getPagos().getMediosPagoCreditoDirecto().size() > 0) {
+            if (TicketService.listaPagosConInteres != null && !TicketService.listaPagosConInteres.isEmpty()) {
+                imprimirTablaAmortizacionInteres(ticket,TicketService.listaPagosConInteres);
+                if (impresoraTermica.equals("2")) {
+                    Thread.sleep(5000);
+                }
+
+            }else if (ticket.getPagos().getMediosPagoCreditoDirecto().size() > 0) {
                 imprimirTabla(ticket);
                 if (impresoraTermica.equals("2")) {
                     Thread.sleep(5000);
@@ -634,6 +614,68 @@ public class PrintServices {
             log.error("imprimirTicket() - Error imprimiendo ticket: " + e.getMessage(), e);
             ServicioTransaccionesErradas.crearTransaccionErrada(ticket.getId_ticket(), TransaccionErradaBean.TIPO_IMPRIMIENDO, TransaccionErradaBean.TIPO_TRANSACCION_FACTURA);
             throw new TicketPrinterException("Error imprimiendo ticket.");
+        }
+    }
+
+    private void imprimirTablaAmortizacionInteres(TicketS ticket, List<TablaAmortizacionCabDTO> listaPagosConInteres) throws TicketPrinterException {
+        if (impresoraTermica.equals("0")) {
+            seleccionarInterlineado(PULGADAS_INTERLINEADO);
+        }
+        int impresora = IMPRESORA_TICKET;
+        log.debug("imprimirTicket() - Imprimiendo Ticket");
+        String resource = "";
+        boolean resultadoImpresion = true;
+        // Poner en funcion que lee el fichero xml.
+        try {
+            resource = leerEsquemaTicket(this.getClass().getResource("/ticket_tabla_amortizacion_credito_directo.xml"));
+            //log.debug("El fichero que tenemos es: " + resource);
+        } catch (Exception e) {// Catch exception if any
+            log.error("imprimirTicket() - Error cargando esquema XML para la impresión del ticket: " + e.getMessage(), e);
+            ServicioTransaccionesErradas.crearTransaccionErrada(ticket.getId_ticket(), TransaccionErradaBean.TIPO_IMPRIMIENDO, TransaccionErradaBean.TIPO_TRANSACCION_FACTURA);
+            throw new TicketPrinterException("Error imprimiendo ticket: Error cargando la plantilla.", e);
+        }
+
+        for(TablaAmortizacionCabDTO cabecera : listaPagosConInteres){
+            imprimirTablaAmortizacionInteres(ticket, cabecera, resource, impresora);
+        }
+
+
+
+    }
+
+    private void imprimirTablaAmortizacionInteres(TicketS ticket, TablaAmortizacionCabDTO cabecera, String resource, int impresora) {
+        boolean resultadoImpresion;
+        PrintTablaAmortizacionCreditoDirecto printTabla = null;
+        printTabla = new PrintTablaAmortizacionCreditoDirecto(ticket, cabecera);
+        printTabla.setPie("COPIA");
+        imprimirTablaAmortizacionInteres(resource, impresora, printTabla);
+        printTabla.setPie("ORIGINAL");
+        imprimirTablaAmortizacionInteres(resource, impresora, printTabla);
+
+    }
+
+    private void imprimirTablaAmortizacionInteres(String resource, int impresora, PrintTablaAmortizacionCreditoDirecto printTabla) {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("printTableAmortizacion", printTabla);
+        DocumentosImpresosBean documentoImpreso = new DocumentosImpresosBean();
+        try {
+            String cadenaImprimir = generaDocumentoImpresion(resource, map, documentoImpreso);
+            generacionTicket(cadenaImprimir, impresora);
+            if (impresoraTermica.equals("2")) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    java.util.logging.Logger.getLogger(PrintServices.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            documentoImpreso.setTipoImpreso(DocumentosImpresosBean.TIPO_TABLA);
+            if(printTabla.getPie().equals("ORIGINAL")){
+                documentosImpresos.add(documentoImpreso);
+            }
+
+        } catch (ScriptException ex) {
+            java.util.logging.Logger.getLogger(PrintServices.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     //</editor-fold>
@@ -2929,9 +2971,6 @@ public class PrintServices {
     }
 
     /**
-     * @author Origen
-     * @modified Gabriel Simbania
-     * @description Impresión Por separado de facturas cupotes etc
      * @param documento
      * @param pantalla
      * @param imprimirFactura
@@ -2940,11 +2979,15 @@ public class PrintServices {
      * @param billeton
      * @param observacion
      * @param imprimirExtension
+     * @param imprimirTablaAmortizacion
      * @return
      * @throws DocumentoException
+     * @author Origen
+     * @modified Gabriel Simbania
+     * @description Impresión Por separado de facturas cupotes etc
      */
     public String reimpresionFactura(DocumentosBean documento, boolean pantalla, boolean imprimirFactura, boolean imprimirVoucher,
-            boolean cupon, boolean billeton, String observacion, boolean imprimirExtension) throws DocumentoException {
+                                     boolean cupon, boolean billeton, String observacion, boolean imprimirExtension, boolean imprimirTablaAmortizacion) throws DocumentoException {
 
         String mensajerespuesta = MENSAJE_RESPUESTA;
         int numeroImpresora;
@@ -3009,7 +3052,16 @@ public class PrintServices {
                     }
 
                 } else {
-                    if (docus.isTipoFacPago() && imprimirVoucher) {
+                    if (docus.isTablaAmortizacion() && imprimirTablaAmortizacion) {
+                        this.original = false;
+                        textoPie="ORIGINAL - CLIENTE";
+                        //textoCabecera="";
+                        reimpresion(docus.getImpreso(), IMPRESORA_TICKET);
+                        textoPie="--- COPIA ---";
+                        textoCabecera="--- COPIA ---";
+                        this.original = true;
+                        reimpresion(docus.getImpreso(), IMPRESORA_TICKET);
+                    } else if (docus.isTipoFacPago() && imprimirVoucher) {
                         numerovoucher++;
                         this.original = false;
                         //textoPie="ORIGINAL - CLIENTE";
